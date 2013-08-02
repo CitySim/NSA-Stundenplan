@@ -3,7 +3,7 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON("package.json")
 		watch:
 			coffee:
-				files: [ "app/**/*.coffee" ]
+				files: [ "app/*/*.coffee", "app/app.coffee" ]
 				tasks: [ "coffee" ]
 			handlebars:
 				files: [ "templates/*.hbs" ]
@@ -34,21 +34,17 @@ module.exports = (grunt) ->
 		uglify:
 			libs:
 				files:
-					"build/libs.js": [
-						"libs/jquery-2.0.3.js",
-						"libs/underscore.js",
-						"libs/backbone.js",
-						"libs/handlebars.js"
-					]
+					"build/libs.js": [ "libs/jquery-2.0.3.js", "libs/underscore.js", "libs/backbone.js", "libs/handlebars.js" ]
+
+		cssmin:
+			combine:
+				files:
+					"build/style.css": "build/style.css"
 
 		copy:
-			css:
+			static:
 				expand: true
-				src: "style.css"
-				dest: "build/"
-			index:
-				expand: true
-				src: "index.html"
+				src: [ "style.css", "index.html" ]
 				dest: "build/"
 				
 	grunt.loadNpmTasks("grunt-contrib-uglify")
@@ -57,5 +53,6 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks("grunt-contrib-handlebars")
 	grunt.loadNpmTasks("grunt-contrib-uglify")
 	grunt.loadNpmTasks("grunt-contrib-watch")
+	grunt.loadNpmTasks("grunt-contrib-cssmin")
 
-	grunt.registerTask("default", [ "coffee", "copy", "handlebars", "uglify" ])
+	grunt.registerTask("default", [ "coffee", "copy", "cssmin", "handlebars", "uglify" ])
