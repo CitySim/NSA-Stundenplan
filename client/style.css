@@ -1,3 +1,12 @@
 body {
 	padding-top: 70px;
 }
+
+.list-group-item {
+	border-left: 0;
+	border-right: 0;
+}
+
+.list-group-item:first-child, .list-group-item:last-child {
+	border-radius: 0;
+}
