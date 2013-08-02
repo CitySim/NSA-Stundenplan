@@ -19,6 +19,7 @@ module.exports = (grunt) ->
 			app:
 				options:
 					join: true
+					sourceMap: true
 				files:
 					"build/app.js": "app/**/*.coffee"
 
@@ -33,6 +34,9 @@ module.exports = (grunt) ->
 
 		uglify:
 			libs:
+				options:
+					sourceMap: "build/libs.js.map"
+					sourceMappingURL: "libs.js.map"
 				files:
 					"build/libs.js": [ "libs/jquery-2.0.3.js", "libs/underscore.js", "libs/backbone.js", "libs/handlebars.js" ]
 
@@ -44,7 +48,7 @@ module.exports = (grunt) ->
 		copy:
 			static:
 				expand: true
-				src: [ "style.css", "index.html" ]
+				src: [ "style.css", "index.html", "libs/*.js" ]
 				dest: "build/"
 				
 	grunt.loadNpmTasks("grunt-contrib-uglify")
