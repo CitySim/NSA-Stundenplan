@@ -11,6 +11,7 @@ class window.nsa.App extends Backbone.Router
 		"replacement"			: "replacement"
 		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
+		"*error"					: "errorNotFound"
 
 	initialize: () =>
 		
@@ -74,6 +75,20 @@ class window.nsa.App extends Backbone.Router
 		loginView.$el.appendTo(".app-output")
 
 		@lastView = loginView
+		return
+
+	errorNotFound: () =>
+		@lastView?.remove()
+
+		error = new nsa.Views.Error
+			error:
+				no: 404
+				title: "Not Found"
+				message: "Diese URL stimmt nicht (glauben wir), tut uns leid."
+		error.render()
+		error.$el.appendTo(".app-output")
+
+		@lastView = error
 		return
 
 $ () ->
