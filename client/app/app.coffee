@@ -2,6 +2,7 @@ window.nsa = _.extend {}, window.nsa,
 	Views: {}
 	Models: {}
 	Data: {}
+	version: "0.0.1"
 
 class window.nsa.App extends Backbone.Router
 	routes:
@@ -11,7 +12,8 @@ class window.nsa.App extends Backbone.Router
 		"replacement"			: "replacement"
 		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
-		"*error"					: "errorNotFound"
+		"about"					: "about"
+		"*error"				: "errorNotFound"
 
 	initialize: () =>
 		
@@ -75,6 +77,16 @@ class window.nsa.App extends Backbone.Router
 		loginView.$el.appendTo(".app-output")
 
 		@lastView = loginView
+		return
+
+	about: () =>
+		@lastView?.remove()
+
+		about = new nsa.Views.About()
+		about.render()
+		about.$el.appendTo(".app-output")
+
+		@lastView = about
 		return
 
 	errorNotFound: () =>

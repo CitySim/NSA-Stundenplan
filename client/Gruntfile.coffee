@@ -11,8 +11,8 @@ module.exports = (grunt) ->
 			css:
 				files: [ "style.css" ]
 				tasks: [ "copy" ]
-			index:
-				files: [ "index.html" ]
+			static:
+				files:[ "style.css", "index.html", "libs/*.js" ]
 				tasks: [ "copy" ]
 
 		coffee:
