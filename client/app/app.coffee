@@ -7,6 +7,9 @@ class window.nsa.App extends Backbone.Router
 	routes:
 		""						: "home"
 		"timetable"				: "timetable"
+		"timetable/class/:id"	: "timetableDetail"
+		"replacement"			: "replacement"
+		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
 
 	initialize: () =>
@@ -16,21 +19,51 @@ class window.nsa.App extends Backbone.Router
 	home: () =>
 		@lastView?.remove()
 
-		homeView = new nsa.Views.Home()
-		homeView.render()
-		homeView.$el.appendTo(".app-output")
+		home = new nsa.Views.Home()
+		home.render()
+		home.$el.appendTo(".app-output")
 
-		@lastView = homeView
+		@lastView = home
 		return
 
 	timetable: () =>
 		@lastView?.remove()
 
-		timetableView = new nsa.Views.Timetable()
-		timetableView.render()
-		timetableView.$el.appendTo(".app-output")
+		timetableList = new nsa.Views.TimetableList()
+		timetableList.render()
+		timetableList.$el.appendTo(".app-output")
 
-		@lastView = timetableView
+		@lastView = timetableList
+		return
+
+	timetableDetail: () =>
+		@lastView?.remove()
+
+		timetableDetail = new nsa.Views.TimetableDetail()
+		timetableDetail.render()
+		timetableDetail.$el.appendTo(".app-output")
+
+		@lastView = timetableDetail
+		return
+
+	replacement: () =>
+		@lastView?.remove()
+
+		replacementList = new nsa.Views.ReplacementList()
+		replacementList.render()
+		replacementList.$el.appendTo(".app-output")
+
+		@lastView = replacementList
+		return
+
+	replacementDetails: () =>
+		@lastView?.remove()
+
+		replacementDetail = new nsa.Views.ReplacementDetail()
+		replacementDetail.render()
+		replacementDetail.$el.appendTo(".app-output")
+
+		@lastView = replacementDetail
 		return
 
 	login: () =>

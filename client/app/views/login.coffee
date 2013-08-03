@@ -4,3 +4,5 @@ class window.nsa.Views.Login extends Backbone.View
 	render: () =>
 		@$el.html @template
 			dummy: 0
+
+		return

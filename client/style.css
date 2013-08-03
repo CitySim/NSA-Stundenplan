@@ -2,11 +2,8 @@ body {
 	padding-top: 70px;
 }
 
-.list-group-item {
-	border-left: 0;
-	border-right: 0;
-}
+/* Views */
 
-.list-group-item:first-child, .list-group-item:last-child {
-	border-radius: 0;
+.view-timetable-list input[type=search] {
+	margin: 10px 0;
 }
