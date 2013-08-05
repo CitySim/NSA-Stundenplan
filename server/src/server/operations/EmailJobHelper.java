@@ -2,7 +2,9 @@ package server.operations;
 
 import java.util.ArrayList;
 
+import storage.entities.EmailAddresse;
 import storage.entities.EntityList;
+import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
@@ -36,24 +38,21 @@ public class EmailJobHelper {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
-		// for (final NewsLetter newsLetter : entityList) {
+		final EmailObject emailObject = new EmailObject();
+		emailList.add(emailObject);
 
-		// final EmailObject emailObject = new EmailObject();
-		// emailList.add(emailObject);
-		//
-		// final ArrayList<String> emailAddresList = emailObject
-		// .getEmailAddressList();
-		// final String emailText = new
-		// TextCreator().generateMailText(group,
-		// path);
-		//
-		// new EmailContentCreator().createMailContent(emailText, file,
-		// emailObject);
-		//
-		// for (final Member member : group.getMemberList()) {
-		// emailAddresList.add(member.getEMailAdress());
-		// }
-		// }
+		final ArrayList<String> emailAddresList = emailObject
+				.getEmailAddressList();
+
+		final String emailText = new TextCreator().generateMailText();
+
+		new EmailContentCreator().createMailContent(emailText, null,
+				emailObject);
+
+		for (final EmailAddresse eMailAddresse : entityList.getNewsLetter()
+				.geteMailAddressList()) {
+			emailAddresList.add(eMailAddresse.geteMailAddress());
+		}
 		return emailList;
 	}
 }

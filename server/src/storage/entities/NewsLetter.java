@@ -1,10 +1,12 @@
 package storage.entities;
 
+import java.util.ArrayList;
+
 public class NewsLetter {
 
 	private int idNewsLetter;
 	private int klassenID;
-	private String emailAddresse;
+	private ArrayList<EmailAddresse> eMailAddressList;
 
 	public int getIdNewsLetter() {
 		return this.idNewsLetter;
@@ -22,12 +24,12 @@ public class NewsLetter {
 		this.klassenID = klassenID;
 	}
 
-	public String getEmailAddresse() {
-		return this.emailAddresse;
+	public ArrayList<EmailAddresse> geteMailAddressList() {
+		return eMailAddressList;
 	}
 
-	public void setEmailAddresse(final String emailAddresse) {
-		this.emailAddresse = emailAddresse;
+	public void seteMailAddressList(ArrayList<EmailAddresse> eMailAddressList) {
+		this.eMailAddressList = eMailAddressList;
 	}
 
 }
