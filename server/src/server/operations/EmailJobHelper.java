@@ -19,18 +19,18 @@ public class EmailJobHelper {
 				"smtp.gmx.net");
 	}
 
-	// public final void sendMailToGroups(final Pojo pojo,
-	// final ArrayList<Group> groupList) {
-	//
-	// if (groupList.size() == 0) {
-	// new NothingToDoExeption("Send").showDialog();
-	// return;
-	// }
-	//
-	// final ArrayList<EmailObject> emailList = this.createEmailObjects(pojo,
-	// groupList);
-	// new EmailJob().sendMail(this.setEmailSettings(), emailList);
-	// }
+	public final void sendMailToGroups() {
+
+		// if (groupList.size() == 0) {
+		// new NothingToDoExeption("Send").showDialog();
+		// return;
+		// }
+
+		// final ArrayList<EmailObject> emailList =
+		// this.createEmailObjects(pojo,
+		// groupList);
+		// new EmailJob().sendMail(this.setEmailSettings(), emailList);
+	}
 
 	// private ArrayList<EmailObject> createEmailObjects(final Pojo pojo,
 	// final ArrayList<Group> groupList) {
