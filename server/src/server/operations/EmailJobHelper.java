@@ -1,5 +1,10 @@
 package server.operations;
 
+import java.util.ArrayList;
+
+import storage.entities.EntityList;
+import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
+import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 /**
@@ -19,45 +24,36 @@ public class EmailJobHelper {
 				"smtp.gmx.net");
 	}
 
-	public final void sendMailToGroups() {
+	public final void sendMailToGroups(final EntityList entityList) {
 
-		// if (groupList.size() == 0) {
-		// new NothingToDoExeption("Send").showDialog();
-		// return;
-		// }
-
-		// final ArrayList<EmailObject> emailList =
-		// this.createEmailObjects(pojo,
-		// groupList);
-		// new EmailJob().sendMail(this.setEmailSettings(), emailList);
+		final ArrayList<EmailObject> emailList = this
+				.createEmailObjects(entityList);
+		new EmailJob().sendMail(this.setEmailSettings(), emailList);
 	}
 
-	// private ArrayList<EmailObject> createEmailObjects(final Pojo pojo,
-	// final ArrayList<Group> groupList) {
-	//
-	// final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
-	// final String path = pojo.getSettings().getPath();
-	//
-	// for (final Group group : groupList) {
-	//
-	// final EmailObject emailObject = new EmailObject();
-	// emailList.add(emailObject);
-	//
-	// final ArrayList<String> emailAddresList = emailObject
-	// .getEmailAddressList();
-	// final String emailText = new TextCreator().generateMailText(group,
-	// path);
-	// final File file = new File(path + "Groups//" + group.getName()
-	// + ".xml");
-	//
-	// new EmailContentCreator().createMailContent(emailText, file,
-	// emailObject);
-	//
-	// for (final Member member : group.getMemberList()) {
-	// emailAddresList.add(member.getEMailAdress());
-	// }
-	// }
-	// return emailList;
-	// }
+	private ArrayList<EmailObject> createEmailObjects(
+			final EntityList entityList) {
 
+		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
+
+		// for (final NewsLetter newsLetter : entityList) {
+
+		// final EmailObject emailObject = new EmailObject();
+		// emailList.add(emailObject);
+		//
+		// final ArrayList<String> emailAddresList = emailObject
+		// .getEmailAddressList();
+		// final String emailText = new
+		// TextCreator().generateMailText(group,
+		// path);
+		//
+		// new EmailContentCreator().createMailContent(emailText, file,
+		// emailObject);
+		//
+		// for (final Member member : group.getMemberList()) {
+		// emailAddresList.add(member.getEMailAdress());
+		// }
+		// }
+		return emailList;
+	}
 }

@@ -8,6 +8,9 @@ public class EntityList {
 	private Raum raum;
 	private Stunde stunde;
 	private Tag tag;
+	private NewsLetter newsLetter;
+	private Unterrichtsfach unterrichtsfach;
+	private Vertretung vertretung;
 
 	public Klasse getKlasse() {
 		return this.klasse;
@@ -73,7 +76,11 @@ public class EntityList {
 		this.vertretung = vertretung;
 	}
 
-	private Unterrichtsfach unterrichtsfach;
-	private Vertretung vertretung;
+	public NewsLetter getNewsLetter() {
+		return this.newsLetter;
+	}
 
+	public void setNewsLetter(final NewsLetter newsLetter) {
+		this.newsLetter = newsLetter;
+	}
 }
