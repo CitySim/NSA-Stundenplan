@@ -1,35 +1,35 @@
 package storage.entities;
 
-import java.util.ArrayList;
 
 public class NewsLetter {
 
-	private int idNewsLetter;
-	private int klassenID;
-	private ArrayList<EmailAddresse> eMailAddressList;
+    private int idNewsLetter;
+    private int klassenID;
 
-	public int getIdNewsLetter() {
-		return this.idNewsLetter;
-	}
+    // private ArrayList<EmailAddresse> eMailAddressList;
 
-	public void setIdNewsLetter(final int idNewsLetter) {
-		this.idNewsLetter = idNewsLetter;
-	}
+    public int getIdNewsLetter() {
+        return this.idNewsLetter;
+    }
 
-	public int getKlassenID() {
-		return this.klassenID;
-	}
+    public void setIdNewsLetter(final int idNewsLetter) {
+        this.idNewsLetter = idNewsLetter;
+    }
 
-	public void setKlassenID(final int klassenID) {
-		this.klassenID = klassenID;
-	}
+    public int getKlassenID() {
+        return this.klassenID;
+    }
 
-	public ArrayList<EmailAddresse> geteMailAddressList() {
-		return eMailAddressList;
-	}
+    public void setKlassenID(final int klassenID) {
+        this.klassenID = klassenID;
+    }
 
-	public void seteMailAddressList(ArrayList<EmailAddresse> eMailAddressList) {
-		this.eMailAddressList = eMailAddressList;
-	}
+    // public ArrayList<EmailAddresse> geteMailAddressList() {
+    // return this.eMailAddressList;
+    // }
+    //
+    // public void seteMailAddressList(final ArrayList<EmailAddresse> eMailAddressList) {
+    // this.eMailAddressList = eMailAddressList;
+    // }
 
 }
