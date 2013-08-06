@@ -1,17 +1,9 @@
 package storage.entities;
 
-public class Klasse {
+public class Klasse extends Entity {
 
-	private int idKlasse;
+	private Newsletter newsletter;
 	private String bezeichung;
-
-	public int getIdKlasse() {
-		return this.idKlasse;
-	}
-
-	public void setIdKlasse(final int idKlasse) {
-		this.idKlasse = idKlasse;
-	}
 
 	public String getBezeichung() {
 		return this.bezeichung;
@@ -21,4 +13,11 @@ public class Klasse {
 		this.bezeichung = bezeichung;
 	}
 
+	public Newsletter getNewsletter() {
+		return this.newsletter;
+	}
+
+	public void setNewsletter(final Newsletter newsletter) {
+		this.newsletter = newsletter;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import storage.entities.EmailAddresse;
 import storage.entities.EntityList;
+import storage.entities.Newsletter;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
@@ -38,21 +39,25 @@ public class EmailJobHelper {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
-		final EmailObject emailObject = new EmailObject();
-		emailList.add(emailObject);
+		for (final Newsletter newsLetter : entityList.getNewsLetter()) {
 
-		final ArrayList<String> emailAddresList = emailObject
-				.getEmailAddressList();
+			final EmailObject emailObject = new EmailObject();
+			emailList.add(emailObject);
 
-		final String emailText = new TextCreator().generateMailText();
+			final ArrayList<String> emailAddresList = emailObject
+					.getEmailAddressList();
 
-		new EmailContentCreator().createMailContent(emailText, null,
-				emailObject);
+			final String emailText = new TextCreator().generateMailText();
 
-		for (final EmailAddresse eMailAddresse : entityList.getNewsLetter()
-				.geteMailAddressList()) {
-			emailAddresList.add(eMailAddresse.geteMailAddress());
+			new EmailContentCreator().createMailContent(emailText, null,
+					emailObject);
+
+			for (final EmailAddresse eMailAddresse : newsLetter
+					.geteMailAddressList()) {
+				emailAddresList.add(eMailAddresse.geteMailAddress());
+			}
 		}
 		return emailList;
 	}
+
 }

@@ -2,7 +2,7 @@ package storage.entities;
 
 import java.util.ArrayList;
 
-public class NewsLetter {
+public class Newsletter {
 
 	private int idNewsLetter;
 	private int klassenID;
