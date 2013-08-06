@@ -1,16 +1,16 @@
 package storage.entities;
 
-public class Tag {
+public class Unterrichtsfach extends DefaultEntity {
 
-	private int idTag;
+	private String kurzName;
 	private String bezeichnung;
 
-	public int getIdTag() {
-		return this.idTag;
+	public String getKurzName() {
+		return this.kurzName;
 	}
 
-	public void setIdTag(final int idTag) {
-		this.idTag = idTag;
+	public void setKurzName(final String kurzName) {
+		this.kurzName = kurzName;
 	}
 
 	public String getBezeichnung() {

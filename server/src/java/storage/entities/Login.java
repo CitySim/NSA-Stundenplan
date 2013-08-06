@@ -1,18 +1,9 @@
 package storage.entities;
 
-public class Login {
+public class Login extends DefaultEntity {
 
-	private int idLogin;
 	private String user;
 	private String passwort;
-
-	public int getIdLogin() {
-		return this.idLogin;
-	}
-
-	public void setIdLogin(final int idLogin) {
-		this.idLogin = idLogin;
-	}
 
 	public String getUser() {
 		return this.user;

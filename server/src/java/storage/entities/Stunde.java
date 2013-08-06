@@ -4,17 +4,8 @@ import java.util.Date;
 
 public class Stunde {
 
-	private int idStunde;
 	private Date zeitVon;
 	private Date zeitBis;
-
-	public int getIdStunde() {
-		return this.idStunde;
-	}
-
-	public void setIdStunde(final int idStunde) {
-		this.idStunde = idStunde;
-	}
 
 	public Date getZeitVon() {
 		return this.zeitVon;

@@ -1,19 +1,10 @@
 package storage.entities;
 
-public class Lehrer {
+public class Lehrer extends DefaultEntity {
 
-	private int idLehrer;
 	private String kurzName;
 	private String name;
 	private String vorname;
-
-	public int getIdLehrer() {
-		return this.idLehrer;
-	}
-
-	public void setIdLehrer(final int idLehrer) {
-		this.idLehrer = idLehrer;
-	}
 
 	public String getKurzName() {
 		return this.kurzName;
