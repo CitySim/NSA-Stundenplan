@@ -1,6 +1,6 @@
 package storage.entities;
 
-public class Klasse extends Entity {
+public class Klasse extends DefaultEntity {
 
 	private String bezeichung;
 
