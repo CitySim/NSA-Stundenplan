@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class EntityList {
 
 	private Klasse klasse;
-	private Newsletter newsLetter;
 
 	private ArrayList<Tag> tag;
 	private ArrayList<Stunde> stunde;

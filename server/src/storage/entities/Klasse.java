@@ -2,7 +2,6 @@ package storage.entities;
 
 public class Klasse extends Entity {
 
-	private Newsletter newsletter;
 	private String bezeichung;
 
 	public String getBezeichung() {
@@ -13,11 +12,4 @@ public class Klasse extends Entity {
 		this.bezeichung = bezeichung;
 	}
 
-	public Newsletter getNewsletter() {
-		return this.newsletter;
-	}
-
-	public void setNewsletter(final Newsletter newsletter) {
-		this.newsletter = newsletter;
-	}
 }
