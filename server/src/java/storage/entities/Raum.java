@@ -1,6 +1,9 @@
 package storage.entities;
 
-public class Raum {
+import javax.persistence.Entity;
+
+@Entity
+public class Raum extends DefaultEntity {
 
 	private String bezeichnung;
 

@@ -1,6 +1,9 @@
 package storage.entities;
 
-public class Tag {
+import javax.persistence.Entity;
+
+@Entity
+public class Tag extends DefaultEntity {
 
 	private String bezeichnung;
 

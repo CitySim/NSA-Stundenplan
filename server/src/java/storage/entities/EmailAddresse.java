@@ -1,5 +1,8 @@
 package storage.entities;
 
+import javax.persistence.Entity;
+
+@Entity
 public class EmailAddresse extends DefaultEntity {
 
 	private String eMailAddress;

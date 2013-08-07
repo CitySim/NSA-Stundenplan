@@ -2,7 +2,10 @@ package storage.entities;
 
 import java.util.Date;
 
-public class Stunde {
+import javax.persistence.Entity;
+
+@Entity
+public class Stunde extends DefaultEntity {
 
 	private Date zeitVon;
 	private Date zeitBis;
