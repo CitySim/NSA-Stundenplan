@@ -22,7 +22,7 @@ public class HibernateTest {
 	@Before
 	public void init() {
 
-		emf = Persistence.createEntityManagerFactory("hello-world");
+		emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
 		em = emf.createEntityManager();
 	}
 
@@ -41,6 +41,7 @@ public class HibernateTest {
 		em.persist(klasse1);
 		em.persist(klasse2);
 		em.getTransaction().commit();
+		
 		final List<Klasse> list = em.createQuery("select p from Klasse p").getResultList();
 		assertEquals(2, list.size());
 		for (Klasse current : list) {
