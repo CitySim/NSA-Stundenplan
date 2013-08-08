@@ -1,5 +1,6 @@
 package server.operations;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import storage.entities.EntityList;
@@ -45,8 +46,8 @@ public class EmailJobHelper {
 
 		final String emailText = new TextCreator().generateMailText();
 
-		new EmailContentCreator().createMailContent(emailText, null,
-				emailObject);
+		new EmailContentCreator().createMailContent(emailText, new File(
+				new PdfPrinter().printAsPDF()), emailObject);
 
 		// for (final EmailAddresse eMailAddresse : newsLetter
 		// .geteMailAddressList()) {
