@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,15 +13,12 @@ import org.junit.Test;
 import storage.entities.Klasse;
 
 public class HibernateTest {
-	private EntityManagerFactory emf;
 
 	private EntityManager em;
 
 	@Before
 	public void init() {
-
-		emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
-		em = emf.createEntityManager();
+		em = HibernateUtil.getEntityManager();
 	}
 
 	@After
@@ -32,7 +27,7 @@ public class HibernateTest {
 	}
 
 	@Test
-	public void emptyTest() {
+	public void entityManagerTest() {
 		em.getTransaction().begin();
 		Klasse klasse1 = new Klasse();
 		klasse1.setBezeichung("ita");
