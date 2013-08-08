@@ -22,14 +22,6 @@ public class PasswordValidator {
 		return matches;
 	}
 
-	public String encryptPassword(final String password) {
-
-		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-		hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-
-		return hashed;
-	}
-
 	private String getPasswordFromDB() {
 
 		final String password = null;
