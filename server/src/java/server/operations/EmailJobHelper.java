@@ -43,7 +43,7 @@ public class EmailJobHelper {
 		final ArrayList<String> emailAddresList = emailObject
 				.getEmailAddressList();
 
-		final String emailText = new TextCreator().generateMailText();
+		final String emailText = new EmailTextCreator().generateMailText();
 
 		new EmailContentCreator().createMailContent(emailText, null,
 				emailObject);
