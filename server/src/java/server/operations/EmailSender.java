@@ -44,7 +44,7 @@ public class EmailSender {
 		final ArrayList<String> emailAddresList = emailObject
 				.getEmailAddressList();
 
-		final String emailText = new TextCreator().generateMailText();
+		final String emailText = new EmailTextCreator().generateMailText();
 
 		new EmailContentCreator().createMailContent(emailText, new File(
 				new PdfPrinter().printAsPDF()), emailObject);

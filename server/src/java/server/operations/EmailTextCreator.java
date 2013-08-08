@@ -8,7 +8,7 @@ package server.operations;
  * @version 1.0
  */
 
-class TextCreator {
+class EmailTextCreator {
 
 	String generateMailText() {
 
