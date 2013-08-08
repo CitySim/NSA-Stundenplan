@@ -7,18 +7,12 @@ class window.nsa.Views.Home extends Backbone.View
 			@model.fetch
 				success: @render
 				error: () =>
-					@lastView?.remove()
-
-
-					error = new nsa.Views.Error
-						error:
-							no: 1000
-							title: "Fehler"
-							message: "Fehler beim Laden der Daten der Schule"
-					error.render()
-					error.$el.appendTo(".app-output")
-
-					@lastView = error
+					delete nsa.Data.school
+					nsa.app.error
+						no: 1000
+						title: "Fehler"
+						message: "Fehler beim Laden der Daten der Schule"
+					
 					return
 
 		return
