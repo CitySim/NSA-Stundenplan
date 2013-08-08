@@ -1,10 +1,11 @@
 window.nsa = _.extend {}, window.nsa,
 	Views: {}
 	Models: {}
+	Collections: {}
 	Data: {}
 	config:
 		api: "/api"
-	version: "0.0.1"
+	version: "0.0.2"
 
 class window.nsa.App extends Backbone.Router
 	routes:
@@ -18,7 +19,6 @@ class window.nsa.App extends Backbone.Router
 		"*error"				: "errorNotFound"
 
 	initialize: () =>
-		
 		return
 
 	home: () =>
