@@ -8,6 +8,14 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * Printer class to create the schedule as PDF file.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class PdfPrinter {
 
 	public String printAsPDF() {

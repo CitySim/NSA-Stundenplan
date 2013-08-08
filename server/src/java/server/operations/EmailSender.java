@@ -10,15 +10,15 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 /**
- * Helper class used to initialize the emailSending and to create the emails to
+ * Helper class used to initialize the emailSending and to create the eMails to
  * send.
  * 
  * @author dennis.markmann
- * @since JDK.1.7.0_21
+ * @since JDK.1.7.0_25
  * @version 1.0
  */
 
-public class EmailJobHelper {
+public class EmailSender {
 
 	private EmailSettings setEmailSettings() {
 		return new EmailSettings("nsa-stundenplan@gmx.de", "nsa-stundenplan",
