@@ -2,18 +2,13 @@ package server.operations;
 
 public class AccountCreator {
 
-	public static void main(final String[] args) {
-
-		new AccountCreator().createAccount("Dennis", "Markmann",
-				new PasswordEncryptor().generateEncryptedPassword());
-
-	}
-
-	public void createAccount(final String name, final String familyName,
-			final String password) {
+	public void createAccount(final String name, final String familyName) {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
+
+		final String password = new PasswordEncryptor()
+				.generateEncryptedPassword();
 
 		this.storeUserInDatabase(userName, password);
 
