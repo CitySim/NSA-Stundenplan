@@ -1,8 +1,34 @@
 class window.nsa.Views.Home extends Backbone.View
 	template: nsa.handlebars.home
 
+	initialize: () =>
+		if not nsa.Data.school?
+			@model = nsa.Data.school = new nsa.Models.School()
+			@model.fetch
+				success: @render
+				error: () =>
+					@lastView?.remove()
+
+
+					error = new nsa.Views.Error
+						error:
+							no: 1000
+							title: "Fehler"
+							message: "Fehler beim Laden der Daten der Schule"
+					error.render()
+					error.$el.appendTo(".app-output")
+
+					@lastView = error
+					return
+
+		return
+
 	render: () =>
+		@$el.html nsa.handlebars.loading()
+
+		###
 		@$el.html @template
-			dummy: 0
+			school: @model.toJSON
+		###
 
 		return
