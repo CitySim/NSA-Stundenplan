@@ -1,28 +1,21 @@
 package server.input;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-	private static final SessionFactory sessionFactory;
-	private static final ServiceRegistry serviceRegistry;
+	private static final EntityManagerFactory emf;
+
+	private static final EntityManager entityManager;
 
 	static {
-		Configuration conf = new Configuration();
-		conf.configure();
-		serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
-		try {
-			sessionFactory = conf.buildSessionFactory(serviceRegistry);
-		} catch (Exception e) {
-			System.err.println("Initial SessionFactory creation failed." + e);
-			throw new ExceptionInInitializerError(e);
-		}
+		emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
+		entityManager = emf.createEntityManager();
 	}
 
-	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
+	public static EntityManager getEntityManager() {
+		return entityManager;
 	}
 }
