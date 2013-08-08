@@ -2,6 +2,12 @@ body {
 	padding-top: 70px;
 }
 
+.loading-circle {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+}
+
 /* Views */
 
 .view-timetable-list input[type=search] {

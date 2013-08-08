@@ -2,6 +2,8 @@ window.nsa = _.extend {}, window.nsa,
 	Views: {}
 	Models: {}
 	Data: {}
+	config:
+		api: "/api"
 	version: "0.0.1"
 
 class window.nsa.App extends Backbone.Router
@@ -90,13 +92,18 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	errorNotFound: () =>
+		@error
+			no: 404
+			title: "Not Found"
+			message: "Diese URL stimmt nicht (glauben wir), tut uns leid."
+
+		return
+
+	error: (error) =>
 		@lastView?.remove()
 
 		error = new nsa.Views.Error
-			error:
-				no: 404
-				title: "Not Found"
-				message: "Diese URL stimmt nicht (glauben wir), tut uns leid."
+			error: error
 		error.render()
 		error.$el.appendTo(".app-output")
 
