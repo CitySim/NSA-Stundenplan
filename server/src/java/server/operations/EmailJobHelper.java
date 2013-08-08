@@ -2,7 +2,7 @@ package server.operations;
 
 import java.util.ArrayList;
 
-import storage.entities.EntityList;
+import storage.entities.Stundenplan;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
@@ -25,7 +25,7 @@ public class EmailJobHelper {
 				"smtp.gmx.net");
 	}
 
-	public final void sendMailToGroups(final EntityList entityList) {
+	public final void sendMailToGroups(final Stundenplan entityList) {
 
 		final ArrayList<EmailObject> emailList = this
 				.createEmailObjects(entityList);
@@ -33,7 +33,7 @@ public class EmailJobHelper {
 	}
 
 	private ArrayList<EmailObject> createEmailObjects(
-			final EntityList entityList) {
+			final Stundenplan entityList) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
