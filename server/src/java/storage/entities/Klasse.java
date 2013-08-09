@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -24,4 +25,15 @@ public class Klasse extends DefaultEntity {
 		this.bezeichung = bezeichung;
 	}
 	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayPlainTextHello() {
+	    return "Hello Jersey";
+	}
+	
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="id")
+    @IndexColumn(name="indx")
+    private List<StundenplanStunde> stundenplanStunde;
+
 }

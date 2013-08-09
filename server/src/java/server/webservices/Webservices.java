@@ -1,4 +1,4 @@
-package server.output;
+package server.webservices;
 
 import storage.entities.Klasse;
 

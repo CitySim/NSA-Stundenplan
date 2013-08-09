@@ -1,4 +1,4 @@
-package server.input;
+package server.persistance;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
