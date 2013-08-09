@@ -1,4 +1,4 @@
-package server.persistance;
+package server.persistence;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.persistance.HibernateUtil;
+import server.persistence.HibernateUtil;
 import storage.entities.Klasse;
 
 public class HibernateTest {
