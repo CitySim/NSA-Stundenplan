@@ -6,13 +6,18 @@ import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-	private static final EntityManagerFactory emf;
+	private static EntityManagerFactory emf = null;
 
-	private static final EntityManager entityManager;
+	private static EntityManager entityManager = null;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
-		entityManager = emf.createEntityManager();
+		if (emf == null) {
+			emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
+		}
+		
+		if (entityManager == null){
+			entityManager = emf.createEntityManager();
+		}
 	}
 
 	public static EntityManager getEntityManager() {

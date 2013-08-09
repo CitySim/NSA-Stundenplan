@@ -18,9 +18,8 @@ public class FormResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		List<Form> formList = HibernateUtil.getEntityManager().createQuery("select p from Klasse p").getResultList();
-		Gson gson = new Gson();
-		String json = gson.toJson(formList);
+		final List<Form> list = HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();		Gson gson = new Gson();
+		String json = gson.toJson(list);
 		return json;
 	}
 }
