@@ -10,7 +10,7 @@ package server.operations;
 
 public class PasswordValidator {
 
-	public boolean validatePassword(final String password) {
+	public final boolean validatePassword(final String password) {
 
 		Boolean matches = false;
 

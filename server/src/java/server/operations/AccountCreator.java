@@ -10,7 +10,7 @@ package server.operations;
 
 public class AccountCreator {
 
-	public void createAccount(final String name, final String familyName) {
+	public final void createAccount(final String name, final String familyName) {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));

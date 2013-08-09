@@ -18,7 +18,7 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
  * @version 1.0
  */
 
-public class EmailJobHelper {
+class EmailJobHelper {
 
 	private EmailSettings setEmailSettings(final String titel) {
 		return new EmailSettings("nsa-stundenplan@gmx.de", "nsa-stundenplan",
@@ -34,7 +34,7 @@ public class EmailJobHelper {
 				emailList);
 	}
 
-	public final void sendConfirmationMail(final String eMailAddress,
+	final void sendConfirmationMail(final String eMailAddress,
 			final String schoolClass) {
 
 		final ArrayList<EmailObject> emailList = this.createConfirmationMail(
@@ -44,7 +44,7 @@ public class EmailJobHelper {
 				emailList);
 	}
 
-	public ArrayList<EmailObject> createConfirmationMail(
+	private final ArrayList<EmailObject> createConfirmationMail(
 			final String eMailAddress, final String schoolClass) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
@@ -79,7 +79,7 @@ public class EmailJobHelper {
 				.getEmailAddressList();
 
 		final String emailText = new EmailTextCreator().generateMailText();
-		final File file = new File(new PdfPrinter().printAsPDF());
+		final File file = new File(new FilePrinter().printAsPDF());
 
 		new EmailContentCreator().createMailContent(emailText, file,
 				emailObject);

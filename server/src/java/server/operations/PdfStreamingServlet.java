@@ -22,13 +22,13 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(final HttpServletRequest request,
+	protected final void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest request,
+	protected final void doPost(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
@@ -36,7 +36,7 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	private void performTask(final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		final File pdfFile = new File(new PdfPrinter().printAsPDF());
+		final File pdfFile = new File(new FilePrinter().printAsPDF());
 
 		response.setContentType("application/pdf");
 		response.addHeader("Content-Disposition", "attachment; filename="
