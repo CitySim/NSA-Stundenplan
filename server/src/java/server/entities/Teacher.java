@@ -1,0 +1,55 @@
+package server.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Lehrer")
+public class Teacher {
+
+	@Id
+	@GeneratedValue
+	@Column(name = "idLehrer")
+	private int id;
+	
+	@Column(name = "Kurzname", length = 5)
+	private String shortName;
+	
+	@Column(name = "Name", length = 45)
+	private String name;
+	
+	@Column(name = "Vorname", length = 45)
+	private String firstname;
+
+	public int getId() {
+		return this.id;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(final String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(final String firstname) {
+		this.firstname = firstname;
+	}
+
+}

@@ -3,7 +3,7 @@ package server.entities;
 import javax.persistence.Entity;
 
 @Entity
-public class EmailAddresse extends DefaultEntity {
+public class EmailAdress extends DefaultEntity {
 
 	private String eMailAddress;
 

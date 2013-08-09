@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.webservices.Webservices;
-import server.entities.Klasse;
+import server.entities.Form;
 
 public class JSONTest {
 
@@ -16,11 +16,11 @@ public class JSONTest {
 
 	@Test
 	public void test() {
-		Klasse klasse = new Klasse();
-		klasse.setBezeichung("IT1a");
-		String json = Webservices.send(klasse);
-		Klasse klasse2 = Webservices.receive(json);
-		assertEquals(klasse.getBezeichung(), klasse2.getBezeichung());
+		Form class1 = new Form();
+		class1.setDescription("IT1a");
+		String json = Webservices.send(class1);
+		Form class2 = Webservices.receive(json);
+		assertEquals(class1.getDescription(), class2.getDescription());
 	}
 
 }

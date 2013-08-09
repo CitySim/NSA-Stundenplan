@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.persistence.HibernateUtil;
-import server.entities.Klasse;
+import server.entities.Form;
 
 public class HibernateTest {
 
@@ -30,18 +30,19 @@ public class HibernateTest {
 	@Test
 	public void entityManagerTest() {
 		em.getTransaction().begin();
-		Klasse klasse1 = new Klasse();
-		klasse1.setBezeichung("ita");
-		Klasse klasse2 = new Klasse();
-		klasse2.setBezeichung("itb");
-		em.persist(klasse1);
-		em.persist(klasse2);
+		Form class1 = new Form();
+		class1.setDescription("ita");
+		Form class2 = new Form();
+		class2.setDescription("itb");
+		
+		em.persist(class1);
+		em.persist(class2);
 		em.getTransaction().commit();
 		
-		final List<Klasse> list = em.createQuery("select p from Klasse p").getResultList();
+		final List<Form> list = em.createNativeQuery("select * from Klasse", Form.class).getResultList();
 		assertEquals(2, list.size());
-		for (Klasse current : list) {
-			final String firstName = current.getBezeichung();
+		for (Form current : list) {
+			final String firstName = current.getDescription();
 			assertTrue(firstName.equals("ita") || firstName.equals("itb"));
 		}
 	}

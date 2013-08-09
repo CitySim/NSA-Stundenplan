@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 public class Login extends DefaultEntity {
 
 	private String user;
-	private String passwort;
+	private String password;
 
 	public String getUser() {
 		return this.user;
@@ -16,12 +16,12 @@ public class Login extends DefaultEntity {
 		this.user = user;
 	}
 
-	public String getPasswort() {
-		return this.passwort;
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setPasswort(final String passwort) {
-		this.passwort = passwort;
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 
 }

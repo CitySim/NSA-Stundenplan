@@ -3,7 +3,7 @@ package server.operations;
 import java.io.File;
 import java.util.ArrayList;
 
-import server.entities.Stundenplan;
+import server.entities.Timetable;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
@@ -25,7 +25,7 @@ class EmailJobHelper {
 				"nsa-stundenplan@gmx.de", titel, "smtp.gmx.net");
 	}
 
-	public final void sendMail(final Stundenplan entityList) {
+	public final void sendMail(final Timetable entityList) {
 
 		final ArrayList<EmailObject> emailList = this
 				.createEmailObjects(entityList);
@@ -68,7 +68,7 @@ class EmailJobHelper {
 	}
 
 	private ArrayList<EmailObject> createEmailObjects(
-			final Stundenplan entityList) {
+			final Timetable entityList) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
