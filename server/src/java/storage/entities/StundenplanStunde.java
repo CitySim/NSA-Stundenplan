@@ -1,10 +1,11 @@
 package storage.entities;
 
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-public class StundenplanStunde {
+@Entity
+public class StundenplanStunde extends DefaultEntity{
 
     @ManyToOne
     @JoinColumn(name="klasseId", 
