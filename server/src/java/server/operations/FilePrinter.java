@@ -40,13 +40,17 @@ class FilePrinter {
 			document.open();
 			document.add(new Paragraph(this.createText()));
 			document.close();
+
+			new File(path);
+
 		} catch (final FileNotFoundException | DocumentException e) {
 			new ScheduleCreationException().sendToClient();
 		}
 		return path;
 	}
 
-	public final void printAsPng() {
+	public final String printAsPng() {
+		String path = "";
 		try {
 			final int width = 200, height = 200;
 
@@ -65,7 +69,7 @@ class FilePrinter {
 			ig2.drawString(message, (width - stringWidth) / 2, height / 2
 					+ stringHeight / 4);
 
-			final String path = System.getProperty("user.home")
+			path = System.getProperty("user.home")
 					+ System.getProperty("file.separator") + "stundenplan.png";
 
 			ImageIO.write(image, "PNG", new File(path));
@@ -73,6 +77,7 @@ class FilePrinter {
 		} catch (final IOException e) {
 			new ScheduleCreationException().sendToClient();
 		}
+		return path;
 
 	}
 
