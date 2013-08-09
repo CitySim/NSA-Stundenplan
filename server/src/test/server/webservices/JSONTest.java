@@ -8,7 +8,7 @@ import org.junit.Test;
 import server.webservices.Webservices;
 import storage.entities.Klasse;
 
-public class WebserviceTest {
+public class JSONTest {
 
 	@Before
 	public void setUp() throws Exception {
