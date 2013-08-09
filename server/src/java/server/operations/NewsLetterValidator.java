@@ -9,15 +9,16 @@ package server.operations;
  * @version 1.0
  */
 
-public class NewsLetterValidator {
+class NewsLetterValidator {
 
-	public void addAddress(final String eMailAddress, final String schoolClass) {
+	public final void addAddress(final String eMailAddress,
+			final String schoolClass) {
 
 		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
 
 	}
 
-	public String generateRegistrationLink(final String schoolClass,
+	final String generateRegistrationLink(final String schoolClass,
 			final String eMailAddress) {
 
 		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:"
@@ -29,7 +30,7 @@ public class NewsLetterValidator {
 		return url;
 	}
 
-	public String generateRemoveLink(final String schoolClass,
+	final String generateRemoveLink(final String schoolClass,
 			final String eMailAddress) {
 
 		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:"
@@ -41,7 +42,7 @@ public class NewsLetterValidator {
 		return url;
 	}
 
-	public void validateConfirmation(final String url) {
+	public final void validateConfirmation(final String url) {
 
 		String eMailAddress = null;
 		String schoolClass = null;

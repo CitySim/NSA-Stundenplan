@@ -27,27 +27,30 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @version 1.0
  */
 
-public class FilePrinter {
+class FilePrinter {
 
-	public String printAsPDF() {
+	final String printAsPDF() {
 		final Document document = new Document();
 		String path = null;
 		try {
 
 			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator")
-					+ "//desktop//HelloWorld.pdf";
+					+ System.getProperty("file.separator") + "stundenplan.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
 			document.add(new Paragraph(this.createText()));
 			document.close();
+
+			new File(path);
+
 		} catch (final FileNotFoundException | DocumentException e) {
 			new ScheduleCreationException().sendToClient();
 		}
 		return path;
 	}
 
-	public void printAsPng() {
+	public final String printAsPng() {
+		String path = "";
 		try {
 			final int width = 200, height = 200;
 
@@ -66,15 +69,15 @@ public class FilePrinter {
 			ig2.drawString(message, (width - stringWidth) / 2, height / 2
 					+ stringHeight / 4);
 
-			final String path = System.getProperty("user.home")
-					+ System.getProperty("file.separator")
-					+ "//desktop//HelloWorld.png";
+			path = System.getProperty("user.home")
+					+ System.getProperty("file.separator") + "stundenplan.png";
 
 			ImageIO.write(image, "PNG", new File(path));
 
 		} catch (final IOException e) {
 			new ScheduleCreationException().sendToClient();
 		}
+		return path;
 
 	}
 
