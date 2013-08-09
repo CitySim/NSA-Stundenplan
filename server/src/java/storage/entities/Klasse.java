@@ -31,9 +31,4 @@ public class Klasse extends DefaultEntity {
 	    return "Hello Jersey";
 	}
 	
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="indx")
-    private List<StundenplanStunde> stundenplanStunde;
-
 }
