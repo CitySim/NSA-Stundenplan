@@ -10,5 +10,5 @@ package server.exceptions;
 
 interface ExceptionDialogInterface {
 
-	void sendToServer();
+	void sendToClient();
 }

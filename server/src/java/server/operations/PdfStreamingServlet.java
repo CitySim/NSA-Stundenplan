@@ -36,7 +36,7 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	private void performTask(final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		final File pdfFile = new File(new PdfPrinter().printAsPDF());
+		final File pdfFile = new File(new FilePrinter().printAsPDF());
 
 		response.setContentType("application/pdf");
 		response.addHeader("Content-Disposition", "attachment; filename="

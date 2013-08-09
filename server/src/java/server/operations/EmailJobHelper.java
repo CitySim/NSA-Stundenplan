@@ -79,7 +79,7 @@ public class EmailJobHelper {
 				.getEmailAddressList();
 
 		final String emailText = new EmailTextCreator().generateMailText();
-		final File file = new File(new PdfPrinter().printAsPDF());
+		final File file = new File(new FilePrinter().printAsPDF());
 
 		new EmailContentCreator().createMailContent(emailText, file,
 				emailObject);

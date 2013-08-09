@@ -22,6 +22,6 @@ public class ScheduleCreationException extends Exception implements
 	}
 
 	@Override
-	public void sendToServer() {
+	public void sendToClient() {
 	}
 }
