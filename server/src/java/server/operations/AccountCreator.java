@@ -1,5 +1,13 @@
 package server.operations;
 
+/**
+ * Class used to create new administrator accounts on the database.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class AccountCreator {
 
 	public void createAccount(final String name, final String familyName) {
@@ -18,8 +26,8 @@ public class AccountCreator {
 			final String hashedPw) {
 
 		// TODO create user in DB
-		System.out.println(userName);
-		System.out.println(hashedPw);
+		// System.out.println(userName);
+		// System.out.println(hashedPw);
 
 	}
 

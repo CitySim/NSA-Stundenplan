@@ -2,6 +2,14 @@ package server.operations;
 
 import java.util.Random;
 
+/**
+ * Class used encrypt and generate passwords.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class PasswordEncryptor {
 
 	public String generateEncryptedPassword() {

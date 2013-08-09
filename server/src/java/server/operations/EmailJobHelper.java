@@ -10,11 +10,11 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 /**
- * Helper class used to initialize the emailSending and to create the emails to
+ * Helper class used to initialize the emailSending and to create the eMails to
  * send.
  * 
  * @author dennis.markmann
- * @since JDK.1.7.0_21
+ * @since JDK.1.7.0_25
  * @version 1.0
  */
 
@@ -34,17 +34,18 @@ public class EmailJobHelper {
 				emailList);
 	}
 
-	public final void sendConfirmationMail(final String eMailAddress) {
+	public final void sendConfirmationMail(final String eMailAddress,
+			final String schoolClass) {
 
-		final ArrayList<EmailObject> emailList = this
-				.createConfirmationMail(eMailAddress);
+		final ArrayList<EmailObject> emailList = this.createConfirmationMail(
+				eMailAddress, schoolClass);
 		new EmailJob().sendMail(
 				this.setEmailSettings("NSA - RegistrierungsBestätigung"),
 				emailList);
 	}
 
 	public ArrayList<EmailObject> createConfirmationMail(
-			final String eMailAddress) {
+			final String eMailAddress, final String schoolClass) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
@@ -55,7 +56,7 @@ public class EmailJobHelper {
 				.getEmailAddressList();
 
 		final String emailText = new EmailTextCreator()
-				.generateConformationText();
+				.generateConformationText(schoolClass, eMailAddress);
 
 		new EmailContentCreator().createMailContent(emailText, null,
 				emailObject);
