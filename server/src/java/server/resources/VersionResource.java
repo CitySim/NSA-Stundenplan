@@ -14,15 +14,18 @@ import com.google.gson.Gson;
 
 @Path("version")
 public class VersionResource {
-
+	// TODO Version an anderer Stelle ablegen
+	private ServerVersion version = new ServerVersion();
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getVersionJSON() {
-		// TODO Version an anderer Stelle ablegen
-		String version = "0.0.1";
 		Gson gson = new Gson();
 		String json = gson.toJson(version);
 		return json;
 	}
 	
+	private class ServerVersion {
+		String version = "0.0.1";
+	}
 }
