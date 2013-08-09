@@ -14,10 +14,6 @@ import org.hibernate.annotations.IndexColumn;
 @Entity
 public class Raum extends DefaultEntity {
 
-    @Id
-    @GeneratedValue
-	private Long raumId;
-
 	private String bezeichnung;
 
 	public String getBezeichnung() {

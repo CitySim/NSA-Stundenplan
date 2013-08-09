@@ -3,6 +3,8 @@ package server.operations;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import server.exceptions.ScheduleCreationException;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -30,10 +32,8 @@ public class PdfPrinter {
 			document.open();
 			document.add(new Paragraph(this.createPDFText()));
 			document.close();
-		} catch (final FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (final DocumentException e) {
-			e.printStackTrace();
+		} catch (final FileNotFoundException | DocumentException e) {
+			new ScheduleCreationException();
 		}
 		return path;
 	}
