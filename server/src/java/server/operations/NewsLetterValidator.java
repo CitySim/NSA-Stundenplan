@@ -20,25 +20,47 @@ public class NewsLetterValidator {
 	public String generateRegistrationLink(final String schoolClass,
 			final String eMailAddress) {
 
+		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:"
+				+ schoolClass;
+
 		// createLink containing our webSite URL + add + emailAddress + to
 		// schoolClass
 
-		return null;
+		return url;
 	}
 
 	public String generateRemoveLink(final String schoolClass,
 			final String eMailAddress) {
 
+		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:"
+				+ schoolClass;
+
 		// createLink containing our webSite URL + remove + emailAddress + to
 		// schoolClass
 
-		return null;
+		return url;
 	}
 
-	public void validateConfirmation() {
+	public void validateConfirmation(final String url) {
 
-		// add eMailAddress for schoolClass newsLetter on DB.
+		String eMailAddress = null;
+		String schoolClass = null;
 
+		if (url.contains("add")) {
+
+			eMailAddress = url.substring(url.indexOf("_") + 1,
+					url.lastIndexOf("_"));
+			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
+			// add eMailAddress for schoolClass newsLetter on DB.
+			return;
+
+		} else if (url.contains("remove")) {
+
+			eMailAddress = url.substring(url.indexOf("_") + 1,
+					url.lastIndexOf("_"));
+			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
+			// remove eMailAddress from schoolClass newsLetter on DB.
+			return;
+		}
 	}
-
 }
