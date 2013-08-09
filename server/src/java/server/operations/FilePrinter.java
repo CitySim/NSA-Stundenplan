@@ -35,8 +35,7 @@ class FilePrinter {
 		try {
 
 			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator")
-					+ "//desktop//HelloWorld.pdf";
+					+ System.getProperty("file.separator") + "stundenplan.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
 			document.add(new Paragraph(this.createText()));
@@ -67,8 +66,7 @@ class FilePrinter {
 					+ stringHeight / 4);
 
 			final String path = System.getProperty("user.home")
-					+ System.getProperty("file.separator")
-					+ "//desktop//HelloWorld.png";
+					+ System.getProperty("file.separator") + "stundenplan.png";
 
 			ImageIO.write(image, "PNG", new File(path));
 

@@ -1,7 +1,7 @@
 package server.exceptions;
 
 /**
- * Exception thrown if the schedule can't be created.
+ * Exception thrown if the login failed.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_21
