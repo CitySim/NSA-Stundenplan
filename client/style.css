@@ -13,3 +13,11 @@ body {
 .view-timetable-list input[type=search] {
 	margin: 10px 0;
 }
+
+.errorvid {
+	max-width: 535px;
+	border: 12px solid #1B1B1B;
+	-webkit-border-radius: 8px !important;
+	-moz-border-radius: 8px !important;
+	border-radius: 8px !important;
+}
