@@ -1,5 +1,6 @@
 package server.operations;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import storage.entities.Stundenplan;
@@ -19,17 +20,50 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 public class EmailJobHelper {
 
-	private EmailSettings setEmailSettings() {
+	private EmailSettings setEmailSettings(final String titel) {
 		return new EmailSettings("nsa-stundenplan@gmx.de", "nsa-stundenplan",
-				"nsa-stundenplan@gmx.de", "NSA - Stundenplan Abweichung",
-				"smtp.gmx.net");
+				"nsa-stundenplan@gmx.de", titel, "smtp.gmx.net");
 	}
 
-	public final void sendMailToGroups(final Stundenplan entityList) {
+	public final void sendMail(final Stundenplan entityList) {
 
 		final ArrayList<EmailObject> emailList = this
 				.createEmailObjects(entityList);
-		new EmailJob().sendMail(this.setEmailSettings(), emailList);
+		new EmailJob().sendMail(
+				this.setEmailSettings("NSA - Stundenplan Abweichung"),
+				emailList);
+	}
+
+	public final void sendConfirmationMail(final String eMailAddress) {
+
+		final ArrayList<EmailObject> emailList = this
+				.createConfirmationMail(eMailAddress);
+		new EmailJob().sendMail(
+				this.setEmailSettings("NSA - RegistrierungsBestätigung"),
+				emailList);
+	}
+
+	public ArrayList<EmailObject> createConfirmationMail(
+			final String eMailAddress) {
+
+		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
+
+		final EmailObject emailObject = new EmailObject();
+		emailList.add(emailObject);
+
+		final ArrayList<String> emailAddresList = emailObject
+				.getEmailAddressList();
+
+		final String emailText = new EmailTextCreator()
+				.generateConformationText();
+
+		new EmailContentCreator().createMailContent(emailText, null,
+				emailObject);
+
+		emailAddresList.add(eMailAddress);
+
+		return emailList;
+
 	}
 
 	private ArrayList<EmailObject> createEmailObjects(
@@ -44,8 +78,9 @@ public class EmailJobHelper {
 				.getEmailAddressList();
 
 		final String emailText = new EmailTextCreator().generateMailText();
+		final File file = new File(new PdfPrinter().printAsPDF());
 
-		new EmailContentCreator().createMailContent(emailText, null,
+		new EmailContentCreator().createMailContent(emailText, file,
 				emailObject);
 
 		// for (final EmailAddresse eMailAddresse : newsLetter

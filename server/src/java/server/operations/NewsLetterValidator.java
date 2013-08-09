@@ -9,8 +9,8 @@ public class NewsLetterValidator {
 
 	}
 
-	public void sendConfirmationMail() {
-
+	public void sendConfirmationMail(final String eMailAddress) {
+		new EmailJobHelper().createConfirmationMail(eMailAddress);
 	}
 
 	public void validateConfirmation() {
