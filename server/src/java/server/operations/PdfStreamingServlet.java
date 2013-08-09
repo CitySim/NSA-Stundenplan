@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,21 +23,18 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 
 	@Override
 	protected void doGet(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
 
 	@Override
 	protected void doPost(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
 
 	private void performTask(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+			final HttpServletResponse response) {
 
 		final File pdfFile = new File(new PdfPrinter().printAsPDF());
 
@@ -47,14 +43,20 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 				+ "stundenplan.pdf");
 		response.setContentLength((int) pdfFile.length());
 
-		final FileInputStream fileInputStream = new FileInputStream(pdfFile);
-		final OutputStream responseOutputStream = response.getOutputStream();
-		int bytes;
-		while ((bytes = fileInputStream.read()) != -1) {
-			responseOutputStream.write(bytes);
-		}
-		fileInputStream.close();
+		FileInputStream fileInputStream;
+		try {
+			fileInputStream = new FileInputStream(pdfFile);
 
+			final OutputStream responseOutputStream = response
+					.getOutputStream();
+			int bytes;
+			while ((bytes = fileInputStream.read()) != -1) {
+				responseOutputStream.write(bytes);
+			}
+			fileInputStream.close();
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

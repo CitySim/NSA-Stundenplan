@@ -9,5 +9,5 @@ package server.exceptions;
 
 interface ExceptionDialogInterface {
 
-	void showDialog();
+	void sendToServer();
 }
