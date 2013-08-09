@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.persistence.HibernateUtil;
-import storage.entities.Klasse;
+import server.entities.Klasse;
 
 public class HibernateTest {
 

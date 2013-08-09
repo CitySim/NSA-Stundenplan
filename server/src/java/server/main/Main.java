@@ -1,21 +1,9 @@
 package server.main;
 
-/**
- * Mainclass for initializing the project.
- * 
- * @author dennis.markmann
- * @since JDK.1.7.0_25
- * @version 1.0
- */
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-public class Main {
+@ApplicationPath("/*")
+public class Main extends Application {
 
-	private Main() {
-		// Should prevent instantiation, throws an exception in case this still
-		// is called somehow.
-		throw new AssertionError("Instantiating utility class");
-	}
-
-	public static void main(final String[] args) {
-	}
 }

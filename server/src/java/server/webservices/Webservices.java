@@ -1,6 +1,6 @@
 package server.webservices;
 
-import storage.entities.Klasse;
+import server.entities.Klasse;
 
 import com.google.gson.Gson;
 

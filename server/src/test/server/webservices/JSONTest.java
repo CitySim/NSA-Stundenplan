@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.webservices.Webservices;
-import storage.entities.Klasse;
+import server.entities.Klasse;
 
 public class JSONTest {
 

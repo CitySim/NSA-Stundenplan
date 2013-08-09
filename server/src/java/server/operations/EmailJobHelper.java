@@ -3,7 +3,7 @@ package server.operations;
 import java.io.File;
 import java.util.ArrayList;
 
-import storage.entities.Stundenplan;
+import server.entities.Stundenplan;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
