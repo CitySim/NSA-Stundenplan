@@ -27,9 +27,9 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @version 1.0
  */
 
-public class FilePrinter {
+class FilePrinter {
 
-	public String printAsPDF() {
+	final String printAsPDF() {
 		final Document document = new Document();
 		String path = null;
 		try {
@@ -47,7 +47,7 @@ public class FilePrinter {
 		return path;
 	}
 
-	public void printAsPng() {
+	public final void printAsPng() {
 		try {
 			final int width = 200, height = 200;
 

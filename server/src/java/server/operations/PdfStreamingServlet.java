@@ -22,13 +22,13 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(final HttpServletRequest request,
+	protected final void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest request,
+	protected final void doPost(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		this.performTask(request, response);
 	}
