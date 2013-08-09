@@ -13,14 +13,14 @@ import server.persistence.HibernateUtil;
 import com.google.gson.Gson;
 
 @Path("class")
-public class ClassResource {
+public class FormResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getClassesJSON() {
-		List<Form> classList = HibernateUtil.getEntityManager().createQuery("select p from Klasse p").getResultList();
+	public String getFormsJSON() {
+		List<Form> formList = HibernateUtil.getEntityManager().createQuery("select p from Klasse p").getResultList();
 		Gson gson = new Gson();
-		String json = gson.toJson(classList);
+		String json = gson.toJson(formList);
 		return json;
 	}
 }
