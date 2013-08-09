@@ -1,16 +1,23 @@
 package storage.entities;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
 @Entity
 public class StundenplanStunde extends DefaultEntity{
 
+	
     @ManyToOne
-    @JoinColumn(name="id", 
-                insertable=false, updatable=false, 
+    @JoinColumn(insertable=false, updatable=false, 
                 nullable=false)
+    @ForeignKey(name="FK_KLASSE")
 	private Klasse klasse;
    
     public Klasse getKlasse() {
@@ -22,7 +29,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
 
 	@ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="tag_id", 
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Tag tag;
@@ -36,7 +43,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
 
 	@ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="stunde_id",  
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Stunde stunde;
@@ -50,7 +57,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
 
 	@ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="lehrer_id",  
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Lehrer lehrer;
@@ -65,7 +72,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
 
 	@ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="fach_id",  
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Unterrichtsfach unterrichtsfach;
@@ -79,7 +86,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
 
 	@ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="raum_id",  
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Raum raum;
@@ -93,7 +100,7 @@ public class StundenplanStunde extends DefaultEntity{
 	}
     
     @ManyToOne
-    @JoinColumn(name="id", 
+    @JoinColumn(name="vertretung_id",  
                 insertable=false, updatable=false, 
                 nullable=false)
 	private Vertretung vertretung;
@@ -105,5 +112,5 @@ public class StundenplanStunde extends DefaultEntity{
 	public void setVertretung(Vertretung vertretung) {
 		this.vertretung = vertretung;
 	}
-
+	
 }

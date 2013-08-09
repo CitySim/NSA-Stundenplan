@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet used for streaming the schedule pdf.
+ * Servlet used for streaming the schedule as png.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
  * @version 1.0
  */
 
-public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
+public class PngStreamingServlet extends javax.servlet.http.HttpServlet
 		implements javax.servlet.Servlet {
 
 	private static final long serialVersionUID = 1L;
@@ -36,16 +36,16 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	private void performTask(final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		final File pdfFile = new File(new FilePrinter().printAsPDF());
+		final File pngFile = new File(new FilePrinter().printAsPng());
 
-		response.setContentType("application/pdf");
+		response.setContentType("application/png");
 		response.addHeader("Content-Disposition", "attachment; filename="
-				+ "stundenplan.pdf");
-		response.setContentLength((int) pdfFile.length());
+				+ "stundenplan.png");
+		response.setContentLength((int) pngFile.length());
 
 		FileInputStream fileInputStream;
 		try {
-			fileInputStream = new FileInputStream(pdfFile);
+			fileInputStream = new FileInputStream(pngFile);
 
 			final OutputStream responseOutputStream = response
 					.getOutputStream();
@@ -58,5 +58,4 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 			e.printStackTrace();
 		}
 	}
-
 }
