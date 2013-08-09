@@ -33,7 +33,12 @@ public class PasswordEncryptor {
 	public static String generate(final String alphabet, final int length) {
 		final String digits = "0123456789";
 		final String special = "!\"#$%&'()*+,-./:;<=>?@";
-		return generate(length, digits, special, alphabet);
+		try {
+			return generate(length, digits, special, alphabet);
+		} catch (final IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return special;
 	}
 
 	/**
