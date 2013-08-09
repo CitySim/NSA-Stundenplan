@@ -24,9 +24,4 @@ public class Klasse extends DefaultEntity {
 		this.bezeichung = bezeichung;
 	}
 	
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="indx")
-    private List<StundenplanStunde> stundenplanStunde;
-
 }

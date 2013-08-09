@@ -33,9 +33,4 @@ public class Unterrichtsfach extends DefaultEntity {
 		this.bezeichnung = bezeichnung;
 	}
 	
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="indx")
-    private List<StundenplanStunde> stundenPlanStunde;
-
 }

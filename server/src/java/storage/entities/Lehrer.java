@@ -42,9 +42,4 @@ public class Lehrer extends DefaultEntity {
 		this.vorname = vorname;
 	}
 
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="indx")
-    private List<StundenplanStunde> stundenPlanStunde;
-
 }

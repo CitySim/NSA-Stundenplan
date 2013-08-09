@@ -24,9 +24,4 @@ public class Raum extends DefaultEntity {
 		this.bezeichnung = bezeichnung;
 	}
 
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="raumId")
-    @IndexColumn(name="indx")
-    private List<StundenplanStunde> stundenPlanStunde;
-
 }
