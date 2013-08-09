@@ -2,9 +2,17 @@ package server.operations;
 
 import java.util.Random;
 
-public class PasswordEncryptor {
+/**
+ * Class used encrypt and generate passwords.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
 
-	public String generateEncryptedPassword() {
+class PasswordEncryptor {
+
+	final String generateEncryptedPassword() {
 
 		return this.encryptPassword(this.generatePassword());
 
@@ -13,6 +21,7 @@ public class PasswordEncryptor {
 	private String encryptPassword(final String password) {
 
 		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+		BCrypt.gensalt();
 		hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
 		return hashed;
@@ -56,11 +65,8 @@ public class PasswordEncryptor {
 	 * @param alphabets
 	 *            The alphabets to use
 	 * @return The generated string
-	 * @throws IllegalArgumentException
-	 *             if not alphabets are given, or an empty of <code>null</code>
-	 *             alphabet is encountered
 	 */
-	public static String generate(final int length, final String... alphabets) {
+	private static String generate(final int length, final String... alphabets) {
 		if (alphabets.length == 0) {
 			throw new IllegalArgumentException(
 					"At least one alphabet must be given");
@@ -104,7 +110,7 @@ public class PasswordEncryptor {
 	}
 
 	/**
-	 * Shuffles the given StringBuffer in place and returns it
+	 * Shuffles the given StringBuffer in place and returns it.
 	 * 
 	 * @param sb
 	 *            The StringBuffer to shuffle and return
