@@ -4,7 +4,7 @@ package server.exceptions;
  * Exception thrown if the schedule can't be created.
  * 
  * @author dennis.markmann
- * @since JDK.1.7.0_21
+ * @since JDK.1.7.0_25
  * @version 1.0
  */
 

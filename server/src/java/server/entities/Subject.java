@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Unterichtsfach")
+@Table(name = "Unterichtsfach")
 public class Subject {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "idUnterichtsfach")
 	private int id;
-	
+
 	@Column(name = "kurzname", length = 10)
 	private String shortName;
-	
+
 	@Column(name = "bezeichnung", length = 45)
 	private String description;
 
@@ -34,13 +34,11 @@ public class Subject {
 	}
 
 	public String getShortName() {
-		return shortName;
+		return this.shortName;
 	}
 
 	public void setShortName(final String shortName) {
 		this.shortName = shortName;
 	}
-
-
 
 }

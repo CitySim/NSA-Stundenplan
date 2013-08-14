@@ -1,6 +1,7 @@
 package server.persistence;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -10,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.persistence.HibernateUtil;
 import server.entities.Form;
 
 public class HibernateTest {
@@ -19,29 +19,30 @@ public class HibernateTest {
 
 	@Before
 	public void init() {
-		em = HibernateUtil.getEntityManager();
+		this.em = HibernateUtil.getEntityManager();
 	}
 
 	@After
 	public void cleanup() {
-		em.close();
+		this.em.close();
 	}
 
 	@Test
 	public void entityManagerTest() {
-		em.getTransaction().begin();
-		Form class1 = new Form();
+		this.em.getTransaction().begin();
+		final Form class1 = new Form();
 		class1.setDescription("ita");
-		Form class2 = new Form();
+		final Form class2 = new Form();
 		class2.setDescription("itb");
-		
-		em.persist(class1);
-		em.persist(class2);
-		em.getTransaction().commit();
-		
-		final List<Form> list = em.createNativeQuery("select * from Klasse", Form.class).getResultList();
+
+		this.em.persist(class1);
+		this.em.persist(class2);
+		this.em.getTransaction().commit();
+
+		final List<Form> list = this.em.createNativeQuery(
+				"select * from Klasse", Form.class).getResultList();
 		assertEquals(2, list.size());
-		for (Form current : list) {
+		for (final Form current : list) {
 			final String firstName = current.getDescription();
 			assertTrue(firstName.equals("ita") || firstName.equals("itb"));
 		}
