@@ -21,3 +21,19 @@ body {
 	-moz-border-radius: 8px !important;
 	border-radius: 8px !important;
 }
+
+.stundenplan, .stundenplan tr, .stundenplan td, .stundenplan th {
+	border: 1px solid #666 !important;
+}
+
+.stundenplan th:nth-child(n+2), .stundenplan td:first-child {
+	background-color: #BBD !important;
+}
+
+.stundenplan .vertretung {
+	background-color: #7295CC;
+}
+
+.stundenplan .ausfall {
+	background-color: #FF8170;
+}
