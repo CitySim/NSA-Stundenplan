@@ -12,13 +12,13 @@ import com.google.gson.Gson;
 
 @Path("teacher")
 public class TeacherResource {
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		Teacher teacher = TeacherTest.getTeacher();
-		Gson gson = new Gson();
-		String json = gson.toJson(teacher);
+		final Teacher teacher = TeacherTest.getTeacher();
+		final Gson gson = new Gson();
+		final String json = gson.toJson(teacher);
 		return json;
 	}
 

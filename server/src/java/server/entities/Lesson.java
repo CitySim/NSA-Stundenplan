@@ -16,10 +16,10 @@ public class Lesson {
 	@GeneratedValue
 	@Column(name = "idStunde")
 	private int id;
-	
+
 	@Column(name = "zeitVon")
 	private Date timeFrom;
-	
+
 	@Column(name = "zeitBis")
 	private Date timeTo;
 

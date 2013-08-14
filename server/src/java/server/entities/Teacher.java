@@ -14,13 +14,13 @@ public class Teacher {
 	@GeneratedValue
 	@Column(name = "idLehrer")
 	private int id;
-	
+
 	@Column(name = "Kurzname", length = 5)
 	private String shortName;
-	
+
 	@Column(name = "Name", length = 45)
 	private String name;
-	
+
 	@Column(name = "Vorname", length = 45)
 	private String firstname;
 
@@ -29,7 +29,7 @@ public class Teacher {
 	}
 
 	public String getShortName() {
-		return shortName;
+		return this.shortName;
 	}
 
 	public void setShortName(final String shortName) {
@@ -37,7 +37,7 @@ public class Teacher {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(final String name) {
@@ -45,7 +45,7 @@ public class Teacher {
 	}
 
 	public String getFirstname() {
-		return firstname;
+		return this.firstname;
 	}
 
 	public void setFirstname(final String firstname) {

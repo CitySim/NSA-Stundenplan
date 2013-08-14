@@ -14,7 +14,7 @@ public class Room {
 	@GeneratedValue
 	@Column(name = "idRaum")
 	private int id;
-	
+
 	@Column(name = "bezeichnung", length = 10)
 	private String description;
 

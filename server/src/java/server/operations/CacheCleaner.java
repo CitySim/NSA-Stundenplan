@@ -3,6 +3,14 @@ package server.operations;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Class used to delete temporary created files.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class CacheCleaner {
 	public void cleanCache() {
 
