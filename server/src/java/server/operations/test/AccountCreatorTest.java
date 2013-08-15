@@ -52,8 +52,7 @@ public class AccountCreatorTest extends TestCase {
 
 		final String password = this.creator.changePassword(userName);
 
-		// TODO getPasswordFromDB
-
-		AccountCreatorTest.assertEquals(password, password);
+		AccountCreatorTest.assertEquals(password,
+				new LoginQuery().getPassword(userName));
 	}
 }
