@@ -37,10 +37,10 @@ public class AccountCreator {
 		this.changePasswordInDatabase(userName, password);
 
 		// TODO getEmailAddress for user from DB
-		final String eMailAddress = "";
-
-		new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
-				password);
+		// final String eMailAddress = "";
+		//
+		// new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
+		// password);
 
 		return password;
 	}

@@ -19,40 +19,34 @@ import server.queries.LoginQuery;
 public class AccountCreatorTest extends TestCase {
 
 	private AccountCreator creator;
+	private String userName;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		this.creator = new AccountCreator();
+
+		final String name = "Dennis";
+		final String familyName = "Markmann";
+		final String emailAddress = "test@test.de";
+
+		this.userName = this.creator.createAccount(name, familyName,
+				emailAddress);
 	}
 
 	@Test
 	public void testAccountCreation() {
 
-		final String name = "Dennis";
-		final String familyName = "Markmann";
-		final String emailAddress = "test@test.de";
-
-		final String userName = this.creator.createAccount(name, familyName,
-				emailAddress);
-
-		AccountCreatorTest
-				.assertNotNull(new LoginQuery().getPassword(userName));
+		AccountCreatorTest.assertNotNull(new LoginQuery()
+				.getPassword(this.userName));
 	}
 
 	@Test
 	public void testPasswordChange() {
 
-		final String name = "Dennis";
-		final String familyName = "Markmann";
-		final String emailAddress = "test@test.de";
-
-		final String userName = this.creator.createAccount(name, familyName,
-				emailAddress);
-
-		final String password = this.creator.changePassword(userName);
+		final String password = this.creator.changePassword(this.userName);
 
 		AccountCreatorTest.assertEquals(password,
-				new LoginQuery().getPassword(userName));
+				new LoginQuery().getPassword(this.userName));
 	}
 }
