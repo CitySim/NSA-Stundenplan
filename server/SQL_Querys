@@ -20,7 +20,7 @@ INSERT INTO `lehrer`(`Vorname`, `Name`, `Kurzname`) VALUES ('Werner','Hermann','
 INSERT INTO `replacement`(`replacementDate`) VALUES ('2013-08-20 07:45:00.000'),('2013-08-20 08:30:00.000'),('2013-08-20 09:30:00.000');
 
 #Unterrichtsfach
-INSERT INTO `unterichtsfach`(`idUnterichtsfach`, `bezeichnung`, `kurzname`) VALUES ('Wirtschaft und Gesellschaft','WuG'),('Anwendungsentwicklung','AE'),('IT-Systeme','IT-S');
+INSERT INTO `unterrichtsfach`( `bezeichnung`, `kurzname`) VALUES ('Wirtschaft und Gesellschaft','WuG'),('Anwendungsentwicklung','AE'),('IT-Systeme','IT-S');
 
 #Login
 INSERT INTO `login`(`password`, `user`) VALUES ('$2a$12$/RiRupOCZ6yaG9YQMRpM4eFB.WolxhSv7XeqznbrTpJ0zfypH0H.i','dennis.markmann'),('$2a$12$Qsj527XR0kHE6j/GYafcLOk8SXQasAY.OQ86uJmclNVstY11NqdNq','oleg.scheltow'),('$2a$12$ErDI/fOivP.9mMN2YA2FTOYumtvCdG5YBUIEIb3PVeXxg3fFxRdam','sven.tatter');
