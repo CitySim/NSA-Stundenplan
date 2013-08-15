@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Class used to delete temporary created files.
+ * Used to delete temporary created files.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

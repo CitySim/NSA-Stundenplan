@@ -1,8 +1,8 @@
 package server.operations;
 
 /**
- * Class used to add newsletter entries on the database. Generates URLs for
- * confirming the registration / removing of eMailAddresses.
+ * Used to add newsletter entries on the database. Generates URLs for confirming
+ * the registration / removing of eMailAddresses.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

@@ -7,6 +7,14 @@ import server.entities.Timetable;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 
+/**
+ * Used to create the eMails to send.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class EmailCreator {
 
 	final ArrayList<EmailObject> createConfirmationMail(

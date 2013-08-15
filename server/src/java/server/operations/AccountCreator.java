@@ -3,7 +3,7 @@ package server.operations;
 import server.queries.LoginQuery;
 
 /**
- * Class used to create new administrator accounts on the database.
+ * Used to create new administrator accounts on the database.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

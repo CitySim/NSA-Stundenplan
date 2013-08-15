@@ -3,7 +3,7 @@ package server.operations;
 import java.util.Random;
 
 /**
- * Class used encrypt and generate passwords.
+ * Used encrypt and generate passwords.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

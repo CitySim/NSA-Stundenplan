@@ -4,7 +4,7 @@ import server.exceptions.LoginFailedException;
 import server.queries.LoginQuery;
 
 /**
- * Class used validate the login as an Administrator.
+ * Used to validate the login as an Administrator.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

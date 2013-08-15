@@ -9,7 +9,7 @@ import server.operations.AccountCreator;
 import server.queries.LoginQuery;
 
 /**
- * Test for the user creation.
+ * Test for the user creation and password change.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

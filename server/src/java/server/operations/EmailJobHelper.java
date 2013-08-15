@@ -8,8 +8,7 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 /**
- * Helper class used to initialize the emailSending and to create the eMails to
- * send.
+ * Used to initialize the emailSending.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
