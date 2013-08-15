@@ -3,9 +3,12 @@ class window.nsa.Views.Home extends Backbone.View
 
 	initialize: () =>
 		if not nsa.Data.school?
-			@model = nsa.Data.school = new nsa.Models.School()
+			@model = new nsa.Models.School()
 			@model.fetch
-				success: @render
+				success: () =>
+					nsa.Data.school = @model
+					@render()
+					return
 				error: () =>
 					delete nsa.Data.school
 					nsa.app.error
@@ -18,11 +21,11 @@ class window.nsa.Views.Home extends Backbone.View
 		return
 
 	render: () =>
-		@$el.html nsa.handlebars.loading()
+		if not nsa.Data.school?
+			@$el.html nsa.handlebars.loading()
+			return
 
-		###
 		@$el.html @template
-			school: @model.toJSON
-		###
+			model: @model.toJSON()
 
 		return
