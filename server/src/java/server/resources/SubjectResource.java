@@ -7,7 +7,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import server.entities.Room;
 import server.entities.Subject;
 import server.persistence.HibernateUtil;
 
@@ -25,7 +24,7 @@ public class SubjectResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Room> getSubjects() {
+	public List<Subject> getSubjects() {
 		return HibernateUtil
 				.getEntityManager()
 				.createNativeQuery("select * from Unterrichtsfach",

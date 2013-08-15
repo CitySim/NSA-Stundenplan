@@ -18,7 +18,7 @@ import server.entities.Room;
 import server.entities.Subject;
 import server.entities.Teacher;
 
-public class HibernateTest {
+public class PersistEntityTest {
 
 	private EntityManager em;
 
@@ -34,6 +34,7 @@ public class HibernateTest {
 	
 	@Test
 	public void entityManagerTest() {
+		
 		this.em.getTransaction().begin();
 		
 		Teacher teacher1 = new Teacher();
@@ -43,8 +44,9 @@ public class HibernateTest {
 		em.persist(teacher1);
 		
 		final Form class1 = new Form();
-		class1.setDescription("ita");	
+		class1.setDescription("ita");
 		class1.setTeacher(teacher1);
+		this.em.persist(class1);
 		
 		Teacher teacher2 = new Teacher();
 		teacher2.setFirstname("Gesinde");
@@ -53,12 +55,23 @@ public class HibernateTest {
 		em.persist(teacher2);
 		
 		final Form class2 = new Form();
-	
 		class2.setTeacher(teacher2);
-		class2.setDescription("itb");	
-		
-		this.em.persist(class1);
+		class2.setDescription("itb");
 		this.em.persist(class2);
+		
+		Room room = new Room();
+		room.setDescription("raum53");
+		em.persist(room);
+		
+		Lesson lesson = new Lesson();
+		lesson.setTimeFrom(Time.valueOf("10:00:00"));
+		lesson.setTimeTo(Time.valueOf("10:00:00"));
+		em.persist(lesson);
+		
+		Subject subject = new Subject();
+		subject.setDescription("Biologie");
+		subject.setShortName("Bio");
+		em.persist(subject);
 		
 		this.em.getTransaction().commit();
 
