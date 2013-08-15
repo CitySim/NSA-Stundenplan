@@ -9,7 +9,7 @@ package server.operations;
  * @version 1.0
  */
 
-class NewsLetterValidator {
+public class NewsLetterValidator {
 
 	public final void addAddress(final String eMailAddress,
 			final String schoolClass) {
@@ -18,7 +18,7 @@ class NewsLetterValidator {
 
 	}
 
-	final String generateRegistrationLink(final String schoolClass,
+	public final String generateRegistrationLink(final String schoolClass,
 			final String eMailAddress) {
 
 		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:"

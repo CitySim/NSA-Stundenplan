@@ -10,7 +10,7 @@ package server.operations;
 
 public class AccountCreator {
 
-	public final void createAccount(final String name, final String familyName) {
+	public final String createAccount(final String name, final String familyName) {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
@@ -19,6 +19,8 @@ public class AccountCreator {
 				.generateEncryptedPassword();
 
 		this.storeUserInDatabase(userName, password);
+
+		return userName;
 
 	}
 
