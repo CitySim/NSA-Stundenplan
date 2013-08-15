@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.entities.Day;
 import server.entities.Form;
 import server.entities.Lesson;
 import server.entities.Room;
@@ -72,6 +73,10 @@ public class PersistEntityTest {
 		subject.setDescription("Biologie");
 		subject.setShortName("Bio");
 		em.persist(subject);
+		
+		Day day = new Day();
+		day.setDescription("Montag");
+		em.persist(day);
 		
 		this.em.getTransaction().commit();
 

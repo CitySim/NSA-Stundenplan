@@ -1,5 +1,33 @@
 package server.resources;
 
-public class DayResource {
+import java.util.List;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import server.entities.Day;
+import server.persistence.HibernateUtil;
+
+import com.google.gson.Gson;
+
+@Path("days")
+public class DayResource {
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getDaysJSON() {
+		final Gson gson = new Gson();
+		final String json = gson.toJson(getDays());
+		return json;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Day> getDays() {
+		return HibernateUtil
+				.getEntityManager()
+				.createNativeQuery("select * from Tag",
+						Day.class).getResultList();
+	}
 }
