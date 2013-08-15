@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +23,9 @@ public class Form implements Serializable {
 	@Column(name = "bezeichnung", length = 10)
 	private String description;
 
+	@ManyToOne(targetEntity=Teacher.class)
+	private Teacher teacher;
+
 	public int getId() {
 		return this.id;
 	}
@@ -34,4 +38,11 @@ public class Form implements Serializable {
 		this.description = description;
 	}
 
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 }

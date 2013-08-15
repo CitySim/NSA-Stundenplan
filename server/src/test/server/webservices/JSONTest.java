@@ -1,11 +1,10 @@
 package server.webservices;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import server.webservices.Webservices;
 import server.entities.Form;
 
 public class JSONTest {

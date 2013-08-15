@@ -23,11 +23,11 @@ public class Teacher {
 
 	@Column(name = "Vorname", length = 45)
 	private String firstname;
-
+	
 	public int getId() {
 		return this.id;
 	}
-
+	
 	public String getShortName() {
 		return this.shortName;
 	}
