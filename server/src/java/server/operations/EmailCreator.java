@@ -72,8 +72,8 @@ public class EmailCreator {
 		final String emailText = new EmailTextCreator()
 				.generateUserCreationText(userName, password);
 
-		new EmailContentCreator().createMailContent(emailText, null,
-				emailObject);
+		// new EmailContentCreator().createMailContent(emailText, null,
+		// emailObject);
 
 		emailAddresList.add(eMailAddress);
 
