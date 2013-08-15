@@ -1,5 +1,7 @@
 package server.operations;
 
+import server.exceptions.LoginFailedException;
+
 /**
  * Class used validate the login as an Administrator.
  * 
@@ -10,12 +12,31 @@ package server.operations;
 
 public class LoginValidator {
 
-	public void validateLoginData(final String userName, final String password) {
+	public Boolean validateLoginData(final String userName,
+			final String password) {
 
-		// search for all userNames on the database in the login table
-		// get the password an compare it to the inserted one
-		// check of the password through passwordValidator
+		final String dbPassword = "toDo";
 
+		final Boolean passwordOkay = this
+				.validatePassword(password, dbPassword);
+
+		if (!passwordOkay) {
+			new LoginFailedException().sendToClient();
+		}
+
+		return passwordOkay;
+
+	}
+
+	private final boolean validatePassword(final String password,
+			final String dbPassword) {
+
+		Boolean matches = false;
+
+		if (BCrypt.checkpw(dbPassword, password)) {
+			matches = true;
+		}
+		return matches;
 	}
 
 }

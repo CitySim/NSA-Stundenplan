@@ -1,0 +1,16 @@
+Wishlist for Dennis:
+
+1. Create user in the DB (Login Table)
+	Parameters from me: UserName & Password
+
+2. Check if userName is in the DB. Return password if true, else null.
+	Parameters from me: UserName
+	
+3. Add eMailAddress for schoolClass newsLetter on DB.
+	Parameters from me: eMailAddress
+	
+4. Remove eMailAddress from schoolClass newsLetter on DB.
+	Parameters from me: eMailAddress
+
+5. Get completeNewsLetterList for schoolClass.
+	Parameters from me: schoolClass.
