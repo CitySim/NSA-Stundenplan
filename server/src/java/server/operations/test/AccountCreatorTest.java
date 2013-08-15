@@ -39,4 +39,19 @@ public class AccountCreatorTest extends TestCase {
 		AccountCreatorTest
 				.assertNotNull(new LoginQuery().getPassword(userName));
 	}
+
+	// TODO
+	@Test
+	public void testPasswordChange() {
+		//
+		// final String name = "Dennis";
+		// final String familyName = "Markmann";
+		// final String emailAddress = "test@test.de";
+		//
+		// final String userName = this.creator.createAccount(name, familyName,
+		// emailAddress);
+		//
+		// AccountCreatorTest
+		// .assertNotNull(new LoginQuery().getPassword(userName));
+	}
 }

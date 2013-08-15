@@ -124,4 +124,10 @@ class EmailJobHelper {
 
 		return emailList;
 	}
+
+	public void sendPasswordChangeMail(final String eMailAddress,
+			final String userName, final String password) {
+		// TODO Auto-generated method stub
+
+	}
 }

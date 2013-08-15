@@ -21,11 +21,26 @@ public class AccountCreator {
 
 		this.storeUserInDatabase(userName, password);
 
-		new EmailJobHelper().sendCreationMail(eMailAddress, userName,
-				password);
+		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
 
 		return userName;
 
+	}
+
+	public String changePassword(final String userName) {
+
+		final String password = new PasswordEncryptor()
+				.generateEncryptedPassword();
+
+		this.changePasswordInDatabase(userName, password);
+
+		// TODO getEmailAddress for user from DB
+		final String eMailAddress = "";
+
+		new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
+				password);
+
+		return password;
 	}
 
 	private void storeUserInDatabase(final String userName,
@@ -35,6 +50,14 @@ public class AccountCreator {
 		// System.out.println(userName);
 		// System.out.println(hashedPw);
 
+	}
+
+	private void changePasswordInDatabase(final String userName,
+			final String hashedPw) {
+
+		// TODO change password in DB
+		// System.out.println(userName);
+		// System.out.println(hashedPw);
 	}
 
 	private String generateUserName(final String name, final String familyName) {
