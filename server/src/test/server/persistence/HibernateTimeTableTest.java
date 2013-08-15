@@ -26,12 +26,15 @@ public class HibernateTimeTableTest {
 		this.em.close();
 	}
 
+	// Only Testable if Database is filled with testdata from SQL Querys
 	@Test
-	public void entityManagerTest() {
+	public void sizeTest() {
 
-		final List<Form> list = this.em.createNativeQuery(
+		final List<TimetableLesson> list = this.em.createNativeQuery(
 				"select * from Klasse_Tag_Stunde", TimetableLesson.class).getResultList();
 		
-		assertEquals(0, list.size());
+		assertEquals(3, list.size());
+		assertEquals("Werner", list.get(0).getLehrer().getFirstname());
 	}
+
 }
