@@ -1,5 +1,7 @@
 package server.operations;
 
+import server.queries.LoginQuery;
+
 /**
  * Class used to create new administrator accounts on the database.
  * 
@@ -46,18 +48,15 @@ public class AccountCreator {
 	private void storeUserInDatabase(final String userName,
 			final String hashedPw) {
 
-		// TODO create user in DB
-		// System.out.println(userName);
-		// System.out.println(hashedPw);
+		new LoginQuery().createUser(userName, hashedPw);
 
 	}
 
 	private void changePasswordInDatabase(final String userName,
 			final String hashedPw) {
 
-		// TODO change password in DB
-		// System.out.println(userName);
-		// System.out.println(hashedPw);
+		new LoginQuery().changePassword(userName, hashedPw);
+
 	}
 
 	private String generateUserName(final String name, final String familyName) {
