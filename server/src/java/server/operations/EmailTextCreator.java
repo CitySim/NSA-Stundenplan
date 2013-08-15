@@ -46,7 +46,7 @@ class EmailTextCreator {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
-		sb.append("Sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
+		sb.append("sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
 		sb.append("Die für sie eingetragene Klasse ist die " + schoolClass
 				+ " .");
 		sb.append(System.lineSeparator());
@@ -73,7 +73,7 @@ class EmailTextCreator {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
-		sb.append("Sie wurden als Administrator der Nation Stundenplan Agency registriert.");
+		sb.append("sie wurden als Administrator der Nation Stundenplan Agency registriert.");
 		sb.append(System.lineSeparator());
 
 		sb.append("Ihr Login ist: ");
@@ -82,6 +82,25 @@ class EmailTextCreator {
 		sb.append(System.lineSeparator());
 
 		sb.append("Ihr Passwort ist: ");
+		sb.append(password);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+
+		return sb.toString();
+	}
+
+	public String generatePasswordChangeText(final String userName,
+			final String password) {
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("Hallo,");
+		sb.append("ihr passwort wurde erfolgreich geändert.");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr neues Passwort ist: ");
 		sb.append(password);
 		sb.append(".");
 		sb.append(System.lineSeparator());

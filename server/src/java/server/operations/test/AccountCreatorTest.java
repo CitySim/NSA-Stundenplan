@@ -19,6 +19,7 @@ import server.queries.LoginQuery;
 public class AccountCreatorTest extends TestCase {
 
 	private AccountCreator creator;
+	private String userName;
 
 	@Override
 	@Before
@@ -26,6 +27,7 @@ public class AccountCreatorTest extends TestCase {
 		this.creator = new AccountCreator();
 	}
 
+	@Before
 	@Test
 	public void testAccountCreation() {
 
@@ -33,25 +35,20 @@ public class AccountCreatorTest extends TestCase {
 		final String familyName = "Markmann";
 		final String emailAddress = "test@test.de";
 
-		final String userName = this.creator.createAccount(name, familyName,
+		this.userName = this.creator.createAccount(name, familyName,
 				emailAddress);
 
-		AccountCreatorTest
-				.assertNotNull(new LoginQuery().getPassword(userName));
+		AccountCreatorTest.assertNotNull(new LoginQuery()
+				.getPassword(this.userName));
 	}
 
-	// TODO
 	@Test
-	public void testPasswordChange() {
-		//
-		// final String name = "Dennis";
-		// final String familyName = "Markmann";
-		// final String emailAddress = "test@test.de";
-		//
-		// final String userName = this.creator.createAccount(name, familyName,
-		// emailAddress);
-		//
-		// AccountCreatorTest
-		// .assertNotNull(new LoginQuery().getPassword(userName));
+	private void testPasswordChange() {
+
+		final String password = this.creator.changePassword(this.userName);
+
+		// TODO getPasswordFromDB
+
+		AccountCreatorTest.assertEquals(password, password);
 	}
 }
