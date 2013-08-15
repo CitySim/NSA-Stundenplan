@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.entities.Form;
+import server.entities.Room;
 import server.entities.Teacher;
 
 public class HibernateTest {
@@ -47,7 +48,10 @@ public class HibernateTest {
 		em.persist(teacher2);
 		class2.setTeacher(teacher2);
 		class2.setDescription("itb");
-
+		
+		Room room = new Room();
+		room.setDescription("raum53");
+		em.persist(room);
 		this.em.persist(class1);
 		this.em.persist(class2);
 		this.em.getTransaction().commit();

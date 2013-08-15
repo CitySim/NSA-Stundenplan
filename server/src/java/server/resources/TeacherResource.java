@@ -23,6 +23,7 @@ public class TeacherResource {
 		return json;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Teacher> getTeachers() {
 		return HibernateUtil.getEntityManager()
 				.createNativeQuery("select * from Lehrer", Teacher.class)
