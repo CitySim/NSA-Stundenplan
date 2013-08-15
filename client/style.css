@@ -29,7 +29,7 @@ body {
 }
 
 .stundenplan th:nth-child(n+2), .stundenplan td:first-child {
-	background-color: rgb(236, 236, 236);
+	background-color: rgb(235, 235, 235);
 }
 
 .stundenplan th:first-child {
