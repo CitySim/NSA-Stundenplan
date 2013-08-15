@@ -21,7 +21,7 @@ module.exports = (grunt) ->
 					join: true
 					sourceMap: true
 				files:
-					"build/app.js": "app/**/*.coffee"
+					"build/app.js": [ "app/app.coffee", "app/models/*.coffee", "app/collections/*.coffee", "app/views/*.coffee" ]
 
 		handlebars:
 			templates:

@@ -1,10 +1,8 @@
 package server.operations;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import server.entities.Timetable;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
@@ -26,8 +24,7 @@ class EmailJobHelper {
 	}
 
 	public final void sendMail(final Timetable entityList) {
-
-		final ArrayList<EmailObject> emailList = this
+		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createEmailObjects(entityList);
 		new EmailJob().sendMail(
 				this.setEmailSettings("NSA - Stundenplan Abweichung"),
@@ -37,59 +34,30 @@ class EmailJobHelper {
 	final void sendConfirmationMail(final String eMailAddress,
 			final String schoolClass) {
 
-		final ArrayList<EmailObject> emailList = this.createConfirmationMail(
-				eMailAddress, schoolClass);
+		final ArrayList<EmailObject> emailList = new EmailCreator()
+				.createConfirmationMail(eMailAddress, schoolClass);
 		new EmailJob().sendMail(
 				this.setEmailSettings("NSA - RegistrierungsBestätigung"),
 				emailList);
 	}
 
-	private final ArrayList<EmailObject> createConfirmationMail(
-			final String eMailAddress, final String schoolClass) {
+	final void sendCreationMail(final String eMailAddress,
+			final String userName, final String password) {
 
-		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
-
-		final EmailObject emailObject = new EmailObject();
-		emailList.add(emailObject);
-
-		final ArrayList<String> emailAddresList = emailObject
-				.getEmailAddressList();
-
-		final String emailText = new EmailTextCreator()
-				.generateConformationText(schoolClass, eMailAddress);
-
-		new EmailContentCreator().createMailContent(emailText, null,
-				emailObject);
-
-		emailAddresList.add(eMailAddress);
-
-		return emailList;
-
+		final ArrayList<EmailObject> emailList = new EmailCreator()
+				.createCreationMail(eMailAddress, userName, password);
+		new EmailJob().sendMail(
+				this.setEmailSettings("NSA - ErstellBestätigung"), emailList);
 	}
 
-	private ArrayList<EmailObject> createEmailObjects(
-			final Timetable entityList) {
+	public void sendPasswordChangeMail(final String eMailAddress,
+			final String userName, final String password) {
 
-		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
-
-		final EmailObject emailObject = new EmailObject();
-		emailList.add(emailObject);
-
-		final ArrayList<String> emailAddresList = emailObject
-				.getEmailAddressList();
-
-		final String emailText = new EmailTextCreator().generateMailText();
-		final File file = new File(new FilePrinter().printAsPDF());
-
-		new EmailContentCreator().createMailContent(emailText, file,
-				emailObject);
-
-		// for (final EmailAddresse eMailAddresse : newsLetter
-		// .geteMailAddressList()) {
-		// emailAddresList.add(eMailAddresse.geteMailAddress());
-		// }
-		// }
-
-		return emailList;
+		final ArrayList<EmailObject> emailList = new EmailCreator()
+				.createPasswordChangeMail(eMailAddress, userName, password);
+		new EmailJob().sendMail(
+				this.setEmailSettings("NSA - PasswordÄnderungsBestätigung"),
+				emailList);
 	}
+
 }

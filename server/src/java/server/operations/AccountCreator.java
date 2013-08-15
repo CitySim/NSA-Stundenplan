@@ -1,5 +1,7 @@
 package server.operations;
 
+import server.queries.LoginQuery;
+
 /**
  * Class used to create new administrator accounts on the database.
  * 
@@ -10,7 +12,8 @@ package server.operations;
 
 public class AccountCreator {
 
-	public final void createAccount(final String name, final String familyName) {
+	public final String createAccount(final String name,
+			final String familyName, final String eMailAddress) {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
@@ -20,14 +23,39 @@ public class AccountCreator {
 
 		this.storeUserInDatabase(userName, password);
 
+		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
+
+		return userName;
+
+	}
+
+	public String changePassword(final String userName) {
+
+		final String password = new PasswordEncryptor()
+				.generateEncryptedPassword();
+
+		this.changePasswordInDatabase(userName, password);
+
+		// TODO getEmailAddress for user from DB
+		final String eMailAddress = "";
+
+		new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
+				password);
+
+		return password;
 	}
 
 	private void storeUserInDatabase(final String userName,
 			final String hashedPw) {
 
-		// TODO create user in DB
-		// System.out.println(userName);
-		// System.out.println(hashedPw);
+		new LoginQuery().createUser(userName, hashedPw);
+
+	}
+
+	private void changePasswordInDatabase(final String userName,
+			final String hashedPw) {
+
+		new LoginQuery().changePassword(userName, hashedPw);
 
 	}
 

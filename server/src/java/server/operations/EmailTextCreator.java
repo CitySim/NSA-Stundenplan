@@ -10,7 +10,7 @@ package server.operations;
 
 class EmailTextCreator {
 
-	String generateMailText() {
+	String generateScheduleChangeText() {
 
 		final StringBuilder sb = new StringBuilder();
 
@@ -46,7 +46,7 @@ class EmailTextCreator {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
-		sb.append("Sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
+		sb.append("sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
 		sb.append("Die für sie eingetragene Klasse ist die " + schoolClass
 				+ " .");
 		sb.append(System.lineSeparator());
@@ -66,6 +66,48 @@ class EmailTextCreator {
 		sb.append("Ihr National Studenplan Agency Team.");
 
 		return sb.toString();
+	}
 
+	String generateUserCreationText(final String userName, final String password) {
+
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("Hallo,");
+		sb.append("sie wurden als Administrator der Nation Stundenplan Agency registriert.");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr Login ist: ");
+		sb.append(userName);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr Passwort ist: ");
+		sb.append(password);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+
+		return sb.toString();
+	}
+
+	public String generatePasswordChangeText(final String userName,
+			final String password) {
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("Hallo,");
+		sb.append("ihr passwort wurde erfolgreich geändert.");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr neues Passwort ist: ");
+		sb.append(password);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+
+		return sb.toString();
 	}
 }

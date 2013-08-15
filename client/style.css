@@ -14,35 +14,48 @@ body {
 	margin: 10px 0;
 }
 
+/* Fehlerseite */
+
 .errorvid {
 	max-width: 535px;
 	border: 12px solid #1B1B1B;
-	-webkit-border-radius: 8px !important;
-	-moz-border-radius: 8px !important;
-	border-radius: 8px !important;
+	border-radius: 8px;
 }
 
-.stundenplan, .stundenplan tr, .stundenplan td, .stundenplan th {
-	border: 1px solid #666 !important;
+/* Stundenplan */
+
+.stundenplan {
+	border-top: none;
 }
 
 .stundenplan th:nth-child(n+2), .stundenplan td:first-child {
-	background-color: #CDCDCD !important;
+	background-color: rgb(235, 235, 235);
 }
 
 .stundenplan th:first-child {
-	border-top-color: #FFF !important;
-	border-left-color: #FFF !important;
+	border-top: 1px solid #FFF !important;
+	border-right: 1px solid #FFF !important;
+	border-left: 1px solid #FFF !important;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 24px;
 	font-weight: 500;
 	line-height: 1.1;
 }
 
+.stundenplan th:nth-child(2) {
+	border-left: 1px solid #FFF !important;
+	border-top-left-radius: 4px;
+}
+
+.stundenplan th:nth-child(6) {
+	border-right: 1px solid #FFF !important;
+	border-top-right-radius: 4px;
+}
+
 .stundenplan .vertretung {
-	background-color: #92B5EC;
+	background-color: #A2C5FC;
 }
 
 .stundenplan .ausfall {
-	background-color: #FF9180;
+	background-color: #FFA190;
 }

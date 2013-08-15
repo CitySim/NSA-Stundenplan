@@ -1,16 +1,21 @@
-Wishlist for Dennis:
+Wishlist from Dennis to Oleg:
 
-1. Create user in the DB (Login Table)
-	Parameters from me: UserName & Password
-
-2. Check if userName is in the DB. Return password if true, else null.
-	Parameters from me: UserName
-	
-3. Add eMailAddress for schoolClass newsLetter on DB.
+2. Add eMailAddress for schoolClass newsLetter on DB.
 	Parameters from me: eMailAddress
+	return: boolean
 	
-4. Remove eMailAddress from schoolClass newsLetter on DB.
+3. Remove eMailAddress from schoolClass newsLetter on DB.
 	Parameters from me: eMailAddress
+	return: boolean
 
-5. Get completeNewsLetterList for schoolClass.
+4. Get complete newsLetterList for schoolClass.
 	Parameters from me: schoolClass.
+	return: newsletterList
+
+5. Add email field in the database.
+
+   Add method to get the emailAddress for a user.
+	Parameters from me: userName
+	return: emailAddress (String)
+
+General: Add forgot password function. (Auch im Pflichtenheft)

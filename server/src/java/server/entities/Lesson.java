@@ -1,5 +1,6 @@
 package server.entities;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,28 +19,28 @@ public class Lesson {
 	private int id;
 
 	@Column(name = "zeitVon")
-	private Date timeFrom;
+	private Time timeFrom;
 
 	@Column(name = "zeitBis")
-	private Date timeTo;
+	private Time timeTo;
 
 	public int getId() {
 		return this.id;
 	}
 
-	public Date getTimeFrom() {
+	public Time getTimeFrom() {
 		return this.timeFrom;
 	}
 
-	public void setTimeFrom(final Date timeFrom) {
+	public void setTimeFrom(final Time timeFrom) {
 		this.timeFrom = timeFrom;
 	}
 
-	public Date getTimeTo() {
+	public Time getTimeTo() {
 		return this.timeTo;
 	}
 
-	public void setTimeTo(final Date timeTo) {
+	public void setTimeTo(final Time timeTo) {
 		this.timeTo = timeTo;
 	}
 
