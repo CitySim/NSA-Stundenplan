@@ -7,6 +7,14 @@ import org.junit.Test;
 
 import server.operations.NewsLetterValidator;
 
+/**
+ * Test for the generation of the newsLetterUrls.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class NewsLetterValidatorTest extends TestCase {
 	private NewsLetterValidator validator;
 

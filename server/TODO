@@ -1,4 +1,4 @@
-Wishlist for Dennis:
+Wishlist from Dennis to Oleg:
 
 1. Create user in the DB (Login Table)
 	Parameters from me: UserName & Password
@@ -19,3 +19,7 @@ TestPasswords:
 $2a$12$/RiRupOCZ6yaG9YQMRpM4eFB.WolxhSv7XeqznbrTpJ0zfypH0H.i
 $2a$12$Qsj527XR0kHE6j/GYafcLOk8SXQasAY.OQ86uJmclNVstY11NqdNq
 $2a$12$ErDI/fOivP.9mMN2YA2FTOYumtvCdG5YBUIEIb3PVeXxg3fFxRdam
+
+
+
+General: Add forgot password function.

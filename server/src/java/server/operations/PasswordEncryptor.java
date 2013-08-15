@@ -10,9 +10,9 @@ import java.util.Random;
  * @version 1.0
  */
 
-class PasswordEncryptor {
+public class PasswordEncryptor {
 
-	final String generateEncryptedPassword() {
+	public final String generateEncryptedPassword() {
 
 		return this.encryptPassword(this.generatePassword());
 

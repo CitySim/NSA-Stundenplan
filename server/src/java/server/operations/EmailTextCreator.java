@@ -10,7 +10,7 @@ package server.operations;
 
 class EmailTextCreator {
 
-	String generateMailText() {
+	String generateScheduleChangeText() {
 
 		final StringBuilder sb = new StringBuilder();
 
@@ -66,6 +66,29 @@ class EmailTextCreator {
 		sb.append("Ihr National Studenplan Agency Team.");
 
 		return sb.toString();
+	}
 
+	String generateUserCreationText(final String userName, final String password) {
+
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("Hallo,");
+		sb.append("Sie wurden als Administrator der Nation Stundenplan Agency registriert.");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr Login ist: ");
+		sb.append(userName);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append("Ihr Passwort ist: ");
+		sb.append(password);
+		sb.append(".");
+		sb.append(System.lineSeparator());
+
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+
+		return sb.toString();
 	}
 }

@@ -44,6 +44,16 @@ class EmailJobHelper {
 				emailList);
 	}
 
+	final void sendCreationMail(final String eMailAddress,
+			final String userName, final String password) {
+
+		final ArrayList<EmailObject> emailList = this.createCreationMail(
+				eMailAddress, userName, password);
+		new EmailJob().sendMail(
+				this.setEmailSettings("NSA - RegistrierungsBestätigung"),
+				emailList);
+	}
+
 	private final ArrayList<EmailObject> createConfirmationMail(
 			final String eMailAddress, final String schoolClass) {
 
@@ -67,8 +77,7 @@ class EmailJobHelper {
 
 	}
 
-	private ArrayList<EmailObject> createEmailObjects(
-			final Timetable entityList) {
+	private ArrayList<EmailObject> createEmailObjects(final Timetable entityList) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
@@ -78,7 +87,8 @@ class EmailJobHelper {
 		final ArrayList<String> emailAddresList = emailObject
 				.getEmailAddressList();
 
-		final String emailText = new EmailTextCreator().generateMailText();
+		final String emailText = new EmailTextCreator()
+				.generateScheduleChangeText();
 		final File file = new File(new FilePrinter().printAsPDF());
 
 		new EmailContentCreator().createMailContent(emailText, file,
@@ -89,6 +99,28 @@ class EmailJobHelper {
 		// emailAddresList.add(eMailAddresse.geteMailAddress());
 		// }
 		// }
+
+		return emailList;
+	}
+
+	private ArrayList<EmailObject> createCreationMail(final String userName,
+			final String password, final String emailAddress) {
+
+		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
+
+		final EmailObject emailObject = new EmailObject();
+		emailList.add(emailObject);
+
+		final ArrayList<String> emailAddresList = emailObject
+				.getEmailAddressList();
+
+		final String emailText = new EmailTextCreator()
+				.generateUserCreationText(userName, password);
+
+		new EmailContentCreator().createMailContent(emailText, null,
+				emailObject);
+
+		emailAddresList.add(emailAddress);
 
 		return emailList;
 	}

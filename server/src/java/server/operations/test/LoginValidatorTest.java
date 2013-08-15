@@ -7,6 +7,14 @@ import org.junit.Test;
 
 import server.operations.LoginValidator;
 
+/**
+ * Test for the login validation.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class LoginValidatorTest extends TestCase {
 
 	private LoginValidator validator;

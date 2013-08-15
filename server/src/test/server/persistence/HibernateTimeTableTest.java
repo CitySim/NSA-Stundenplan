@@ -1,6 +1,7 @@
 package server.persistence;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.entities.Form;
 import server.entities.TimetableLesson;
 
 public class HibernateTimeTableTest {
@@ -31,8 +31,9 @@ public class HibernateTimeTableTest {
 	public void sizeTest() {
 
 		final List<TimetableLesson> list = this.em.createNativeQuery(
-				"select * from Klasse_Tag_Stunde", TimetableLesson.class).getResultList();
-		
+				"select * from Klasse_Tag_Stunde", TimetableLesson.class)
+				.getResultList();
+
 		assertEquals(3, list.size());
 		assertEquals("Werner", list.get(0).getLehrer().getFirstname());
 	}
