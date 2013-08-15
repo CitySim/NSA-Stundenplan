@@ -23,9 +23,13 @@ public class LoginQuery {
 		return password;
 	}
 	
-	public void setUser(String username,String password){
+	public void createUser(String username,String password){
 		Query  persistableQuery = HibernateUtil.getEntityManager().createNativeQuery("INSERT INTO `login`(`password`, `user`) VALUES ("+password+","+username+")", Login.class);
 		persistableQuery.executeUpdate();
 	}
 	
+	public void changePassword(String username,String password){
+		Query  persistableQuery = HibernateUtil.getEntityManager().createNativeQuery("UPDATE `login` SET `password`="+password+" WHERE user = "+username+")", Login.class);
+		persistableQuery.executeUpdate();
+	}
 }

@@ -1,9 +1,5 @@
 Wishlist from Dennis to Oleg:
 
-1. Create user in the DB (Login Table)
-	Parameters from me: UserName & Password
-	return: boolean
-	
 2. Add eMailAddress for schoolClass newsLetter on DB.
 	Parameters from me: eMailAddress
 	return: boolean
@@ -21,10 +17,5 @@ Wishlist from Dennis to Oleg:
    Add method to get the emailAddress for a user.
 	Parameters from me: userName
 	return: emailAddress (String)
-   
-6. Add method to change the password for a user.
-	Parameters from me: userName, password
-	return: boolean
-
 
 General: Add forgot password function. (Auch im Pflichtenheft)
