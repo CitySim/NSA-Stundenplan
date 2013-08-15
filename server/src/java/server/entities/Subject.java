@@ -7,12 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Unterichtsfach")
+@Table(name = "Unterrichtsfach")
 public class Subject {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "idUnterichtsfach")
+	@Column(name = "idUnterrichtsfach")
 	private int id;
 
 	@Column(name = "kurzname", length = 10)

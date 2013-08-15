@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import server.entities.Form;
 import server.entities.Room;
+import server.entities.Subject;
 import server.entities.Teacher;
 
 public class HibernateTest {
@@ -52,10 +53,17 @@ public class HibernateTest {
 		Room room = new Room();
 		room.setDescription("raum53");
 		em.persist(room);
+		
+		Subject subject = new Subject();
+		subject.setDescription("Biologie");
+		subject.setShortName("Bio");
+		em.persist(subject);
+		
 		this.em.persist(class1);
 		this.em.persist(class2);
 		this.em.getTransaction().commit();
 
+		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery(
 				"select * from Klasse", Form.class).getResultList();
 		assertEquals(2, list.size());
