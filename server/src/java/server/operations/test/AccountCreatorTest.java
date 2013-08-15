@@ -41,7 +41,7 @@ public class AccountCreatorTest extends TestCase {
 	}
 
 	@Test
-	private void testPasswordChange() {
+	public void testPasswordChange() {
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
