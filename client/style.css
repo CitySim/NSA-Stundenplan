@@ -27,13 +27,22 @@ body {
 }
 
 .stundenplan th:nth-child(n+2), .stundenplan td:first-child {
-	background-color: #BBD !important;
+	background-color: #CDCDCD !important;
+}
+
+.stundenplan th:first-child {
+	border-top-color: #FFF !important;
+	border-left-color: #FFF !important;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 1.1;
 }
 
 .stundenplan .vertretung {
-	background-color: #7295CC;
+	background-color: #92B5EC;
 }
 
 .stundenplan .ausfall {
-	background-color: #FF8170;
+	background-color: #FF9180;
 }
