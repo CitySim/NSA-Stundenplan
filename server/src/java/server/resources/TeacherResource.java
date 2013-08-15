@@ -1,12 +1,14 @@
 package server.resources;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import server.entities.Teacher;
-import server.persistence.TeacherTest;
+import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 
@@ -16,10 +18,16 @@ public class TeacherResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		final Teacher teacher = TeacherTest.getTeacher();
 		final Gson gson = new Gson();
-		final String json = gson.toJson(teacher);
+		final String json = gson.toJson(getTeachers());
 		return json;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Teacher> getTeachers() {
+		return HibernateUtil.getEntityManager()
+				.createNativeQuery("select * from Lehrer", Teacher.class)
+				.getResultList();
 	}
 
 }
