@@ -16,9 +16,8 @@ import server.persistence.HibernateUtil;
 
 /**
  * Creates/Deletes/Checks the Cookies and inputs them into the Database
- * 
  * @author oleg.scheltow
- * 
+ *
  */
 public class NewsletterQuery {
 	private final EntityManager em;
@@ -29,20 +28,17 @@ public class NewsletterQuery {
 
 	/**
 	 * Creates a new Cookie
-	 * 
 	 * @param cookieString
 	 */
-	public void addEmail(String mail, String schoolClass) {
+	public void addEmail(String mail,String schoolClass) {	
 		em.getTransaction().begin();
-
-		EmailAddress email = getEmail(mail);
-		if(email == null){
-			email = new EmailAddress();
-			email.setEMailAddress(mail);
-			em.persist(email);
-		}
+		
+		EmailAddress email = new EmailAddress();
+		email.setEMailAddress(mail);
+		em.persist(email);	
+		
 		Form form = getForm(schoolClass);
-
+		
 		Newsletter newsletter = new Newsletter();
 		newsletter.setEmail(email);
 		newsletter.setForm(form);
@@ -51,67 +47,42 @@ public class NewsletterQuery {
 	}
 
 	/**
-	 * Removes existing Email
-	 * 
+	 * Removes existing Cookie
 	 * @param cookieString
 	 * @return
 	 */
-	public boolean removeEmail(String mail, String schoolClass) {
-		List<Newsletter> newsletters = getAllNewsletters();
-		Newsletter singleNewsletter = null;
-		for (Newsletter newsletter : newsletters) {
-			if (newsletter.getEmail().getEMailAddress() == mail
-					&& newsletter.getForm().getDescription() == schoolClass) {
-				singleNewsletter = newsletter;
-			}
-		}
-		if (singleNewsletter == null) {
+	public boolean removeEmail(String mail){
+		Newsletter newsletter = getNewsletter(mail);
+		
+		if(newsletter == null){
 			return false;
-		} else {
+		}else{
 			em.getTransaction().begin();
-			em.remove(singleNewsletter);
+			em.remove(newsletter);
 			em.getTransaction().commit();
 			return true;
 		}
 	}
-
 	
 	/**
-	 * Gets existing Email adress
-	 * 
-	 * @param formString
+	 * Get the specified Cookie
+	 * @param cookie
 	 * @return
 	 */
-	private EmailAddress getEmail(String mail) {
+	private Form getForm(String formString){
 		@SuppressWarnings("unchecked")
-		EmailAddress email = (EmailAddress) this.em.createNativeQuery(
-				"select * from Email WHERE eMailAddress ='" + mail + "'",
-				Form.class).getSingleResult();
-		return email;
-	}
-	/**
-	 * Gets the existing schoolClass
-	 * 
-	 * @param formString
-	 * @return
-	 */
-	private Form getForm(String formString) {
-		@SuppressWarnings("unchecked")
-		Form form = (Form) this.em.createNativeQuery(
-				"select * from Klasse WHERE bezeichnung ='" + formString + "'",
-				Form.class).getSingleResult();
+		Form form =  (Form) this.em.createNativeQuery(
+				"select * from Klasse WHERE bezeichnung ='"+formString+"'", Form.class).getSingleResult();
 		return form;
 	}
+	
+	// TODO --> Is wrong! First get Email and then get the Newsletter that has the email
+	private Newsletter getNewsletter (String email){
+		Newsletter newsletter =  (Newsletter) this.em.createNativeQuery(
+				"select * from Newsletter WHERE bezeichnung ='"+email+"'", Newsletter.class).getSingleResult();
 
-	/**
-	 * Gets the full Newsletterlist
-	 * @return
-	 */
-	private List<Newsletter> getAllNewsletters() {
-		@SuppressWarnings("unchecked")
-		List<Newsletter> newsletter = em.createNativeQuery(
-				"select * from Newsletter", Newsletter.class).getResultList();
 		return newsletter;
 	}
-
+	
+	
 }
