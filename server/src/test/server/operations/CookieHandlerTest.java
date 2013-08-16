@@ -1,4 +1,4 @@
-package server.operations.test;
+package server.operations;
 
 import javax.servlet.http.Cookie;
 

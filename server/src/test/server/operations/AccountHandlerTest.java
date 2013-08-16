@@ -1,4 +1,4 @@
-package server.operations.test;
+package server.operations;
 
 import junit.framework.TestCase;
 
@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import server.exceptions.DuplicateUserException;
 import server.exceptions.EmailSendingException;
-import server.operations.AccountHandler;
 import server.queries.LoginQuery;
 
 /**
@@ -35,7 +34,7 @@ public class AccountHandlerTest extends TestCase {
 		final String emailAddress = "test@test.de";
 
 		this.userName = this.handler.createAccount(name, familyName,
-				emailAddress);
+				emailAddress).getUser();
 
 	}
 

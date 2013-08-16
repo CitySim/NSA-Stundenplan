@@ -1,5 +1,6 @@
 package server.operations;
 
+import server.entities.Login;
 import server.exceptions.DuplicateUserException;
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
@@ -15,21 +16,28 @@ import server.queries.LoginQuery;
 
 public class AccountHandler {
 
-	public final String createAccount(final String name,
+	public final Login createAccount(final String name,
 			final String familyName, final String eMailAddress)
 			throws DuplicateUserException, EmailSendingException {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
 
-		final String password = new PasswordEncryptor()
-				.generateEncryptedPassword();
+		final String password = new PasswordEncryptor().generatePassword();
 
-		this.storeUserInDatabase(userName, password, eMailAddress);
+		final String hashedPw = new PasswordEncryptor()
+				.encryptPassword(password);
+
+		this.storeUserInDatabase(userName, hashedPw, eMailAddress);
 
 		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
 
-		return userName;
+		// used for tests
+		final Login login = new Login();
+		login.setUser(name);
+		login.setPassword(password);
+
+		return login;
 
 	}
 

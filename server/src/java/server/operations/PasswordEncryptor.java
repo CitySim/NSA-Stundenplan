@@ -20,14 +20,14 @@ public class PasswordEncryptor {
 
 	public String encryptPassword(final String password) {
 
-		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-		BCrypt.gensalt();
-		hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+		final String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
+		// hashed = BCrypt.hashpw(hashed, BCrypt.gensalt(12));
 
 		return hashed;
 	}
 
-	private String generatePassword() {
+	String generatePassword() {
 
 		final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
