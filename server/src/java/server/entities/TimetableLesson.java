@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -83,8 +82,7 @@ public class TimetableLesson implements Serializable {
 		room = newRoom;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idVertretung", insertable = false, updatable = false, nullable = true)
+	@ManyToOne(targetEntity=Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
