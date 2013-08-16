@@ -3,7 +3,6 @@ package server.persistence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Time;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,9 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.entities.Form;
-import server.entities.Lesson;
-import server.entities.Room;
-import server.entities.Subject;
 import server.entities.Teacher;
 
 public class HibernateTest {

@@ -24,6 +24,7 @@ public class FormResource {
 		return json;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Form> getForms() {
 		return HibernateUtil.getEntityManager()
 				.createNativeQuery("select * from Klasse", Form.class)

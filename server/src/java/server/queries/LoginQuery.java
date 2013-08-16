@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import com.itextpdf.text.log.SysoCounter;
 
-import server.entities.EmailAdress;
+import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
 
@@ -38,8 +38,8 @@ public class LoginQuery {
 			
 		this.em.getTransaction().begin();
 
-		EmailAdress email = new EmailAdress();
-		email.setEmailAddress(eMailAddress);
+		EmailAddress email = new EmailAddress();
+		email.setEMailAddress(eMailAddress);
 		this.em.persist(email);
 		
 		Login login = new Login();
