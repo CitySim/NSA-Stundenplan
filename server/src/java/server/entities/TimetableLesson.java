@@ -54,7 +54,7 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idLehrer", insertable = false, updatable = false, nullable = true)
+	@JoinColumn(name = "idLehrer")
 	private Teacher teacher;
 
 	public Teacher getTeacher() {
@@ -65,8 +65,8 @@ public class TimetableLesson implements Serializable {
 		teacher = newTeacher;
 	}
 
-	@ManyToOne(targetEntity=Subject.class)
-	@JoinColumn(name = "idUnterrichtsfach", referencedColumnName="idUnterrichtsfach", insertable = false, updatable = false, nullable = true)
+	@ManyToOne
+	@JoinColumn(name = "idUnterrichtsfach")
 	private Subject subject;
 
 	public Subject getSubject() {
@@ -78,7 +78,7 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idRaum", insertable = false, updatable = false, nullable = true)
+	@JoinColumn(name = "idRaum")
 	private Room room;
 
 	public Room getRoom() {
@@ -89,7 +89,7 @@ public class TimetableLesson implements Serializable {
 		room = newRoom;
 	}
 
-	@ManyToOne(targetEntity=Replacement.class)
+	@ManyToOne(targetEntity = Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
@@ -99,5 +99,4 @@ public class TimetableLesson implements Serializable {
 	public void setReplacement(Replacement replacement) {
 		this.replacement = replacement;
 	}
-
 }
