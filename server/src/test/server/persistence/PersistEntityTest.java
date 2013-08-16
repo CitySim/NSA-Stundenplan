@@ -23,6 +23,7 @@ import server.entities.Subject;
 import server.entities.Teacher;
 import server.entities.Timetable;
 import server.entities.TimetableLesson;
+import server.operations.PasswordEncryptor;
 
 public class PersistEntityTest {
 
@@ -133,7 +134,7 @@ public class PersistEntityTest {
 			
 		Login login1 = new Login();
 		login1.setEmail(email);
-		login1.setPassword("test");
+		login1.setPassword(new PasswordEncryptor().encryptPassword("test"));		
 		login1.setUser("Hans");
 		em.persist(login1);
 		

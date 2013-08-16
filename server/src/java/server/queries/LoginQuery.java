@@ -1,13 +1,6 @@
 package server.queries;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import com.itextpdf.text.log.SysoCounter;
-
-import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
@@ -43,18 +36,18 @@ public class LoginQuery {
 			final String eMailAddress) {
 		Login login = getLoginUser(username);	
 		if(login == null){
-			this.em.getTransaction().begin();
+			em.getTransaction().begin();
 
 			EmailAddress email = new EmailAddress();
 			email.setEMailAddress(eMailAddress);
-			this.em.persist(email);
+			em.persist(email);
 		
 			login = new Login();
 			login.setPassword(password);
 			login.setUser(username);
 			login.setEmail(email);
-			this.em.persist(login);
-			this.em.getTransaction().commit();
+			em.persist(login);
+			em.getTransaction().commit();
 			return true;
 		}else{
 			return false;
@@ -71,9 +64,9 @@ public class LoginQuery {
 		if(login == null){
 			return false;
 		}else{
-			this.em.getTransaction().begin();
-			this.em.remove(login);
-			this.em.getTransaction().commit();
+			em.getTransaction().begin();
+			em.remove(login);
+			em.getTransaction().commit();
 			return true;
 		}
 	}
@@ -84,20 +77,16 @@ public class LoginQuery {
 	 * @param password
 	 */
 	public void changePassword(final String username, final String password) {
-		this.em.getTransaction().begin();
+		em.getTransaction().begin();
 		Login loginUser = getLoginUser(username);
 		loginUser.setPassword(password);
-		this.em.persist(loginUser);
-		this.em.getTransaction().commit();
+		em.persist(loginUser);
+		em.getTransaction().commit();
 	}
 	
 	private Login getLoginUser (String username){
-		Login login = null;
-		final List<Login> loginList = this.em.createNativeQuery(
-				"select * from Login WHERE user ='"+username+"'", Login.class).getResultList();
-		if(loginList.size() == 1){
-			login = loginList.get(0);
-		}
+		Login login = (Login) em.createNativeQuery(
+				"select * from Login WHERE user ='"+username+"'", Login.class).getSingleResult();
 		return login;
 	}
 	
