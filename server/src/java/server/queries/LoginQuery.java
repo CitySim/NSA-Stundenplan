@@ -1,6 +1,13 @@
 package server.queries;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.itextpdf.text.log.SysoCounter;
+
+import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
@@ -85,8 +92,12 @@ public class LoginQuery {
 	}
 	
 	private Login getLoginUser (String username){
-		Login login = (Login) this.em.createNativeQuery(
-				"select * from Login WHERE user ='"+username+"'", Login.class).getSingleResult();
+		Login login = null;
+		final List<Login> loginList = this.em.createNativeQuery(
+				"select * from Login WHERE user ='"+username+"'", Login.class).getResultList();
+		if(loginList.size() == 1){
+			login = loginList.get(0);
+		}
 		return login;
 	}
 	

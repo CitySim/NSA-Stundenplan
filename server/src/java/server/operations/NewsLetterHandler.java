@@ -1,6 +1,7 @@
 package server.operations;
 
 import server.exceptions.EmailSendingException;
+import server.operations.email.EmailJobHelper;
 
 /**
  * Used to add newsletter entries on the database. Generates URLs for confirming
@@ -43,7 +44,7 @@ public class NewsLetterHandler {
 		return url;
 	}
 
-	final String generateRemoveLink(final String schoolClass,
+	public final String generateRemoveLink(final String schoolClass,
 			final String eMailAddress) {
 
 		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:"

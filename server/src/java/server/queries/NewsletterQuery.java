@@ -3,8 +3,14 @@ package server.queries;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.itextpdf.text.log.SysoCounter;
+
+import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Form;
+import server.entities.Login;
 import server.entities.Newsletter;
 import server.persistence.HibernateUtil;
 
@@ -77,6 +83,7 @@ public class NewsletterQuery {
 	 * @return
 	 */
 	private EmailAddress getEmail(String mail) {
+		@SuppressWarnings("unchecked")
 		EmailAddress email = (EmailAddress) this.em.createNativeQuery(
 				"select * from Email WHERE eMailAddress ='" + mail + "'",
 				Form.class).getSingleResult();
@@ -89,6 +96,7 @@ public class NewsletterQuery {
 	 * @return
 	 */
 	private Form getForm(String formString) {
+		@SuppressWarnings("unchecked")
 		Form form = (Form) this.em.createNativeQuery(
 				"select * from Klasse WHERE bezeichnung ='" + formString + "'",
 				Form.class).getSingleResult();

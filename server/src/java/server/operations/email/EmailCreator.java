@@ -1,12 +1,11 @@
-package server.operations;
+package server.operations.email;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import server.entities.Timetable;
 import server.exceptions.ScheduleCreationException;
-import server.operations.email.EmailContentCreator;
-import server.operations.email.EmailObject;
+import server.operations.FilePrinter;
 
 /**
  * Used to create the eMails to send.
