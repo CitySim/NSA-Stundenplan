@@ -17,5 +17,7 @@ Wishlist from Dennis to Oleg:
    Add method to get the emailAddress for a user.
 	Parameters from me: userName
 	return: emailAddress (String)
+	
+6. Delete operations for user & newsLetterEntries
 
 General: Add forgot password function. (Auch im Pflichtenheft)
