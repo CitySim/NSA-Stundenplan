@@ -36,6 +36,7 @@ public class CookieServletTest extends TestCase {
 	}
 
 	@After
+	@Test
 	public void cleanUpTestData() {
 		// TODO delete cookie
 	}

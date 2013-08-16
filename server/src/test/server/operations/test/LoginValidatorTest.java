@@ -45,6 +45,7 @@ public class LoginValidatorTest extends TestCase {
 	}
 
 	@After
+	@Test
 	public void cleanUpTestData() {
 		// TODO delete user
 	}
