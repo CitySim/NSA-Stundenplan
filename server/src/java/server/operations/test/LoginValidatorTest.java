@@ -2,6 +2,7 @@ package server.operations.test;
 
 import junit.framework.TestCase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,5 +37,10 @@ public class LoginValidatorTest extends TestCase {
 		LoginValidatorTest.assertTrue(this.validator.validateLoginData(
 				userName, password));
 
+	}
+
+	@After
+	public void cleanUpTestData() {
+		// TODO delete user
 	}
 }
