@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import server.exceptions.LoginFailedException;
-import server.operations.CookieServlet;
+import server.operations.CookieValidator;
 import server.operations.LoginValidator;
 
 import com.google.gson.Gson;
@@ -20,7 +20,7 @@ public class LoginResource {
 		final Gson gson = new Gson();
 		final String json;
 		if (this.checkLogin("a", "b")) {
-			json = gson.toJson(new CookieServlet().createCookie());
+			json = gson.toJson(new CookieValidator().createCookie());
 		} else {
 			json = "Fehler";
 		}

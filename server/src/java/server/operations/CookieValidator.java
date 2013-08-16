@@ -2,7 +2,7 @@ package server.operations;
 
 import javax.servlet.http.Cookie;
 
-public class CookieServlet {
+public class CookieValidator {
 
 	public Cookie createCookie() {
 

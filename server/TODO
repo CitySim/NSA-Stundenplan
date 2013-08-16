@@ -12,7 +12,7 @@ Wishlist from Dennis to Oleg:
 	Parameters from me: schoolClass.
 	return: newsletterList
 	
-5. Delete operations for user & newsLetterEntries
+5. Delete operations for user, newsLetterEntries, cookies
 
 6. Create a Cookie table in the database.
 	(Only has a String field to store)
