@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,8 @@ import server.entities.Lesson;
 import server.entities.Room;
 import server.entities.Subject;
 import server.entities.Teacher;
+import server.entities.Timetable;
+import server.entities.TimetableLesson;
 
 public class PersistEntityTest {
 
@@ -60,23 +63,67 @@ public class PersistEntityTest {
 		class2.setDescription("itb");
 		this.em.persist(class2);
 		
-		Room room = new Room();
-		room.setDescription("raum53");
-		em.persist(room);
+		Room room1 = new Room();
+		room1.setDescription("raum53");
+		em.persist(room1);
 		
-		Lesson lesson = new Lesson();
-		lesson.setTimeFrom(Time.valueOf("10:00:00"));
-		lesson.setTimeTo(Time.valueOf("10:00:00"));
-		em.persist(lesson);
+		Room room2 = new Room();
+		room2.setDescription("raum53");
+		em.persist(room2);
 		
-		Subject subject = new Subject();
-		subject.setDescription("Biologie");
-		subject.setShortName("Bio");
-		em.persist(subject);
+		Lesson lesson1 = new Lesson();
+		lesson1.setTimeFrom(Time.valueOf("10:00:00"));
+		lesson1.setTimeTo(Time.valueOf("10:45:00"));
+		em.persist(lesson1);
 		
-		Day day = new Day();
-		day.setDescription("Montag");
-		em.persist(day);
+		Lesson lesson2 = new Lesson();
+		lesson2.setTimeFrom(Time.valueOf("10:45:00"));
+		lesson2.setTimeTo(Time.valueOf("11:30:00"));
+		em.persist(lesson2);
+		
+		Subject subject1 = new Subject();
+		subject1.setDescription("Biologie");
+		subject1.setShortName("Bio");
+		em.persist(subject1);
+		
+		Subject subject2 = new Subject();
+		subject2.setDescription("System Gammelierung");
+		subject2.setShortName("SYSGAM");
+		em.persist(subject2);
+		
+		Day day1 = new Day();
+		day1.setDescription("Montag");
+		em.persist(day1);
+		
+		Day day2 = new Day();
+		day2.setDescription("Dienstag");
+		em.persist(day2);
+		
+		TimetableLesson timetableLesson1 = new TimetableLesson();
+		timetableLesson1.setForm(class1);
+		timetableLesson1.setTeacher(teacher1);
+		timetableLesson1.setRoom(room1);
+		timetableLesson1.setLesson(lesson1);
+		timetableLesson1.setDay(day1);
+		timetableLesson1.setSubject(subject1);
+		em.persist(timetableLesson1);
+		
+		TimetableLesson timetableLesson2 = new TimetableLesson();
+		timetableLesson2.setForm(class1);
+		timetableLesson2.setTeacher(teacher2);
+		timetableLesson2.setRoom(room2);
+		timetableLesson2.setLesson(lesson2);
+		timetableLesson2.setDay(day1);
+		timetableLesson2.setSubject(subject2);
+		em.persist(timetableLesson2);
+		
+		List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
+		timetableLessons.add(timetableLesson1);
+		timetableLessons.add(timetableLesson2);
+				
+		Timetable timetable1 = new Timetable();
+		timetable1.setLessons(timetableLessons);
+		em.persist(timetable1);
 		
 		this.em.getTransaction().commit();
 

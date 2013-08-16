@@ -1,14 +1,15 @@
 package server.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Login {
+public class Login extends DefaultEntity {
 	
 	@Id
 	@GeneratedValue
@@ -18,11 +19,7 @@ public class Login {
 	private String user;
 	private String password;
 
-
-	public int getId() {
-		return this.id;
-	}
-
+	
 	public String getUser() {
 		return this.user;
 	}

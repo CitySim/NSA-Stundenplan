@@ -20,4 +20,20 @@ Wishlist from Dennis to Oleg:
 	
 6. Delete operations for user & newsLetterEntries
 
+7. Create a Cookie table in the database.
+	(Only has a String field to store)
+	
+	Add a method to add a cookie in the database.
+	Parameters from me: String (cookie)
+	Return: boolean
+	
+	Add a method to remove a cookie from the database.
+	Parameters from me: String (cookie)
+	Return: boolean
+	
+	Add a method to search if a cookie exists in the database.
+	Parameters from me: String (cookie)
+	Return: boolean
+	
+
 General: Add forgot password function. (Auch im Pflichtenheft)

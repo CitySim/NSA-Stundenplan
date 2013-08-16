@@ -4,7 +4,7 @@ class window.nsa.Views.About extends Backbone.View
 	initialize: () =>
 
 		$.ajax
-			url: "api/version"
+			url: nsa.config.api + "/version"
 			dataType: "json"
 			success: (data) =>
 				@$(".app-server-version").html("v. #{data.version}")

@@ -20,15 +20,15 @@ public class TimetableResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getTimetablesJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getTimetables());
+		final String json = gson.toJson(getTimetable());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Timetable> getTimetables() {
+	public List<Timetable> getTimetable() {
 		return HibernateUtil
 				.getEntityManager()
-				.createNativeQuery("select * from Tag",
+				.createNativeQuery("select * from timetable",
 						Timetable.class).getResultList();
 	}
 }

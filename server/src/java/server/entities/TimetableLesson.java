@@ -2,6 +2,7 @@ package server.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -30,67 +31,66 @@ public class TimetableLesson implements Serializable {
 	@EmbeddedId
 	@ManyToOne
 	@JoinColumn(name = "idTag", insertable = false, updatable = false, nullable = false)
-	private Day tag;
+	private Day day;
 
-	public Day getTag() {
-		return tag;
+	public Day getDay() {
+		return day;
 	}
 
-	public void setTag(Day tag) {
-		this.tag = tag;
+	public void setDay(Day newDay) {
+		day = newDay;
 	}
 
 	@EmbeddedId
 	@ManyToOne
 	@JoinColumn(name = "idStunde", insertable = false, updatable = false, nullable = false)
-	private Lesson stunde;
+	private Lesson lesson;
 
-	public Lesson getStunde() {
-		return stunde;
+	public Lesson getLesson() {
+		return lesson;
 	}
 
-	public void setStunde(Lesson stunde) {
-		this.stunde = stunde;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "idLehrer", insertable = false, updatable = false, nullable = false)
-	private Teacher lehrer;
-
-	public Teacher getLehrer() {
-		return lehrer;
-	}
-
-	public void setLehrer(Teacher lehrer) {
-		this.lehrer = lehrer;
+	public void setLesson(Lesson newLesson) {
+		lesson = newLesson;
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idUnterrichtsfach", insertable = false, updatable = false, nullable = false)
-	private Subject unterrichtsfach;
+	@JoinColumn(name = "idLehrer", insertable = false, updatable = false, nullable = true)
+	private Teacher teacher;
 
-	public Subject getUnterrichtsfach() {
-		return unterrichtsfach;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
-	public void setUnterrichtsfach(Subject unterrichtsfach) {
-		this.unterrichtsfach = unterrichtsfach;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "idRaum", insertable = false, updatable = false, nullable = false)
-	private Room raum;
-
-	public Room getRaum() {
-		return raum;
-	}
-
-	public void setRaum(Room raum) {
-		this.raum = raum;
+	public void setTeacher(Teacher newTeacher) {
+		teacher = newTeacher;
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idVertretung", insertable = false, updatable = false, nullable = true)
+	@JoinColumn(name = "idUnterrichtsfach", insertable = false, updatable = false, nullable = true)
+	private Subject subject;
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject newSubject) {
+		subject = newSubject;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "idRaum", insertable = false, updatable = false, nullable = true)
+	private Room room;
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room newRoom) {
+		room = newRoom;
+	}
+
+	@ManyToOne(targetEntity=Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
