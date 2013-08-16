@@ -33,7 +33,6 @@ public class CookieQuery {
 	}
 	
 	public boolean removeCookie(String cookie){
-		@SuppressWarnings("unchecked")
 		Cookie c = getCookie(cookie);
 		
 		if(c == null){
