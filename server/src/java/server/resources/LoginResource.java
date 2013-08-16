@@ -1,7 +1,8 @@
 package server.resources;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -16,7 +17,8 @@ import com.google.gson.Gson;
 @Path("login")
 public class LoginResource {
 
-	@GET
+	@POST
+	@Consumes("text/plain")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String doLogin(
 			@DefaultValue("") @QueryParam("user") String userName,
