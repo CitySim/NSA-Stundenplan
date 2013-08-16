@@ -1,19 +1,1 @@
-Wishlist from Dennis to Oleg:
-
-2. Add eMailAddress for schoolClass newsLetter on DB.
-	Parameters from me: eMailAddress
-	return: boolean
-	
-3. Remove eMailAddress from schoolClass newsLetter on DB.
-	Parameters from me: eMailAddress
-	return: boolean
-
-4. Get complete newsLetterList for schoolClass.
-	Parameters from me: schoolClass.
-	return: newsletterList
-	
-5. Delete newsLetterEntries for schoolClass.
-	Parameters from me: eMailAddress
-	return: boolean
-
 General: Add forgot password function. (Auch im Pflichtenheft)
