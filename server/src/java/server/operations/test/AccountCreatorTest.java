@@ -2,6 +2,7 @@ package server.operations.test;
 
 import junit.framework.TestCase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,5 +49,11 @@ public class AccountCreatorTest extends TestCase {
 
 		AccountCreatorTest.assertEquals(password,
 				new LoginQuery().getPassword(this.userName));
+
+	}
+
+	@After
+	public void cleanUpTestData() {
+		// TODO delete user
 	}
 }

@@ -14,6 +14,7 @@ public class NewsLetterValidator {
 	public final void addAddress(final String eMailAddress,
 			final String schoolClass) {
 
+		// TODO add address in db
 		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
 
 	}

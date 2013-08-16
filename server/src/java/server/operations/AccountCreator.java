@@ -21,7 +21,7 @@ public class AccountCreator {
 		final String password = new PasswordEncryptor()
 				.generateEncryptedPassword();
 
-		this.storeUserInDatabase(userName, password);
+		this.storeUserInDatabase(userName, password, eMailAddress);
 
 		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
 
@@ -46,9 +46,9 @@ public class AccountCreator {
 	}
 
 	private void storeUserInDatabase(final String userName,
-			final String hashedPw) {
+			final String hashedPw, final String eMailAddress) {
 
-		new LoginQuery().createUser(userName, hashedPw);
+		new LoginQuery().createUser(userName, hashedPw, eMailAddress);
 
 	}
 

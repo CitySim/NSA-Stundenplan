@@ -17,11 +17,6 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 class EmailJobHelper {
 
-	private EmailSettings setEmailSettings(final String titel) {
-		return new EmailSettings("nsa-stundenplan@gmx.de", "nsa-stundenplan",
-				"nsa-stundenplan@gmx.de", titel, "smtp.gmx.net");
-	}
-
 	public final void sendMail(final Timetable entityList) {
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createEmailObjects(entityList);
@@ -59,4 +54,8 @@ class EmailJobHelper {
 				emailList);
 	}
 
+	private EmailSettings setEmailSettings(final String titel) {
+		return new EmailSettings("nsa-stundenplan@gmx.de", "nsa-stundenplan",
+				"nsa-stundenplan@gmx.de", titel, "smtp.gmx.net");
+	}
 }
