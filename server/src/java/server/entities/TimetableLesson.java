@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,8 +14,7 @@ public class TimetableLesson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	@ManyToOne
-	@JoinColumn(name = "idKlasse", insertable = false, updatable = false, nullable = false)
+	@ManyToOne(targetEntity=Form.class)
 	private Form form;
 
 	public Form getForm() {
@@ -28,69 +26,63 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@EmbeddedId
-	@ManyToOne
-	@JoinColumn(name = "idTag", insertable = false, updatable = false, nullable = false)
-	private Day tag;
+	@ManyToOne(targetEntity=Day.class)
+	private Day day;
 
-	public Day getTag() {
-		return tag;
+	public Day getDay() {
+		return day;
 	}
 
-	public void setTag(Day tag) {
-		this.tag = tag;
+	public void setDay(Day newDay) {
+		day = newDay;
 	}
 
 	@EmbeddedId
-	@ManyToOne
-	@JoinColumn(name = "idStunde", insertable = false, updatable = false, nullable = false)
-	private Lesson stunde;
+	@ManyToOne(targetEntity=Lesson.class)
+	private Lesson lesson;
 
-	public Lesson getStunde() {
-		return stunde;
+	public Lesson getLesson() {
+		return lesson;
 	}
 
-	public void setStunde(Lesson stunde) {
-		this.stunde = stunde;
+	public void setLesson(Lesson newLesson) {
+		lesson = newLesson;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idLehrer", insertable = false, updatable = false, nullable = false)
-	private Teacher lehrer;
+	@ManyToOne(targetEntity=Teacher.class)
+	private Teacher teacher;
 
-	public Teacher getLehrer() {
-		return lehrer;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
-	public void setLehrer(Teacher lehrer) {
-		this.lehrer = lehrer;
+	public void setTeacher(Teacher newTeacher) {
+		teacher = newTeacher;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idUnterrichtsfach", insertable = false, updatable = false, nullable = false)
-	private Subject unterrichtsfach;
+	@ManyToOne(targetEntity=Subject.class)
+	private Subject subject;
 
-	public Subject getUnterrichtsfach() {
-		return unterrichtsfach;
+	public Subject getSubject() {
+		return subject;
 	}
 
-	public void setUnterrichtsfach(Subject unterrichtsfach) {
-		this.unterrichtsfach = unterrichtsfach;
+	public void setSubject(Subject newSubject) {
+		subject = newSubject;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idRaum", insertable = false, updatable = false, nullable = false)
-	private Room raum;
+	@ManyToOne(targetEntity=Room.class)
+	private Room room;
 
-	public Room getRaum() {
-		return raum;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRaum(Room raum) {
-		this.raum = raum;
+	public void setRoom(Room newRoom) {
+		room = newRoom;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idVertretung", insertable = false, updatable = false, nullable = true)
+	@ManyToOne(targetEntity=Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
