@@ -2,11 +2,10 @@ package server.operations.test;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.operations.AccountCreator;
+import server.operations.AccountHandler;
 import server.queries.LoginQuery;
 
 /**
@@ -17,44 +16,43 @@ import server.queries.LoginQuery;
  * @version 1.0
  */
 
-public class AccountCreatorTest extends TestCase {
+public class AccountHandlerTest extends TestCase {
 
-	private AccountCreator creator;
+	private AccountHandler handler;
 	private String userName;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		this.creator = new AccountCreator();
+		this.handler = new AccountHandler();
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
 		final String emailAddress = "test@test.de";
 
-		this.userName = this.creator.createAccount(name, familyName,
+		this.userName = this.handler.createAccount(name, familyName,
 				emailAddress);
 	}
 
 	@Test
 	public void testAccountCreation() {
 
-		AccountCreatorTest.assertNotNull(new LoginQuery()
+		AccountHandlerTest.assertNotNull(new LoginQuery()
 				.getPassword(this.userName));
 	}
 
 	@Test
 	public void testPasswordChange() {
 
-		final String password = this.creator.changePassword(this.userName);
+		final String password = this.handler.changePassword(this.userName);
 
-		AccountCreatorTest.assertEquals(password,
+		AccountHandlerTest.assertEquals(password,
 				new LoginQuery().getPassword(this.userName));
 
 	}
 
-	@After
 	@Test
 	public void cleanUpTestData() {
-		// TODO delete user
+		this.handler.deleteAccount(this.userName);
 	}
 }

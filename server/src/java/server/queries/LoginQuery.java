@@ -7,10 +7,16 @@ import javax.persistence.Query;
 
 import com.itextpdf.text.log.SysoCounter;
 
+import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
 
+/**
+ * Creates/Deletes/Checks the Login and inputs them into the Database
+ * @author oleg.scheltow
+ *
+ */
 public class LoginQuery {
 	private final EntityManager em;
 
@@ -33,21 +39,43 @@ public class LoginQuery {
 	 * @param password
 	 * @param eMailAddress
 	 */
-	public void createUser(final String username, final String password,
+	public boolean createUser(final String username, final String password,
 			final String eMailAddress) {
-			
-		this.em.getTransaction().begin();
+		Login login = getLoginUser(username);	
+		if(login == null){
+			this.em.getTransaction().begin();
 
-		EmailAddress email = new EmailAddress();
-		email.setEMailAddress(eMailAddress);
-		this.em.persist(email);
+			EmailAddress email = new EmailAddress();
+			email.setEMailAddress(eMailAddress);
+			this.em.persist(email);
 		
-		Login login = new Login();
-		login.setPassword(password);
-		login.setUser(username);
-		login.setEmail(email);
-		this.em.persist(login);
-		this.em.getTransaction().commit();
+			login = new Login();
+			login.setPassword(password);
+			login.setUser(username);
+			login.setEmail(email);
+			this.em.persist(login);
+			this.em.getTransaction().commit();
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Removes the User Login
+	 * @param username
+	 * @return
+	 */
+	public boolean removeLogin(String username){
+		Login login = getLoginUser(username);
+		if(login == null){
+			return false;
+		}else{
+			this.em.getTransaction().begin();
+			this.em.remove(login);
+			this.em.getTransaction().commit();
+			return true;
+		}
 	}
 
 	/**
