@@ -11,16 +11,10 @@ Wishlist from Dennis to Oleg:
 4. Get complete newsLetterList for schoolClass.
 	Parameters from me: schoolClass.
 	return: newsletterList
-
-5. Add email field in the database.
-
-   Add method to get the emailAddress for a user.
-	Parameters from me: userName
-	return: emailAddress (String)
 	
-6. Delete operations for user & newsLetterEntries
+5. Delete operations for user & newsLetterEntries
 
-7. Create a Cookie table in the database.
+6. Create a Cookie table in the database.
 	(Only has a String field to store)
 	
 	Add a method to add a cookie in the database.
