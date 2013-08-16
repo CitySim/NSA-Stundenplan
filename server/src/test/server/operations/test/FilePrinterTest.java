@@ -49,7 +49,6 @@ public class FilePrinterTest extends TestCase {
 	}
 
 	@After
-	@Test
 	public void cleanUpTestData() {
 		this.cleaner.cleanCache();
 	}

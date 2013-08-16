@@ -18,7 +18,7 @@ import server.operations.CookieValidator;
  * @version 1.0
  */
 
-public class CookieServletTest extends TestCase {
+public class CookieValidatorTest extends TestCase {
 
 	private CookieValidator validator;
 
@@ -32,7 +32,7 @@ public class CookieServletTest extends TestCase {
 	public void testCookieCreation() {
 
 		final Cookie cookie = this.validator.createCookie();
-		CookieServletTest.assertTrue(this.validator.validateCookie(cookie));
+		CookieValidatorTest.assertTrue(this.validator.validateCookie(cookie));
 	}
 
 	@After
