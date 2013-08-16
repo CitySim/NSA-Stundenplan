@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CookieServlet {
 
-	public void doGet(final String userName, final HttpServletResponse response) {
+	public void createCookie(final String userName,
+			final HttpServletResponse response) {
 
 		final String cookieID = new PasswordEncryptor()
 				.generateEncryptedPassword();
@@ -17,7 +18,7 @@ public class CookieServlet {
 		response.addCookie(cookie);
 	}
 
-	public boolean validateKey(final HttpServletRequest request) {
+	public boolean validateCookie(final HttpServletRequest request) {
 
 		final Cookie[] cookies = request.getCookies();
 		String clientKey = "";
