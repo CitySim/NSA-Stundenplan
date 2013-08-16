@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.exceptions.EmailSendingException;
 import server.operations.NewsLetterValidator;
 
 /**
@@ -44,7 +45,7 @@ public class NewsLetterValidatorTest extends TestCase {
 	}
 
 	@Test
-	public void testAddressCreation() {
+	public void testAddressCreation() throws EmailSendingException {
 
 		boolean success = false;
 		this.validator.addAddress(this.eMailAddress, this.schoolClass);
