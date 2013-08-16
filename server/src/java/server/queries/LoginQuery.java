@@ -37,7 +37,7 @@ public class LoginQuery {
 	
 	public void changePassword(String username,String password){
 		this.em.getTransaction().begin();
-		Query  persistableQuery = HibernateUtil.getEntityManager().createNativeQuery("UPDATE Login set password='"+password+"' WHERE user = '"+username+"')", Login.class);
+		Query  persistableQuery = HibernateUtil.getEntityManager().createNativeQuery("UPDATE Login set password='"+password+"' WHERE user = '"+username+"'", Login.class);
 		persistableQuery.executeUpdate();
 		this.em.getTransaction().commit();
 	}
