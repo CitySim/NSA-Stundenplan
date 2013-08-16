@@ -22,7 +22,7 @@ public class CookieValidator {
 
 		String cookieValue = "";
 
-		if ("NSA_Cookie".equals(cookie.getName())) {
+		if ("NSA-Cookie".equals(cookie.getName())) {
 			cookieValue = cookie.getValue();
 		}
 
