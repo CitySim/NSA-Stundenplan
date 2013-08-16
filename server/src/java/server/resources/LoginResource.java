@@ -1,8 +1,10 @@
 package server.resources;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import server.exceptions.LoginFailedException;
@@ -16,22 +18,18 @@ public class LoginResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String doLogin() {
+	public String doLogin(
+			@DefaultValue("") @QueryParam("user") String userName,
+			@DefaultValue("") @QueryParam("password") String password) {
 		final Gson gson = new Gson();
-		final String json;
-		if (this.checkLogin("a", "b")) {
+		String json;
+		try {
+			new LoginValidator().validateLoginData(userName, password);
 			json = gson.toJson(new CookieValidator().createCookie());
-		} else {
-			json = "Fehler";
+
+		} catch (LoginFailedException e) {
+			json = gson.toJson(e.getMessage());
 		}
 		return json;
-	}
-
-	public boolean checkLogin(final String userName, final String password) {
-		try {
-			return new LoginValidator().validateLoginData(userName, password);
-		} catch (final LoginFailedException e) {
-			return false;
-		}
 	}
 }
