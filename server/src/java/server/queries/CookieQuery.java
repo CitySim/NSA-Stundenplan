@@ -32,15 +32,14 @@ public class CookieQuery {
 		return getCookie(cookie) == null ? false : true;
 	}
 	
-	public boolean removeCookie(String cookie){
-		Cookie c = getCookie(cookie);
+	public boolean removeCookie(String cookieString){
+		Cookie cookie = getCookie(cookieString);
 		
-		if(c == null){
+		if(cookie == null){
 			return false;
 		}else{
 			this.em.getTransaction().begin();
-			cookie = null;
-			this.em.persist(cookie);
+			this.em.remove(cookie);
 			this.em.getTransaction().commit();
 			return true;
 		}
