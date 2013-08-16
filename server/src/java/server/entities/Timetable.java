@@ -2,15 +2,30 @@ package server.entities;
 
 import java.util.List;
 
-public class Timetable {
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
-	private List<TimetableLesson> lessons;
+@Entity
+public class Timetable extends DefaultEntity {
+
+	@OneToMany
+	private List<TimetableLesson> timetableLessons;
 
 	public List<TimetableLesson> getLessons() {
-		return lessons;
+		return timetableLessons;
 	}
 
 	public void setLessons(List<TimetableLesson> lessons) {
-		this.lessons = lessons;
+		this.timetableLessons = lessons;
+	}
+	
+	// TODO Liste initialisieren
+	public void addLesson(TimetableLesson timetableLesson) {
+		timetableLessons.add(timetableLesson);
+	}
+	
+	// TODO TESTEN
+	public void removeTimetableLesson(TimetableLesson timetableLesson) {
+		timetableLessons.remove(timetableLesson);
 	}
 }

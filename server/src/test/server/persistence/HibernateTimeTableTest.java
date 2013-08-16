@@ -30,12 +30,13 @@ public class HibernateTimeTableTest {
 	@Test
 	public void sizeTest() {
 
+		@SuppressWarnings("unchecked")
 		final List<TimetableLesson> list = this.em.createNativeQuery(
 				"select * from Klasse_Tag_Stunde", TimetableLesson.class)
 				.getResultList();
 
 		assertEquals(3, list.size());
-		assertEquals("Werner", list.get(0).getLehrer().getFirstname());
+		assertEquals("Werner", list.get(0).getTeacher().getFirstname());
 	}
 
 }
