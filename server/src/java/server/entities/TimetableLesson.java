@@ -2,8 +2,10 @@ package server.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,7 +16,8 @@ public class TimetableLesson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	@ManyToOne(targetEntity=Form.class)
+	@ManyToOne
+	@JoinColumn(name = "idKlasse", insertable = false, updatable = false, nullable = false)
 	private Form form;
 
 	public Form getForm() {
@@ -26,7 +29,8 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@EmbeddedId
-	@ManyToOne(targetEntity=Day.class)
+	@ManyToOne
+	@JoinColumn(name = "idTag", insertable = false, updatable = false, nullable = false)
 	private Day day;
 
 	public Day getDay() {
@@ -38,7 +42,8 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@EmbeddedId
-	@ManyToOne(targetEntity=Lesson.class)
+	@ManyToOne
+	@JoinColumn(name = "idStunde", insertable = false, updatable = false, nullable = false)
 	private Lesson lesson;
 
 	public Lesson getLesson() {
@@ -49,7 +54,8 @@ public class TimetableLesson implements Serializable {
 		lesson = newLesson;
 	}
 
-	@ManyToOne(targetEntity=Teacher.class)
+	@ManyToOne
+	@JoinColumn(name = "idLehrer", insertable = false, updatable = false, nullable = true)
 	private Teacher teacher;
 
 	public Teacher getTeacher() {
@@ -60,7 +66,8 @@ public class TimetableLesson implements Serializable {
 		teacher = newTeacher;
 	}
 
-	@ManyToOne(targetEntity=Subject.class)
+	@ManyToOne
+	@JoinColumn(name = "idUnterrichtsfach", insertable = false, updatable = false, nullable = true)
 	private Subject subject;
 
 	public Subject getSubject() {
@@ -71,7 +78,8 @@ public class TimetableLesson implements Serializable {
 		subject = newSubject;
 	}
 
-	@ManyToOne(targetEntity=Room.class)
+	@ManyToOne
+	@JoinColumn(name = "idRaum", insertable = false, updatable = false, nullable = true)
 	private Room room;
 
 	public Room getRoom() {

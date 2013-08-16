@@ -77,8 +77,8 @@ public class PersistEntityTest {
 		em.persist(lesson1);
 		
 		Lesson lesson2 = new Lesson();
-		lesson2.setTimeFrom(Time.valueOf("10:00:00"));
-		lesson2.setTimeTo(Time.valueOf("10:45:00"));
+		lesson2.setTimeFrom(Time.valueOf("10:45:00"));
+		lesson2.setTimeTo(Time.valueOf("11:30:00"));
 		em.persist(lesson2);
 		
 		Subject subject1 = new Subject();
@@ -108,8 +108,18 @@ public class PersistEntityTest {
 		timetableLesson1.setSubject(subject1);
 		em.persist(timetableLesson1);
 		
+		TimetableLesson timetableLesson2 = new TimetableLesson();
+		timetableLesson2.setForm(class1);
+		timetableLesson2.setTeacher(teacher2);
+		timetableLesson2.setRoom(room2);
+		timetableLesson2.setLesson(lesson2);
+		timetableLesson2.setDay(day1);
+		timetableLesson2.setSubject(subject2);
+		em.persist(timetableLesson2);
+		
 		List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
 		timetableLessons.add(timetableLesson1);
+		timetableLessons.add(timetableLesson2);
 				
 		Timetable timetable1 = new Timetable();
 		timetable1.setLessons(timetableLessons);
