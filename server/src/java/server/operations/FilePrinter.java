@@ -27,9 +27,9 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @version 1.0
  */
 
-class FilePrinter {
+public class FilePrinter {
 
-	final String printAsPDF() throws ScheduleCreationException {
+	public final String printAsPDF() throws ScheduleCreationException {
 		final Document document = new Document();
 		String path = null;
 		try {
@@ -82,6 +82,8 @@ class FilePrinter {
 	}
 
 	private String createText() {
+
+		// TODO get Stundenplan
 		return "Test";
 	}
 

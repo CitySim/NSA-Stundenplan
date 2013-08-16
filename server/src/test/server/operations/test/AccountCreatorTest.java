@@ -53,6 +53,7 @@ public class AccountCreatorTest extends TestCase {
 	}
 
 	@After
+	@Test
 	public void cleanUpTestData() {
 		// TODO delete user
 	}
