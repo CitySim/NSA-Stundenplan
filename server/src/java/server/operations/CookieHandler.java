@@ -4,7 +4,7 @@ import javax.servlet.http.Cookie;
 
 import server.queries.CookieQuery;
 
-public class CookieValidator {
+public class CookieHandler {
 
 	public Cookie createCookie() {
 
@@ -12,7 +12,7 @@ public class CookieValidator {
 				.generateEncryptedPassword();
 		final Cookie cookie = new Cookie("NSA-Cookie", cookieID);
 		cookie.setValue(cookieID);
-		cookie.setMaxAge(600);
+		cookie.setMaxAge(2592000);
 		new CookieQuery().createCookie(cookieID);
 
 		return cookie;
@@ -29,4 +29,7 @@ public class CookieValidator {
 		return new CookieQuery().existsCookie(cookieValue);
 	}
 
+	public boolean deleteCookie(final Cookie cookie) {
+		return new CookieQuery().removeCookie(cookie.getValue());
+	}
 }
