@@ -1,4 +1,6 @@
-package server.operations;
+package server.operations.email;
+
+import server.operations.NewsLetterHandler;
 
 /**
  * Class for generating the text for the schedule mails.
@@ -52,8 +54,8 @@ class EmailTextCreator {
 		sb.append(System.lineSeparator());
 
 		sb.append("Bitte bestätigen sie ihre Anmeldung indem Sie auf den folgenden Link klicken:");
-		sb.append(new NewsLetterHandler().generateRegistrationLink(
-				schoolClass, eMailAddress));
+		sb.append(new NewsLetterHandler().generateRegistrationLink(schoolClass,
+				eMailAddress));
 		sb.append(System.lineSeparator());
 
 		sb.append("Sollten Sie die Registrierung nicht durchgeführt haben oder keine Newsletter erhalten wollen,");

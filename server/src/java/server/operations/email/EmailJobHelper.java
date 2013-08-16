@@ -1,13 +1,10 @@
-package server.operations;
+package server.operations.email;
 
 import java.util.ArrayList;
 
 import server.entities.Timetable;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
-import server.operations.email.EmailJob;
-import server.operations.email.EmailObject;
-import server.operations.email.EmailSettings;
 
 /**
  * Used to initialize the emailSending.
@@ -17,7 +14,7 @@ import server.operations.email.EmailSettings;
  * @version 1.0
  */
 
-class EmailJobHelper {
+public class EmailJobHelper {
 
 	public final void sendMail(final Timetable entityList)
 			throws ScheduleCreationException, EmailSendingException {
@@ -28,7 +25,7 @@ class EmailJobHelper {
 				emailList);
 	}
 
-	final void sendConfirmationMail(final String eMailAddress,
+	public final void sendConfirmationMail(final String eMailAddress,
 			final String schoolClass) throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator()
@@ -38,7 +35,7 @@ class EmailJobHelper {
 				emailList);
 	}
 
-	final void sendCreationMail(final String eMailAddress,
+	public final void sendCreationMail(final String eMailAddress,
 			final String userName, final String password)
 			throws EmailSendingException {
 

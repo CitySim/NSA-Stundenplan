@@ -2,6 +2,7 @@ package server.operations;
 
 import server.exceptions.DuplicateUserException;
 import server.exceptions.EmailSendingException;
+import server.operations.email.EmailJobHelper;
 import server.queries.LoginQuery;
 
 /**

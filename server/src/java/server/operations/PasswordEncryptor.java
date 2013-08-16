@@ -18,7 +18,7 @@ public class PasswordEncryptor {
 
 	}
 
-	private String encryptPassword(final String password) {
+	public String encryptPassword(final String password) {
 
 		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 		BCrypt.gensalt();
