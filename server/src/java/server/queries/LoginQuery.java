@@ -1,6 +1,8 @@
 package server.queries;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
@@ -22,8 +24,12 @@ public class LoginQuery {
 	 * @param username
 	 * @return
 	 */
-	public String getPassword(final String username) {	
-		return getLoginUser(username).getPassword();
+	public String getPassword(final String username) {
+		Login login = getLoginUser(username);
+		if (login != null) {
+			return login.getPassword();
+		}
+		return null;
 	}
 
 	/**
@@ -84,9 +90,14 @@ public class LoginQuery {
 		em.getTransaction().commit();
 	}
 	
-	private Login getLoginUser (String username){
-		Login login = (Login) em.createNativeQuery(
-				"select * from Login WHERE user ='"+username+"'", Login.class).getSingleResult();
+	private Login getLoginUser(String username) {
+		Login login = null;
+		try {login = em.createQuery(
+				"select l from Login l where user = '" + username + "'",
+				Login.class).getSingleResult();}
+		catch (NoResultException e){
+			
+		}
 		return login;
 	}
 	
