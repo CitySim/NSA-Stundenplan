@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,13 +32,12 @@ public class CookieHandlerTest extends TestCase {
 	public void testCookieCreation() {
 
 		this.cookie = this.handler.createCookie();
-		CookieHandlerTest
-				.assertTrue(this.handler.validateCookie(this.cookie));
+		CookieHandlerTest.assertTrue(this.handler.validateCookie(this.cookie));
+
 	}
 
-	@After
 	@Test
 	public void cleanUpTestData() {
-		this.handler.deleteCookie(this.cookie);
+		CookieHandlerTest.assertTrue(this.handler.deleteCookie(this.cookie));
 	}
 }
