@@ -1,21 +1,18 @@
 package server.queries;
 
-import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
-import com.itextpdf.text.log.SysoCounter;
-
-import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
 
 /**
  * Creates/Deletes/Checks the Login and inputs them into the Database
+ * 
  * @author oleg.scheltow
- *
+ * 
  */
 public class LoginQuery {
 	private final EntityManager em;
@@ -25,30 +22,36 @@ public class LoginQuery {
 	}
 
 	/**
-	 *  Get the Password for the specified User
+	 * Get the Password for the specified User
+	 * 
 	 * @param username
 	 * @return
 	 */
-	public String getPassword(final String username) {	
-		return getLoginUser(username).getPassword();
+	public String getPassword(final String username) {
+		Login login = getLoginUser(username);
+		if (login != null) {
+			return login.getPassword();
+		}
+		return null;
 	}
 
 	/**
 	 * Create a new User with the specified Details
+	 * 
 	 * @param username
 	 * @param password
 	 * @param eMailAddress
 	 */
 	public boolean createUser(final String username, final String password,
 			final String eMailAddress) {
-		Login login = getLoginUser(username);	
-		if(login == null){
+		Login login = getLoginUser(username);
+		if (login == null) {
 			this.em.getTransaction().begin();
 
 			EmailAddress email = new EmailAddress();
 			email.setEMailAddress(eMailAddress);
 			this.em.persist(email);
-		
+
 			login = new Login();
 			login.setPassword(password);
 			login.setUser(username);
@@ -56,21 +59,22 @@ public class LoginQuery {
 			this.em.persist(login);
 			this.em.getTransaction().commit();
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Removes the User Login
+	 * 
 	 * @param username
 	 * @return
 	 */
-	public boolean removeLogin(String username){
+	public boolean removeLogin(String username) {
 		Login login = getLoginUser(username);
-		if(login == null){
+		if (login == null) {
 			return false;
-		}else{
+		} else {
 			this.em.getTransaction().begin();
 			this.em.remove(login);
 			this.em.getTransaction().commit();
@@ -80,6 +84,7 @@ public class LoginQuery {
 
 	/**
 	 * Changes the User password
+	 * 
 	 * @param username
 	 * @param password
 	 */
@@ -90,15 +95,16 @@ public class LoginQuery {
 		this.em.persist(loginUser);
 		this.em.getTransaction().commit();
 	}
-	
-	private Login getLoginUser (String username){
+
+	private Login getLoginUser(String username) {
 		Login login = null;
-		final List<Login> loginList = this.em.createNativeQuery(
-				"select * from Login WHERE user ='"+username+"'", Login.class).getResultList();
-		if(loginList.size() == 1){
-			login = loginList.get(0);
+		try {login = em.createQuery(
+				"select l from Login l where user = '" + username + "'",
+				Login.class).getSingleResult();}
+		catch (NoResultException e){
+			
 		}
 		return login;
 	}
-	
+
 }
