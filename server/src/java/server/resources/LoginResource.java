@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import server.exceptions.LoginFailedException;
-import server.operations.CookieValidator;
+import server.operations.CookieHandler;
 import server.operations.LoginValidator;
 
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ public class LoginResource {
 		String json;
 		try {
 			new LoginValidator().validateLoginData(userName, password);
-			json = gson.toJson(new CookieValidator().createCookie());
+			json = gson.toJson(new CookieHandler().createCookie());
 
 		} catch (LoginFailedException e) {
 			json = gson.toJson(e.getMessage());

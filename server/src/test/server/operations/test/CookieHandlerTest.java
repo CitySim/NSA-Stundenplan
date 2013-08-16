@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.operations.CookieValidator;
+import server.operations.CookieHandler;
 
 /**
  * Test for cookie creation and validation.
@@ -18,26 +18,28 @@ import server.operations.CookieValidator;
  * @version 1.0
  */
 
-public class CookieServletTest extends TestCase {
+public class CookieHandlerTest extends TestCase {
 
-	private CookieValidator validator;
+	private CookieHandler handler;
+	private Cookie cookie;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		this.validator = new CookieValidator();
+		this.handler = new CookieHandler();
 	}
 
 	@Test
 	public void testCookieCreation() {
 
-		final Cookie cookie = this.validator.createCookie();
-		CookieServletTest.assertTrue(this.validator.validateCookie(cookie));
+		this.cookie = this.handler.createCookie();
+		CookieHandlerTest
+				.assertTrue(this.handler.validateCookie(this.cookie));
 	}
 
 	@After
 	@Test
 	public void cleanUpTestData() {
-		// TODO delete cookie
+		this.handler.deleteCookie(this.cookie);
 	}
 }
