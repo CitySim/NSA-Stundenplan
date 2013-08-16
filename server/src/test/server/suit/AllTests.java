@@ -1,0 +1,23 @@
+package server.suit;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import server.operations.AccountHandlerTest;
+import server.operations.CookieHandlerTest;
+import server.operations.FilePrinterTest;
+import server.operations.NewsLetterHandlerTest;
+import server.persistence.HibernateTest;
+import server.persistence.HibernateTimeTableTest;
+import server.persistence.PersistEntityTest;
+import server.webservices.JSONTest;
+
+@RunWith(Suite.class)
+@SuiteClasses({ AccountHandlerTest.class, CookieHandlerTest.class,
+		FilePrinterTest.class, NewsLetterHandlerTest.class,
+		HibernateTest.class, HibernateTimeTableTest.class,
+		PersistEntityTest.class, JSONTest.class })
+public class AllTests {
+
+}
