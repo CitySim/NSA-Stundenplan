@@ -11,13 +11,23 @@ import server.exceptions.EmailSendingException;
  * @version 1.0
  */
 
-public class NewsLetterValidator {
+public class NewsLetterHandler {
 
-	public final void addAddress(final String eMailAddress,
+	public final boolean addAddress(final String eMailAddress,
 			final String schoolClass) throws EmailSendingException {
 
-		// TODO add address in db
+		// TODO add address in DB
 		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
+
+		return false;
+
+	}
+
+	public final boolean removeAddress(final String eMailAddress,
+			final String schoolClass) {
+
+		// TODO remove address from DB
+		return false;
 
 	}
 
