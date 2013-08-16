@@ -29,7 +29,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 class FilePrinter {
 
-	final String printAsPDF() {
+	final String printAsPDF() throws ScheduleCreationException {
 		final Document document = new Document();
 		String path = null;
 		try {
@@ -44,12 +44,12 @@ class FilePrinter {
 			new File(path);
 
 		} catch (final FileNotFoundException | DocumentException e) {
-			new ScheduleCreationException().sendToClient();
+			throw new ScheduleCreationException();
 		}
 		return path;
 	}
 
-	public final String printAsPng() {
+	public final String printAsPng() throws ScheduleCreationException {
 		String path = "";
 		try {
 			final int width = 200, height = 200;
@@ -75,7 +75,7 @@ class FilePrinter {
 			ImageIO.write(image, "PNG", new File(path));
 
 		} catch (final IOException e) {
-			new ScheduleCreationException().sendToClient();
+			throw new ScheduleCreationException();
 		}
 		return path;
 

@@ -8,8 +8,7 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class LoginFailedException extends Exception implements
-		ExceptionDialogInterface {
+public class LoginFailedException extends Exception {
 
 	int errorNumber = 2;
 	String errorTitel = "Login Exception";
@@ -21,7 +20,4 @@ public class LoginFailedException extends Exception implements
 		super();
 	}
 
-	@Override
-	public void sendToClient() {
-	}
 }

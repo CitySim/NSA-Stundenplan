@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import server.entities.Timetable;
+import server.exceptions.ScheduleCreationException;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 
@@ -40,7 +41,8 @@ public class EmailCreator {
 
 	}
 
-	ArrayList<EmailObject> createEmailObjects(final Timetable entityList) {
+	ArrayList<EmailObject> createEmailObjects(final Timetable entityList)
+			throws ScheduleCreationException {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 

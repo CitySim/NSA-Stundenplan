@@ -8,8 +8,7 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class ScheduleCreationException extends Exception implements
-		ExceptionDialogInterface {
+public class ScheduleCreationException extends Exception {
 
 	int errorNumber = 1;
 	String errorTitel = "Schedule Creation Exception";
@@ -21,7 +20,4 @@ public class ScheduleCreationException extends Exception implements
 		super();
 	}
 
-	@Override
-	public void sendToClient() {
-	}
 }

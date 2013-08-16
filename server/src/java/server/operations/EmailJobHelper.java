@@ -3,6 +3,7 @@ package server.operations;
 import java.util.ArrayList;
 
 import server.entities.Timetable;
+import server.exceptions.ScheduleCreationException;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
 import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
@@ -17,7 +18,8 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 class EmailJobHelper {
 
-	public final void sendMail(final Timetable entityList) {
+	public final void sendMail(final Timetable entityList)
+			throws ScheduleCreationException {
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createEmailObjects(entityList);
 		new EmailJob().sendMail(

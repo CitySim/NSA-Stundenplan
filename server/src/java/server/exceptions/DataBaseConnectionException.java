@@ -8,8 +8,7 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class DataBaseConnectionException extends Exception implements
-		ExceptionDialogInterface {
+public class DataBaseConnectionException extends Exception {
 
 	int errorNumber = 3;
 	String errorTitel = "DataBaseConnection Exception";
@@ -21,7 +20,4 @@ public class DataBaseConnectionException extends Exception implements
 		super();
 	}
 
-	@Override
-	public void sendToClient() {
-	}
 }
