@@ -20,6 +20,14 @@ public class CookieQuery {
 	}
 
 
+	public void createCookie(String cookieString) {	
+		this.em.getTransaction().begin();
+		Cookie cookie = new Cookie();
+		cookie.setCookie(cookieString);
+		this.em.persist(cookie);
+		this.em.getTransaction().commit();
+	}
+
 	public boolean existsCookie(String cookie){
 		return getCookie(cookie) == null ? false : true;
 	}
