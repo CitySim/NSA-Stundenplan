@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CookieServlet {
 
-	public void doGet(final String userName, final HttpServletResponse res)
+	public void doGet(final String userName, final HttpServletResponse response)
 			throws ServletException, IOException {
 
-		final Cookie ck = new Cookie("prefResultsPerPage", "");
-		ck.setValue(new PasswordEncryptor().generateEncryptedPassword());
+		final Cookie cookie = new Cookie("NSA_Cookie", "IDTest");
+		cookie.setValue(new PasswordEncryptor().generateEncryptedPassword());
+		cookie.setMaxAge(600);
 		// TODO: save password in the DB / temp storage
-		res.addCookie(ck);
+		response.addCookie(cookie);
 	}
 
 	public boolean validateKey(final HttpServletRequest req) {
