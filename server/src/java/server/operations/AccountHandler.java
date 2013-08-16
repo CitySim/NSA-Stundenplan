@@ -1,5 +1,6 @@
 package server.operations;
 
+import server.exceptions.DuplicateUserException;
 import server.queries.LoginQuery;
 
 /**
@@ -10,10 +11,11 @@ import server.queries.LoginQuery;
  * @version 1.0
  */
 
-public class AccountCreator {
+public class AccountHandler {
 
 	public final String createAccount(final String name,
-			final String familyName, final String eMailAddress) {
+			final String familyName, final String eMailAddress)
+			throws DuplicateUserException {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
@@ -45,10 +47,24 @@ public class AccountCreator {
 		return password;
 	}
 
-	private void storeUserInDatabase(final String userName,
-			final String hashedPw, final String eMailAddress) {
+	public boolean deleteAccount(final String userName) {
 
-		new LoginQuery().createUser(userName, hashedPw, eMailAddress);
+		// return new LoginQuery().removeAccount(userName);
+
+		return false;
+
+	}
+
+	private void storeUserInDatabase(final String userName,
+			final String hashedPw, final String eMailAddress)
+			throws DuplicateUserException {
+
+		final boolean success = new LoginQuery().createUser(userName, hashedPw,
+				eMailAddress);
+
+		if (!success) {
+			throw new DuplicateUserException();
+		}
 
 	}
 
