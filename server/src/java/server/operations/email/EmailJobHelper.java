@@ -1,12 +1,10 @@
-package server.operations;
+package server.operations.email;
 
 import java.util.ArrayList;
 
 import server.entities.Timetable;
+import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailJob;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
 
 /**
  * Used to initialize the emailSending.
@@ -16,10 +14,10 @@ import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailSettings;
  * @version 1.0
  */
 
-class EmailJobHelper {
+public class EmailJobHelper {
 
 	public final void sendMail(final Timetable entityList)
-			throws ScheduleCreationException {
+			throws ScheduleCreationException, EmailSendingException {
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createEmailObjects(entityList);
 		new EmailJob().sendMail(
@@ -27,8 +25,8 @@ class EmailJobHelper {
 				emailList);
 	}
 
-	final void sendConfirmationMail(final String eMailAddress,
-			final String schoolClass) {
+	public final void sendConfirmationMail(final String eMailAddress,
+			final String schoolClass) throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createConfirmationMail(eMailAddress, schoolClass);
@@ -37,8 +35,9 @@ class EmailJobHelper {
 				emailList);
 	}
 
-	final void sendCreationMail(final String eMailAddress,
-			final String userName, final String password) {
+	public final void sendCreationMail(final String eMailAddress,
+			final String userName, final String password)
+			throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createCreationMail(eMailAddress, userName, password);
@@ -47,7 +46,8 @@ class EmailJobHelper {
 	}
 
 	public void sendPasswordChangeMail(final String eMailAddress,
-			final String userName, final String password) {
+			final String userName, final String password)
+			throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator()
 				.createPasswordChangeMail(eMailAddress, userName, password);

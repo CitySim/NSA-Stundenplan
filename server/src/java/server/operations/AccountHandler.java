@@ -1,6 +1,8 @@
 package server.operations;
 
 import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailSendingException;
+import server.operations.email.EmailJobHelper;
 import server.queries.LoginQuery;
 
 /**
@@ -15,7 +17,7 @@ public class AccountHandler {
 
 	public final String createAccount(final String name,
 			final String familyName, final String eMailAddress)
-			throws DuplicateUserException {
+			throws DuplicateUserException, EmailSendingException {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
@@ -49,10 +51,7 @@ public class AccountHandler {
 
 	public boolean deleteAccount(final String userName) {
 
-		// return new LoginQuery().removeAccount(userName);
-
-		return false;
-
+		return new LoginQuery().removeLogin(userName);
 	}
 
 	private void storeUserInDatabase(final String userName,

@@ -2,9 +2,12 @@ package server.operations.test;
 
 import junit.framework.TestCase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailSendingException;
 import server.operations.AccountHandler;
 import server.queries.LoginQuery;
 
@@ -20,10 +23,11 @@ public class AccountHandlerTest extends TestCase {
 
 	private AccountHandler handler;
 	private String userName;
+	private String password;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws EmailSendingException, DuplicateUserException {
 		this.handler = new AccountHandler();
 
 		final String name = "Dennis";
@@ -32,26 +36,29 @@ public class AccountHandlerTest extends TestCase {
 
 		this.userName = this.handler.createAccount(name, familyName,
 				emailAddress);
+
 	}
 
 	@Test
-	public void testAccountCreation() {
+	public void testAccountCreation() throws EmailSendingException {
 
-		AccountHandlerTest.assertNotNull(new LoginQuery()
-				.getPassword(this.userName));
+		this.password = new LoginQuery().getPassword(this.userName);
+		AccountHandlerTest.assertNotNull(this.password);
+
 	}
 
 	@Test
-	public void testPasswordChange() {
+	public void testPasswordChange() throws EmailSendingException {
 
-		final String password = this.handler.changePassword(this.userName);
+		this.password = this.handler.changePassword(this.userName);
 
-		AccountHandlerTest.assertEquals(password,
+		AccountHandlerTest.assertEquals(this.password,
 				new LoginQuery().getPassword(this.userName));
 
 	}
 
 	@Test
+	@After
 	public void cleanUpTestData() {
 		this.handler.deleteAccount(this.userName);
 	}
