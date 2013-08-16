@@ -1,21 +1,11 @@
 package server.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Login extends DefaultEntity {
 	
-	@Id
-	@GeneratedValue
-	@Column(name = "idLogin")
-	private int id;
-
 	private String user;
 	private String password;
 
@@ -36,14 +26,14 @@ public class Login extends DefaultEntity {
 		this.password = password;
 	}
 
-	@ManyToOne(targetEntity=EmailAdress.class)
-	private EmailAdress email;
+	@ManyToOne(targetEntity=EmailAddress.class)
+	private EmailAddress email;
 
-	public EmailAdress getEmail() {
+	public EmailAddress getEmail() {
 		return email;
 	}
 
-	public void setEmail(EmailAdress email) {
+	public void setEmail(EmailAddress email) {
 		this.email = email;
 	}
 
