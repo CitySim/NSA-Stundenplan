@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Login extends DefaultEntity {
+public class Login {
 	
 	@Id
 	@GeneratedValue
@@ -18,6 +18,10 @@ public class Login extends DefaultEntity {
 	private String user;
 	private String password;
 
+
+	public int getId() {
+		return this.id;
+	}
 
 	public String getUser() {
 		return this.user;

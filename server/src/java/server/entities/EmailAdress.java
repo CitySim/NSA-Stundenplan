@@ -6,20 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class EmailAdress extends DefaultEntity {
+public class EmailAdress {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "idEmail")
 	private int id;
 
-	@Column(name = "Email")
+	@Column(name = "email")
 	private String eMailAddress;
-
-	
-	public int getId() {
-		return this.id;
-	}
 
 	public String getEmailAddress() {
 		return this.eMailAddress;
@@ -29,4 +24,7 @@ public class EmailAdress extends DefaultEntity {
 		this.eMailAddress = eMailAddress;
 	}
 
+	public int getId() {
+		return this.id;
+	}
 }
