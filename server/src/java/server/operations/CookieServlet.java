@@ -1,13 +1,10 @@
 package server.operations;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class CookieServlet {
 
-	public void createCookie(final String userName,
-			final HttpServletResponse response) {
+	public Cookie createCookie() {
 
 		final String cookieID = new PasswordEncryptor()
 				.generateEncryptedPassword();
@@ -15,27 +12,25 @@ public class CookieServlet {
 		cookie.setValue(cookieID);
 		cookie.setMaxAge(600);
 		// TODO: save password in the DB / temp storage
-		response.addCookie(cookie);
+		return cookie;
 	}
 
-	public boolean validateCookie(final HttpServletRequest request) {
+	public boolean validateCookie(final Cookie cookie) {
 
-		final Cookie[] cookies = request.getCookies();
 		String clientKey = "";
 		boolean valid = false;
-		if (cookies != null) {
-			for (final Cookie cookie : cookies) {
-				if ("NSA_Cookie".equals(cookie.getName())) {
-					clientKey = cookie.getValue();
-				}
-			}
-			// TODO: Check the DB for the key
-			final String dbKey = null;
 
-			if (clientKey.equals(dbKey)) {
-				valid = true;
-			}
+		if ("NSA_Cookie".equals(cookie.getName())) {
+			clientKey = cookie.getValue();
 		}
+
+		// TODO: Check the DB for the key
+		final String dbKey = null;
+
+		if (clientKey.equals(dbKey)) {
+			valid = true;
+		}
+
 		return valid;
 	}
 
