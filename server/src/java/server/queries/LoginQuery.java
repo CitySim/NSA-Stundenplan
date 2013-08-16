@@ -33,21 +33,26 @@ public class LoginQuery {
 	 * @param password
 	 * @param eMailAddress
 	 */
-	public void createUser(final String username, final String password,
+	public boolean createUser(final String username, final String password,
 			final String eMailAddress) {
-			
-		this.em.getTransaction().begin();
+		Login login = getLoginUser(username);	
+		if(login == null){
+			this.em.getTransaction().begin();
 
-		EmailAddress email = new EmailAddress();
-		email.setEMailAddress(eMailAddress);
-		this.em.persist(email);
+			EmailAddress email = new EmailAddress();
+			email.setEMailAddress(eMailAddress);
+			this.em.persist(email);
 		
-		Login login = new Login();
-		login.setPassword(password);
-		login.setUser(username);
-		login.setEmail(email);
-		this.em.persist(login);
-		this.em.getTransaction().commit();
+			login = new Login();
+			login.setPassword(password);
+			login.setUser(username);
+			login.setEmail(email);
+			this.em.persist(login);
+			this.em.getTransaction().commit();
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
