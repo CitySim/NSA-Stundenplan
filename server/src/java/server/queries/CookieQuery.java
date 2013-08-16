@@ -12,6 +12,11 @@ import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
 
+/**
+ * Creates/Deletes/Checks the Cookies and inputs them into the Database
+ * @author oleg.scheltow
+ *
+ */
 public class CookieQuery {
 	private final EntityManager em;
 
@@ -19,7 +24,10 @@ public class CookieQuery {
 		this.em = HibernateUtil.getEntityManager();
 	}
 
-
+	/**
+	 * Creates a new Cookie
+	 * @param cookieString
+	 */
 	public void createCookie(String cookieString) {	
 		this.em.getTransaction().begin();
 		Cookie cookie = new Cookie();
@@ -28,10 +36,20 @@ public class CookieQuery {
 		this.em.getTransaction().commit();
 	}
 
+	/**
+	 * Checks for existing Cookie
+	 * @param cookie
+	 * @return
+	 */
 	public boolean existsCookie(String cookie){
 		return getCookie(cookie) == null ? false : true;
 	}
 	
+	/**
+	 * Removes existing Cookie
+	 * @param cookieString
+	 * @return
+	 */
 	public boolean removeCookie(String cookieString){
 		Cookie cookie = getCookie(cookieString);
 		
@@ -45,6 +63,11 @@ public class CookieQuery {
 		}
 	}
 	
+	/**
+	 * Get the specified Cookie
+	 * @param cookie
+	 * @return
+	 */
 	private Cookie getCookie(String cookie){
 		@SuppressWarnings("unchecked")
 		final List<Cookie> cookieList = this.em.createNativeQuery(

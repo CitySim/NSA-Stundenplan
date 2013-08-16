@@ -7,10 +7,16 @@ import javax.persistence.Query;
 
 import com.itextpdf.text.log.SysoCounter;
 
+import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Login;
 import server.persistence.HibernateUtil;
 
+/**
+ * Creates/Deletes/Checks the Login and inputs them into the Database
+ * @author oleg.scheltow
+ *
+ */
 public class LoginQuery {
 	private final EntityManager em;
 
@@ -52,6 +58,23 @@ public class LoginQuery {
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	/**
+	 * Removes the User Login
+	 * @param username
+	 * @return
+	 */
+	public boolean removeLogin(String username){
+		Login login = getLoginUser(username);
+		if(login == null){
+			return false;
+		}else{
+			this.em.getTransaction().begin();
+			this.em.remove(login);
+			this.em.getTransaction().commit();
+			return true;
 		}
 	}
 
