@@ -66,8 +66,8 @@ public class TimetableLesson implements Serializable {
 		teacher = newTeacher;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "idUnterrichtsfach", insertable = false, updatable = false, nullable = true)
+	@ManyToOne(targetEntity=Subject.class)
+	@JoinColumn(name = "idUnterrichtsfach", referencedColumnName="idUnterrichtsfach", insertable = false, updatable = false, nullable = true)
 	private Subject subject;
 
 	public Subject getSubject() {
