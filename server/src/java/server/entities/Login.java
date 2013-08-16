@@ -36,7 +36,6 @@ public class Login extends DefaultEntity implements Serializable {
 		this.password = password;
 	}
 
-	@ManyToOne(targetEntity=EmailAddress.class)
 	private EmailAddress email;
 
 	public EmailAddress getEmail() {
