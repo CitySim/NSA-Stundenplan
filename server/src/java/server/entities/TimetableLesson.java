@@ -84,7 +84,7 @@ public class TimetableLesson implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "replacement_id", insertable = false, updatable = false, nullable = true)
+	@JoinColumn(name = "idVertretung", insertable = false, updatable = false, nullable = true)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
