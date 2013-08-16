@@ -8,8 +8,7 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class DuplicateUserException extends Exception implements
-		ExceptionDialogInterface {
+public class DuplicateUserException extends Exception {
 
 	int errorNumber = 4;
 	String errorTitel = "DuplicateUser Exception";
@@ -21,7 +20,4 @@ public class DuplicateUserException extends Exception implements
 		super();
 	}
 
-	@Override
-	public void sendToClient() {
-	}
 }

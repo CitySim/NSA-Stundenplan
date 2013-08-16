@@ -12,7 +12,7 @@ Wishlist from Dennis to Oleg:
 	Parameters from me: schoolClass.
 	return: newsletterList
 	
-5. Delete operations for user & newsLetterEntries
+5. Delete operations for user, newsLetterEntries, cookies
 
 6. Create a Cookie table in the database.
 	(Only has a String field to store)
@@ -28,6 +28,9 @@ Wishlist from Dennis to Oleg:
 	Add a method to search if a cookie exists in the database.
 	Parameters from me: String (cookie)
 	Return: boolean
+	
+8. Duplicate User Check when creating a new user
+	(Exception already exists)
 	
 
 General: Add forgot password function. (Auch im Pflichtenheft)

@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.exceptions.LoginFailedException;
 import server.operations.LoginValidator;
 
 /**
@@ -34,8 +35,12 @@ public class LoginValidatorTest extends TestCase {
 
 		// TODO : Create user in DB directly
 
-		LoginValidatorTest.assertTrue(this.validator.validateLoginData(
-				userName, password));
+		try {
+			LoginValidatorTest.assertTrue(this.validator.validateLoginData(
+					userName, password));
+		} catch (final LoginFailedException e) {
+			LoginValidatorTest.fail();
+		}
 
 	}
 

@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import server.exceptions.ScheduleCreationException;
+
 /**
  * Servlet used for streaming the schedule pdf.
  * 
@@ -24,17 +26,28 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 	@Override
 	protected final void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) {
-		this.performTask(request, response);
+		try {
+			this.performTask(request, response);
+		} catch (final ScheduleCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	protected final void doPost(final HttpServletRequest request,
 			final HttpServletResponse response) {
-		this.performTask(request, response);
+		try {
+			this.performTask(request, response);
+		} catch (final ScheduleCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void performTask(final HttpServletRequest request,
-			final HttpServletResponse response) {
+			final HttpServletResponse response)
+			throws ScheduleCreationException {
 
 		final File pdfFile = new File(new FilePrinter().printAsPDF());
 

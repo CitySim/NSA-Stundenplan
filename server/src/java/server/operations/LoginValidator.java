@@ -14,21 +14,19 @@ import server.queries.LoginQuery;
 public class LoginValidator {
 
 	public Boolean validateLoginData(final String userName,
-			final String password) {
+			final String password) throws LoginFailedException {
 
 		final String dbPassword = new LoginQuery().getPassword(userName);
 
 		if (dbPassword == null) {
-			new LoginFailedException().sendToClient();
-			return false;
+			throw new LoginFailedException();
 		}
 
 		final Boolean passwordOkay = this
 				.validatePassword(password, dbPassword);
 
 		if (!passwordOkay) {
-			new LoginFailedException().sendToClient();
-			return false;
+			throw new LoginFailedException();
 		}
 
 		return passwordOkay;
