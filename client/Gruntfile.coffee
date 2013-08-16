@@ -9,10 +9,10 @@ module.exports = (grunt) ->
 				files: [ "templates/*.hbs" ]
 				tasks: [ "handlebars" ]
 			css:
-				files: [ "style.css" ]
+				files: [ "css/*.css" ]
 				tasks: [ "copy" ]
 			static:
-				files:[ "style.css", "index.html", "libs/*.js" ]
+				files:[ "index.html", "libs/*.js" ]
 				tasks: [ "copy" ]
 
 		coffee:
@@ -43,7 +43,7 @@ module.exports = (grunt) ->
 		cssmin:
 			combine:
 				files:
-					"build/style.css": "build/style.css"
+					"build/style.css": "css/*.css"
 
 		copy:
 			static:
