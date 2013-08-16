@@ -62,6 +62,7 @@ public class NewsLetterValidatorTest extends TestCase {
 	}
 
 	@After
+	@Test
 	public void cleanUpTestData() {
 		// TODO delete emailAddress
 	}
