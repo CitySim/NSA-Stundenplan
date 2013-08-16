@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import server.entities.Timetable;
 import server.exceptions.ScheduleCreationException;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailContentCreator;
-import dennis.markmann.MyLibraries.DefaultJobs.Email.EmailObject;
+import server.operations.email.EmailContentCreator;
+import server.operations.email.EmailObject;
 
 /**
  * Used to create the eMails to send.

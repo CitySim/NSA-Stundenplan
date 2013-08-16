@@ -14,8 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.entities.Day;
+import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Lesson;
+import server.entities.Login;
 import server.entities.Room;
 import server.entities.Subject;
 import server.entities.Teacher;
@@ -124,6 +126,16 @@ public class PersistEntityTest {
 		Timetable timetable1 = new Timetable();
 		timetable1.setLessons(timetableLessons);
 		em.persist(timetable1);
+		
+		EmailAddress email = new EmailAddress();
+		email.setEMailAddress("hans@wurst.de");
+		em.persist(email);
+			
+		Login login1 = new Login();
+		login1.setEmail(email);
+		login1.setPassword("test");
+		login1.setUser("Hans");
+		em.persist(login1);
 		
 		this.em.getTransaction().commit();
 

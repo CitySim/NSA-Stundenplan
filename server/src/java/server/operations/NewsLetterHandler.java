@@ -1,5 +1,7 @@
 package server.operations;
 
+import server.exceptions.EmailSendingException;
+
 /**
  * Used to add newsletter entries on the database. Generates URLs for confirming
  * the registration / removing of eMailAddresses.
@@ -9,13 +11,23 @@ package server.operations;
  * @version 1.0
  */
 
-public class NewsLetterValidator {
+public class NewsLetterHandler {
 
-	public final void addAddress(final String eMailAddress,
+	public final boolean addAddress(final String eMailAddress,
+			final String schoolClass) throws EmailSendingException {
+
+		// TODO add address in DB
+		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
+
+		return false;
+
+	}
+
+	public final boolean removeAddress(final String eMailAddress,
 			final String schoolClass) {
 
-		// TODO add address in db
-		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
+		// TODO remove address from DB
+		return false;
 
 	}
 
