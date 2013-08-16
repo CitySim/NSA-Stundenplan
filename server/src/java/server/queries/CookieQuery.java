@@ -1,15 +1,7 @@
 package server.queries;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import com.itextpdf.text.log.SysoCounter;
-
 import server.entities.Cookie;
-import server.entities.EmailAddress;
-import server.entities.Login;
 import server.persistence.HibernateUtil;
 
 /**
@@ -68,10 +60,9 @@ public class CookieQuery {
 	 * @param cookie
 	 * @return
 	 */
-	private Cookie getCookie(String cookie){
-		@SuppressWarnings("unchecked")
-		final List<Cookie> cookieList = this.em.createNativeQuery(
-				"select * from Cookie WHERE cookie ='"+cookie+"'", Cookie.class).getResultList();
-		return cookieList.size() == 1 ? cookieList.get(0) : null;
+	private Cookie getCookie(String cookieString){
+		Cookie cookie = (Cookie) this.em.createNativeQuery(
+				"select * from Cookie WHERE cookie ='"+cookieString+"'", Cookie.class).getSingleResult();
+		return cookie;
 	}
 }
