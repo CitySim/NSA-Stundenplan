@@ -89,7 +89,6 @@ public class TimetableLesson implements Serializable {
 		room = newRoom;
 	}
 
-	@ManyToOne(targetEntity = Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {

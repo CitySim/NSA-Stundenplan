@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Lesson;
 import server.entities.Login;
+import server.entities.Replacement;
 import server.entities.Room;
 import server.entities.Subject;
 import server.entities.Teacher;
@@ -50,10 +52,10 @@ public class PersistEntityTest {
 		teacher1.setShortName("WUHA");
 		em.persist(teacher1);
 		
-		final Form class1 = new Form();
-		class1.setDescription("ita");
-		class1.setTeacher(teacher1);
-		this.em.persist(class1);
+		final Form form1 = new Form();
+		form1.setDescription("ita");
+		form1.setTeacher(teacher1);
+		this.em.persist(form1);
 		
 		Teacher teacher2 = new Teacher();
 		teacher2.setFirstname("Gesinde");
@@ -61,10 +63,10 @@ public class PersistEntityTest {
 		teacher2.setShortName("HaGe");
 		em.persist(teacher2);
 		
-		final Form class2 = new Form();
-		class2.setTeacher(teacher2);
-		class2.setDescription("itb");
-		this.em.persist(class2);
+		final Form form2 = new Form();
+		form2.setTeacher(teacher2);
+		form2.setDescription("itb");
+		this.em.persist(form2);
 		
 		Room room1 = new Room();
 		room1.setDescription("raum53");
@@ -103,7 +105,7 @@ public class PersistEntityTest {
 		em.persist(day2);
 		
 		TimetableLesson timetableLesson1 = new TimetableLesson();
-		timetableLesson1.setForm(class1);
+		timetableLesson1.setForm(form1);
 		timetableLesson1.setTeacher(teacher1);
 		timetableLesson1.setRoom(room1);
 		timetableLesson1.setLesson(lesson1);
@@ -112,7 +114,7 @@ public class PersistEntityTest {
 		em.persist(timetableLesson1);
 		
 		TimetableLesson timetableLesson2 = new TimetableLesson();
-		timetableLesson2.setForm(class1);
+		timetableLesson2.setForm(form1);
 		timetableLesson2.setTeacher(teacher2);
 		timetableLesson2.setRoom(room2);
 		timetableLesson2.setLesson(lesson2);
@@ -137,6 +139,13 @@ public class PersistEntityTest {
 		login1.setPassword(new PasswordEncryptor().encryptPassword("test"));		
 		login1.setUser("Hans");
 		em.persist(login1);
+		
+		Replacement replacement = new Replacement();
+		replacement.setDate(Calendar.getInstance().getTime());
+		replacement.setRoom(room1);
+		replacement.setTeacher(teacher1);
+		replacement.setForm(form1);
+		em.persist(replacement);
 		
 		this.em.getTransaction().commit();
 
