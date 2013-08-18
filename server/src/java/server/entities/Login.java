@@ -5,7 +5,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Login extends DefaultEntity {
-	
+
+	private static final long serialVersionUID = 1L;
 	private String user;
 	private String password;
 
