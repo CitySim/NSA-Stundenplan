@@ -1,1 +1,4 @@
 General: Add forgot password function. (Auch im Pflichtenheft)
+
+Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
+sollte HTTP Status 400 kommen, nicht 404
