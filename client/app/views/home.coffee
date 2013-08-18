@@ -2,7 +2,9 @@ class window.nsa.Views.Home extends Backbone.View
 	template: nsa.handlebars.home
 
 	initialize: () =>
-		if not nsa.Data.school?
+		if nsa.Data.school?
+			@model = nsa.Data.school
+		else
 			@model = new nsa.Models.School()
 			@model.fetch
 				success: () =>
@@ -21,7 +23,7 @@ class window.nsa.Views.Home extends Backbone.View
 		return
 
 	render: () =>
-		if not nsa.Data.school?
+		if not @model?
 			@$el.html nsa.handlebars.loading()
 			return
 
