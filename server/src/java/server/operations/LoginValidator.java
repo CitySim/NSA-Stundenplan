@@ -13,35 +13,32 @@ import server.queries.LoginQuery;
 
 public class LoginValidator {
 
-	public Boolean validateLoginData(final String userName,
-			final String password) throws LoginFailedException {
+    public Boolean validateLoginData(final String userName, final String password) throws LoginFailedException {
 
-		final String dbPassword = new LoginQuery().getPassword(userName);
+        final String dbPassword = new LoginQuery().getPassword(userName);
 
-		if (dbPassword == null) {
-			throw new LoginFailedException();
-		}
+        if (dbPassword == null) {
+            throw new LoginFailedException();
+        }
 
-		final Boolean passwordOkay = this
-				.validatePassword(password, dbPassword);
+        final Boolean passwordOkay = this.validatePassword(password, dbPassword);
 
-		if (!passwordOkay) {
-			throw new LoginFailedException();
-		}
+        if (!passwordOkay) {
+            throw new LoginFailedException();
+        }
 
-		return passwordOkay;
+        return passwordOkay;
 
-	}
+    }
 
-	private final boolean validatePassword(final String password,
-			final String dbPassword) {
+    private final boolean validatePassword(final String password, final String dbPassword) {
 
-		Boolean matches = false;
+        Boolean matches = false;
 
-		if (BCrypt.checkpw(dbPassword, password)) {
-			matches = true;
-		}
-		return matches;
-	}
+        if (BCrypt.checkpw(password, dbPassword)) {
+            matches = true;
+        }
+        return matches;
+    }
 
 }

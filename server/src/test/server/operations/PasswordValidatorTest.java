@@ -49,7 +49,7 @@ public class PasswordValidatorTest extends TestCase {
         this.userName = account.getUser();
 
         try {
-            PasswordValidatorTest.assertTrue(this.validator.validateLoginData(name, password));
+            PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));
         } catch (final LoginFailedException e) {
             PasswordValidatorTest.fail();
         }
