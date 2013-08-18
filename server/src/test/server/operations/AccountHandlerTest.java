@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.entities.Login;
 import server.exceptions.DuplicateUserException;
 import server.exceptions.EmailSendingException;
 import server.queries.LoginQuery;
@@ -20,45 +21,48 @@ import server.queries.LoginQuery;
 
 public class AccountHandlerTest extends TestCase {
 
-	private AccountHandler handler;
-	private String userName;
-	private String password;
+    private AccountHandler handler;
+    private String userName;
+    private String password;
 
-	@Override
-	@Before
-	public void setUp() throws EmailSendingException, DuplicateUserException {
-		this.handler = new AccountHandler();
+    @Override
+    @Before
+    public void setUp() throws EmailSendingException, DuplicateUserException {
+        this.handler = new AccountHandler();
 
-		final String name = "Dennis";
-		final String familyName = "Markmann";
-		final String emailAddress = "test@test.de";
+        final String name = "Dennis";
+        final String familyName = "Markmann";
+        final String eMailAddress = "test@test.de";
+        try {
+            final Login account = this.handler.createAccount(name, familyName, eMailAddress);
+            this.userName = account.getUser();
+        } catch (final EmailSendingException | DuplicateUserException e) {
+        }
+    }
 
-		this.userName = this.handler.createAccount(name, familyName,
-				emailAddress).getUser();
+    @Test
+    public void testAccountCreation() throws EmailSendingException {
 
-	}
+        this.password = new LoginQuery().getPassword(this.userName);
+        AccountHandlerTest.assertNotNull(this.password);
 
-	@Test
-	public void testAccountCreation() throws EmailSendingException {
+    }
 
-		this.password = new LoginQuery().getPassword(this.userName);
-		AccountHandlerTest.assertNotNull(this.password);
+    @Test
+    public void testPasswordChange() throws EmailSendingException {
 
-	}
+        try {
+            this.password = this.handler.changePassword(this.userName);
+        } catch (final EmailSendingException e) {
+        }
 
-	@Test
-	public void testPasswordChange() throws EmailSendingException {
+        AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
 
-		this.password = this.handler.changePassword(this.userName);
+    }
 
-		AccountHandlerTest.assertEquals(this.password,
-				new LoginQuery().getPassword(this.userName));
-
-	}
-
-	@Test
-	@After
-	public void cleanUpTestData() {
-		this.handler.deleteAccount(this.userName);
-	}
+    @Test
+    @After
+    public void cleanUpTestData() {
+        this.handler.deleteAccount(this.userName);
+    }
 }

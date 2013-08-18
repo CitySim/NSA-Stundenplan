@@ -12,7 +12,7 @@ import server.exceptions.EmailSendingException;
 import server.exceptions.LoginFailedException;
 
 /**
- * Test for cookie creation and validation.
+ * Test for password validation.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

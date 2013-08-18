@@ -16,88 +16,79 @@ import server.queries.LoginQuery;
 
 public class AccountHandler {
 
-	public final Login createAccount(final String name,
-			final String familyName, final String eMailAddress)
-			throws DuplicateUserException, EmailSendingException {
+    public final Login createAccount(final String name, final String familyName, final String eMailAddress)
+            throws DuplicateUserException, EmailSendingException {
 
-		final String userName = this.generateUserName(this.correctFormat(name),
-				this.correctFormat(familyName));
+        final String userName = this.generateUserName(this.correctFormat(name), this.correctFormat(familyName));
 
-		final String password = new PasswordEncryptor().generatePassword();
+        final String password = new PasswordEncryptor().generatePassword();
 
-		final String hashedPw = new PasswordEncryptor()
-				.encryptPassword(password);
+        final String hashedPw = new PasswordEncryptor().encryptPassword(password);
 
-		this.storeUserInDatabase(userName, hashedPw, eMailAddress);
+        this.storeUserInDatabase(userName, hashedPw, eMailAddress);
 
-		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
+        new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
 
-		// used for tests
-		final Login login = new Login();
-		login.setUser(name);
-		login.setPassword(password);
+        // used for tests
+        final Login login = new Login();
+        login.setUser(name);
+        login.setPassword(password);
 
-		return login;
+        return login;
 
-	}
+    }
 
-	public String changePassword(final String userName) {
+    public String changePassword(final String userName) throws EmailSendingException {
 
-		final String password = new PasswordEncryptor()
-				.generateEncryptedPassword();
+        final String password = new PasswordEncryptor().generateEncryptedPassword();
 
-		this.changePasswordInDatabase(userName, password);
+        this.changePasswordInDatabase(userName, password);
 
-		// TODO getEmailAddress for user from DB
-		// final String eMailAddress = "";
-		//
-		// new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
-		// password);
+        // final TODO getEmailAddress for final user from DB
+        // final String eMailAddress = "";
 
-		return password;
-	}
+        // new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName, password);
 
-	public boolean deleteAccount(final String userName) {
+        return password;
+    }
 
-		return new LoginQuery().removeLogin(userName);
-	}
+    public boolean deleteAccount(final String userName) {
 
-	private void storeUserInDatabase(final String userName,
-			final String hashedPw, final String eMailAddress)
-			throws DuplicateUserException {
+        return new LoginQuery().removeLogin(userName);
+    }
 
-		final boolean success = new LoginQuery().createUser(userName, hashedPw,
-				eMailAddress);
+    private void storeUserInDatabase(final String userName, final String hashedPw, final String eMailAddress)
+            throws DuplicateUserException {
 
-		if (!success) {
-			throw new DuplicateUserException();
-		}
+        final boolean success = new LoginQuery().createUser(userName, hashedPw, eMailAddress);
 
-	}
+        if (!success) {
+            throw new DuplicateUserException();
+        }
 
-	private void changePasswordInDatabase(final String userName,
-			final String hashedPw) {
+    }
 
-		new LoginQuery().changePassword(userName, hashedPw);
+    private void changePasswordInDatabase(final String userName, final String hashedPw) {
 
-	}
+        new LoginQuery().changePassword(userName, hashedPw);
 
-	private String generateUserName(final String name, final String familyName) {
+    }
 
-		return familyName.substring(0, 4) + name.substring(0, 2) + "."
-				+ this.getRndNumber();
+    private String generateUserName(final String name, final String familyName) {
 
-	}
+        return familyName.substring(0, 4) + name.substring(0, 2) + "." + this.getRndNumber();
 
-	private String getRndNumber() {
+    }
 
-		return (int) (Math.random() * (10000 - 5000) + 300) + "";
-	}
+    private String getRndNumber() {
 
-	private String correctFormat(String string) {
-		string = string.trim();
-		string = string.toLowerCase();
-		string = string.substring(0, 1).toUpperCase() + string.substring(1);
-		return string;
-	}
+        return (int) (Math.random() * (10000 - 5000) + 300) + "";
+    }
+
+    private String correctFormat(String string) {
+        string = string.trim();
+        string = string.toLowerCase();
+        string = string.substring(0, 1).toUpperCase() + string.substring(1);
+        return string;
+    }
 }
