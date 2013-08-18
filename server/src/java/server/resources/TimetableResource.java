@@ -1,7 +1,6 @@
 package server.resources;
 
-import java.util.List;
-
+import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -9,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import server.entities.Timetable;
+import server.entities.TimetableLesson;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ public class TimetableResource {
 		final String json = gson.toJson(getClassTimetable(classId));
 		return json;
 	}
-	
+
 	@GET
 	@Path("room")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,7 +34,7 @@ public class TimetableResource {
 		final String json = gson.toJson(getRoomTimetable(roomId));
 		return json;
 	}
-	
+
 	@GET
 	@Path("teacher")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -45,26 +45,29 @@ public class TimetableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Timetable> getClassTimetable(int classId) {
-		return HibernateUtil
-				.getEntityManager()
-				.createNativeQuery("select * from timetable",
-						Timetable.class).getResultList();
+	public Timetable getClassTimetable(int classId) {
+		String sql = "select * from klasse_tag_stunde where idklasse = '" + classId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		Timetable timetable = new Timetable();
+		timetable.setLessons(query.getResultList());
+		return timetable;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Timetable> getRoomTimetable(int roomId) {
-		return HibernateUtil
-				.getEntityManager()
-				.createNativeQuery("select * from timetable",
-						Timetable.class).getResultList();
+	public Timetable getRoomTimetable(int roomId) {
+		String sql = "select * from klasse_tag_stunde where idRaum = '" + roomId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		Timetable timetable = new Timetable();
+		timetable.setLessons(query.getResultList());
+		return timetable;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Timetable> getTeacherTimetable(int teacherId) {
-		return HibernateUtil
-				.getEntityManager()
-				.createNativeQuery("select * from timetable",
-						Timetable.class).getResultList();
+	public Timetable getTeacherTimetable(int teacherId) {
+		String sql = "select * from klasse_tag_stunde where idLehrer = '" + teacherId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		Timetable timetable = new Timetable();
+		timetable.setLessons(query.getResultList());
+		return timetable;
 	}
 }
