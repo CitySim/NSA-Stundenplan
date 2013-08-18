@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Timetable extends DefaultEntity {
 
+	private static final long serialVersionUID = 1L;
+
 	@OneToMany
 	private List<TimetableLesson> timetableLessons;
 
@@ -18,12 +20,12 @@ public class Timetable extends DefaultEntity {
 	public void setLessons(List<TimetableLesson> lessons) {
 		this.timetableLessons = lessons;
 	}
-	
+
 	// TODO Liste initialisieren
 	public void addLesson(TimetableLesson timetableLesson) {
 		timetableLessons.add(timetableLesson);
 	}
-	
+
 	// TODO TESTEN
 	public void removeTimetableLesson(TimetableLesson timetableLesson) {
 		timetableLessons.remove(timetableLesson);

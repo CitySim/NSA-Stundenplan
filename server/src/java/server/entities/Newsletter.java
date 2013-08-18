@@ -2,7 +2,6 @@ package server.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * TODO --> Values should not be null
@@ -10,9 +9,9 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "Newsletter")
 public class Newsletter extends DefaultEntity{
 
+	private static final long serialVersionUID = 1L;
 
 	// Klasse
 	@ManyToOne(targetEntity=Form.class)
@@ -35,7 +34,5 @@ public class Newsletter extends DefaultEntity{
 
 	public void setEmail(EmailAddress email) {
 		this.email = email;
-	}
-	
-	
+	}	
 }
