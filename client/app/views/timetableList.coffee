@@ -30,7 +30,10 @@ class window.nsa.Views.TimetableList extends Backbone.View
 
 	renderList: () =>
 		if not nsa.Data[@selectedList]?
-			@fetchList()
+			nsa.app.fetchList @selectedList, (err) =>
+				return if err?
+				@renderList()
+				return
 			return
 
 		@collection = nsa.Data[@selectedList]
@@ -58,37 +61,5 @@ class window.nsa.Views.TimetableList extends Backbone.View
 
 
 		@$(".app-select-list").html(html)
-
-		return
-
-	fetchList: () =>
-		switch @selectedList
-			when "classes"
-				@collection = new nsa.Collections.Classes()
-			when "rooms"
-				@collection = new nsa.Collections.Rooms()
-			when "teachers"
-				@collection = new nsa.Collections.Teachers()
-
-		if not @collection?
-			nsa.app.error
-				no: 1001
-				title: "Fehler"
-				message: "Unbekannter Listen Typ wurde versucht zu laden (#{@selectedList})"
-			return
-
-		@collection.fetch
-			success: () =>
-				nsa.Data[@selectedList] = @collection
-				@renderList()
-				return
-			error: () =>
-				delete nsa.Data[@selectedList]
-				nsa.app.error
-					no: 1002
-					title: "Fehler"
-					message: "Fehler beim Laden der Daten"
-				
-				return
 
 		return

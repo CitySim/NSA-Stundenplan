@@ -11,7 +11,7 @@ class window.nsa.App extends Backbone.Router
 	routes:
 		""						: "home"
 		"timetable"				: "timetable"
-		"timetable/class/:id"	: "timetableDetail"
+		"timetable/:type/:id"	: "timetableDetail"
 		"replacement"			: "replacement"
 		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
@@ -22,73 +22,40 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	home: () =>
-		@lastView?.remove()
-
-		home = new nsa.Views.Home()
-		home.render()
-		home.$el.appendTo(".app-output")
-
-		@lastView = home
+		@showView(new nsa.Views.Home())
 		return
 
 	timetable: () =>
-		@lastView?.remove()
-
-		timetableList = new nsa.Views.TimetableList()
-		timetableList.render()
-		timetableList.$el.appendTo(".app-output")
-
-		@lastView = timetableList
+		@showView(new nsa.Views.TimetableList())
 		return
 
-	timetableDetail: () =>
-		@lastView?.remove()
+	timetableDetail: (type, id) =>
+		if ["room", "teacher", "class"].indexOf(type) is -1
+			@error
+				no: 2405
+				title: "Unbekannter Typ"
+				message: "Unbekannter Typ von Stundenplan (#{type})"
+			return
 
-		timetableDetail = new nsa.Views.TimetableDetail()
-		timetableDetail.render()
-		timetableDetail.$el.appendTo(".app-output")
 
-		@lastView = timetableDetail
+
+		@showView(new nsa.Views.TimetableDetail())
 		return
 
 	replacement: () =>
-		@lastView?.remove()
-
-		replacementList = new nsa.Views.ReplacementList()
-		replacementList.render()
-		replacementList.$el.appendTo(".app-output")
-
-		@lastView = replacementList
+		@showView(new nsa.Views.ReplacementList())
 		return
 
 	replacementDetails: () =>
-		@lastView?.remove()
-
-		replacementDetail = new nsa.Views.ReplacementDetail()
-		replacementDetail.render()
-		replacementDetail.$el.appendTo(".app-output")
-
-		@lastView = replacementDetail
+		@showView(new nsa.Views.ReplacementDetail())
 		return
 
 	login: () =>
-		@lastView?.remove()
-
-		loginView = new nsa.Views.Login()
-		loginView.render()
-		loginView.$el.appendTo(".app-output")
-
-		@lastView = loginView
+		@showView(new nsa.Views.Login())
 		return
 
 	about: () =>
-		@lastView?.remove()
-
-		about = new nsa.Views.About()
-		about.render()
-		about.$el.appendTo(".app-output")
-
-		@lastView = about
+		@showView(new nsa.Views.About())
 		return
 
 	errorNotFound: () =>
@@ -100,14 +67,51 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	error: (error) =>
+		@showView new nsa.Views.Error
+			error: error
+		return
+
+	showView: (view) =>
 		@lastView?.remove()
 
-		error = new nsa.Views.Error
-			error: error
-		error.render()
-		error.$el.appendTo(".app-output")
+		view.render()
+		view.$el.appendTo(".app-output")
+		
+		@lastView = view
+		return
 
-		@lastView = error
+	fetchList: (list, callback) =>
+		switch list
+			when "classes"	then collection = new nsa.Collections.Classes()
+			when "days"		then collection = new nsa.Collections.Days()
+			when "periods"	then collection = new nsa.Collections.Periods()
+			when "rooms"	then collection = new nsa.Collections.Rooms()
+			when "subjects"	then collection = new nsa.Collections.Subjects()
+			when "teachers"	then collection = new nsa.Collections.Teachers()
+
+		if not collection?
+			nsa.app.error
+				no: 1001
+				title: "Fehler"
+				message: "Unbekannter Listen Typ wurde versucht zu laden (#{list})"
+			return
+
+		collection.fetch
+			success: () =>
+				nsa.Data[list] = collection
+				callback(null, collection)
+				return
+			error: () =>
+				delete nsa.Data[list]
+				callback("error")
+
+				nsa.app.error
+					no: 1002
+					title: "Fehler"
+					message: "Fehler beim Laden der Daten"
+				
+				return
+
 		return
 
 $ () ->
