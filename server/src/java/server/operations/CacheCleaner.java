@@ -11,31 +11,30 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class CacheCleaner {
-	public void cleanCache() {
+class CacheCleaner {
 
-		final ArrayList<File> filesToDelete = new ArrayList<File>();
+    final void cleanCache() {
 
-		filesToDelete.add(new File(System.getProperty("user.home")
-				+ System.getProperty("file.separator") + "stundenplan.pdf"));
+        final ArrayList<File> filesToDelete = new ArrayList<File>();
 
-		filesToDelete.add(new File(System.getProperty("user.home")
-				+ System.getProperty("file.separator") + "stundenplan.png"));
+        filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.pdf"));
 
-		this.deleteFile(filesToDelete);
+        filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.png"));
 
-	}
+        this.deleteFile(filesToDelete);
 
-	private void deleteFile(final ArrayList<File> filesToDelete) {
+    }
 
-		for (final File file : filesToDelete) {
-			try {
-				if (!file.isDirectory()) {
-					file.delete();
-				}
-			} catch (final Exception e) {
-				// noting to do.
-			}
-		}
-	}
+    private void deleteFile(final ArrayList<File> filesToDelete) {
+
+        for (final File file : filesToDelete) {
+            try {
+                if (!file.isDirectory()) {
+                    file.delete();
+                }
+            } catch (final Exception e) {
+                // noting to do.
+            }
+        }
+    }
 }

@@ -16,37 +16,35 @@ import javax.mail.internet.MimeMultipart;
  * @version 1.0
  */
 
-public class EmailContentCreator {
+class EmailContentCreator {
 
-	public final void createMailContent(final String text,
-			final File attachement, final EmailObject emailObject) {
+    final void createMailContent(final String text, final File attachement, final EmailObject emailObject) {
 
-		try {
-			final MimeBodyPart textPart = new MimeBodyPart();
-			textPart.setText(text);
-			textPart.setDisposition(MimeBodyPart.INLINE);
-			final MimeBodyPart attachementPart = new MimeBodyPart();
+        try {
+            final MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText(text);
+            textPart.setDisposition(MimeBodyPart.INLINE);
+            final MimeBodyPart attachementPart = new MimeBodyPart();
 
-			if (attachement != null) {
-				attachementPart.setDataHandler(new DataHandler(
-						new FileDataSource(attachement)));
-				attachementPart.setFileName(attachement.getName());
-				attachementPart.setDisposition(MimeBodyPart.ATTACHMENT);
-			}
+            if (attachement != null) {
+                attachementPart.setDataHandler(new DataHandler(new FileDataSource(attachement)));
+                attachementPart.setFileName(attachement.getName());
+                attachementPart.setDisposition(MimeBodyPart.ATTACHMENT);
+            }
 
-			final MimeMultipart mailContent = new MimeMultipart();
+            final MimeMultipart mailContent = new MimeMultipart();
 
-			mailContent.addBodyPart(textPart);
+            mailContent.addBodyPart(textPart);
 
-			if (attachement != null) {
-				mailContent.addBodyPart(attachementPart);
-			}
+            if (attachement != null) {
+                mailContent.addBodyPart(attachementPart);
+            }
 
-			emailObject.setMailContent(mailContent);
+            emailObject.setMailContent(mailContent);
 
-		} catch (final MessagingException e) {
-			e.printStackTrace();
-		}
+        } catch (final MessagingException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 }

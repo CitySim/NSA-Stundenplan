@@ -8,16 +8,22 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class ScheduleCreationException extends Exception {
+public class ScheduleCreationException extends Exception implements ExceptionInterface {
 
-	int errorNumber = 1;
-	String errorTitel = "Schedule Creation Exception";
-	String errorMessage = "An error appeared while creating the schedule. Please try again later.";
+    private final int errorNumber = 1;
+    private final String errorTitel = "Schedule Creation Exception";
+    private final String errorMessage = "An error appeared while creating the schedule. Please try again later.";
 
-	private static final long serialVersionUID = -4565962119370664301L;
+    private static final long serialVersionUID = -4565962119370664301L;
 
-	public ScheduleCreationException() {
-		super();
-	}
+    public ScheduleCreationException() {
+        super();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

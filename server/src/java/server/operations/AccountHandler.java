@@ -38,7 +38,7 @@ public class AccountHandler {
 
     }
 
-    public String changePassword(final String userName) throws EmailSendingException {
+    public final String changePassword(final String userName) throws EmailSendingException {
 
         final String password = new PasswordEncryptor().generateEncryptedPassword();
 
@@ -52,7 +52,7 @@ public class AccountHandler {
         return password;
     }
 
-    public boolean deleteAccount(final String userName) {
+    public final boolean deleteAccount(final String userName) {
 
         return new LoginQuery().removeLogin(userName);
     }

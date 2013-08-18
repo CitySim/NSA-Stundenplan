@@ -13,7 +13,7 @@ import server.queries.LoginQuery;
 
 public class LoginValidator {
 
-    public Boolean validateLoginData(final String userName, final String password) throws LoginFailedException {
+    public final Boolean validateLoginData(final String userName, final String password) throws LoginFailedException {
 
         final String dbPassword = new LoginQuery().getPassword(userName);
 
@@ -31,7 +31,7 @@ public class LoginValidator {
 
     }
 
-    private final boolean validatePassword(final String password, final String dbPassword) {
+    private boolean validatePassword(final String password, final String dbPassword) {
 
         Boolean matches = false;
 

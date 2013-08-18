@@ -8,16 +8,22 @@ package server.exceptions;
  * @version 1.0
  */
 
-public class LoginFailedException extends Exception {
+public class LoginFailedException extends Exception implements ExceptionInterface {
 
-	int errorNumber = 2;
-	String errorTitel = "Login Exception";
-	String errorMessage = "An error appeared while trying to login. UserName or password was incorrect.";
+    private final int errorNumber = 2;
+    private final String errorTitel = "Login Exception";
+    private final String errorMessage = "An error appeared while trying to login. UserName or password was incorrect.";
 
-	private static final long serialVersionUID = -4565962119370664301L;
+    private static final long serialVersionUID = -4565962119370664301L;
 
-	public LoginFailedException() {
-		super();
-	}
+    public LoginFailedException() {
+        super();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        // TODO Auto-generated method stub
+
+    }
 
 }
