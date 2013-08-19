@@ -152,7 +152,7 @@ public class PersistEntityTest {
 		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery(
 				"select * from Klasse", Form.class).getResultList();
-		assertEquals(2, list.size());
+		assertTrue(list.size() > 2);
 		for (final Form current : list) {
 			final String firstName = current.getDescription();
 			assertTrue(firstName.equals("ita") || firstName.equals("itb"));

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import server.entities.TimetableLesson;
@@ -27,6 +28,7 @@ public class HibernateTimeTableTest {
 	}
 
 	// Only Testable if Database is filled with testdata from SQL Querys
+	@Ignore
 	@Test
 	public void sizeTest() {
 
