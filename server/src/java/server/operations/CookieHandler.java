@@ -1,5 +1,7 @@
 package server.operations;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.Cookie;
 
 import server.queries.CookieQuery;
@@ -14,29 +16,49 @@ import server.queries.CookieQuery;
 
 public class CookieHandler {
 
-    public final Cookie createCookie() {
+	public final Cookie createCookie() {
 
-        final String cookieID = new PasswordEncryptor().generateEncryptedPassword();
-        final Cookie cookie = new Cookie("NSA-Cookie", cookieID);
-        cookie.setValue(cookieID);
-        cookie.setMaxAge(2592000);
-        new CookieQuery().createCookie(cookieID);
+		final String cookieID = new PasswordEncryptor()
+				.generateEncryptedPassword();
+		final Cookie cookie = new Cookie("NSA-Cookie", cookieID);
+		cookie.setValue(cookieID);
+		cookie.setMaxAge(2592000);
+		new CookieQuery().createCookie(cookieID);
 
-        return cookie;
-    }
+		return cookie;
+	}
 
-    public final boolean validateCookie(final Cookie cookie) {
+	public final boolean validateCookie(final Cookie cookie) {
 
-        String cookieValue = "";
+		String cookieValue = "";
 
-        if ("NSA-Cookie".equals(cookie.getName())) {
-            cookieValue = cookie.getValue();
-        }
+		if ("NSA-Cookie".equals(cookie.getName())) {
+			cookieValue = cookie.getValue();
+		}
 
-        return new CookieQuery().existsCookie(cookieValue);
-    }
+		return new CookieQuery().existsCookie(cookieValue);
+	}
 
-    public final boolean deleteCookie(final Cookie cookie) {
-        return new CookieQuery().removeCookie(cookie.getValue());
-    }
+	public final void deleteInvalidCookies() {
+
+		final ArrayList<Cookie> cookieList = null;
+
+		for (final Cookie cookie : cookieList) {
+			if (!this.checkStillValid(cookie)) {
+				this.deleteCookie(cookie);
+			}
+		}
+
+	}
+
+	public final boolean deleteCookie(final Cookie cookie) {
+		return new CookieQuery().removeCookie(cookie.getValue());
+	}
+
+	private boolean checkStillValid(final Cookie cookie) {
+		return true;
+
+		// invalidDate für cookie aus der DB ziehen
+		// wenn erreicht return false, sonst true
+	}
 }
