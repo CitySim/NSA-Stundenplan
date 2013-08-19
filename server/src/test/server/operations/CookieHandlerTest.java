@@ -4,11 +4,8 @@ import javax.servlet.http.Cookie;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import server.operations.CookieHandler;
 
 /**
  * Test for cookie creation and validation.
@@ -35,11 +32,5 @@ public class CookieHandlerTest extends TestCase {
 		CookieHandlerTest.assertTrue(this.handler.validateCookie(this.cookie));
 		CookieHandlerTest.assertTrue(this.handler.deleteCookie(this.cookie));
 
-	}
-
-	@Test
-	@After
-	public void testCookieDeletion() {
-		CookieHandlerTest.assertTrue(this.handler.deleteCookie(this.cookie));
 	}
 }

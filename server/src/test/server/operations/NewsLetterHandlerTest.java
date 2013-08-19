@@ -1,14 +1,14 @@
 package server.operations;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.exceptions.EmailSendingException;
+import server.entities.Newsletter;
+import server.queries.NewsletterQuery;
 
 /**
  * Test for the generation of the newsLetterUrls.
@@ -20,56 +20,53 @@ import server.exceptions.EmailSendingException;
 
 public class NewsLetterHandlerTest extends TestCase {
 
-    private NewsLetterHandler handler;
+	private NewsLetterHandler handler;
 
-    private String schoolClass;
-    private String eMailAddress;
+	private String schoolClass;
+	private String eMailAddress;
+	private String url;
 
-    @Override
-    @Before
-    public void setUp() throws Exception {
-        this.handler = new NewsLetterHandler();
-        this.schoolClass = "it1a";
-        this.eMailAddress = "test@test.de";
-    }
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		this.handler = new NewsLetterHandler();
+		this.schoolClass = "it1a";
+		this.eMailAddress = "test@test.de";
+	}
 
-    @Test
-    public void testUrlCreation() {
+	@Test
+	public void testUrlCreation() {
 
-        // TODO Edit url
-        final String expectedUrl = "nsa blabla/add_" + this.eMailAddress + "_to:" + this.schoolClass;
+		// TODO Edit url
+		this.url = "nsa blabla/add_" + this.eMailAddress + "_to:"
+				+ this.schoolClass;
 
-        NewsLetterHandlerTest.assertEquals(
-                expectedUrl,
-                this.handler.generateRegistrationLink(this.schoolClass, this.eMailAddress));
-    }
+		NewsLetterHandlerTest.assertEquals(this.url, this.handler
+				.generateRegistrationLink(this.schoolClass, this.eMailAddress));
 
-    @Test
-    public void testAddressCreation() throws EmailSendingException {
+	}
 
-        boolean success = false;
+	@Test
+	public void testAddressCreation() {
 
-        try {
-            NewsLetterHandlerTest.assertTrue(this.handler.addAddress(this.eMailAddress, this.schoolClass));
-        } catch (final EmailSendingException e) {
-        }
+		this.testUrlCreation();
 
-        // TODO get List from DB
-        final ArrayList<String> newsLetterList = null;
+		boolean success = false;
 
-        for (final String emailAddress : newsLetterList) {
-            if (emailAddress.equals(this.eMailAddress)) {
-                success = true;
-            }
-        }
-        NewsLetterHandlerTest.assertEquals(true, success);
+		NewsLetterHandlerTest.assertTrue(this.handler
+				.validateConfirmation(this.url));
 
-    }
+		final List<Newsletter> newsLetterList = new NewsletterQuery()
+				.getAllNewsletters();
 
-    @After
-    @Test
-    public void testAddressRemoving() {
+		for (final Newsletter newsLetter : newsLetterList) {
+			if (newsLetter.getEmail().equals(this.eMailAddress)) {
+				success = true;
+			}
+		}
+		NewsLetterHandlerTest.assertEquals(true, success);
 
-        NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(this.eMailAddress, this.schoolClass));
-    }
+		NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(
+				this.eMailAddress, this.schoolClass));
+	}
 }

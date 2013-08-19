@@ -2,6 +2,7 @@ package server.operations;
 
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
+import server.queries.NewsletterQuery;
 
 /**
  * Used to add newsletter entries on the database. Generates URLs for confirming
@@ -14,21 +15,17 @@ import server.operations.email.EmailJobHelper;
 
 public class NewsLetterHandler {
 
-	public final boolean addAddress(final String eMailAddress,
+	public final void addAddress(final String eMailAddress,
 			final String schoolClass) throws EmailSendingException {
 
-		// TODO add address in DB
 		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
-
-		return false;
 
 	}
 
 	public final boolean removeAddress(final String eMailAddress,
 			final String schoolClass) {
 
-		// TODO remove address from DB
-		return false;
+		return new NewsletterQuery().removeEmail(eMailAddress, schoolClass);
 
 	}
 
@@ -56,7 +53,7 @@ public class NewsLetterHandler {
 		return url;
 	}
 
-	public final void validateConfirmation(final String url) {
+	public final boolean validateConfirmation(final String url) {
 
 		String eMailAddress = null;
 		String schoolClass = null;
@@ -66,16 +63,19 @@ public class NewsLetterHandler {
 			eMailAddress = url.substring(url.indexOf("_") + 1,
 					url.lastIndexOf("_"));
 			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
-			// add eMailAddress for schoolClass newsLetter on DB.
-			return;
+
+			// boolean check
+			new NewsletterQuery().addEmail(eMailAddress, schoolClass);
+			return true;
 
 		} else if (url.contains("remove")) {
 
 			eMailAddress = url.substring(url.indexOf("_") + 1,
 					url.lastIndexOf("_"));
 			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
-			// remove eMailAddress from schoolClass newsLetter on DB.
-			return;
+
+			return new NewsletterQuery().removeEmail(eMailAddress, schoolClass);
 		}
+		return false;
 	}
 }
