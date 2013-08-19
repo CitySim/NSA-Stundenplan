@@ -1,3 +1,21 @@
+For Oleg:
+
+Cookie Tabellen Erweiterung: Speichern eines Dates (InvalidFrom)
+
+Exists Cookie verändern: ich brauch den gesamtem Cookie zurück
+
+---------
+
+For Dennis:
+
+Email Server wechseln
+Logging von Fehlern in txt files (inkl. emailFehlern)
+Tests lauffähig machen
+
+
+---------
+
+
 General: Add forgot password function. (Auch im Pflichtenheft)
 
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
