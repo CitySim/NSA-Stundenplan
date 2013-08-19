@@ -35,8 +35,12 @@ public class CookieHandler {
 		if ("NSA-Cookie".equals(cookie.getName())) {
 			cookieValue = cookie.getValue();
 		}
-
-		return new CookieQuery().existsCookie(cookieValue);
+		
+		if(new CookieQuery().getCookie(cookieValue) != null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public final void deleteInvalidCookies() {

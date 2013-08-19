@@ -27,15 +27,6 @@ public class CookieQuery {
 		this.em.persist(cookie);
 		this.em.getTransaction().commit();
 	}
-
-	/**
-	 * Checks for existing Cookie
-	 * @param cookie
-	 * @return
-	 */
-	public boolean existsCookie(String cookie){
-		return getCookie(cookie) == null ? false : true;
-	}
 	
 	/**
 	 * Removes existing Cookie
@@ -60,7 +51,7 @@ public class CookieQuery {
 	 * @param cookie
 	 * @return
 	 */
-	private Cookie getCookie(String cookieString){
+	public Cookie getCookie(String cookieString){
 		Cookie cookie = (Cookie) this.em.createNativeQuery(
 				"select * from Cookie WHERE cookie ='"+cookieString+"'", Cookie.class).getSingleResult();
 		return cookie;
