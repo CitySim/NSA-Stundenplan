@@ -10,14 +10,14 @@ package server.exceptions;
 
 public class LoginFailedException extends SuperException {
 
-	private final int errorNumber = 2;
-	private final String errorTitel = "Login Exception";
-	private final String errorMessage = "An error appeared while trying to login. UserName or password was incorrect.";
+	private final static int errorNumber = 2;
+	private final static String errorTitel = "Login Exception";
+	private final static String errorMessage = "An error appeared while trying to login. UserName or password was incorrect.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public LoginFailedException() {
-		super();
+		super(errorNumber, errorTitel);
 	}
 
 }

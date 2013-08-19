@@ -10,18 +10,14 @@ package server.exceptions;
 
 public class EmailSendingException extends SuperException {
 
-	private final int errorNumber = 6;
-	private final String errorTitel = "EmailSending Exception";
-	private final String errorMessage = "An error appeared while trying to send out the E-Mail. Please check your network and firewall settings.";
+	private final static int errorNumber = 6;
+	private final static String errorTitel = "EmailSending Exception";
+	private final static String errorMessage = "An error appeared while trying to send out the E-Mail. Please check your network and firewall settings.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public EmailSendingException() {
-		super();
+		super(errorNumber, errorTitel);
 	}
 
-	@Override
-	public String showErrorMessage() {
-		return super.showErrorMessage();
-	}
 }

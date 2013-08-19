@@ -10,13 +10,13 @@ package server.exceptions;
 
 public class EmailAddressException extends SuperException {
 
-	private final int errorNumber = 5;
-	private final String errorTitel = "EmailAddress Exception";
-	private final String errorMessage = "An error appeared while trying to send out the E-Mail. The E-Mail address seems to be invalid.";
+	private final static int errorNumber = 5;
+	private final static String errorTitel = "EmailAddress Exception";
+	private final static String errorMessage = "An error appeared while trying to send out the E-Mail. The E-Mail address seems to be invalid.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public EmailAddressException() {
-		super();
+		super(errorNumber, errorTitel);
 	}
 }
