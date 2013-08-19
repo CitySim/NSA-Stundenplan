@@ -17,7 +17,7 @@ import server.queries.LoginQuery;
 public class AccountHandler {
 
     public final Login createAccount(final String name, final String familyName, final String eMailAddress)
-            throws DuplicateUserException, EmailSendingException {
+            throws DuplicateUserException {
 
         final String userName = this.generateUserName(this.correctFormat(name), this.correctFormat(familyName));
 
@@ -27,7 +27,11 @@ public class AccountHandler {
 
         this.storeUserInDatabase(userName, hashedPw, eMailAddress);
 
-        new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
+        try {
+            new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
+        } catch (final EmailSendingException e) {
+            new ExceptionLogger().logException(e);
+        }
 
         // used for tests
         final Login login = new Login();
@@ -38,7 +42,7 @@ public class AccountHandler {
 
     }
 
-    public final String changePassword(final String userName) throws EmailSendingException {
+    public final String changePassword(final String userName) {
 
         final String password = new PasswordEncryptor().generateEncryptedPassword();
 
@@ -46,9 +50,11 @@ public class AccountHandler {
 
         // final TODO getEmailAddress for final user from DB
         // final String eMailAddress = "";
-
+        // try {
         // new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName, password);
-
+        // } catch (final EmailSendingException e) {
+        // new ExceptionLogger().logException(e);
+        // }
         return password;
     }
 

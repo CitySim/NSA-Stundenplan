@@ -36,7 +36,7 @@ public class AccountHandlerTest extends TestCase {
         try {
             final Login account = this.handler.createAccount(name, familyName, eMailAddress);
             this.userName = account.getUser();
-        } catch (final EmailSendingException | DuplicateUserException e) {
+        } catch (final DuplicateUserException e) {
         }
     }
 
@@ -51,10 +51,7 @@ public class AccountHandlerTest extends TestCase {
     @Test
     public void testPasswordChange() throws EmailSendingException {
 
-        try {
-            this.password = this.handler.changePassword(this.userName);
-        } catch (final EmailSendingException e) {
-        }
+        this.password = this.handler.changePassword(this.userName);
 
         AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
 

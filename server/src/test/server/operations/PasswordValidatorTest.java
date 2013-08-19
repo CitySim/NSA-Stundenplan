@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
-import server.exceptions.EmailSendingException;
 import server.exceptions.LoginFailedException;
 
 /**
@@ -42,7 +41,7 @@ public class PasswordValidatorTest extends TestCase {
         Login account = null;
         try {
             account = this.handler.createAccount(name, familyName, eMailAddress);
-        } catch (final EmailSendingException | DuplicateUserException e) {
+        } catch (final DuplicateUserException e) {
         }
 
         final String password = account.getPassword();
