@@ -35,10 +35,10 @@ public class CookieHandler {
 		if ("NSA-Cookie".equals(cookie.getName())) {
 			cookieValue = cookie.getValue();
 		}
-		
-		if(new CookieQuery().getCookie(cookieValue) != null){
+
+		if (new CookieQuery().getCookie(cookieValue) != null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -60,6 +60,7 @@ public class CookieHandler {
 	}
 
 	private boolean checkStillValid(final Cookie cookie) {
+
 		return true;
 
 		// invalidDate für cookie aus der DB ziehen
