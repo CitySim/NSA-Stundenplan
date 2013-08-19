@@ -31,7 +31,7 @@ public class AccountHandler {
 
         // used for tests
         final Login login = new Login();
-        login.setUser(name);
+        login.setUser(userName);
         login.setPassword(password);
 
         return login;

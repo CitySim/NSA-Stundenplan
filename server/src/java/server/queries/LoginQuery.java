@@ -67,13 +67,13 @@ public class LoginQuery {
 	 */
 	public boolean removeLogin(String username){
 		Login login = getLoginUser(username);
-		if(login == null){
-			return false;
-		}else{
+		if(login != null){
 			em.getTransaction().begin();
 			em.remove(login);
 			em.getTransaction().commit();
 			return true;
+		}else{
+			return false;
 		}
 	}
 
@@ -82,12 +82,17 @@ public class LoginQuery {
 	 * @param username
 	 * @param password
 	 */
-	public void changePassword(final String username, final String password) {
+	public boolean changePassword(final String username, final String password) {
 		em.getTransaction().begin();
 		Login loginUser = getLoginUser(username);
-		loginUser.setPassword(password);
-		em.persist(loginUser);
-		em.getTransaction().commit();
+		if(loginUser != null){
+			loginUser.setPassword(password);
+			em.persist(loginUser);
+			em.getTransaction().commit();
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	private Login getLoginUser(String username) {
