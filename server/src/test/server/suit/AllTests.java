@@ -18,7 +18,7 @@ import server.webservices.JSONTest;
 @SuiteClasses({ AccountHandlerTest.class, CookieHandlerTest.class,
 		FilePrinterTest.class, NewsLetterHandlerTest.class,
 		PasswordValidatorTest.class, HibernateTest.class,
-		HibernateTimeTableTest.class, PersistEntityTest.class, JSONTest.class })
+		PersistEntityTest.class, JSONTest.class })
 public class AllTests {
 
 }
