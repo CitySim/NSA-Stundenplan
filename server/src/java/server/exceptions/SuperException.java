@@ -16,26 +16,37 @@ public class SuperException extends Exception {
 
 	private int errorNumber = 0;
 	private String errorTitel = "";
-	private final String errorMessage = "";
+	private String errorMessage = "";
 	private Date date = null;
 
-	SuperException(final int errorNumber, final String errorTitel) {
-		super();
+	SuperException(final int errorNumber, final String errorTitel,
+			final String errorMessage) {
+
 		this.errorNumber = errorNumber;
 		this.errorTitel = errorTitel;
+		this.errorMessage = errorMessage;
 		this.date = new Date();
 	}
 
 	public String createLogingMessage() {
 		final StringBuffer sb = new StringBuffer();
-		sb.append(this.errorNumber);
-		sb.append(this.errorTitel);
 		sb.append(this.date);
+		sb.append(": '");
+		sb.append(this.errorNumber);
+		sb.append("' '");
+		sb.append(this.errorTitel);
+		sb.append("'");
 		return sb.toString();
 	}
 
 	public String showErrorMessage() {
-
-		return this.errorMessage;
+		final StringBuffer sb = new StringBuffer();
+		sb.append(this.errorNumber);
+		sb.append(": '");
+		sb.append(this.errorTitel);
+		sb.append("' '");
+		sb.append(this.errorMessage);
+		sb.append("'");
+		return sb.toString();
 	}
 }

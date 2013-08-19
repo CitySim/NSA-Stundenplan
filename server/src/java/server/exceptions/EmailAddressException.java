@@ -17,6 +17,6 @@ public class EmailAddressException extends SuperException {
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public EmailAddressException() {
-		super(errorNumber, errorTitel);
+		super(errorNumber, errorTitel, errorMessage);
 	}
 }

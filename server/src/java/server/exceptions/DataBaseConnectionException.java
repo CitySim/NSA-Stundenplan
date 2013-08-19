@@ -17,7 +17,7 @@ public class DataBaseConnectionException extends SuperException {
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public DataBaseConnectionException() {
-		super(errorNumber, errorTitel);
+		super(errorNumber, errorTitel, errorMessage);
 	}
 
 }

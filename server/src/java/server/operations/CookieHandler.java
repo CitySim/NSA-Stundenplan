@@ -45,6 +45,7 @@ public class CookieHandler {
 
 	public final void deleteInvalidCookies() {
 
+		// TODO get cookieList
 		final ArrayList<Cookie> cookieList = null;
 
 		for (final Cookie cookie : cookieList) {
