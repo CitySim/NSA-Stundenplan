@@ -1,6 +1,10 @@
 package server.queries;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+
 import server.entities.Cookie;
 import server.persistence.HibernateUtil;
 
@@ -20,12 +24,13 @@ public class CookieQuery {
 	 * Creates a new Cookie
 	 * @param cookieString
 	 */
-	public void createCookie(String cookieString) {	
-		this.em.getTransaction().begin();
+	public void createCookie(String cookieString, Date date) {	
+		em.getTransaction().begin();
 		Cookie cookie = new Cookie();
 		cookie.setCookie(cookieString);
-		this.em.persist(cookie);
-		this.em.getTransaction().commit();
+		cookie.setInvalidForm(date);
+		em.persist(cookie);
+		em.getTransaction().commit();
 	}
 	
 	/**
@@ -39,11 +44,23 @@ public class CookieQuery {
 		if(cookie == null){
 			return false;
 		}else{
-			this.em.getTransaction().begin();
-			this.em.remove(cookie);
-			this.em.getTransaction().commit();
+			em.getTransaction().begin();
+			em.remove(cookie);
+			em.getTransaction().commit();
 			return true;
 		}
+	}
+	
+	public List<Cookie> getInvalidCookies(Date date){
+		@SuppressWarnings("unchecked")
+		List<Cookie> cookies = this.em.createNativeQuery(
+				"select * from Cookie WHERE invalidForm <='"+date+"'", Cookie.class).getResultList();
+		em.getTransaction().begin();
+		for (Cookie cookie : cookies) {
+			em.remove(cookie);
+		}
+		em.getTransaction().commit();
+		return cookies;
 	}
 	
 	/**
