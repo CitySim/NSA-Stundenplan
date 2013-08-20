@@ -16,85 +16,95 @@ import server.queries.LoginQuery;
 
 public class AccountHandler {
 
-    public final Login createAccount(final String name, final String familyName, final String eMailAddress)
-            throws DuplicateUserException {
+	public final Login createAccount(final String name,
+			final String familyName, final String eMailAddress)
+			throws DuplicateUserException {
 
-        final String userName = this.generateUserName(this.correctFormat(name), this.correctFormat(familyName));
+		final String userName = this.generateUserName(this.correctFormat(name),
+				this.correctFormat(familyName));
 
-        final String password = new PasswordEncryptor().generatePassword();
+		final String password = new PasswordEncryptor().generatePassword();
 
-        final String hashedPw = new PasswordEncryptor().encryptPassword(password);
+		final String hashedPw = new PasswordEncryptor()
+				.encryptPassword(password);
 
-        this.storeUserInDatabase(userName, hashedPw, eMailAddress);
+		this.storeUserInDatabase(userName, hashedPw, eMailAddress);
 
-        try {
-            new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
-        } catch (final EmailSendingException e) {
-            new ExceptionLogger().logException(e);
-        }
+		try {
+			new EmailJobHelper().sendCreationMail(eMailAddress, userName,
+					password);
+		} catch (final EmailSendingException e) {
+			new ExceptionLogger().logException(e);
+		}
 
-        // used for tests
-        final Login login = new Login();
-        login.setUser(userName);
-        login.setPassword(password);
+		// used for tests
+		final Login login = new Login();
+		login.setUser(userName);
+		login.setPassword(password);
 
-        return login;
+		return login;
 
-    }
+	}
 
-    public final String changePassword(final String userName) {
+	public final String changePassword(final String userName) {
 
-        final String password = new PasswordEncryptor().generateEncryptedPassword();
+		final String password = new PasswordEncryptor()
+				.generateEncryptedPassword();
 
-        this.changePasswordInDatabase(userName, password);
+		this.changePasswordInDatabase(userName, password);
 
-        // final TODO getEmailAddress for final user from DB
-        // final String eMailAddress = "";
-        // try {
-        // new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName, password);
-        // } catch (final EmailSendingException e) {
-        // new ExceptionLogger().logException(e);
-        // }
-        return password;
-    }
+		// final TODO getEmailAddress for final user from DB
+		// final String eMailAddress = "";
+		// try {
+		// new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
+		// password);
+		// } catch (final EmailSendingException e) {
+		// new ExceptionLogger().logException(e);
+		// }
+		return password;
+	}
 
-    public final boolean deleteAccount(final String userName) {
+	public final boolean deleteAccount(final String userName) {
 
-        return new LoginQuery().removeLogin(userName);
-    }
+		return new LoginQuery().removeLogin(userName);
+	}
 
-    private void storeUserInDatabase(final String userName, final String hashedPw, final String eMailAddress)
-            throws DuplicateUserException {
+	private void storeUserInDatabase(final String userName,
+			final String hashedPw, final String eMailAddress)
+			throws DuplicateUserException {
 
-        final boolean success = new LoginQuery().createUser(userName, hashedPw, eMailAddress);
+		final boolean success = new LoginQuery().createUser(userName, hashedPw,
+				eMailAddress);
 
-        if (!success) {
-            throw new DuplicateUserException();
-        }
+		if (!success) {
+			throw new DuplicateUserException();
+		}
 
-    }
+	}
 
-    private void changePasswordInDatabase(final String userName, final String hashedPw) {
+	private void changePasswordInDatabase(final String userName,
+			final String hashedPw) {
 
-        new LoginQuery().changePassword(userName, hashedPw);
+		new LoginQuery().changePassword(userName, hashedPw);
 
-    }
+	}
 
-    private String generateUserName(final String name, final String familyName) {
+	private String generateUserName(final String name, final String familyName) {
 
-        return familyName.substring(0, 4) + name.substring(0, 2) + "." + this.getRndNumber();
+		return familyName.substring(0, 4) + name.substring(0, 2) + "."
+				+ this.getRndNumber();
 
-    }
+	}
 
-    private String getRndNumber() {
+	private String getRndNumber() {
 
-        return (int) (Math.random() * (10000 - 5000) + 300) + "";
-    }
+		return (int) (Math.random() * (10000 - 5000) + 300) + "";
+	}
 
-    private String correctFormat(String string) {
-        string = string.trim();
-        string = string.toLowerCase();
-        string = string.substring(0, 1).toUpperCase() + string.substring(1);
-        return string;
-    }
+	private String correctFormat(String string) {
+		string = string.trim();
+		string = string.toLowerCase();
+		string = string.substring(0, 1).toUpperCase() + string.substring(1);
+		return string;
+	}
 }
