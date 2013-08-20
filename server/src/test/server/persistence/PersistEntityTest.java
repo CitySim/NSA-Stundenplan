@@ -1,6 +1,5 @@
 package server.persistence;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Time;
@@ -152,7 +151,7 @@ public class PersistEntityTest {
 		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery(
 				"select * from Klasse", Form.class).getResultList();
-		assertTrue(list.size() > 2);
+		assertTrue(list.size() >= 2);
 		for (final Form current : list) {
 			final String firstName = current.getDescription();
 			assertTrue(firstName.equals("ita") || firstName.equals("itb"));
