@@ -23,7 +23,10 @@ public class CookieHandler {
 		final Cookie cookie = new Cookie("NSA-Cookie", cookieID);
 		cookie.setValue(cookieID);
 		cookie.setMaxAge(2592000);
-		new CookieQuery().createCookie(cookieID);
+		final DateHelper dateHelper = new DateHelper();
+		dateHelper.addTime(0, 1, 0, 0, 0, 0);
+		new CookieQuery().createCookie(cookieID,
+				dateHelper.parseStringToDate(dateHelper.getFullDate()));
 
 		return cookie;
 	}
