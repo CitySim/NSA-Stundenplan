@@ -5,8 +5,7 @@ class window.nsa.Views.Login extends Backbone.View
 		"click .btn.app-login": "sendLogin"
 
 	render: () =>
-		@$el.html @template
-			dummy: 0
+		@$el.html(@template())
 
 		return
 

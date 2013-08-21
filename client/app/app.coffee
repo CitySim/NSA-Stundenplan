@@ -127,6 +127,8 @@ class window.nsa.App extends Backbone.Router
 		return
 
 $ () ->
+	nsa.Data.user = new nsa.Models.User()
+	
 	navbarView = new nsa.Views.NavBar
 		el: $(".app-navbar")
 	navbarView.render()
