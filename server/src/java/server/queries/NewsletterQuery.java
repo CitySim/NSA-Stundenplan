@@ -41,11 +41,11 @@ public class NewsletterQuery extends QueryResult {
 			teacher.setFirstname("Werner");
 			teacher.setName("Hermann");
 			teacher.setShortName("HR");
-			em.persist(teacher);
+			this.em.persist(teacher);
 			form = new Form();
 			form.setDescription("it1a");
 			form.setTeacher(teacher);
-			em.persist(form);
+			this.em.persist(form);
 		}
 		// FIXME FORM SHOULD NOOOOOOOOOOT BE HERE
 		
