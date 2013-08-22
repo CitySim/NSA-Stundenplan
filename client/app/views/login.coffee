@@ -17,12 +17,18 @@ class window.nsa.Views.Login extends Backbone.View
 				user: @$(".app-username").val()
 				password: @$(".app-password").val()
 			success: (data) =>
-				data = JSON.parse(data)
+				try
+					data = JSON.parse(data)
 
-				if not data.status
-					@$("app-alert").html(data.error).show()
-				else
-					nsa.app.navigate("admin")
+					if not data.status
+						@$("app-alert").html(data.error).show()
+					else
+						nsa.app.navigate("admin")
+				catch e
+					nsa.app.error
+						no: 2543
+						title: "Fehler bei Login"
+						message: "Es tratt ein schwerer Fehler beim Login auf<br>" + e.message
 
 				return
 
@@ -30,7 +36,7 @@ class window.nsa.Views.Login extends Backbone.View
 				nsa.app.error
 					no: 2542
 					title: "Fehler bei Login"
-					message: "Es tratt ein schwerer Fehelr beim Login auf"
+					message: "Es tratt ein schwerer Fehler beim Login auf"
 
 				return
 
