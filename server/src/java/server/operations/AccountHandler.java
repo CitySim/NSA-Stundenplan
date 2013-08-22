@@ -14,11 +14,10 @@ import server.queries.LoginQuery;
  * @version 1.0
  */
 
-public class AccountHandler {
+class AccountHandler {
 
-	public final Login createAccount(final String name,
-			final String familyName, final String eMailAddress)
-			throws DuplicateUserException {
+	final Login createAccount(final String name, final String familyName,
+			final String eMailAddress) throws DuplicateUserException {
 
 		final String userName = this.generateUserName(this.correctFormat(name),
 				this.correctFormat(familyName));
@@ -46,7 +45,7 @@ public class AccountHandler {
 
 	}
 
-	public final String changePassword(final String userName) {
+	final String changePassword(final String userName) {
 
 		final String password = new PasswordEncryptor()
 				.generateEncryptedPassword();
@@ -64,7 +63,7 @@ public class AccountHandler {
 		return password;
 	}
 
-	public final boolean deleteAccount(final String userName) {
+	final boolean deleteAccount(final String userName) {
 
 		return new LoginQuery().removeLogin(userName);
 	}

@@ -2,13 +2,9 @@ package server.queries;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
-import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
-import server.persistence.HibernateUtil;
 
 /**
  * Creates/Deletes/Checks the Cookies and inputs them into the Database
@@ -29,21 +25,21 @@ public class NewsletterQuery extends QueryResult {
 	 * @return
 	 */
 	public void addEmail(final String mail, final String schoolClass) {
-		em.getTransaction().begin();
+		this.em.getTransaction().begin();
 
 		EmailAddress email = this.getEmail(mail);
 		if (email == null) {
 			email = new EmailAddress();
 			email.setEMailAddress(mail);
-			em.persist(email);
+			this.em.persist(email);
 		}
 		final Form form = this.getForm(schoolClass);
 
 		final Newsletter newsletter = new Newsletter();
 		newsletter.setEmail(email);
 		newsletter.setForm(form);
-		em.persist(newsletter);
-		em.getTransaction().commit();
+		this.em.persist(newsletter);
+		this.em.getTransaction().commit();
 	}
 
 	/**
@@ -54,7 +50,7 @@ public class NewsletterQuery extends QueryResult {
 	 */
 	public boolean removeEmail(final String mail, final String schoolClass) {
 		// Get Newsletter where email.id = emailID und klasse.id=klasseID
-		// 
+		//
 		final List<Newsletter> newsletters = this.getAllNewsletters();
 		Newsletter singleNewsletter = null;
 		for (final Newsletter newsletter : newsletters) {
@@ -63,7 +59,7 @@ public class NewsletterQuery extends QueryResult {
 				singleNewsletter = newsletter;
 			}
 		}
-		return removeFromDB(singleNewsletter);
+		return this.removeFromDB(singleNewsletter);
 
 	}
 
@@ -74,9 +70,10 @@ public class NewsletterQuery extends QueryResult {
 	 * @return EmailAddress
 	 */
 	private EmailAddress getEmail(final String mail) {
-		return (EmailAddress) getSingleResult(em.createNativeQuery(
-				"select * from emailaddress WHERE eMailAddress ='" + mail + "'",
-				Form.class));
+		return (EmailAddress) this.getSingleResult(this.em
+				.createNativeQuery(
+						"select * from emailaddress WHERE eMailAddress ='"
+								+ mail + "'", Form.class));
 	}
 
 	/**
@@ -86,7 +83,7 @@ public class NewsletterQuery extends QueryResult {
 	 * @return Form
 	 */
 	private Form getForm(final String formString) {
-		return (Form) getSingleResult(em.createNativeQuery(
+		return (Form) this.getSingleResult(this.em.createNativeQuery(
 				"select * from Klasse WHERE bezeichnung ='" + formString + "'",
 				Form.class));
 	}

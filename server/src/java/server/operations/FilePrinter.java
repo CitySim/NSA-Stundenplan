@@ -51,7 +51,7 @@ public class FilePrinter {
 		return path;
 	}
 
-	public final String printAsPng() throws ScheduleCreationException {
+	final String printAsPng() throws ScheduleCreationException {
 		String path = "";
 		try {
 			final int width = 200, height = 200;

@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class PasswordEncryptor {
 
-	public final String generateEncryptedPassword() {
+	final String generateEncryptedPassword() {
 		return this.encryptPassword(this.generatePassword());
 	}
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import server.exceptions.ScheduleCreationException;
 
 /**
- * Servlet used for streaming the schedule pdf.
+ * Servlet used for streaming the schedule PDF.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
@@ -67,6 +67,7 @@ public class PdfStreamingServlet extends javax.servlet.http.HttpServlet
 				responseOutputStream.write(bytes);
 			}
 			fileInputStream.close();
+			new CacheCleaner().cleanCache();
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

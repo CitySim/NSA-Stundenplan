@@ -10,9 +10,9 @@ package server.exceptions;
 
 public class ScheduleCreationException extends SuperException {
 
-	private final static int errorNumber = 1;
-	private final static String errorTitel = "Schedule Creation Exception";
-	private final static String errorMessage = "An error appeared while creating the schedule. Please try again later.";
+	private static final int errorNumber = 1;
+	private static final String errorTitel = "Schedule Creation Exception";
+	private static final String errorMessage = "An error appeared while creating the schedule. Please try again later.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 

@@ -15,11 +15,11 @@ import server.exceptions.SuperException;
  * @version 1.0
  */
 
-public class ExceptionLogger {
+class ExceptionLogger {
 
-	boolean failed = false;
+	private boolean failed = false;
 
-	public boolean logException(final SuperException exception) {
+	boolean logException(final SuperException exception) {
 		final String path = System.getProperty("user.home")
 				+ System.getProperty("file.separator")
 				+ "NSA_StundenPlan_log.txt";

@@ -10,9 +10,9 @@ package server.exceptions;
 
 public class ParsingException extends SuperException {
 
-	private final static int errorNumber = 7;
-	private final static String errorTitel = "Parsing Exception";
-	private final static String errorMessage = "An error appeared while trying to parse a String to Date.";
+	private static final int errorNumber = 7;
+	private static final String errorTitel = "Parsing Exception";
+	private static final String errorMessage = "An error appeared while trying to parse a String to Date.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 
