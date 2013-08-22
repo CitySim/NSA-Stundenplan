@@ -62,6 +62,7 @@ public class ExceptionLogger {
 
 		} catch (final IOException e) {
 			this.failed = true;
+			// no way to handle an error when the error handling fails
 		}
 	}
 }

@@ -77,7 +77,9 @@ public class AccountHandler {
 				eMailAddress);
 
 		if (!success) {
-			throw new DuplicateUserException();
+			final DuplicateUserException e = new DuplicateUserException();
+			new ExceptionLogger().logException(e);
+			throw e;
 		}
 
 	}

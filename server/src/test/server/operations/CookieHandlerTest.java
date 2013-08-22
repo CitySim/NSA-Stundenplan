@@ -1,11 +1,15 @@
 package server.operations;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import server.queries.CookieQuery;
 
 /**
  * Test for cookie creation and validation.
@@ -18,7 +22,6 @@ import org.junit.Test;
 public class CookieHandlerTest extends TestCase {
 
 	private CookieHandler handler;
-	private Cookie cookie;
 
 	@Override
 	@Before
@@ -28,9 +31,26 @@ public class CookieHandlerTest extends TestCase {
 
 	@Test
 	public void testCookieCreation() {
-		this.cookie = this.handler.createCookie();
-		CookieHandlerTest.assertTrue(this.handler.validateCookie(this.cookie));
-		CookieHandlerTest.assertTrue(this.handler.deleteCookie(this.cookie));
+		final Cookie cookie = this.handler.createCookie();
+		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
+		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
+	}
+
+	@Test
+	public void testInvalidCookie() {
+
+		final CookieQuery query = new CookieQuery();
+
+		final String cookieID = new PasswordEncryptor()
+				.generateEncryptedPassword();
+		final DateHelper dateHelper = new DateHelper();
+		dateHelper.addTime(0, 0, 0, 0, -10, 0);
+		query.createCookie(cookieID,
+				dateHelper.parseStringToDate(dateHelper.getFullDate()));
+		CookieHandlerTest.assertNotNull(query.getCookie(cookieID));
+
+		query.removeInvalidCookies(new Date());
+		CookieHandlerTest.assertNull(query.getCookie(cookieID));
 
 	}
 }

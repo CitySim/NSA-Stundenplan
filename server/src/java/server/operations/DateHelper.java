@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import server.exceptions.ParsingException;
+
 /**
  * Used to get the current Date or to parse Strings to Date objects.
  * 
@@ -67,7 +69,8 @@ public class DateHelper {
 		try {
 			return new SimpleDateFormat("dd.MM.yyyy").parse(dateString);
 		} catch (final ParseException e) {
-			e.printStackTrace();
+			final ParsingException e2 = new ParsingException();
+			new ExceptionLogger().logException(e2);
 		}
 		return null;
 
