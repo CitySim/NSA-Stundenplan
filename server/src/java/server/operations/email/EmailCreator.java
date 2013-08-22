@@ -40,7 +40,7 @@ class EmailCreator {
 
 	}
 
-	final ArrayList<EmailObject> createEmailObjects(final Timetable entityList)
+	final ArrayList<EmailObject> createEmailObjects(final Timetable timeTable)
 			throws ScheduleCreationException {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
@@ -53,7 +53,7 @@ class EmailCreator {
 
 		final String emailText = new EmailTextCreator()
 				.generateScheduleChangeText();
-		final File file = new File(new FilePrinter().printAsPDF());
+		final File file = new FilePrinter().printAsPDF(timeTable);
 
 		new EmailContentCreator().createMailContent(emailText, file,
 				emailObject);

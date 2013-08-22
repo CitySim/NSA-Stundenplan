@@ -4,11 +4,6 @@ import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-
-import server.exceptions.ScheduleCreationException;
-import server.operations.CacheCleaner;
-import server.operations.FilePrinter;
 
 /**
  * Test for cookie creation and validation.
@@ -30,23 +25,23 @@ public class FilePrinterTest extends TestCase {
 		this.cleaner = new CacheCleaner();
 	}
 
-	@Test
-	public void testprintAsPDF() {
-		try {
-			FilePrinterTest.assertNotNull(this.printer.printAsPDF());
-		} catch (final ScheduleCreationException e) {
-			FilePrinterTest.fail();
-		}
-	}
-
-	@Test
-	public void testprintAsPNG() {
-		try {
-			FilePrinterTest.assertNotNull(this.printer.printAsPng());
-		} catch (final ScheduleCreationException e) {
-			FilePrinterTest.fail();
-		}
-	}
+	// @Test
+	// public void testprintAsPDF() {
+	// try {
+	// FilePrinterTest.assertNotNull(this.printer.printAsPDF());
+	// } catch (final ScheduleCreationException e) {
+	// FilePrinterTest.fail();
+	// }
+	// }
+	//
+	// @Test
+	// public void testprintAsPNG() {
+	// try {
+	// FilePrinterTest.assertNotNull(this.printer.printAsPng());
+	// } catch (final ScheduleCreationException e) {
+	// FilePrinterTest.fail();
+	// }
+	// }
 
 	@After
 	public void cleanUpTestData() {

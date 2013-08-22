@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import server.entities.Timetable;
 import server.exceptions.ScheduleCreationException;
 
 import com.itextpdf.text.Document;
@@ -29,29 +30,29 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FilePrinter {
 
-	public final String printAsPDF() throws ScheduleCreationException {
+	public final File printAsPDF(final Timetable timeTable)
+			throws ScheduleCreationException {
 		final Document document = new Document();
 		String path = null;
 		try {
 
 			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator") + "stundenplan.pdf";
+					+ System.getProperty("file.separator") + "timeTable.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			document.add(new Paragraph(this.createText()));
+			document.add(new Paragraph(this.createText(timeTable)));
 			document.close();
-
-			new File(path);
 
 		} catch (final FileNotFoundException | DocumentException e) {
 			final ScheduleCreationException e2 = new ScheduleCreationException();
 			new ExceptionLogger().logException(e2);
 			throw e2;
 		}
-		return path;
+		return new File(path);
 	}
 
-	final String printAsPng() throws ScheduleCreationException {
+	public final File printAsPng(final Timetable timeTable)
+			throws ScheduleCreationException {
 		String path = "";
 		try {
 			final int width = 200, height = 200;
@@ -63,7 +64,7 @@ public class FilePrinter {
 
 			final Font font = new Font("TimesRoman", Font.BOLD, 20);
 			ig2.setFont(font);
-			final String message = this.createText();
+			final String message = this.createText(timeTable);
 			final FontMetrics fontMetrics = ig2.getFontMetrics();
 			final int stringWidth = fontMetrics.stringWidth(message);
 			final int stringHeight = fontMetrics.getAscent();
@@ -72,7 +73,7 @@ public class FilePrinter {
 					+ stringHeight / 4);
 
 			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator") + "stundenplan.png";
+					+ System.getProperty("file.separator") + "timeTable.png";
 
 			ImageIO.write(image, "PNG", new File(path));
 
@@ -81,13 +82,13 @@ public class FilePrinter {
 			new ExceptionLogger().logException(e2);
 			throw e2;
 		}
-		return path;
+		return new File(path);
 
 	}
 
-	private String createText() {
+	private String createText(final Timetable timeTable) {
 
-		// TODO get Stundenplan
+		// TODO fill file with timeTable data.
 		return "Test";
 	}
 
