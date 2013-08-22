@@ -1,5 +1,6 @@
 package server.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -17,7 +18,7 @@ public class Newsletter extends DefaultEntity{
 	@ManyToOne(targetEntity=Form.class)
 	private Form form;
 
-	@ManyToOne(targetEntity=EmailAddress.class)
+	@ManyToOne(targetEntity=EmailAddress.class, cascade=CascadeType.REMOVE)
 	private EmailAddress email;
 
 	public Form getForm() {

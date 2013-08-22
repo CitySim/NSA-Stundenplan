@@ -3,6 +3,8 @@ For Oleg:
 Methode um alle Cookies zu löschen deren Ablaufdatum vor dem angegebenen Datum ist.
 
 Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
+Auch bind Parameters!
+http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
 ---------
 
 For Dennis:
