@@ -38,7 +38,7 @@ module.exports = (grunt) ->
 					sourceMap: "build/libs.js.map"
 					sourceMappingURL: "libs.js.map"
 				files:
-					"build/libs.js": [ "libs/jquery-2.0.3.js", "libs/bootstrap.js", "libs/underscore.js", "libs/backbone.js", "libs/handlebars.js" ]
+					"build/libs.js": [ "libs/moment.js", "libs/jquery-2.0.3.js", "libs/bootstrap.js", "libs/underscore.js", "libs/backbone.js", "libs/handlebars.js" ]
 
 		cssmin:
 			combine:
