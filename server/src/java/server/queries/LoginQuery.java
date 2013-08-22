@@ -13,10 +13,9 @@ import server.persistence.HibernateUtil;
  *
  */
 public class LoginQuery extends QueryResult{
-	private final EntityManager em;
 
 	public LoginQuery() {
-		this.em = HibernateUtil.getEntityManager();
+		super();
 	}
 
 	/**
@@ -67,14 +66,8 @@ public class LoginQuery extends QueryResult{
 	 */
 	public boolean removeLogin(String username){
 		Login login = getLoginUser(username);
-		if(login != null){
-			em.getTransaction().begin();
-			em.remove(login);
-			em.getTransaction().commit();
-			return true;
-		}else{
-			return false;
-		}
+		return removeFromDB(login);
+
 	}
 
 	/**
@@ -95,16 +88,10 @@ public class LoginQuery extends QueryResult{
 		}
 	}
 	
-	private Login getLoginUser(String username) {
-		Login login = null;
-		try {
-			login = em.createQuery(
+	private Login getLoginUser(String username) {	
+		return (Login) getSingleResult(em.createQuery(
 				"select l from Login l where user = '" + username + "'",
-				Login.class).getSingleResult();}
-		catch (NoResultException e){
-			
-		}
-		return login;
+				Login.class));
 	}
 	
 }

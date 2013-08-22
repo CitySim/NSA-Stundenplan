@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
@@ -16,10 +17,9 @@ import server.persistence.HibernateUtil;
  * 
  */
 public class NewsletterQuery extends QueryResult {
-	private final EntityManager em;
 
 	public NewsletterQuery() {
-		this.em = HibernateUtil.getEntityManager();
+		super();
 	}
 
 	/**
@@ -61,46 +61,38 @@ public class NewsletterQuery extends QueryResult {
 				singleNewsletter = newsletter;
 			}
 		}
-		if (singleNewsletter == null) {
-			return false;
-		} else {
-			em.getTransaction().begin();
-			em.remove(singleNewsletter);
-			em.getTransaction().commit();
-			return true;
-		}
+		return removeFromDB(singleNewsletter);
+
 	}
 
 	/**
-	 * Gets existing Email adress
+	 * Gets existing Email address
 	 * 
 	 * @param formString
-	 * @return
+	 * @return EmailAddress
 	 */
 	private EmailAddress getEmail(final String mail) {
-		final EmailAddress email = (EmailAddress) this.em.createNativeQuery(
+		return (EmailAddress) getSingleResult(em.createNativeQuery(
 				"select * from emailaddress WHERE eMailAddress ='" + mail + "'",
-				Form.class).getSingleResult();
-		return email;
+				Form.class));
 	}
 
 	/**
 	 * Gets the existing schoolClass
 	 * 
 	 * @param formString
-	 * @return
+	 * @return Form
 	 */
 	private Form getForm(final String formString) {
-		final Form form = (Form) this.em.createNativeQuery(
+		return (Form) getSingleResult(em.createNativeQuery(
 				"select * from Klasse WHERE bezeichnung ='" + formString + "'",
-				Form.class).getSingleResult();
-		return form;
+				Form.class));
 	}
 
 	/**
 	 * Gets the full Newsletterlist
 	 * 
-	 * @return
+	 * @return List<Newsletter>
 	 */
 	public List<Newsletter> getAllNewsletters() {
 		@SuppressWarnings("unchecked")

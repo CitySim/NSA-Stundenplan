@@ -16,10 +16,9 @@ import server.persistence.HibernateUtil;
  * 
  */
 public class CookieQuery extends QueryResult {
-	private final EntityManager em;
 
 	public CookieQuery() {
-		this.em = HibernateUtil.getEntityManager();
+		super();
 	}
 
 	/**
@@ -28,12 +27,12 @@ public class CookieQuery extends QueryResult {
 	 * @param cookieString
 	 */
 	public void createCookie(final String cookieString, final Date date) {
-		this.em.getTransaction().begin();
+		em.getTransaction().begin();
 		final Cookie cookie = new Cookie();
 		cookie.setCookie(cookieString);
 		cookie.setInvalidForm(date);
-		this.em.persist(cookie);
-		this.em.getTransaction().commit();
+		em.persist(cookie);
+		em.getTransaction().commit();
 	}
 
 	/**
@@ -44,15 +43,7 @@ public class CookieQuery extends QueryResult {
 	 */
 	public boolean removeCookie(final String cookieString) {
 		final Cookie cookie = this.getCookie(cookieString);
-
-		if (cookie == null) {
-			return false;
-		} else {
-			this.em.getTransaction().begin();
-			this.em.remove(cookie);
-			this.em.getTransaction().commit();
-			return true;
-		}
+		return removeFromDB(cookie);
 	}
 
 	public void removeInvalidCookies(final Date date) {
@@ -60,12 +51,13 @@ public class CookieQuery extends QueryResult {
 		final List<Cookie> cookies = this.em.createNativeQuery(
 				"select * from Cookie WHERE invalidForm <='" + date + "'",
 				Cookie.class).getResultList();
-
-		this.em.getTransaction().begin();
-		for (final Cookie cookie : cookies) {
-			this.em.remove(cookie);
+		if(cookies.size() != 0){
+			em.getTransaction().begin();
+			for (final Cookie cookie : cookies) {
+				em.remove(cookie);
+			}
+			em.getTransaction().commit();
 		}
-		this.em.getTransaction().commit();
 	}
 
 	/**
