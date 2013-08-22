@@ -1,16 +1,12 @@
 For Oleg:
 
-Cookie Tabellen Erweiterung: Speichern eines Dates (InvalidFrom)
+Methode um alle Cookies zu löschen deren Ablaufdatum vor dem angegebenen Datum ist.
 
-Exists Cookie verändern: ich brauch den gesamtem Cookie zurück
-
-Methode um alle Cookies zu erhalten deren Ablaufdatum vor dem angegebenen Datum ist.
-
+Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
 ---------
 
 For Dennis:
 
-CookieDeletion
 Email Server wechseln
 
 ---------

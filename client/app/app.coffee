@@ -37,8 +37,6 @@ class window.nsa.App extends Backbone.Router
 				message: "Unbekannter Typ von Stundenplan (#{type})"
 			return
 
-
-
 		@showView(new nsa.Views.TimetableDetail())
 		return
 
@@ -80,6 +78,20 @@ class window.nsa.App extends Backbone.Router
 		@lastView = view
 		return
 
+	fetchLists: (lists, callback) =>
+		if lists.length is 0
+			callback(null)
+			return
+
+		@fetchList lists[0], (err) =>
+			if err?
+				callback(err)
+				return
+
+			@fetchLists(lists.splice(1), callback)
+			return
+		return
+
 	fetchList: (list, callback) =>
 		switch list
 			when "classes"	then collection = new nsa.Collections.Classes()
@@ -108,13 +120,15 @@ class window.nsa.App extends Backbone.Router
 				nsa.app.error
 					no: 1002
 					title: "Fehler"
-					message: "Fehler beim Laden der Daten"
+					message: "Fehler beim Laden der Daten (#{list})"
 				
 				return
 
 		return
 
 $ () ->
+	nsa.Data.user = new nsa.Models.User()
+	
 	navbarView = new nsa.Views.NavBar
 		el: $(".app-navbar")
 	navbarView.render()

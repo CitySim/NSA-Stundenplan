@@ -1,6 +1,6 @@
 package server.operations;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.Cookie;
 
@@ -48,26 +48,11 @@ public class CookieHandler {
 
 	public final void deleteInvalidCookies() {
 
-		// TODO get cookieList
-		final ArrayList<Cookie> cookieList = null;
-
-		for (final Cookie cookie : cookieList) {
-			if (!this.checkStillValid(cookie)) {
-				this.deleteCookie(cookie);
-			}
-		}
+		new CookieQuery().removeInvalidCookies(new Date());
 
 	}
 
 	public final boolean deleteCookie(final Cookie cookie) {
 		return new CookieQuery().removeCookie(cookie.getValue());
-	}
-
-	private boolean checkStillValid(final Cookie cookie) {
-
-		return true;
-
-		// invalidDate für cookie aus der DB ziehen
-		// wenn erreicht return false, sonst true
 	}
 }

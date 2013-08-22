@@ -4,73 +4,72 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.AbstractQuery;
 
 import server.entities.Cookie;
 import server.persistence.HibernateUtil;
 
 /**
  * Creates/Deletes/Checks the Cookies and inputs them into the Database
+ * 
  * @author oleg.scheltow
- *
+ * 
  */
-public class CookieQuery {
-	private final EntityManager em;
+public class CookieQuery extends QueryResult {
 
 	public CookieQuery() {
-		this.em = HibernateUtil.getEntityManager();
+		super();
 	}
 
 	/**
 	 * Creates a new Cookie
+	 * 
 	 * @param cookieString
 	 */
-	public void createCookie(String cookieString, Date date) {	
+	public void createCookie(final String cookieString, final Date date) {
 		em.getTransaction().begin();
-		Cookie cookie = new Cookie();
+		final Cookie cookie = new Cookie();
 		cookie.setCookie(cookieString);
 		cookie.setInvalidForm(date);
 		em.persist(cookie);
 		em.getTransaction().commit();
 	}
-	
+
 	/**
 	 * Removes existing Cookie
+	 * 
 	 * @param cookieString
 	 * @return
 	 */
-	public boolean removeCookie(String cookieString){
-		Cookie cookie = getCookie(cookieString);
-		
-		if(cookie == null){
-			return false;
-		}else{
-			em.getTransaction().begin();
-			em.remove(cookie);
-			em.getTransaction().commit();
-			return true;
-		}
+	public boolean removeCookie(final String cookieString) {
+		final Cookie cookie = this.getCookie(cookieString);
+		return removeFromDB(cookie);
 	}
-	
-	public List<Cookie> getInvalidCookies(Date date){
+
+	public void removeInvalidCookies(final Date date) {
 		@SuppressWarnings("unchecked")
-		List<Cookie> cookies = this.em.createNativeQuery(
-				"select * from Cookie WHERE invalidForm <='"+date+"'", Cookie.class).getResultList();
-		em.getTransaction().begin();
-		for (Cookie cookie : cookies) {
-			em.remove(cookie);
+		final List<Cookie> cookies = this.em.createNativeQuery(
+				"select * from Cookie WHERE invalidForm <='" + date + "'",
+				Cookie.class).getResultList();
+		if(cookies.size() != 0){
+			em.getTransaction().begin();
+			for (final Cookie cookie : cookies) {
+				em.remove(cookie);
+			}
+			em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
-		return cookies;
 	}
-	
+
 	/**
 	 * Get the specified Cookie
+	 * 
 	 * @param cookie
 	 * @return
 	 */
-	public Cookie getCookie(String cookieString){
-		Cookie cookie = (Cookie) this.em.createNativeQuery(
-				"select * from Cookie WHERE cookie ='"+cookieString+"'", Cookie.class).getSingleResult();
-		return cookie;
+	public Cookie getCookie(final String cookieString) {
+		return (Cookie) getSingleResult(em.createNativeQuery(
+				"select * from Cookie WHERE cookie ='" + cookieString + "'",
+				Cookie.class));
 	}
+
 }
