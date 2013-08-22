@@ -60,7 +60,8 @@ public class NewsLetterHandlerTest extends TestCase {
 				.getAllNewsletters();
 
 		for (final Newsletter newsLetter : newsLetterList) {
-			if (newsLetter.getEmail().getEMailAddress().equals(this.eMailAddress)) {
+			if (newsLetter.getEmail().getEMailAddress()
+					.equals(this.eMailAddress)) {
 				success = true;
 			}
 		}
