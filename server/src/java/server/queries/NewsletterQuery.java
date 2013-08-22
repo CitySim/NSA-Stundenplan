@@ -53,6 +53,8 @@ public class NewsletterQuery extends QueryResult {
 	 * @return
 	 */
 	public boolean removeEmail(final String mail, final String schoolClass) {
+		// Get Newsletter where email.id = emailID und klasse.id=klasseID
+		// 
 		final List<Newsletter> newsletters = this.getAllNewsletters();
 		Newsletter singleNewsletter = null;
 		for (final Newsletter newsletter : newsletters) {
