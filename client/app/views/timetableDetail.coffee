@@ -5,7 +5,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 	loading: true
 
 	initialize: () =>
-		nsa.app.fetchLists ["classes", "days", "periods", "rooms", "subjects", "teachers"], (err) =>
+		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
 			return if err?
 
 			@loading = false
@@ -20,6 +20,6 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			return
 			
 		@$el.html @template
-			collection: @collection.toJSON()
+			collection: null #@collection.toJSON()
 
 		return

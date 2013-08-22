@@ -96,7 +96,7 @@ class window.nsa.App extends Backbone.Router
 		switch list
 			when "classes"	then collection = new nsa.Collections.Classes()
 			when "days"		then collection = new nsa.Collections.Days()
-			when "periods"	then collection = new nsa.Collections.Periods()
+			when "lessons"	then collection = new nsa.Collections.Lessons()
 			when "rooms"	then collection = new nsa.Collections.Rooms()
 			when "subjects"	then collection = new nsa.Collections.Subjects()
 			when "teachers"	then collection = new nsa.Collections.Teachers()

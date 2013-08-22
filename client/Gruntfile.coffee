@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 				tasks: [ "handlebars" ]
 			css:
 				files: [ "css/*.css" ]
-				tasks: [ "copy" ]
+				tasks: [ "cssmin" ]
 			static:
 				files:[ "index.html", "libs/*.js" ]
 				tasks: [ "copy" ]
@@ -48,7 +48,7 @@ module.exports = (grunt) ->
 		copy:
 			static:
 				expand: true
-				src: [ "style.css", "index.html", "libs/*.js", "font/*.*" ]
+				src: [ "index.html", "libs/*.js", "font/*.*" ]
 				dest: "build/"
 				
 	grunt.loadNpmTasks("grunt-contrib-uglify")
