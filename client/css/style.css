@@ -26,7 +26,23 @@ body {
 	border-radius: 8px;
 }
 
+/* Main Page */
+
+.news:after {
+	content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('https://i.imgur.com/D8lkXuu.gif');
+    background-repeat: no-repeat;
+    width: 500;
+    height: 500;
+    opacity : 0.2;
+}
+
 /* Stundenplan */
+
 
 .stundenplan {
 	border-top: none;
