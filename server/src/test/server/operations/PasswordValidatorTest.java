@@ -20,44 +20,46 @@ import server.exceptions.LoginFailedException;
 
 public class PasswordValidatorTest extends TestCase {
 
-    private LoginValidator validator;
-    private AccountHandler handler;
-    private String userName;
+	private LoginValidator validator;
+	private AccountHandler handler;
+	private String userName;
 
-    @Override
-    @Before
-    public void setUp() throws Exception {
-        this.validator = new LoginValidator();
-        this.handler = new AccountHandler();
-    }
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		this.validator = new LoginValidator();
+		this.handler = new AccountHandler();
+	}
 
-    @Test
-    public void testPasswordValidation() {
+	@Test
+	public void testPasswordValidation() {
 
-        final String name = "Dennis";
-        final String familyName = "Markmann";
-        final String eMailAddress = "test@test.de";
+		final String name = "Dennis";
+		final String familyName = "Markmann";
+		final String eMailAddress = "test@test.de";
 
-        Login account = null;
-        try {
-            account = this.handler.createAccount(name, familyName, eMailAddress);
-        } catch (final DuplicateUserException e) {
-        }
+		Login account = null;
+		try {
+			account = this.handler
+					.createAccount(name, familyName, eMailAddress);
+		} catch (final DuplicateUserException e) {
+		}
 
-        final String password = account.getPassword();
-        this.userName = account.getUser();
+		final String password = account.getPassword();
+		this.userName = account.getUser();
 
-        try {
-            PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));
-        } catch (final LoginFailedException e) {
-            PasswordValidatorTest.fail();
-        }
+		try {
+			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(
+					this.userName, password));
+		} catch (final LoginFailedException e) {
+			PasswordValidatorTest.fail();
+		}
 
-    }
+	}
 
-    @Test
-    @After
-    public void cleanUpTestData() {
-        this.handler.deleteAccount(this.userName);
-    }
+	@Test
+	@After
+	public void cleanUpTestData() {
+		this.handler.deleteAccount(this.userName);
+	}
 }

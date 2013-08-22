@@ -10,14 +10,13 @@ package server.exceptions;
 
 public class DataBaseConnectionException extends SuperException {
 
-	private final static int errorNumber = 3;
-	private final static String errorTitel = "DataBaseConnection Exception";
-	private final static String errorMessage = "An error appeared while connecting to the database. Please check your network settings and firewall.";
+	private static final int errorNumber = 3;
+	private static final String errorTitel = "DataBaseConnection Exception";
+	private static final String errorMessage = "An error appeared while connecting to the database. Please check your network settings and firewall.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 
 	public DataBaseConnectionException() {
 		super(errorNumber, errorTitel, errorMessage);
 	}
-
 }

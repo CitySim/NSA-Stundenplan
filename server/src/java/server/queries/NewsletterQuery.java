@@ -2,14 +2,10 @@ package server.queries;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
-import server.entities.Cookie;
 import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
 import server.entities.Teacher;
-import server.persistence.HibernateUtil;
 
 /**
  * Creates/Deletes/Checks the Cookies and inputs them into the Database
@@ -30,13 +26,13 @@ public class NewsletterQuery extends QueryResult {
 	 * @return
 	 */
 	public void addEmail(final String mail, final String schoolClass) {
-		em.getTransaction().begin();
+		this.em.getTransaction().begin();
 
 		EmailAddress email = this.getEmail(mail);
 		if (email == null) {
 			email = new EmailAddress();
 			email.setEMailAddress(mail);
-			em.persist(email);
+			this.em.persist(email);
 		}
 		Form form = this.getForm(schoolClass);
 		// FIXME
@@ -56,8 +52,8 @@ public class NewsletterQuery extends QueryResult {
 		final Newsletter newsletter = new Newsletter();
 		newsletter.setEmail(email);
 		newsletter.setForm(form);
-		em.persist(newsletter);
-		em.getTransaction().commit();
+		this.em.persist(newsletter);
+		this.em.getTransaction().commit();
 	}
 
 	/**
@@ -67,14 +63,6 @@ public class NewsletterQuery extends QueryResult {
 	 * @return
 	 */
 	public boolean removeEmail(final String mail, final String formString) {
-//		final List<Newsletter> newsletters = this.getAllNewsletters();
-//		Newsletter singleNewsletter = null;
-//		for (final Newsletter newsletter : newsletters) {
-//			if (newsletter.getEmail().getEMailAddress() == getEmail(mail).getEMailAddress()
-//					&& newsletter.getForm().getDescription() == getForm(formString).getDescription()) {
-//				singleNewsletter = newsletter;
-//			}
-//		}
 		EmailAddress email= getEmail(mail);
 		Form form = getForm(formString);
 		
@@ -85,6 +73,7 @@ public class NewsletterQuery extends QueryResult {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Gets existing Email address
@@ -105,7 +94,7 @@ public class NewsletterQuery extends QueryResult {
 	 * @return Form
 	 */
 	private Form getForm(final String formString) {
-		return (Form) getSingleResult(em.createNativeQuery(
+		return (Form) this.getSingleResult(this.em.createNativeQuery(
 				"select * from Klasse WHERE bezeichnung ='" + formString + "'",
 				Form.class));
 	}
