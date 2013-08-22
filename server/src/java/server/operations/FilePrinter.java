@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import server.entities.Timetable;
+import server.entities.TimetableLesson;
 import server.exceptions.ScheduleCreationException;
 
 import com.itextpdf.text.Document;
@@ -88,8 +89,12 @@ public class FilePrinter {
 
 	private String createText(final Timetable timeTable) {
 
-		// TODO fill file with timeTable data.
-		return "Test";
-	}
+		final StringBuilder sb = new StringBuilder();
 
+		for (final TimetableLesson lesson : timeTable.getLessons()) {
+			sb.append(lesson.getRoom());
+		}
+		// TODO fill file with timeTable data.
+		return sb.toString();
+	}
 }
