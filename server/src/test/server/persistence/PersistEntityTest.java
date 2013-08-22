@@ -32,86 +32,86 @@ public class PersistEntityTest {
 
 	@Before
 	public void init() {
-		this.em = HibernateUtil.getEntityManager();
+		em = HibernateUtil.getEntityManager();
 	}
 
 	@After
 	public void cleanup() {
-		this.em.close();
+		em.close();
 	}
-	
+
 	@Test
 	public void entityManagerTest() {
-		
-		this.em.getTransaction().begin();
-		
-		Teacher teacher1 = new Teacher();
+
+		em.getTransaction().begin();
+
+		final Teacher teacher1 = new Teacher();
 		teacher1.setFirstname("Hans");
 		teacher1.setName("Wurst");
 		teacher1.setShortName("WUHA");
 		em.persist(teacher1);
-		
+
 		final Form form1 = new Form();
 		form1.setDescription("ita");
 		form1.setTeacher(teacher1);
-		this.em.persist(form1);
-		
-		Teacher teacher2 = new Teacher();
+		em.persist(form1);
+
+		final Teacher teacher2 = new Teacher();
 		teacher2.setFirstname("Gesinde");
 		teacher2.setName("Hammel");
 		teacher2.setShortName("HaGe");
 		em.persist(teacher2);
-		
+
 		final Form form2 = new Form();
 		form2.setTeacher(teacher2);
 		form2.setDescription("itb");
-		this.em.persist(form2);
-		
-		Room room1 = new Room();
+		em.persist(form2);
+
+		final Room room1 = new Room();
 		room1.setDescription("raum53");
 		em.persist(room1);
-		
-		Room room2 = new Room();
+
+		final Room room2 = new Room();
 		room2.setDescription("raum53");
 		em.persist(room2);
-		
-		Lesson lesson1 = new Lesson();
+
+		final Lesson lesson1 = new Lesson();
 		lesson1.setTimeFrom(Time.valueOf("10:00:00"));
 		lesson1.setTimeTo(Time.valueOf("10:45:00"));
 		em.persist(lesson1);
-		
-		Lesson lesson2 = new Lesson();
+
+		final Lesson lesson2 = new Lesson();
 		lesson2.setTimeFrom(Time.valueOf("10:45:00"));
 		lesson2.setTimeTo(Time.valueOf("11:30:00"));
 		em.persist(lesson2);
-		
-		Subject subject1 = new Subject();
+
+		final Subject subject1 = new Subject();
 		subject1.setDescription("Biologie");
 		subject1.setShortName("Bio");
 		em.persist(subject1);
-		
-		Subject subject2 = new Subject();
+
+		final Subject subject2 = new Subject();
 		subject2.setDescription("System Gammelierung");
 		subject2.setShortName("SYSGAM");
 		em.persist(subject2);
-		
-		Day day1 = new Day();
+
+		final Day day1 = new Day();
 		day1.setDescription("Montag");
 		em.persist(day1);
-		
-		Day day2 = new Day();
+
+		final Day day2 = new Day();
 		day2.setDescription("Dienstag");
 		em.persist(day2);
-		
-		TimetableLesson timetableLesson1 = new TimetableLesson();
+
+		final TimetableLesson timetableLesson1 = new TimetableLesson();
 		timetableLesson1.setForm(form1);
 		timetableLesson1.setTeacher(teacher1);
 		timetableLesson1.setRoom(room1);
 		timetableLesson1.setLesson(lesson1);
 		timetableLesson1.setDay(day1);
 		timetableLesson1.setSubject(subject1);
-		
-		TimetableLesson timetableLesson2 = new TimetableLesson();
+
+		final TimetableLesson timetableLesson2 = new TimetableLesson();
 		timetableLesson2.setForm(form1);
 		timetableLesson2.setTeacher(teacher2);
 		timetableLesson2.setRoom(room2);
@@ -119,39 +119,39 @@ public class PersistEntityTest {
 		timetableLesson2.setDay(day1);
 		timetableLesson2.setSubject(subject2);
 		em.persist(timetableLesson2);
-		
-		List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
+
+		final List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
 		timetableLessons.add(timetableLesson1);
 		timetableLessons.add(timetableLesson2);
-				
-		Timetable timetable1 = new Timetable();
+
+		final Timetable timetable1 = new Timetable();
 		timetable1.setLessons(timetableLessons);
 		em.persist(timetable1);
-		
-		EmailAddress email = new EmailAddress();
+
+		final EmailAddress email = new EmailAddress();
 		email.setEMailAddress("hans@wurst.de");
 		em.persist(email);
-			
-		Login login1 = new Login();
+
+		final Login login1 = new Login();
 		login1.setEmail(email);
-		login1.setPassword(new PasswordEncryptor().encryptPassword("test"));		
+		login1.setPassword(new PasswordEncryptor().encryptPassword("test"));
 		login1.setUser("Hans");
 		em.persist(login1);
-		
-		Replacement replacement1 = new Replacement();
+
+		final Replacement replacement1 = new Replacement();
 		replacement1.setDate(Calendar.getInstance().getTime());
 		replacement1.setRoom(room1);
 		replacement1.setTeacher(teacher1);
 		replacement1.setForm(form1);
 		em.persist(replacement1);
-		
+
 		timetableLesson1.setReplacement(replacement1);
 		em.persist(timetableLesson1);
-		
+
 		em.getTransaction().commit();
 
 		@SuppressWarnings("unchecked")
-		final List<Form> list = this.em.createNativeQuery(
+		final List<Form> list = em.createNativeQuery(
 				"select * from Klasse", Form.class).getResultList();
 		assertTrue(list.size() >= 2);
 		for (final Form current : list) {

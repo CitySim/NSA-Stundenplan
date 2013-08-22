@@ -27,7 +27,7 @@ public class PngStreamingServlet extends javax.servlet.http.HttpServlet
 	protected final void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		try {
-			this.performTask(request, response);
+			this.createPng(request, response);
 		} catch (final ScheduleCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,14 +38,14 @@ public class PngStreamingServlet extends javax.servlet.http.HttpServlet
 	protected final void doPost(final HttpServletRequest request,
 			final HttpServletResponse response) {
 		try {
-			this.performTask(request, response);
+			this.createPng(request, response);
 		} catch (final ScheduleCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void performTask(final HttpServletRequest request,
+	public void createPng(final HttpServletRequest request,
 			final HttpServletResponse response)
 			throws ScheduleCreationException {
 
