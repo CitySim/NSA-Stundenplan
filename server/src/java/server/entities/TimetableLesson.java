@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -88,7 +89,8 @@ public class TimetableLesson implements Serializable {
 	public void setRoom(Room newRoom) {
 		room = newRoom;
 	}
-
+	
+	@OneToOne(targetEntity = Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {

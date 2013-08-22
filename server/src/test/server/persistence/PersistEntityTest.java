@@ -110,7 +110,6 @@ public class PersistEntityTest {
 		timetableLesson1.setLesson(lesson1);
 		timetableLesson1.setDay(day1);
 		timetableLesson1.setSubject(subject1);
-		em.persist(timetableLesson1);
 		
 		TimetableLesson timetableLesson2 = new TimetableLesson();
 		timetableLesson2.setForm(form1);
@@ -139,14 +138,17 @@ public class PersistEntityTest {
 		login1.setUser("Hans");
 		em.persist(login1);
 		
-		Replacement replacement = new Replacement();
-		replacement.setDate(Calendar.getInstance().getTime());
-		replacement.setRoom(room1);
-		replacement.setTeacher(teacher1);
-		replacement.setForm(form1);
-		em.persist(replacement);
+		Replacement replacement1 = new Replacement();
+		replacement1.setDate(Calendar.getInstance().getTime());
+		replacement1.setRoom(room1);
+		replacement1.setTeacher(teacher1);
+		replacement1.setForm(form1);
+		em.persist(replacement1);
 		
-		this.em.getTransaction().commit();
+		timetableLesson1.setReplacement(replacement1);
+		em.persist(timetableLesson1);
+		
+		em.getTransaction().commit();
 
 		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery(

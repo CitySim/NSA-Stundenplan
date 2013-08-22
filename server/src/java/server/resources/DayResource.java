@@ -12,7 +12,7 @@ import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 
-@Path("days")
+@Path("day")
 public class DayResource {
 	
 	@GET
