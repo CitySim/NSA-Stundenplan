@@ -54,17 +54,17 @@ public class CookieQuery {
 		}
 	}
 
-	public List<Cookie> getInvalidCookies(final Date date) {
+	public void removeInvalidCookies(final Date date) {
 		@SuppressWarnings("unchecked")
 		final List<Cookie> cookies = this.em.createNativeQuery(
 				"select * from Cookie WHERE invalidForm <='" + date + "'",
 				Cookie.class).getResultList();
+		
 		this.em.getTransaction().begin();
 		for (final Cookie cookie : cookies) {
 			this.em.remove(cookie);
 		}
 		this.em.getTransaction().commit();
-		return cookies;
 	}
 
 	/**
@@ -80,8 +80,4 @@ public class CookieQuery {
 		return cookie;
 	}
 
-	public void removeInvalidCookies(final Date date) {
-		// TODO Auto-generated method stub
-
-	}
 }
