@@ -4,6 +4,11 @@ import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
+
+import server.entities.Timetable;
+import server.exceptions.ScheduleCreationException;
+import server.resources.TimetableResource;
 
 /**
  * Test for cookie creation and validation.
@@ -17,27 +22,31 @@ public class FilePrinterTest extends TestCase {
 
 	private FilePrinter printer;
 	private CacheCleaner cleaner;
+	private Timetable timeTable;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		this.printer = new FilePrinter();
 		this.cleaner = new CacheCleaner();
+		this.timeTable = new TimetableResource().getClassTimetable(1);
+	}
+
+	@Test
+	public void testprintAsPDF() {
+		try {
+			FilePrinterTest.assertNotNull(this.printer
+					.printAsPDF(this.timeTable));
+		} catch (final ScheduleCreationException e) {
+			FilePrinterTest.fail();
+		}
 	}
 
 	// @Test
-	// public void testprintAsPDF() {
-	// try {
-	// FilePrinterTest.assertNotNull(this.printer.printAsPDF());
-	// } catch (final ScheduleCreationException e) {
-	// FilePrinterTest.fail();
-	// }
-	// }
-	//
-	// @Test
 	// public void testprintAsPNG() {
 	// try {
-	// FilePrinterTest.assertNotNull(this.printer.printAsPng());
+	// FilePrinterTest.assertNotNull(this.printer
+	// .printAsPng(this.timeTable));
 	// } catch (final ScheduleCreationException e) {
 	// FilePrinterTest.fail();
 	// }
