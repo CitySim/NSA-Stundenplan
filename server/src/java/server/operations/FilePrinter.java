@@ -44,12 +44,14 @@ public class FilePrinter {
 			new File(path);
 
 		} catch (final FileNotFoundException | DocumentException e) {
-			throw new ScheduleCreationException();
+			final ScheduleCreationException e2 = new ScheduleCreationException();
+			new ExceptionLogger().logException(e2);
+			throw e2;
 		}
 		return path;
 	}
 
-	public final String printAsPng() throws ScheduleCreationException {
+	final String printAsPng() throws ScheduleCreationException {
 		String path = "";
 		try {
 			final int width = 200, height = 200;
@@ -75,7 +77,9 @@ public class FilePrinter {
 			ImageIO.write(image, "PNG", new File(path));
 
 		} catch (final IOException e) {
-			throw new ScheduleCreationException();
+			final ScheduleCreationException e2 = new ScheduleCreationException();
+			new ExceptionLogger().logException(e2);
+			throw e2;
 		}
 		return path;
 

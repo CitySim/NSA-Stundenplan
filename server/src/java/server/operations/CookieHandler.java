@@ -31,7 +31,7 @@ public class CookieHandler {
 		return cookie;
 	}
 
-	public final boolean validateCookie(final Cookie cookie) {
+	final boolean validateCookie(final Cookie cookie) {
 
 		String cookieValue = "";
 
@@ -47,12 +47,10 @@ public class CookieHandler {
 	}
 
 	public final void deleteInvalidCookies() {
-
 		new CookieQuery().removeInvalidCookies(new Date());
-
 	}
 
-	public final boolean deleteCookie(final Cookie cookie) {
+	final boolean deleteCookie(final Cookie cookie) {
 		return new CookieQuery().removeCookie(cookie.getValue());
 	}
 }
