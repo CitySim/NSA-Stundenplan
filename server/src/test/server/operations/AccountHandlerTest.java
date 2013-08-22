@@ -21,45 +21,47 @@ import server.queries.LoginQuery;
 
 public class AccountHandlerTest extends TestCase {
 
-    private AccountHandler handler;
-    private String userName;
-    private String password;
+	private AccountHandler handler;
+	private String userName;
+	private String password;
 
-    @Override
-    @Before
-    public void setUp() throws EmailSendingException, DuplicateUserException {
-        this.handler = new AccountHandler();
+	@Override
+	@Before
+	public void setUp() throws EmailSendingException, DuplicateUserException {
+		this.handler = new AccountHandler();
 
-        final String name = "Dennis";
-        final String familyName = "Markmann";
-        final String eMailAddress = "test@test.de";
-        try {
-            final Login account = this.handler.createAccount(name, familyName, eMailAddress);
-            this.userName = account.getUser();
-        } catch (final DuplicateUserException e) {
-        }
-    }
+		final String name = "Dennis";
+		final String familyName = "Markmann";
+		final String eMailAddress = "test@test.de";
+		try {
+			final Login account = this.handler.createAccount(name, familyName,
+					eMailAddress);
+			this.userName = account.getUser();
+		} catch (final DuplicateUserException e) {
+		}
+	}
 
-    @Test
-    public void testAccountCreation() throws EmailSendingException {
+	@Test
+	public void testAccountCreation() throws EmailSendingException {
 
-        this.password = new LoginQuery().getPassword(this.userName);
-        AccountHandlerTest.assertNotNull(this.password);
+		this.password = new LoginQuery().getPassword(this.userName);
+		AccountHandlerTest.assertNotNull(this.password);
 
-    }
+	}
 
-    @Test
-    public void testPasswordChange() throws EmailSendingException {
+	@Test
+	public void testPasswordChange() throws EmailSendingException {
 
-        this.password = this.handler.changePassword(this.userName);
+		this.password = this.handler.changePassword(this.userName);
 
-        AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
+		AccountHandlerTest.assertEquals(this.password,
+				new LoginQuery().getPassword(this.userName));
 
-    }
+	}
 
-    @Test
-    @After
-    public void cleanUpTestData() {
-        this.handler.deleteAccount(this.userName);
-    }
+	@Test
+	@After
+	public void cleanUpTestData() {
+		this.handler.deleteAccount(this.userName);
+	}
 }
