@@ -1,3 +1,3 @@
-class window.nsa.Collections.Periods extends Backbone.Collection
-	model: nsa.Models.Period
-	url: nsa.config.api + "/period"
+class window.nsa.Collections.Lessons extends Backbone.Collection
+	model: nsa.Models.Lesson
+	url: nsa.config.api + "/lesson"
