@@ -42,15 +42,15 @@ public class FilePrinterTest extends TestCase {
 		}
 	}
 
-	@Test
-	public void testprintAsPNG() {
-		try {
-			FilePrinterTest.assertNotNull(this.printer
-					.printAsPng(this.timeTable));
-		} catch (final ScheduleCreationException e) {
-			FilePrinterTest.fail();
-		}
-	}
+	// @Test
+	// public void testprintAsPNG() {
+	// try {
+	// FilePrinterTest.assertNotNull(this.printer
+	// .printAsPng(this.timeTable));
+	// } catch (final ScheduleCreationException e) {
+	// FilePrinterTest.fail();
+	// }
+	// }
 
 	@After
 	public void cleanUpTestData() {
