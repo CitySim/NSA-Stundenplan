@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.AbstractQuery;
 
 import server.entities.Cookie;
 import server.persistence.HibernateUtil;
@@ -14,7 +15,7 @@ import server.persistence.HibernateUtil;
  * @author oleg.scheltow
  * 
  */
-public class CookieQuery {
+public class CookieQuery extends QueryResult {
 	private final EntityManager em;
 
 	public CookieQuery() {
@@ -59,7 +60,7 @@ public class CookieQuery {
 		final List<Cookie> cookies = this.em.createNativeQuery(
 				"select * from Cookie WHERE invalidForm <='" + date + "'",
 				Cookie.class).getResultList();
-		
+
 		this.em.getTransaction().begin();
 		for (final Cookie cookie : cookies) {
 			this.em.remove(cookie);
@@ -74,10 +75,9 @@ public class CookieQuery {
 	 * @return
 	 */
 	public Cookie getCookie(final String cookieString) {
-		final Cookie cookie = (Cookie) this.em.createNativeQuery(
+		return (Cookie) getSingleResult(em.createNativeQuery(
 				"select * from Cookie WHERE cookie ='" + cookieString + "'",
-				Cookie.class).getSingleResult();
-		return cookie;
+				Cookie.class));
 	}
 
 }

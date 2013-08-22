@@ -15,7 +15,7 @@ import server.persistence.HibernateUtil;
  * @author oleg.scheltow
  * 
  */
-public class NewsletterQuery {
+public class NewsletterQuery extends QueryResult {
 	private final EntityManager em;
 
 	public NewsletterQuery() {
@@ -29,21 +29,21 @@ public class NewsletterQuery {
 	 * @return
 	 */
 	public void addEmail(final String mail, final String schoolClass) {
-		this.em.getTransaction().begin();
+		em.getTransaction().begin();
 
 		EmailAddress email = this.getEmail(mail);
 		if (email == null) {
 			email = new EmailAddress();
 			email.setEMailAddress(mail);
-			this.em.persist(email);
+			em.persist(email);
 		}
 		final Form form = this.getForm(schoolClass);
 
 		final Newsletter newsletter = new Newsletter();
 		newsletter.setEmail(email);
 		newsletter.setForm(form);
-		this.em.persist(newsletter);
-		this.em.getTransaction().commit();
+		em.persist(newsletter);
+		em.getTransaction().commit();
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class NewsletterQuery {
 		if (singleNewsletter == null) {
 			return false;
 		} else {
-			this.em.getTransaction().begin();
-			this.em.remove(singleNewsletter);
-			this.em.getTransaction().commit();
+			em.getTransaction().begin();
+			em.remove(singleNewsletter);
+			em.getTransaction().commit();
 			return true;
 		}
 	}
@@ -79,7 +79,7 @@ public class NewsletterQuery {
 	 */
 	private EmailAddress getEmail(final String mail) {
 		final EmailAddress email = (EmailAddress) this.em.createNativeQuery(
-				"select * from Email WHERE eMailAddress ='" + mail + "'",
+				"select * from emailaddress WHERE eMailAddress ='" + mail + "'",
 				Form.class).getSingleResult();
 		return email;
 	}

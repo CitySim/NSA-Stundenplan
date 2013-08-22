@@ -12,7 +12,7 @@ import server.persistence.HibernateUtil;
  * @author oleg.scheltow
  *
  */
-public class LoginQuery {
+public class LoginQuery extends QueryResult{
 	private final EntityManager em;
 
 	public LoginQuery() {
@@ -97,7 +97,8 @@ public class LoginQuery {
 	
 	private Login getLoginUser(String username) {
 		Login login = null;
-		try {login = em.createQuery(
+		try {
+			login = em.createQuery(
 				"select l from Login l where user = '" + username + "'",
 				Login.class).getSingleResult();}
 		catch (NoResultException e){
