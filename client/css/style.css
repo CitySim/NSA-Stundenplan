@@ -32,13 +32,13 @@ body {
 	content : "";
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10;
+    left: 15;
     background-image: url('https://i.imgur.com/D8lkXuu.gif');
     background-repeat: no-repeat;
-    width: 500;
-    height: 500;
-    opacity : 0.2;
+    width: 450;
+    height: 450;
+    opacity : 0.1;
 }
 
 /* Stundenplan */
