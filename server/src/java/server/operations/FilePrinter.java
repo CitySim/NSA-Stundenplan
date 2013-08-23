@@ -19,6 +19,7 @@ import server.exceptions.ScheduleCreationException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 /**
@@ -41,6 +42,7 @@ public class FilePrinter {
 					+ System.getProperty("file.separator") + "timeTable.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
+			//createPdfTable(timeTable, document);
 			document.add(new Paragraph(this.createText(timeTable)));
 			document.close();
 
@@ -93,12 +95,39 @@ public class FilePrinter {
 
 		for (final TimetableLesson lesson : timeTable.getLessons()) {
 			sb.append(lesson.getSubject().getShortName());
+			sb.append("\n");
 			sb.append(lesson.getTeacher().getShortName());
+			sb.append("\n");
 			sb.append(lesson.getRoom().getDescription());
 			sb.append("\n");
+			sb.append("\n");
+			sb.append("\n");
+
 		}
 		//System.out.println(sb.toString());
 		// TODO fill file with timeTable data.
 		return sb.toString();
 	}
+	
+	private void createPdfTable(Timetable timeTable,Document document) throws DocumentException{
+		
+		PdfPTable table = new PdfPTable(5); // Code 1
+
+		// Code 2
+		table.addCell("1");
+		table.addCell("2");
+		
+		// Code 3
+		table.addCell("3");
+		table.addCell("4");
+		
+		// Code 4
+		table.addCell("5");
+		table.addCell("6");
+		
+		// Code 5
+			document.add(table);
+		document.close();
+	}
+	
 }
