@@ -1,10 +1,12 @@
+- Fix CookieCreation (test)
 - AvailableResource implementieren
 - ConfirmationResource implementieren (für Newsletter anmeldung)
 - Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
-- forgot password function hinzufügen. (Im Pflichtenheft)
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
 - Cookie überprüfen bei jedem Request
+
+- forgot password function hinzufügen. (Im Pflichtenheft)
 
 Dennis:
 EmailSending testen (Mercury einrichten etc.)
