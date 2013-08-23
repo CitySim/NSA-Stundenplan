@@ -25,7 +25,7 @@ public class CookieHandlerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.handler = new CookieHandler();
 	}
 
@@ -41,12 +41,10 @@ public class CookieHandlerTest extends TestCase {
 
 		final CookieQuery query = new CookieQuery();
 
-		final String cookieID = new PasswordEncryptor()
-				.generateEncryptedPassword();
+		final String cookieID = new PasswordEncryptor().generateEncryptedPassword();
 		final DateHelper dateHelper = new DateHelper();
 		dateHelper.addTime(0, 0, 0, 0, -10, 0);
-		query.createCookie(cookieID,
-				dateHelper.parseStringToDate(dateHelper.getFullDate()));
+		query.createCookie(cookieID, dateHelper.parseStringToDate(dateHelper.getFullDate()));
 		CookieHandlerTest.assertNotNull(query.getCookie(cookieID));
 
 		query.removeInvalidCookies(new Date());

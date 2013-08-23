@@ -21,14 +21,12 @@ public class ExceptionLoggerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.logger = new ExceptionLogger();
 	}
 
 	@Test
 	public void testExceptionLogging() {
-		ExceptionLoggerTest.assertFalse(this.logger
-				.logException(new SuperException(0, "TestException",
-						"JustTesting")));
+		ExceptionLoggerTest.assertFalse(this.logger.logException(new SuperException(0, "TestException", "JustTesting")));
 	}
 }

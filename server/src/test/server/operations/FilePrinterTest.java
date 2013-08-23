@@ -26,7 +26,7 @@ public class FilePrinterTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.printer = new FilePrinter();
 		this.cleaner = new CacheCleaner();
 		this.timeTable = new TimetableResource().getClassTimetable(1);
@@ -35,8 +35,7 @@ public class FilePrinterTest extends TestCase {
 	@Test
 	public void testprintAsPDF() {
 		try {
-			FilePrinterTest.assertNotNull(this.printer
-					.printAsPDF(this.timeTable));
+			FilePrinterTest.assertNotNull(this.printer.printAsPDF(this.timeTable));
 		} catch (final ScheduleCreationException e) {
 			FilePrinterTest.fail();
 		}
