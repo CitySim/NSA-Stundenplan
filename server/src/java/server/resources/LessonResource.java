@@ -1,5 +1,7 @@
 package server.resources;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -26,5 +28,14 @@ public class LessonResource {
 	@SuppressWarnings("unchecked")
 	public List<Lesson> getLessons() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
+	}
+	
+	public List<Time> getTimeList() {
+		List<Time> times = new ArrayList<>();
+		List<Lesson> lessons = getLessons();
+		for (Lesson lesson : lessons) {
+			times.add(lesson.getTimeFrom());
+		}
+		return times;
 	}
 }

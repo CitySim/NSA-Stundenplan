@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -16,6 +19,7 @@ import javax.imageio.ImageIO;
 import server.entities.Timetable;
 import server.entities.TimetableLesson;
 import server.exceptions.ScheduleCreationException;
+import server.resources.LessonResource;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -109,7 +113,14 @@ public class FilePrinter {
 
 		table.setHeaderRows(1);
 		int counter =4;
-		for (final TimetableLesson lesson : timeTable.getLessons()) {
+		HashMap<Time, String> hashMap = new HashMap<>();
+		List<Time> times = new LessonResource().getTimeList();
+	
+	//	hashMap.put(times.get(i), timeTable.getLessons().get(i))
+
+		for (TimetableLesson lesson : timeTable.getLessons()) {
+			
+
 			if(counter == 4){
 				counter = 0;
 				table.addCell(lesson.getLesson().getTimeFrom().toString().substring(0, 5) + "\n - \n" + lesson.getLesson().getTimeTo().toString().substring(0, 5));
@@ -122,6 +133,6 @@ public class FilePrinter {
 		}
 
 		document.add(table);
-	}
+	}	
 
 }
