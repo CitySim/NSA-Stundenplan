@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,6 +42,11 @@ public class DataCreationTest {
 	@Before
 	public void init() {
 		this.em = HibernateUtil.getEntityManager();
+	}
+
+	@After
+	public void cleanup() {
+		this.em.close();
 	}
 
 	@SuppressWarnings("unused")

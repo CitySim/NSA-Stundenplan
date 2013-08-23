@@ -11,7 +11,7 @@ import server.exceptions.ScheduleCreationException;
 import server.resources.TimetableResource;
 
 /**
- * Test for cookie creation and validation.
+ * Test for file printing.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

@@ -9,7 +9,7 @@ import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
 
 /**
- * Test for exception logging.
+ * Test for exception email sending.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
