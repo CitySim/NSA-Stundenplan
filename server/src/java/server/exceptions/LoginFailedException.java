@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if the login failed.
  * 
@@ -18,5 +20,6 @@ public class LoginFailedException extends SuperException {
 
 	public LoginFailedException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 }

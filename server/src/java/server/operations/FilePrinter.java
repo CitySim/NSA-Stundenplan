@@ -32,36 +32,30 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FilePrinter {
 
-	public final File printAsPDF(final Timetable timeTable)
-			throws ScheduleCreationException {
+	public final File printAsPDF(final Timetable timeTable) throws ScheduleCreationException {
 		final Document document = new Document();
 		String path = null;
 		try {
 
-			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator") + "timeTable.pdf";
+			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			//createPdfTable(timeTable, document);
+			// createPdfTable(timeTable, document);
 			document.add(new Paragraph(this.createText(timeTable)));
 			document.close();
 
 		} catch (final FileNotFoundException | DocumentException e) {
-			final ScheduleCreationException e2 = new ScheduleCreationException();
-			new ExceptionLogger().logException(e2);
-			throw e2;
+			throw new ScheduleCreationException();
 		}
 		return new File(path);
 	}
 
-	public final File printAsPng(final Timetable timeTable)
-			throws ScheduleCreationException {
+	public final File printAsPng(final Timetable timeTable) throws ScheduleCreationException {
 		String path = "";
 		try {
 			final int width = 200, height = 200;
 
-			final BufferedImage image = new BufferedImage(width, height,
-					BufferedImage.TYPE_INT_ARGB);
+			final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 			final Graphics2D ig2 = image.createGraphics();
 
@@ -72,18 +66,14 @@ public class FilePrinter {
 			final int stringWidth = fontMetrics.stringWidth(message);
 			final int stringHeight = fontMetrics.getAscent();
 			ig2.setPaint(Color.black);
-			ig2.drawString(message, (width - stringWidth) / 2, height / 2
-					+ stringHeight / 4);
+			ig2.drawString(message, (width - stringWidth) / 2, height / 2 + stringHeight / 4);
 
-			path = System.getProperty("user.home")
-					+ System.getProperty("file.separator") + "timeTable.png";
+			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
 			ImageIO.write(image, "PNG", new File(path));
 
 		} catch (final IOException e) {
-			final ScheduleCreationException e2 = new ScheduleCreationException();
-			new ExceptionLogger().logException(e2);
-			throw e2;
+			throw new ScheduleCreationException();
 		}
 		return new File(path);
 
@@ -104,30 +94,30 @@ public class FilePrinter {
 			sb.append("\n");
 
 		}
-		//System.out.println(sb.toString());
+		// System.out.println(sb.toString());
 		// TODO fill file with timeTable data.
 		return sb.toString();
 	}
-	
-	private void createPdfTable(Timetable timeTable,Document document) throws DocumentException{
-		
-		PdfPTable table = new PdfPTable(5); // Code 1
+
+	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
+
+		final PdfPTable table = new PdfPTable(5); // Code 1
 
 		// Code 2
 		table.addCell("1");
 		table.addCell("2");
-		
+
 		// Code 3
 		table.addCell("3");
 		table.addCell("4");
-		
+
 		// Code 4
 		table.addCell("5");
 		table.addCell("6");
-		
+
 		// Code 5
-			document.add(table);
+		document.add(table);
 		document.close();
 	}
-	
+
 }

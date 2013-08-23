@@ -13,32 +13,26 @@ import server.queries.LoginQuery;
 
 public class LoginValidator {
 
-	public final Boolean validateLoginData(final String userName,
-			final String password) throws LoginFailedException {
+	public final Boolean validateLoginData(final String userName, final String password) throws LoginFailedException {
 
 		final String dbPassword = new LoginQuery().getPassword(userName);
 
 		if (dbPassword == null) {
-			final LoginFailedException e = new LoginFailedException();
-			new ExceptionLogger().logException(e);
-			throw e;
+			throw new LoginFailedException();
+
 		}
 
-		final Boolean passwordOkay = this
-				.validatePassword(password, dbPassword);
+		final Boolean passwordOkay = this.validatePassword(password, dbPassword);
 
 		if (!passwordOkay) {
-			final LoginFailedException e = new LoginFailedException();
-			new ExceptionLogger().logException(e);
-			throw e;
+			throw new LoginFailedException();
 		}
 
 		return passwordOkay;
 
 	}
 
-	private boolean validatePassword(final String password,
-			final String dbPassword) {
+	private boolean validatePassword(final String password, final String dbPassword) {
 
 		Boolean matches = false;
 

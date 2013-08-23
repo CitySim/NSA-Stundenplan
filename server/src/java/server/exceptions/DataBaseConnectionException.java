@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if the connection to the database fails.
  * 
@@ -18,5 +20,6 @@ public class DataBaseConnectionException extends SuperException {
 
 	public DataBaseConnectionException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 }

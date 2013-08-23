@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailSendingException;
 import server.queries.LoginQuery;
 
 /**
@@ -35,6 +36,8 @@ public class AccountHandlerTest extends TestCase {
 		try {
 			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
 			this.userName = account.getUser();
+		} catch (final EmailSendingException e) {
+			AccountHandlerTest.fail();
 		} catch (final DuplicateUserException e) {
 		}
 	}
