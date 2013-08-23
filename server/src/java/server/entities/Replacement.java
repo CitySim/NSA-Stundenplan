@@ -17,15 +17,15 @@ public class Replacement extends DefaultEntity {
 
 	@ManyToOne(targetEntity = Room.class)
 	private Room room;
-	
+
 	@ManyToOne(targetEntity = Subject.class)
 	private Subject subject;
-	
-	@ManyToOne(targetEntity= Form.class)
+
+	@ManyToOne(targetEntity = Form.class)
 	private Form form;
-	
+
 	private String note;
-	
+
 	public Date getDate() {
 		return date;
 	}

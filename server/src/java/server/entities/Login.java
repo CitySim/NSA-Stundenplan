@@ -10,7 +10,6 @@ public class Login extends DefaultEntity {
 	private String user;
 	private String password;
 
-	
 	public String getUser() {
 		return this.user;
 	}
@@ -27,7 +26,7 @@ public class Login extends DefaultEntity {
 		this.password = password;
 	}
 
-	@ManyToOne(targetEntity=EmailAddress.class)
+	@ManyToOne(targetEntity = EmailAddress.class)
 	private EmailAddress email;
 
 	public EmailAddress getEmail() {

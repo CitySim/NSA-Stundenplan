@@ -46,8 +46,10 @@ public class TimetableResource {
 
 	@SuppressWarnings("unchecked")
 	public Timetable getClassTimetable(int classId) {
-		String sql = "select * from klasse_tag_stunde where idklasse = '" + classId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idklasse = '"
+				+ classId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
+				TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
 		return timetable;
@@ -55,8 +57,10 @@ public class TimetableResource {
 
 	@SuppressWarnings("unchecked")
 	public Timetable getRoomTimetable(int roomId) {
-		String sql = "select * from klasse_tag_stunde where idRaum = '" + roomId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idRaum = '"
+				+ roomId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
+				TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
 		return timetable;
@@ -64,8 +68,10 @@ public class TimetableResource {
 
 	@SuppressWarnings("unchecked")
 	public Timetable getTeacherTimetable(int teacherId) {
-		String sql = "select * from klasse_tag_stunde where idLehrer = '" + teacherId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idLehrer = '"
+				+ teacherId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
+				TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
 		return timetable;

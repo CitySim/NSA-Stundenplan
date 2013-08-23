@@ -6,16 +6,17 @@ import javax.persistence.ManyToOne;
 
 /**
  * TODO --> Values should not be null
+ * 
  * @author oleg.scheltow
- *
+ * 
  */
 @Entity
-public class Newsletter extends DefaultEntity{
+public class Newsletter extends DefaultEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	// Klasse
-	@ManyToOne(targetEntity=Form.class)
+	@ManyToOne(targetEntity = Form.class)
 	private Form form;
 
 	@ManyToOne(targetEntity=EmailAddress.class)
@@ -35,5 +36,5 @@ public class Newsletter extends DefaultEntity{
 
 	public void setEmail(EmailAddress email) {
 		this.email = email;
-	}	
+	}
 }
