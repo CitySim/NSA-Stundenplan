@@ -16,48 +16,30 @@ import server.exceptions.ScheduleCreationException;
 
 public class EmailJobHelper {
 
-	public final void sendMail(final Timetable entityList)
-			throws ScheduleCreationException, EmailSendingException {
-		final ArrayList<EmailObject> emailList = new EmailCreator()
-				.createEmailObjects(entityList);
-		new EmailJob().sendMail(
-				this.setEmailSettings("NSA - Stundenplan Abweichung"),
-				emailList);
+	public final void sendNewsLetterMail(final Timetable entityList) throws ScheduleCreationException, EmailSendingException {
+		final ArrayList<EmailObject> emailList = new EmailCreator().createNewsLetterMails(entityList);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);
 	}
 
-	public final void sendConfirmationMail(final String eMailAddress,
-			final String schoolClass) throws EmailSendingException {
+	public final void sendConfirmationMail(final String eMailAddress, final String schoolClass) throws EmailSendingException {
 
-		final ArrayList<EmailObject> emailList = new EmailCreator()
-				.createConfirmationMail(eMailAddress, schoolClass);
-		new EmailJob().sendMail(
-				this.setEmailSettings("NSA - RegistrierungsBestätigung"),
-				emailList);
+		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(eMailAddress, schoolClass);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - RegistrierungsBestätigung"), emailList);
 	}
 
-	public final void sendCreationMail(final String eMailAddress,
-			final String userName, final String password)
-			throws EmailSendingException {
+	public final void sendCreationMail(final String eMailAddress, final String userName, final String password) throws EmailSendingException {
 
-		final ArrayList<EmailObject> emailList = new EmailCreator()
-				.createCreationMail(userName, password,eMailAddress);
-		new EmailJob().sendMail(
-				this.setEmailSettings("NSA - ErstellBestätigung"), emailList);
+		final ArrayList<EmailObject> emailList = new EmailCreator().createCreationMail(userName, password, eMailAddress);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - ErstellBestätigung"), emailList);
 	}
 
-	public final void sendPasswordChangeMail(final String eMailAddress,
-			final String userName, final String password)
-			throws EmailSendingException {
+	public final void sendPasswordChangeMail(final String eMailAddress, final String userName, final String password) throws EmailSendingException {
 
-		final ArrayList<EmailObject> emailList = new EmailCreator()
-				.createPasswordChangeMail(eMailAddress, userName, password);
-		new EmailJob().sendMail(
-				this.setEmailSettings("NSA - PasswordÄnderungsBestätigung"),
-				emailList);
+		final ArrayList<EmailObject> emailList = new EmailCreator().createPasswordChangeMail(eMailAddress, userName, password);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - PasswordÄnderungsBestätigung"), emailList);
 	}
 
 	private EmailSettings setEmailSettings(final String titel) {
-		return new EmailSettings("olegscheltow", "",
-				"olegscheltow@localhost", titel, "localhost");
+		return new EmailSettings("olegscheltow", "", "olegscheltow@localhost", titel, "localhost");
 	}
 }

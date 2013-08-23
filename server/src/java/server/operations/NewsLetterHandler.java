@@ -15,30 +15,21 @@ import server.queries.NewsletterQuery;
 
 public class NewsLetterHandler {
 
-	public final void addAddress(final String eMailAddress,
-			final String schoolClass) {
+	public final void addAddress(final String eMailAddress, final String schoolClass) throws EmailSendingException {
 
-		try {
-			new EmailJobHelper()
-					.sendConfirmationMail(eMailAddress, schoolClass);
-		} catch (final EmailSendingException e) {
-			new ExceptionLogger().logException(e);
-		}
+		new EmailJobHelper().sendConfirmationMail(eMailAddress, schoolClass);
 
 	}
 
-	final boolean removeAddress(final String eMailAddress,
-			final String schoolClass) {
+	final boolean removeAddress(final String eMailAddress, final String schoolClass) {
 
 		return new NewsletterQuery().removeEmail(eMailAddress, schoolClass);
 
 	}
 
-	public final String generateRegistrationLink(final String schoolClass,
-			final String eMailAddress) {
+	public final String generateRegistrationLink(final String schoolClass, final String eMailAddress) {
 
-		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:"
-				+ schoolClass;
+		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:" + schoolClass;
 
 		// createLink containing our webSite URL + add + emailAddress + to
 		// schoolClass
@@ -46,11 +37,9 @@ public class NewsLetterHandler {
 		return url;
 	}
 
-	public final String generateRemoveLink(final String schoolClass,
-			final String eMailAddress) {
+	public final String generateRemoveLink(final String schoolClass, final String eMailAddress) {
 
-		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:"
-				+ schoolClass;
+		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:" + schoolClass;
 
 		// createLink containing our webSite URL + remove + emailAddress + to
 		// schoolClass
@@ -65,8 +54,7 @@ public class NewsLetterHandler {
 
 		if (url.contains("add")) {
 
-			eMailAddress = url.substring(url.indexOf("_") + 1,
-					url.lastIndexOf("_"));
+			eMailAddress = url.substring(url.indexOf("_") + 1, url.lastIndexOf("_"));
 			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
 
 			// boolean check
@@ -75,8 +63,7 @@ public class NewsLetterHandler {
 
 		} else if (url.contains("remove")) {
 
-			eMailAddress = url.substring(url.indexOf("_") + 1,
-					url.lastIndexOf("_"));
+			eMailAddress = url.substring(url.indexOf("_") + 1, url.lastIndexOf("_"));
 			schoolClass = url.substring(url.lastIndexOf(":") + 1, url.length());
 
 			return new NewsletterQuery().removeEmail(eMailAddress, schoolClass);

@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if a user is already existing.
  * 
@@ -18,5 +20,6 @@ public class DuplicateUserException extends SuperException {
 
 	public DuplicateUserException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 }

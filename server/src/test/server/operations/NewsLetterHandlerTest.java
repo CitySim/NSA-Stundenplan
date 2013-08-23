@@ -11,7 +11,7 @@ import server.entities.Newsletter;
 import server.queries.NewsletterQuery;
 
 /**
- * Test for the generation of the newsLetterUrls.
+ * Test for the generation of the newsLetter and URLs.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25

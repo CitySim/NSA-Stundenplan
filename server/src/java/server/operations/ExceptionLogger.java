@@ -15,14 +15,12 @@ import server.exceptions.SuperException;
  * @version 1.0
  */
 
-class ExceptionLogger {
+public class ExceptionLogger {
 
 	private boolean failed = false;
 
-	boolean logException(final SuperException exception) {
-		final String path = System.getProperty("user.home")
-				+ System.getProperty("file.separator")
-				+ "NSA_StundenPlan_log.txt";
+	public final boolean logException(final SuperException exception) {
+		final String path = System.getProperty("user.home") + System.getProperty("file.separator") + "NSA_StundenPlan_log.txt";
 
 		final String text = this.readFile(path);
 		this.writeFile(text, exception, path);
@@ -47,8 +45,7 @@ class ExceptionLogger {
 		return sb.toString();
 	}
 
-	private void writeFile(final String text, final SuperException exception,
-			final String path) {
+	private void writeFile(final String text, final SuperException exception, final String path) {
 		try {
 			final PrintWriter writer = new PrintWriter(new FileWriter(path));
 

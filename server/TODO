@@ -1,18 +1,21 @@
-For Oleg:
+- AvailableResource implementieren
+- ConfirmationResource implementieren (für Newsletter anmeldung)
+- Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
+- forgot password function hinzufügen. (Auch im Pflichtenheft)
+- Aufruf von changePassword (Passwort vergessen) durch den Client
+- Aufruf von deleteCookie (Ausloggen) durch den Client
+- ???
+- Profit!
 
+Dennis:
+EmailSending testen (Mercury einrichten etc.)
+
+Oleg:
 Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
 Auch bind Parameters!
 http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
----------
 
-For Dennis:
 
-Email Server wechseln
-
----------
-AvailableResource implementierens
-
-General: Add forgot password function. (Auch im Pflichtenheft)
 
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
-sollte HTTP Status 400 kommen, nicht 404
+		   sollte HTTP Status 400 kommen, nicht 404

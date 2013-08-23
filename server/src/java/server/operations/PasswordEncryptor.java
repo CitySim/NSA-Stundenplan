@@ -77,8 +77,7 @@ public class PasswordEncryptor {
 	 * @return A StringBufer with 'n' characters chosen randomly from the given
 	 *         alphabet
 	 */
-	private static StringBuffer selectRandom(final StringBuffer alphabet,
-			final int n) {
+	private static StringBuffer selectRandom(final StringBuffer alphabet, final int n) {
 		final StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < n; i++) {
 			sb.append(alphabet.charAt(random.nextInt(alphabet.length())));

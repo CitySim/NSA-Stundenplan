@@ -35,7 +35,7 @@ public class LoginResource {
 			json = gson.toJson(cookie);
 
 		} catch (LoginFailedException e) {
-			json = gson.toJson(e.getMessage());
+			json = gson.toJson(e.showErrorMessage());
 		}
 		
 		return Response.ok(json).cookie(cookie).build();

@@ -73,7 +73,8 @@ body {
 }
 
 .stundenplan .vertretung {
-	background-color: #A2C5FC;
+	color: #FFF;
+	background-color: #D9534F;
 }
 
 .stundenplan .ausfall {
