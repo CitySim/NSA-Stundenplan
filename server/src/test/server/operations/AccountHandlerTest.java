@@ -43,7 +43,11 @@ public class AccountHandlerTest extends TestCase {
 	@Test
 	public void testPasswordChange() {
 		this.createTestAccount();
-		this.password = this.handler.changePassword(this.userName);
+		try {
+			this.password = this.handler.changePassword(this.userName);
+		} catch (final EmailSendingException e) {
+			AccountHandlerTest.fail();
+		}
 		AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
 	}
 
