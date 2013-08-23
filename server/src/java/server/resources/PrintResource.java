@@ -1,35 +1,47 @@
 package server.resources;
 
+import java.io.File;
+
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+import server.exceptions.ScheduleCreationException;
+import server.operations.FilePrinter;
 
 @Path("print")
 public class PrintResource {
 
-	// @GET
-	// @Path("pdf")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public String printPDF() {
-	// PdfStreamingServlet pdfCreator = new PdfStreamingServlet();
-	// try {
-	// pdfCreator.createPdf(null, null);
-	// } catch (ScheduleCreationException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return "?";
-	// }
+	@GET
+	@Path("pdf")
+	@Produces(MediaType.TEXT_PLAIN)
+	public File printPDF(@QueryParam("id") int timetableId) {
+		FilePrinter filePrinter = new FilePrinter();
+		File pdf = null;
+		try {
+			pdf = filePrinter.printAsPDF(new TimetableResource().getTimetable(timetableId));
+		} catch (ScheduleCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	// @GET
-	// @Path("png")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public String printPNG() {
-	// PngStreamingServlet pngCreator = new PngStreamingServlet();
-	// try {
-	// pngCreator.createPng(null, null);
-	// } catch (ScheduleCreationException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return "?";
-	// }
+		return pdf;
+	}
+
+	@GET
+	@Path("png")
+	@Produces(MediaType.TEXT_PLAIN)
+	public File printPNG() {
+		FilePrinter filePrinter = new FilePrinter();
+		File png = null;
+		try {
+			png = filePrinter.printAsPng(new TimetableResource().getClassTimetable(1));
+		} catch (ScheduleCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return png;
+	}
 }

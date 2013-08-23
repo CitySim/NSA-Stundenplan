@@ -26,9 +26,6 @@ public class FormResource {
 
 	@SuppressWarnings("unchecked")
 	public List<Form> getForms() {
-		return HibernateUtil.getEntityManager()
-				.createNativeQuery("select * from Klasse", Form.class)
-				.getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
 	}
-
 }

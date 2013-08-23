@@ -94,7 +94,7 @@ public class FilePrinter {
 		for (final TimetableLesson lesson : timeTable.getLessons()) {
 			sb.append(lesson.getRoom().getDescription());
 		}
-		System.out.println(sb.toString());
+		//System.out.println(sb.toString());
 		// TODO fill file with timeTable data.
 		return sb.toString();
 	}

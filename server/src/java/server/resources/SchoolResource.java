@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 @Path("school")
 public class SchoolResource {
 	School school = new School();
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
@@ -20,7 +20,7 @@ public class SchoolResource {
 	}
 
 	// TODO: Dummy muss in ie Datenbank
-	private class School{
+	private class School {
 		@SuppressWarnings("unused")
 		String image = "http://i.imgur.com/xcEPAMC.gif";
 		@SuppressWarnings("unused")
@@ -33,4 +33,3 @@ public class SchoolResource {
 				+ "++++ Trachten nach dem Tod: Bayerische Profikiller möchten in traditioneller Kleidung bestattet werden ++++";
 	}
 }
-

@@ -26,6 +26,4 @@ public class Cookie extends DefaultEntity {
 	public void setInvalidForm(Date invalidForm) {
 		this.invalidForm = invalidForm;
 	}
-	
-	
 }

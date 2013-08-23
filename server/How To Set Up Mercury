@@ -1,0 +1,13 @@
+Email versenden mit Java: http://stackoverflow.com/questions/15938298/not-receiving-email-sent-by-localhost-mercury-mail
+
+Komplett konfiguration Mercury: http://www.derdualstudent.de/mercury-einrichten-xampp-mailserver.html
+
+
+Für euch:
+User anlegen usw. sollte für die funktion des Email krams eigentlich reichen
+- Mercury starten
+- Configuration --> manage local users.. --> ADD
+--> Hier euren Email user eintragen:
+Username : username
+Personal name: <username>@localhost
+Mail password: Leer lassen 

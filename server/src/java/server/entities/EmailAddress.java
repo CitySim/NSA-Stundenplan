@@ -10,7 +10,7 @@ public class EmailAddress extends DefaultEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String eMailAddress;
-	
+
 	public String getEMailAddress() {
 		return this.eMailAddress;
 	}
@@ -18,5 +18,4 @@ public class EmailAddress extends DefaultEntity implements Serializable {
 	public void setEMailAddress(final String eMailAddress) {
 		this.eMailAddress = eMailAddress;
 	}
-
 }

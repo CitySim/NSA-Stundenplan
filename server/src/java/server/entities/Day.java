@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Tag")
+@Table(name = "tag")
 public class Day {
 
 	@Id
@@ -29,5 +29,4 @@ public class Day {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
 }

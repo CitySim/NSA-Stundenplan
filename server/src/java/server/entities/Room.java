@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Raum")
+@Table(name = "raum")
 public class Room implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,5 +33,4 @@ public class Room implements Serializable {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
 }

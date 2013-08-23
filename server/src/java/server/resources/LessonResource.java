@@ -25,8 +25,6 @@ public class LessonResource {
 
 	@SuppressWarnings("unchecked")
 	public List<Lesson> getLessons() {
-		return HibernateUtil.getEntityManager()
-				.createNativeQuery("select * from Stunde", Lesson.class)
-				.getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
 	}
 }

@@ -22,12 +22,10 @@ public class TeacherResource {
 		final String json = gson.toJson(getTeachers());
 		return json;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Teacher> getTeachers() {
-		return HibernateUtil.getEntityManager()
-				.createNativeQuery("select * from Lehrer", Teacher.class)
-				.getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from lehrer", Teacher.class).getResultList();
 	}
 
 }
