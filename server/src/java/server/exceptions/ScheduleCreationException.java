@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if the schedule can't be created.
  * 
@@ -18,6 +20,7 @@ public class ScheduleCreationException extends SuperException {
 
 	public ScheduleCreationException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 
 }

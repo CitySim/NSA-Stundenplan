@@ -16,25 +16,18 @@ import server.queries.LoginQuery;
 
 class AccountHandler {
 
-	final Login createAccount(final String name, final String familyName,
-			final String eMailAddress) throws DuplicateUserException {
+	final Login createAccount(final String name, final String familyName, final String eMailAddress) throws DuplicateUserException,
+			EmailSendingException {
 
-		final String userName = this.generateUserName(this.correctFormat(name),
-				this.correctFormat(familyName));
+		final String userName = this.generateUserName(this.correctFormat(name), this.correctFormat(familyName));
 
 		final String password = new PasswordEncryptor().generatePassword();
 
-		final String hashedPw = new PasswordEncryptor()
-				.encryptPassword(password);
+		final String hashedPw = new PasswordEncryptor().encryptPassword(password);
 
 		this.storeUserInDatabase(userName, hashedPw, eMailAddress);
 
-		try {
-			new EmailJobHelper().sendCreationMail(eMailAddress, userName,
-					password);
-		} catch (final EmailSendingException e) {
-			new ExceptionLogger().logException(e);
-		}
+		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
 
 		// used for tests
 		final Login login = new Login();
@@ -47,8 +40,7 @@ class AccountHandler {
 
 	final String changePassword(final String userName) {
 
-		final String password = new PasswordEncryptor()
-				.generateEncryptedPassword();
+		final String password = new PasswordEncryptor().generateEncryptedPassword();
 
 		this.changePasswordInDatabase(userName, password);
 
@@ -68,23 +60,17 @@ class AccountHandler {
 		return new LoginQuery().removeLogin(userName);
 	}
 
-	private void storeUserInDatabase(final String userName,
-			final String hashedPw, final String eMailAddress)
-			throws DuplicateUserException {
+	private void storeUserInDatabase(final String userName, final String hashedPw, final String eMailAddress) throws DuplicateUserException {
 
-		final boolean success = new LoginQuery().createUser(userName, hashedPw,
-				eMailAddress);
+		final boolean success = new LoginQuery().createUser(userName, hashedPw, eMailAddress);
 
 		if (!success) {
-			final DuplicateUserException e = new DuplicateUserException();
-			new ExceptionLogger().logException(e);
-			throw e;
+			throw new DuplicateUserException();
 		}
 
 	}
 
-	private void changePasswordInDatabase(final String userName,
-			final String hashedPw) {
+	private void changePasswordInDatabase(final String userName, final String hashedPw) {
 
 		new LoginQuery().changePassword(userName, hashedPw);
 
@@ -92,8 +78,7 @@ class AccountHandler {
 
 	private String generateUserName(final String name, final String familyName) {
 
-		return familyName.substring(0, 4) + name.substring(0, 2) + "."
-				+ this.getRndNumber();
+		return familyName.substring(0, 4) + name.substring(0, 2) + "." + this.getRndNumber();
 
 	}
 

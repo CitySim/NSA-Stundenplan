@@ -52,8 +52,7 @@ class DateHelper {
 		return sb.toString();
 	}
 
-	final void addTime(final int years, final int months, final int days,
-			final int hours, final int minutes, final int seconds) {
+	final void addTime(final int years, final int months, final int days, final int hours, final int minutes, final int seconds) {
 
 		this.c.add(Calendar.YEAR, years);
 		this.c.add(Calendar.MONTH, months);
@@ -68,8 +67,7 @@ class DateHelper {
 		try {
 			return new SimpleDateFormat("dd.MM.yyyy").parse(dateString);
 		} catch (final ParseException e) {
-			final ParsingException e2 = new ParsingException();
-			new ExceptionLogger().logException(e2);
+			new ParsingException();
 		}
 		return null;
 

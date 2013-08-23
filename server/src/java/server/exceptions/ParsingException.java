@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if a the parsing process fails.
  * 
@@ -18,6 +20,7 @@ public class ParsingException extends SuperException {
 
 	public ParsingException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 
 }

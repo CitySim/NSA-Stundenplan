@@ -1,5 +1,7 @@
 package server.exceptions;
 
+import server.operations.ExceptionLogger;
+
 /**
  * Exception thrown if a the E-Mail address is not valid.
  * 
@@ -18,5 +20,6 @@ public class EmailAddressException extends SuperException {
 
 	public EmailAddressException() {
 		super(errorNumber, errorTitel, errorMessage);
+		new ExceptionLogger().logException(this);
 	}
 }

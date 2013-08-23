@@ -28,7 +28,7 @@ public class NewsLetterHandlerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.handler = new NewsLetterHandler();
 		this.schoolClass = "it1a";
 		this.eMailAddress = "test@test.de";
@@ -38,36 +38,30 @@ public class NewsLetterHandlerTest extends TestCase {
 	public void testUrlCreation() {
 
 		// TODO Edit url
-		this.url = "nsa blabla/add_" + this.eMailAddress + "_to:"
-				+ this.schoolClass;
+		this.url = "nsa blabla/add_" + this.eMailAddress + "_to:" + this.schoolClass;
 
-		NewsLetterHandlerTest.assertEquals(this.url, this.handler
-				.generateRegistrationLink(this.schoolClass, this.eMailAddress));
+		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(this.schoolClass, this.eMailAddress));
 
 	}
 
-	 @Test
-	 public void testAddressCreation() {
-	
-	 this.testUrlCreation();
-	
-	 boolean success = false;
-	
-	 NewsLetterHandlerTest.assertTrue(this.handler
-	 .validateConfirmation(this.url));
-	
-	 final List<Newsletter> newsLetterList = new NewsletterQuery()
-	 .getAllNewsletters();
-	
-	 for (final Newsletter newsLetter : newsLetterList) {
-	 if (newsLetter.getEmail().getEMailAddress()
-	 .equals(this.eMailAddress)) {
-	 success = true;
-	 }
-	 }
-	 NewsLetterHandlerTest.assertEquals(true, success);
-	
-	 NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(
-	 this.eMailAddress, this.schoolClass));
-	 }
+	@Test
+	public void testAddressCreation() {
+
+		this.testUrlCreation();
+
+		boolean success = false;
+
+		NewsLetterHandlerTest.assertTrue(this.handler.validateConfirmation(this.url));
+
+		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters();
+
+		for (final Newsletter newsLetter : newsLetterList) {
+			if (newsLetter.getEmail().getEMailAddress().equals(this.eMailAddress)) {
+				success = true;
+			}
+		}
+		NewsLetterHandlerTest.assertEquals(true, success);
+
+		NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(this.eMailAddress, this.schoolClass));
+	}
 }

@@ -25,21 +25,19 @@ import server.exceptions.EmailSendingException;
 
 class EmailJob {
 
-	final void sendMail(final EmailSettings emailSettings,
-			final ArrayList<EmailObject> emailList)
-			throws EmailSendingException {
+	final void sendMail(final EmailSettings emailSettings, final ArrayList<EmailObject> emailList) throws EmailSendingException {
 
 		final Properties properties = new Properties();
 		properties.put("mail.smtp.host", emailSettings.getSmtpHost());
-//		properties.setProperty("mail.smtp.port", "587");
-//		properties.put("mail.smtp.auth", "true");
-		
-	    properties.setProperty("mail.smtp.password", emailSettings.getPassword());
-	    
-//		final MailAuthenticator auth = new MailAuthenticator(
-//				emailSettings.getUsername(), emailSettings.getPassword());
-//		final Session session = Session.getDefaultInstance(properties, auth);
-	    Session session = Session.getDefaultInstance(properties);
+		// properties.setProperty("mail.smtp.port", "587");
+		// properties.put("mail.smtp.auth", "true");
+
+		properties.setProperty("mail.smtp.password", emailSettings.getPassword());
+
+		// final MailAuthenticator auth = new MailAuthenticator(
+		// emailSettings.getUsername(), emailSettings.getPassword());
+		// final Session session = Session.getDefaultInstance(properties, auth);
+		final Session session = Session.getDefaultInstance(properties);
 		try {
 			final Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(emailSettings.getSenderAddress()));
@@ -51,19 +49,19 @@ class EmailJob {
 			for (final EmailObject emailObject : emailList) {
 				msg.setContent(emailObject.getMailContent());
 
-				for (final String emailAddress : emailObject
-						.getEmailAddressList()) {
+				for (final String emailAddress : emailObject.getEmailAddressList()) {
 					if (emailAddress != null && !emailAddress.equals("")) {
 						try {
-							msg.setRecipients(Message.RecipientType.TO,
-									InternetAddress.parse(emailAddress, false));
+							msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailAddress, false));
 							Transport.send(msg);
 						} catch (final MessagingException e) {
+							throw new EmailSendingException();
 						}
 					}
 				}
 			}
 		} catch (final Exception e) {
+			throw new EmailSendingException();
 		}
 	}
 

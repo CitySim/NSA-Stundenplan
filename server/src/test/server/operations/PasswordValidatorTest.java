@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailSendingException;
 import server.exceptions.LoginFailedException;
 
 /**
@@ -26,7 +27,7 @@ public class PasswordValidatorTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.validator = new LoginValidator();
 		this.handler = new AccountHandler();
 	}
@@ -40,8 +41,9 @@ public class PasswordValidatorTest extends TestCase {
 
 		Login account = null;
 		try {
-			account = this.handler
-					.createAccount(name, familyName, eMailAddress);
+			account = this.handler.createAccount(name, familyName, eMailAddress);
+		} catch (final EmailSendingException e) {
+			PasswordValidatorTest.fail();
 		} catch (final DuplicateUserException e) {
 		}
 
@@ -49,8 +51,7 @@ public class PasswordValidatorTest extends TestCase {
 		this.userName = account.getUser();
 
 		try {
-			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(
-					this.userName, password));
+			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));
 		} catch (final LoginFailedException e) {
 			PasswordValidatorTest.fail();
 		}

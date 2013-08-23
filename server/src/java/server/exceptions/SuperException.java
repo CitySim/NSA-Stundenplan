@@ -20,8 +20,7 @@ public class SuperException extends Exception {
 	private String errorMessage = "";
 	private Date date = null;
 
-	public SuperException(final int errorNumber, final String errorTitel,
-			final String errorMessage) {
+	public SuperException(final int errorNumber, final String errorTitel, final String errorMessage) {
 
 		this.errorNumber = errorNumber;
 		this.errorTitel = errorTitel;
