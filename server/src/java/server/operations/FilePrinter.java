@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import server.resources.LessonResource;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -45,7 +43,7 @@ public class FilePrinter {
 			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			createPdfTable(timeTable, document);
+			this.createPdfTable(timeTable, document);
 			document.close();
 
 		} catch (final FileNotFoundException | DocumentException e) {
@@ -103,7 +101,7 @@ public class FilePrinter {
 
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
-		final PdfPTable table = new PdfPTable(6); 
+		final PdfPTable table = new PdfPTable(6);
 		table.addCell("Klasse XXX");
 		table.addCell("Montag");
 		table.addCell("Dienstag");
@@ -112,27 +110,25 @@ public class FilePrinter {
 		table.addCell("Freitag");
 
 		table.setHeaderRows(1);
-		int counter =4;
-		HashMap<Time, String> hashMap = new HashMap<>();
-		List<Time> times = new LessonResource().getTimeList();
-	
-	//	hashMap.put(times.get(i), timeTable.getLessons().get(i))
+		int counter = 4;
+		final HashMap<Time, String> hashMap = new HashMap<>();
+		final List<Time> times = new LessonResource().getTimeList();
 
-		for (TimetableLesson lesson : timeTable.getLessons()) {
-			
+		// hashMap.put(times.get(i), timeTable.getLessons().get(i))
 
-			if(counter == 4){
+		for (final TimetableLesson lesson : timeTable.getLessons()) {
+
+			if (counter == 4) {
 				counter = 0;
-				table.addCell(lesson.getLesson().getTimeFrom().toString().substring(0, 5) + "\n - \n" + lesson.getLesson().getTimeTo().toString().substring(0, 5));
-			}else{
+				table.addCell(lesson.getLesson().getTimeFrom().toString().substring(0, 5) + "\n - \n"
+						+ lesson.getLesson().getTimeTo().toString().substring(0, 5));
+			} else {
 				counter++;
 			}
-			table.addCell(lesson.getSubject().getShortName()+"\n"+
-			lesson.getTeacher().getShortName()+"\n"+
-			lesson.getRoom().getDescription());
+			table.addCell(lesson.getSubject().getShortName() + "\n" + lesson.getTeacher().getShortName() + "\n" + lesson.getRoom().getDescription());
 		}
 
 		document.add(table);
-	}	
+	}
 
 }

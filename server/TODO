@@ -2,6 +2,8 @@
 - ConfirmationResource implementieren (für Newsletter anmeldung)
 - Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
 - forgot password function hinzufügen. (Auch im Pflichtenheft)
+- Aufruf von changePassword (Passwort vergessen) durch den Client
+- Aufruf von deleteCookie (Ausloggen) durch den Client
 - ???
 - Profit!
 

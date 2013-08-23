@@ -16,7 +16,7 @@ import server.exceptions.ScheduleCreationException;
 
 public class EmailJobHelper {
 
-	public final void sendMail(final Timetable entityList) throws ScheduleCreationException, EmailSendingException {
+	public final void sendNewsLetterMail(final Timetable entityList) throws ScheduleCreationException, EmailSendingException {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createNewsLetterMails(entityList);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);
 	}
