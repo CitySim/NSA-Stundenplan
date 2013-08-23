@@ -2,9 +2,7 @@ package server.operations;
 
 import java.util.Date;
 
-
-
-import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.NewCookie;
 
 import junit.framework.TestCase;
 
@@ -33,7 +31,7 @@ public class CookieHandlerTest extends TestCase {
 
 	@Test
 	public void testCookieCreation() {
-		final Cookie cookie = this.handler.createCookie();
+		final NewCookie cookie = this.handler.createCookie();
 		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
 		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
 	}

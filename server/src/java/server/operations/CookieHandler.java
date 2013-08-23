@@ -2,10 +2,6 @@ package server.operations;
 
 import java.util.Date;
 
-
-
-
-import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 
 import server.queries.CookieQuery;
@@ -22,20 +18,17 @@ public class CookieHandler {
 
 	public final NewCookie createCookie() {
 
-		final String cookieID = new PasswordEncryptor()
-				.generateEncryptedPassword();
-		
-		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID, null, null, null, 30*24*60*60,false);
+		final String cookieID = new PasswordEncryptor().generateEncryptedPassword();
 
+		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID);
 		final DateHelper dateHelper = new DateHelper();
 		dateHelper.addTime(0, 1, 0, 0, 0, 0);
-		new CookieQuery().createCookie(cookieID,
-				dateHelper.parseStringToDate(dateHelper.getFullDate()));
+		new CookieQuery().createCookie(cookieID, dateHelper.parseStringToDate(dateHelper.getFullDate()));
 
 		return cookie;
 	}
 
-	final boolean validateCookie(final Cookie cookie) {
+	final boolean validateCookie(final NewCookie cookie) {
 
 		String cookieValue = "";
 
@@ -54,7 +47,7 @@ public class CookieHandler {
 		new CookieQuery().removeInvalidCookies(new Date());
 	}
 
-	final boolean deleteCookie(final Cookie cookie) {
+	final boolean deleteCookie(final NewCookie cookie) {
 		return new CookieQuery().removeCookie(cookie.getValue());
 	}
 }
