@@ -37,7 +37,11 @@ class window.nsa.App extends Backbone.Router
 				message: "Unbekannter Typ von Stundenplan (#{type})"
 			return
 
-		@showView(new nsa.Views.TimetableDetail())
+		@showView new nsa.Views.TimetableDetail
+			fetchData:
+				type: type
+				id: id
+
 		return
 
 	replacement: () =>
@@ -137,4 +141,13 @@ $ () ->
 	Backbone.history.start()
 	#Backbone.history.start({ pushState: true })
 
+	Handlebars.registerHelper "ifcond", (v1, operator, v2, options) ->
+		switch operator
+			when "=="	then (if v1 is v2	then options.fn(this) else options.inverse(this))
+			when "<"	then (if v1 < v2	then options.fn(this) else options.inverse(this))
+			when "<="	then (if v1 <= v2	then options.fn(this) else options.inverse(this))
+			when ">"	then (if v1 > v2	then options.fn(this) else options.inverse(this))
+			when ">="	then (if v1 >= v2	then options.fn(this) else options.inverse(this))
+			else option.inverse()
+		
 	return

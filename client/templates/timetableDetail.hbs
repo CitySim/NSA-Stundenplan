@@ -20,8 +20,18 @@
 								<br>{{format_end}}
 							</small>
 						</td>
-						{{#each days}}
-							<td>ToDo</td>
+						{{#each ../days}}
+							<td>
+								{{#each ../../timetable.timetableLessons}}
+									{{#ifcond day.id "==" ../id}}
+										{{#ifcond lesson.id "==" ../../../id}}
+											{{subject.shortName}}<br>
+											{{room.description}}<br>
+											{{teacher.shortName}}
+										{{/ifcond}}
+									{{/ifcond}}
+								{{/each}}
+							</td>
 						{{/each}}
 					</tr>
 				{{/each}}
