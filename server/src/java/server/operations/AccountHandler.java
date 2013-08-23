@@ -38,20 +38,16 @@ class AccountHandler {
 
 	}
 
-	final String changePassword(final String userName) {
+	final String changePassword(final String userName) throws EmailSendingException {
 
 		final String password = new PasswordEncryptor().generateEncryptedPassword();
 
 		this.changePasswordInDatabase(userName, password);
 
-		// final TODO getEmailAddress for final user from DB
-		// final String eMailAddress = "";
-		// try {
-		// new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName,
-		// password);
-		// } catch (final EmailSendingException e) {
-		// new ExceptionLogger().logException(e);
-		// }
+		final String eMailAddress = new LoginQuery().getEmailForUser(userName);
+
+		new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName, password);
+
 		return password;
 	}
 

@@ -4,20 +4,19 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import server.operations.AccountHandlerTest;
-import server.operations.CookieHandlerTest;
-import server.operations.ExceptionLoggerTest;
-import server.operations.FilePrinterTest;
-import server.operations.NewsLetterHandlerTest;
-import server.operations.PasswordValidatorTest;
-import server.persistence.DataCreationTest;
-import server.persistence.HibernateTimeTableTest;
+import server.operations.OperationTestSuit;
+import server.persistence.PersistenceTestSuit;
+
+/**
+ * Used to start all tests for the application.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
 
 @RunWith(Suite.class)
-@SuiteClasses({ AccountHandlerTest.class, CookieHandlerTest.class,
-		ExceptionLoggerTest.class, NewsLetterHandlerTest.class,
-		PasswordValidatorTest.class, HibernateTimeTableTest.class,
-		FilePrinterTest.class, DataCreationTest.class })
+@SuiteClasses({ OperationTestSuit.class, PersistenceTestSuit.class })
 public class AllTests {
 
 }

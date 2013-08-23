@@ -42,26 +42,22 @@ class EmailTextCreator {
 		return sb.toString();
 	}
 
-	String generateConformationText(final String schoolClass,
-			final String eMailAddress) {
+	String generateConformationText(final String schoolClass, final String eMailAddress) {
 
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
 		sb.append("sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
-		sb.append("Die für sie eingetragene Klasse ist die " + schoolClass
-				+ " .");
+		sb.append("Die für sie eingetragene Klasse ist die " + schoolClass + " .");
 		sb.append(System.lineSeparator());
 
 		sb.append("Bitte bestätigen sie ihre Anmeldung indem Sie auf den folgenden Link klicken:");
-		sb.append(new NewsLetterHandler().generateRegistrationLink(schoolClass,
-				eMailAddress));
+		sb.append(new NewsLetterHandler().generateRegistrationLink(schoolClass, eMailAddress));
 		sb.append(System.lineSeparator());
 
 		sb.append("Sollten Sie die Registrierung nicht durchgeführt haben oder keine Newsletter erhalten wollen,");
 		sb.append("klicken Sie auf den folgenden Link oder ignorieren diese Nachricht.");
-		sb.append(new NewsLetterHandler().generateRemoveLink(schoolClass,
-				eMailAddress));
+		sb.append(new NewsLetterHandler().generateRemoveLink(schoolClass, eMailAddress));
 		sb.append("Ihre Addresse wird dann in kürze wieder gelöscht.");
 
 		sb.append(System.lineSeparator());
@@ -94,8 +90,7 @@ class EmailTextCreator {
 		return sb.toString();
 	}
 
-	public String generatePasswordChangeText(final String userName,
-			final String password) {
+	public String generatePasswordChangeText(final String userName, final String password) {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
