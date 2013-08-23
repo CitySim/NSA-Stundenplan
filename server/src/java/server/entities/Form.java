@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Klasse")
+@Table(name = "klasse")
 public class Form implements Serializable {
 
 	private static final long serialVersionUID = 1L;

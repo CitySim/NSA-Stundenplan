@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Klasse_Tag_Stunde")
+@Table(name = "klasse_tag_stunde")
 public class TimetableLesson implements Serializable {
 
 	private static final long serialVersionUID = 1L;
