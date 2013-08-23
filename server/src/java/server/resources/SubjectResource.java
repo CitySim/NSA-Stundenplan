@@ -25,9 +25,6 @@ public class SubjectResource {
 
 	@SuppressWarnings("unchecked")
 	public List<Subject> getSubjects() {
-		return HibernateUtil
-				.getEntityManager()
-				.createNativeQuery("select * from Unterrichtsfach",
-						Subject.class).getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Unterrichtsfach", Subject.class).getResultList();
 	}
 }

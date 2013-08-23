@@ -76,4 +76,15 @@ public class TimetableResource {
 		timetable.setLessons(query.getResultList());
 		return timetable;
 	}
+
+	@SuppressWarnings("unchecked")
+	public Timetable getTimetable(int timetableId) {
+		String sql = "select * from timetable where id = '"
+				+ timetableId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
+				TimetableLesson.class);
+		Timetable timetable = new Timetable();
+		timetable.setLessons(query.getResultList());
+		return timetable;
+	}
 }

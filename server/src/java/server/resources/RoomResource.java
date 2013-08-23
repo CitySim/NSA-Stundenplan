@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 @Path("room")
 public class RoomResource {
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoomsJSON() {
@@ -21,11 +22,9 @@ public class RoomResource {
 		final String json = gson.toJson(getRooms());
 		return json;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Room> getRooms() {
-		return HibernateUtil.getEntityManager()
-				.createNativeQuery("select * from Raum", Room.class)
-				.getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Raum", Room.class).getResultList();
 	}
 }
