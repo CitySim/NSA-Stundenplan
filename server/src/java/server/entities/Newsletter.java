@@ -19,7 +19,7 @@ public class Newsletter extends DefaultEntity {
 	@ManyToOne(targetEntity = Form.class)
 	private Form form;
 
-	@ManyToOne(targetEntity = EmailAddress.class, cascade = CascadeType.REMOVE)
+	@ManyToOne(targetEntity=EmailAddress.class)
 	private EmailAddress email;
 
 	public Form getForm() {
