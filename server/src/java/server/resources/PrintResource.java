@@ -33,11 +33,11 @@ public class PrintResource {
 	@GET
 	@Path("png")
 	@Produces(MediaType.TEXT_PLAIN)
-	public File printPNG() {
+	public File printPNG(@QueryParam("id") int timetableId) {
 		FilePrinter filePrinter = new FilePrinter();
 		File png = null;
 		try {
-			png = filePrinter.printAsPng(new TimetableResource().getClassTimetable(1));
+			png = filePrinter.printAsPng(new TimetableResource().getTimetable(timetableId));
 		} catch (ScheduleCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

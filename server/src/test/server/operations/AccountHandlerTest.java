@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
-import server.exceptions.EmailSendingException;
 import server.queries.LoginQuery;
 
 /**
@@ -27,22 +26,21 @@ public class AccountHandlerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() throws EmailSendingException, DuplicateUserException {
+	public void setUp() {
 		this.handler = new AccountHandler();
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
 		final String eMailAddress = "test@test.de";
 		try {
-			final Login account = this.handler.createAccount(name, familyName,
-					eMailAddress);
+			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
 			this.userName = account.getUser();
 		} catch (final DuplicateUserException e) {
 		}
 	}
 
 	@Test
-	public void testAccountCreation() throws EmailSendingException {
+	public void testAccountCreation() {
 
 		this.password = new LoginQuery().getPassword(this.userName);
 		AccountHandlerTest.assertNotNull(this.password);
@@ -50,12 +48,10 @@ public class AccountHandlerTest extends TestCase {
 	}
 
 	@Test
-	public void testPasswordChange() throws EmailSendingException {
+	public void testPasswordChange() {
 
 		this.password = this.handler.changePassword(this.userName);
-
-		AccountHandlerTest.assertEquals(this.password,
-				new LoginQuery().getPassword(this.userName));
+		AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
 
 	}
 
