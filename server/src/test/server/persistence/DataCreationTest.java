@@ -60,7 +60,7 @@ public class DataCreationTest {
 		final Teacher burg = this.helper.createTeacher("Burg", "Burg", "Bu");
 
 		final Form it1a = this.helper.createForm("it1a", herrmann);
-		final Form it1b = this.helper.createForm("it1b", lührssen);
+		final Form it1b = this.helper.createForm("it1b", burg);
 
 		final Room raum32 = this.helper.createRoom("Raum 32");
 		final Room raum53 = this.helper.createRoom("Raum 53");
@@ -93,50 +93,92 @@ public class DataCreationTest {
 		final Day donnerstag = this.helper.createDay("Donnerstag");
 		final Day freitag = this.helper.createDay("Freitag");
 
-		final List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
-
+		// it1a
 		// Lessons for Monday
-		final TimetableLesson timetableLesson = this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timetableLessons);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae, timetableLessons);
-		this.helper.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timetableLessons);
-		this.helper.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timetableLessons);
-		this.helper.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timetableLessons);
+		final List<TimetableLesson> timeTableLessons_it1a = new ArrayList<TimetableLesson>();
 
+		final TimetableLesson timetableLesson = this.helper
+				.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timeTableLessons_it1a);
+		final TimetableLesson timetableLesson2 = this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae,
+				timeTableLessons_it1a);
+		final TimetableLesson timetableLesson3 = this.helper
+				.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timeTableLessons_it1a);
 		// Lessons for TuesDay
-		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag, wug, timetableLessons);
-		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag, wug, timetableLessons);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson5, dienstag, ae, timetableLessons);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson6, dienstag, ae, timetableLessons);
-
+		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag, wug, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag, wug, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson5, dienstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson6, dienstag, ae, timeTableLessons_it1a);
 		// Lessons for Wednesday
-		this.helper.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch, orgaGp, timetableLessons);
-		this.helper.createTimeTableSession(it1a, giera, raum82, lesson4, mittwoch, orgaGp, timetableLessons);
-		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson5, mittwoch, itSyst, timetableLessons);
-		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson6, mittwoch, itSyst, timetableLessons);
-		this.helper.createTimeTableSession(it1a, burg, raum114, lesson7, mittwoch, fe, timetableLessons);
-		this.helper.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe, timetableLessons);
-
+		this.helper.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch, orgaGp, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, giera, raum82, lesson4, mittwoch, orgaGp, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson5, mittwoch, itSyst, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson6, mittwoch, itSyst, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, burg, raum114, lesson7, mittwoch, fe, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe, timeTableLessons_it1a);
 		// Lessons for Thursday
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson1, donnerstag, ae, timetableLessons);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson2, donnerstag, ae, timetableLessons);
-		this.helper.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag, orgaGp, timetableLessons);
-		this.helper.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag, orgaGp, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, donnerstag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, donnerstag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson7, donnerstag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson8, donnerstag, pro, timetableLessons);
-
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson1, donnerstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson2, donnerstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag, orgaGp, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag, orgaGp, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, donnerstag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, donnerstag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson7, donnerstag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, herrmann, raum53, lesson8, donnerstag, pro, timeTableLessons_it1a);
 		// Lessons for Friday
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson1, freitag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson2, freitag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson3, freitag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson4, freitag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, freitag, pro, timetableLessons);
-		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, freitag, pro, timetableLessons);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson1, freitag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson2, freitag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson3, freitag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson4, freitag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, freitag, pro, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, freitag, pro, timeTableLessons_it1a);
 
-		final Timetable timetable = new Timetable();
-		timetable.setLessons(timetableLessons);
-		this.em.persist(timetable);
+		final Timetable timetable_it1a = new Timetable();
+		timetable_it1a.setLessons(timeTableLessons_it1a);
+		this.em.persist(timetable_it1a);
+
+		// it1b
+		// Lessons for Monday
+		final List<TimetableLesson> timeTableLessons_it1b = new ArrayList<TimetableLesson>();
+
+		this.helper.createTimeTableSession(it1b, albers, raum32, lesson1, montag, suk, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, albers, raum32, lesson2, montag, suk, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, bastians, raum53, lesson5, montag, wug, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, bastians, raum53, lesson6, montag, wug, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson7, montag, ae, timeTableLessons_it1b);
+		// Lessons for TuesDay
+		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson1, dienstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson2, dienstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, bastians, raum81, lesson3, dienstag, wug, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, bastians, raum81, lesson4, dienstag, wug, timeTableLessons_it1b);
+		// Lessons for Wednesday
+		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson4, mittwoch, itSyst, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson5, mittwoch, itSyst, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum82, lesson6, mittwoch, fe, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum82, lesson7, mittwoch, fe, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, giera, raum53, lesson8, mittwoch, orgaGp, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, giera, raum53, lesson9, mittwoch, orgaGp, timeTableLessons_it1b);
+		// Lessons for Thursday
+		this.helper.createTimeTableSession(it1b, giera, raum81, lesson1, donnerstag, orgaGp, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, giera, raum81, lesson2, donnerstag, orgaGp, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson3, donnerstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson4, donnerstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson5, donnerstag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson6, donnerstag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson7, donnerstag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson8, donnerstag, pro, timeTableLessons_it1b);
+		// Lessons for Friday
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson1, freitag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson2, freitag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson3, freitag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson4, freitag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson5, freitag, pro, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, burg, raum114, lesson6, freitag, pro, timeTableLessons_it1b);
+
+		final Timetable timetable_it1b = new Timetable();
+		timetable_it1b.setLessons(timeTableLessons_it1a);
+		this.em.persist(timetable_it1b);
 
 		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@g18.de");
 		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@g18.de");
@@ -148,6 +190,8 @@ public class DataCreationTest {
 		this.helper.createLogin("test", "test@g18.de");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, timetableLesson);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, timetableLesson2);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, timetableLesson3);
 
 		this.em.getTransaction().commit();
 
