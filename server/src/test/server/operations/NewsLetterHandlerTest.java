@@ -1,9 +1,14 @@
 package server.operations;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import server.entities.Newsletter;
+import server.queries.NewsletterQuery;
 
 /**
  * Test for the generation of the newsLetterUrls.
@@ -41,28 +46,28 @@ public class NewsLetterHandlerTest extends TestCase {
 
 	}
 
-	// @Test
-	// public void testAddressCreation() {
-	//
-	// this.testUrlCreation();
-	//
-	// boolean success = false;
-	//
-	// NewsLetterHandlerTest.assertTrue(this.handler
-	// .validateConfirmation(this.url));
-	//
-	// final List<Newsletter> newsLetterList = new NewsletterQuery()
-	// .getAllNewsletters();
-	//
-	// for (final Newsletter newsLetter : newsLetterList) {
-	// if (newsLetter.getEmail().getEMailAddress()
-	// .equals(this.eMailAddress)) {
-	// success = true;
-	// }
-	// }
-	// NewsLetterHandlerTest.assertEquals(true, success);
-	//
-	// NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(
-	// this.eMailAddress, this.schoolClass));
-	// }
+	 @Test
+	 public void testAddressCreation() {
+	
+	 this.testUrlCreation();
+	
+	 boolean success = false;
+	
+	 NewsLetterHandlerTest.assertTrue(this.handler
+	 .validateConfirmation(this.url));
+	
+	 final List<Newsletter> newsLetterList = new NewsletterQuery()
+	 .getAllNewsletters();
+	
+	 for (final Newsletter newsLetter : newsLetterList) {
+	 if (newsLetter.getEmail().getEMailAddress()
+	 .equals(this.eMailAddress)) {
+	 success = true;
+	 }
+	 }
+	 NewsLetterHandlerTest.assertEquals(true, success);
+	
+	 NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(
+	 this.eMailAddress, this.schoolClass));
+	 }
 }
