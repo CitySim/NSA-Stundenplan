@@ -29,7 +29,7 @@ public class FilePrinterTest extends TestCase {
 	public void setUp() {
 		this.printer = new FilePrinter();
 		this.cleaner = new CacheCleaner();
-		this.timeTable = new TimetableResource().getClassTimetable(1);
+		this.timeTable = new TimetableResource().getClassTimetable(2);
 	}
 
 	@Test

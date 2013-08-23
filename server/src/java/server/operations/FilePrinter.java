@@ -92,7 +92,10 @@ public class FilePrinter {
 		final StringBuilder sb = new StringBuilder();
 
 		for (final TimetableLesson lesson : timeTable.getLessons()) {
+			sb.append(lesson.getSubject().getShortName());
+			sb.append(lesson.getTeacher().getShortName());
 			sb.append(lesson.getRoom().getDescription());
+			sb.append("\n");
 		}
 		//System.out.println(sb.toString());
 		// TODO fill file with timeTable data.
