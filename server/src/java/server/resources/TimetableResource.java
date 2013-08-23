@@ -1,5 +1,7 @@
 package server.resources;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,9 +15,9 @@ import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 
-// TODO
 @Path("timetable")
 public class TimetableResource {
+	private EntityManager entitiyManager;
 
 	@GET
 	@Path("class")
@@ -46,45 +48,49 @@ public class TimetableResource {
 
 	@SuppressWarnings("unchecked")
 	public Timetable getClassTimetable(int classId) {
-		String sql = "select * from klasse_tag_stunde where idklasse = '"
-				+ classId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
-				TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idklasse = '" + classId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
+		saveTimetable(timetable);
 		return timetable;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Timetable getRoomTimetable(int roomId) {
-		String sql = "select * from klasse_tag_stunde where idRaum = '"
-				+ roomId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
-				TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idRaum = '" + roomId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
+		saveTimetable(timetable);
 		return timetable;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Timetable getTeacherTimetable(int teacherId) {
-		String sql = "select * from klasse_tag_stunde where idLehrer = '"
-				+ teacherId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
-				TimetableLesson.class);
+		String sql = "select * from klasse_tag_stunde where idLehrer = '" + teacherId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, TimetableLesson.class);
 		Timetable timetable = new Timetable();
 		timetable.setLessons(query.getResultList());
+		saveTimetable(timetable);
 		return timetable;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Timetable getTimetable(int timetableId) {
-		String sql = "select * from timetable where id = '"
-				+ timetableId + "'";
-		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql,
-				TimetableLesson.class);
-		Timetable timetable = new Timetable();
-		timetable.setLessons(query.getResultList());
+		String sql = "select * from timetable where id = '" + timetableId + "'";
+		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Timetable.class);
+		Timetable timetable = (Timetable) query.getResultList().get(0);
 		return timetable;
+	}
+
+	private void saveTimetable(Timetable timetable) {
+		if (timetable != null && timetable.getLessons().size() > 0) {
+			// Überprüfen ob der Stundenplan schon existiert:
+			entitiyManager = HibernateUtil.getEntityManager();
+			EntityTransaction transaction = entitiyManager.getTransaction();
+			transaction.begin();
+			entitiyManager.persist(timetable);
+			transaction.commit();
+		}
 	}
 }
