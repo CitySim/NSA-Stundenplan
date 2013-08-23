@@ -1,11 +1,10 @@
 - AvailableResource implementieren
 - ConfirmationResource implementieren (für Newsletter anmeldung)
 - Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
-- forgot password function hinzufügen. (Auch im Pflichtenheft)
+- forgot password function hinzufügen. (Im Pflichtenheft)
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
-- ???
-- Profit!
+- Cookie überprüfen bei jedem Request
 
 Dennis:
 EmailSending testen (Mercury einrichten etc.)
