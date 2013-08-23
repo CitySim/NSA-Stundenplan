@@ -1,6 +1,5 @@
 package server.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -15,11 +14,10 @@ public class Newsletter extends DefaultEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	// Klasse
 	@ManyToOne(targetEntity = Form.class)
 	private Form form;
 
-	@ManyToOne(targetEntity=EmailAddress.class)
+	@ManyToOne(targetEntity = EmailAddress.class)
 	private EmailAddress email;
 
 	public Form getForm() {
