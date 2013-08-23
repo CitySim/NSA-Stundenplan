@@ -12,10 +12,16 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			@render()
 			return
 
+		model = new nsa.Models.TimeTable()
+		model.fetchData = @options.fetchData
+		model.fetch
+			success: () =>
+				@model = model
+				return
 		return
 		
 	render: () =>
-		if @loading
+		if @loading or not @model?
 			@$el.html nsa.handlebars.loading()
 			return
 		
@@ -35,6 +41,6 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		@$el.html @template
 			days: tempDays
 			lessons: tempLessons
-			collection: null #@collection.toJSON()
+			timetable: @model.toJSON()
 
 		return
