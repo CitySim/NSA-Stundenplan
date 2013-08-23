@@ -28,7 +28,7 @@ public class SuperException extends Exception {
 		this.date = new Date();
 	}
 
-	public String createLogingMessage() {
+	public final String createLogingMessage() {
 		final StringBuffer sb = new StringBuffer();
 		sb.append(this.date);
 		sb.append(": ErrorNumber'");
@@ -39,7 +39,7 @@ public class SuperException extends Exception {
 		return sb.toString();
 	}
 
-	public String showErrorMessage() {
+	public final String showErrorMessage() {
 		final StringBuffer sb = new StringBuffer();
 		sb.append(this.errorNumber);
 		sb.append(": '");

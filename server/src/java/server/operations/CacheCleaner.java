@@ -13,28 +13,28 @@ import java.util.ArrayList;
 
 class CacheCleaner {
 
-    final void cleanCache() {
+	final void cleanCache() {
 
-        final ArrayList<File> filesToDelete = new ArrayList<File>();
+		final ArrayList<File> filesToDelete = new ArrayList<File>();
 
-        filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.pdf"));
+		filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.pdf"));
 
-        filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.png"));
+		filesToDelete.add(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "stundenplan.png"));
 
-        this.deleteFile(filesToDelete);
+		this.deleteFile(filesToDelete);
 
-    }
+	}
 
-    private void deleteFile(final ArrayList<File> filesToDelete) {
+	private void deleteFile(final ArrayList<File> filesToDelete) {
 
-        for (final File file : filesToDelete) {
-            try {
-                if (!file.isDirectory()) {
-                    file.delete();
-                }
-            } catch (final Exception e) {
-                // noting to do.
-            }
-        }
-    }
+		for (final File file : filesToDelete) {
+			try {
+				if (!file.isDirectory()) {
+					file.delete();
+				}
+			} catch (final Exception e) {
+				// noting to do.
+			}
+		}
+	}
 }

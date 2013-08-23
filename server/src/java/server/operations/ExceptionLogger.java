@@ -19,7 +19,7 @@ public class ExceptionLogger {
 
 	private boolean failed = false;
 
-	public boolean logException(final SuperException exception) {
+	public final boolean logException(final SuperException exception) {
 		final String path = System.getProperty("user.home") + System.getProperty("file.separator") + "NSA_StundenPlan_log.txt";
 
 		final String text = this.readFile(path);
