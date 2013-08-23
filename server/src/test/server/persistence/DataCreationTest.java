@@ -41,7 +41,7 @@ public class DataCreationTest {
 
 		this.em.getTransaction().begin();
 
-		final Teacher lürssen = this.createTeacher("Volker", "Lürssen", "Lü");
+		final Teacher lührssen = this.createTeacher("Volker", "Lührssen", "Lü");
 		final Teacher albers = this.createTeacher("Kirsten", "Albers", "Al");
 		final Teacher herrmann = this.createTeacher("Werner", "Herrmann", "Hr");
 		final Teacher bastians = this.createTeacher("Thomas", "Bastians", "Ba");
@@ -50,7 +50,7 @@ public class DataCreationTest {
 		final Teacher burg = this.createTeacher("Burg", "Burg", "Bu");
 
 		final Form it1a = this.createForm("it1a", herrmann);
-		final Form it1b = this.createForm("it1b", lürssen);
+		final Form it1b = this.createForm("it1b", lührssen);
 
 		final Room raum32 = this.createRoom("Raum 32");
 		final Room raum53 = this.createRoom("Raum 53");
@@ -86,8 +86,8 @@ public class DataCreationTest {
 		final List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
 
 		// Lessons for Monday
-		final TimetableLesson timetableLesson = this.createTimeTableSession(it1a, lürssen, raum53, lesson3, montag, ae, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson4, montag, ae, timetableLessons);
+		final TimetableLesson timetableLesson = this.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae, timetableLessons);
 		this.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timetableLessons);
 		this.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timetableLessons);
 		this.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timetableLessons);
@@ -95,8 +95,8 @@ public class DataCreationTest {
 		// Lessons for TuesDay
 		this.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag, wug, timetableLessons);
 		this.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag, wug, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson5, dienstag, ae, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson6, dienstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lührssen, raum53, lesson5, dienstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lührssen, raum53, lesson6, dienstag, ae, timetableLessons);
 
 		// Lessons for Wednesday
 		this.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch, orgaGp, timetableLessons);
@@ -107,8 +107,8 @@ public class DataCreationTest {
 		this.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe, timetableLessons);
 
 		// Lessons for Thursday
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson1, donnerstag, ae, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson2, donnerstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lührssen, raum53, lesson1, donnerstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lührssen, raum53, lesson2, donnerstag, ae, timetableLessons);
 		this.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag, orgaGp, timetableLessons);
 		this.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag, orgaGp, timetableLessons);
 		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, donnerstag, pro, timetableLessons);
@@ -135,8 +135,9 @@ public class DataCreationTest {
 		this.createLogin("Heike.Giera", "Heike.Giera@g18.de");
 		this.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@g18.de");
 		this.createLogin("Burg.Burg", "Burg.Burg@g18.de");
+		this.createLogin("test", "test@g18.de");
 
-		this.createReplacement(Calendar.getInstance().getTime(), raum53, lürssen, it1a, timetableLesson);
+		this.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, timetableLesson);
 
 		this.em.getTransaction().commit();
 
