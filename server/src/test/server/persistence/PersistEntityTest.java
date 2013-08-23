@@ -126,6 +126,7 @@ public class PersistEntityTest {
 
 		final Timetable timetable1 = new Timetable();
 		timetable1.setLessons(timetableLessons);
+		timetable1.setForm(form1);
 		em.persist(timetable1);
 
 		final EmailAddress email = new EmailAddress();
