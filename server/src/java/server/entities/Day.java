@@ -29,5 +29,4 @@ public class Day {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
 }

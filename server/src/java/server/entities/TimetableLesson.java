@@ -89,7 +89,7 @@ public class TimetableLesson implements Serializable {
 	public void setRoom(Room newRoom) {
 		room = newRoom;
 	}
-	
+
 	@OneToOne(targetEntity = Replacement.class)
 	private Replacement replacement;
 

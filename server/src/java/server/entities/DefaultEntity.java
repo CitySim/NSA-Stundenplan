@@ -17,5 +17,4 @@ public abstract class DefaultEntity implements Serializable {
 	public int getId() {
 		return this.id;
 	}
-
 }

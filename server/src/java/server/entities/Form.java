@@ -23,7 +23,7 @@ public class Form implements Serializable {
 	@Column(name = "bezeichnung", length = 10)
 	private String description;
 
-	@ManyToOne(targetEntity=Teacher.class)
+	@ManyToOne(targetEntity = Teacher.class)
 	private Teacher teacher;
 
 	public int getId() {

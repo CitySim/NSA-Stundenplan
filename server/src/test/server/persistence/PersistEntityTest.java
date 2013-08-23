@@ -151,8 +151,8 @@ public class PersistEntityTest {
 		em.getTransaction().commit();
 
 		@SuppressWarnings("unchecked")
-		final List<Form> list = em.createNativeQuery(
-				"select * from Klasse", Form.class).getResultList();
+		final List<Form> list = em.createNativeQuery("select * from Klasse",
+				Form.class).getResultList();
 		assertTrue(list.size() >= 2);
 		for (final Form current : list) {
 			final String firstName = current.getDescription();
