@@ -2,7 +2,11 @@ package server.operations;
 
 import java.util.Date;
 
-import javax.servlet.http.Cookie;
+
+
+
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.NewCookie;
 
 import server.queries.CookieQuery;
 
@@ -16,13 +20,13 @@ import server.queries.CookieQuery;
 
 public class CookieHandler {
 
-	public final Cookie createCookie() {
+	public final NewCookie createCookie() {
 
 		final String cookieID = new PasswordEncryptor()
 				.generateEncryptedPassword();
-		final Cookie cookie = new Cookie("NSA-Cookie", cookieID);
-		cookie.setValue(cookieID);
-		cookie.setMaxAge(2592000);
+		
+		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID, null, null, null, 30*24*60*60,false);
+
 		final DateHelper dateHelper = new DateHelper();
 		dateHelper.addTime(0, 1, 0, 0, 0, 0);
 		new CookieQuery().createCookie(cookieID,

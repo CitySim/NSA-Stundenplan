@@ -7,6 +7,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
 
 import server.exceptions.LoginFailedException;
 import server.operations.CookieHandler;
@@ -20,18 +22,22 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String doLogin(
+	public Response doLogin(
 			@DefaultValue("") @FormParam("user") String userName,
 			@DefaultValue("") @FormParam("password") String password) {
 		final Gson gson = new Gson();
 		String json;
+		NewCookie cookie = null;
+		
 		try {
 			new LoginValidator().validateLoginData(userName, password);
-			json = gson.toJson(new CookieHandler().createCookie());
+			cookie = new CookieHandler().createCookie();
+			json = gson.toJson(cookie);
 
 		} catch (LoginFailedException e) {
 			json = gson.toJson(e.getMessage());
 		}
-		return json;
+		
+		return Response.ok(json).cookie(cookie).build();
 	}
 }

@@ -2,7 +2,9 @@ package server.operations;
 
 import java.util.Date;
 
-import javax.servlet.http.Cookie;
+
+
+import javax.ws.rs.core.Cookie;
 
 import junit.framework.TestCase;
 

@@ -16,6 +16,9 @@ class window.nsa.Views.Login extends Backbone.View
 			data:
 				user: @$(".app-username").val()
 				password: @$(".app-password").val()
+			headers:
+				"Content-Type": "application/x-www-form-urlencoded"
+
 			success: (data) =>
 				try
 					data = JSON.parse(data)

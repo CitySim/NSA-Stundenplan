@@ -24,7 +24,14 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		if @loading or not @model?
 			@$el.html nsa.handlebars.loading()
 			return
-		
+
+		# days prepare
+		tempDays = nsa.Data.days.toJSON()
+		_.each tempDays, (d) =>
+			d.short = d.description.substr(0, 2)
+			return
+
+		# lessons prepare
 		tempLessons = nsa.Data.lessons.toJSON()
 		lessonNo = 1
 		_.each tempLessons, (l) =>
@@ -33,14 +40,28 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			l.format_end = moment(l.timeTo, "hh:mm a").format("HH:mm")
 			return
 
-		tempDays = nsa.Data.days.toJSON()
-		_.each tempDays, (d) =>
-			d.short = d.description.substr(0, 2)
+		# prepare timetable
+		_.each tempLessons, (l) =>
+			tempTimeTable = []
+			_.each tempDays, (d) =>
+				tempLesson = {}
+				_.each @model.get("timetableLessons"), (t) =>
+					if d.id is t.day.id and l.id is t.lesson.id
+						tempLesson = t
+					return
+
+				tempTimeTable[tempTimeTable.length - 1].push(tempLesson)
+				return
+
+			l.days = tempTimeTable
 			return
+
+		console.log tempTimeTable
 
 		@$el.html @template
 			days: tempDays
 			lessons: tempLessons
 			timetable: @model.toJSON()
+			timetabledta: tempTimeTable
 
 		return
