@@ -19,12 +19,25 @@ public class LoginQuery extends QueryResult {
 	 * Get the Password for the specified User
 	 * 
 	 * @param username
-	 * @return
+	 * @return String password
 	 */
 	public String getPassword(final String username) {
 		final Login login = this.getLoginUser(username);
 		if (login != null) {
 			return login.getPassword();
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the Email address for the specified User
+	 * @param username
+	 * @return String Email
+	 */
+	public String getEmailForUser(String username){
+		final Login login = this.getLoginUser(username);
+		if (login != null) {
+			return login.getEmail().getEMailAddress();
 		}
 		return null;
 	}

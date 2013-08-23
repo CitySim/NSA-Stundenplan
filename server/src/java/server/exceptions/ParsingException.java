@@ -22,5 +22,4 @@ public class ParsingException extends SuperException {
 		super(errorNumber, errorTitel, errorMessage);
 		new ExceptionLogger().logException(this);
 	}
-
 }

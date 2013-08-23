@@ -26,6 +26,14 @@ import server.entities.Timetable;
 import server.entities.TimetableLesson;
 import server.operations.PasswordEncryptor;
 
+/**
+ * Test for the initial dataCreation.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class DataCreationTest {
 
 	private EntityManager em;
@@ -144,10 +152,6 @@ public class DataCreationTest {
 		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery("select * from Klasse", Form.class).getResultList();
 		assertTrue(list.size() >= 2);
-		for (final Form current : list) {
-			final String firstName = current.getDescription();
-			assertTrue(firstName.equals("ita") || firstName.equals("itb"));
-		}
 	}
 
 	private Teacher createTeacher(final String firstName, final String lastName, final String shortName) {

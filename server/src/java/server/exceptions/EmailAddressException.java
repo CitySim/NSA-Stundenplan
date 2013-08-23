@@ -12,9 +12,9 @@ import server.operations.ExceptionLogger;
 
 public class EmailAddressException extends SuperException {
 
-	private final static int errorNumber = 5;
-	private final static String errorTitel = "EmailAddress Exception";
-	private final static String errorMessage = "An error appeared while trying to send out the E-Mail. The E-Mail address seems to be invalid.";
+	private static final int errorNumber = 5;
+	private static final String errorTitel = "EmailAddress Exception";
+	private static final String errorMessage = "An error appeared while trying to send out the E-Mail. The E-Mail address seems to be invalid.";
 
 	private static final long serialVersionUID = -4565962119370664301L;
 

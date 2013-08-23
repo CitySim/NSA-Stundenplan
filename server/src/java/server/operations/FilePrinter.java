@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -40,8 +41,7 @@ public class FilePrinter {
 			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			// createPdfTable(timeTable, document);
-			document.add(new Paragraph(this.createText(timeTable)));
+			createPdfTable(timeTable, document);
 			document.close();
 
 		} catch (final FileNotFoundException | DocumentException e) {
@@ -94,30 +94,34 @@ public class FilePrinter {
 			sb.append("\n");
 
 		}
-		// System.out.println(sb.toString());
-		// TODO fill file with timeTable data.
 		return sb.toString();
 	}
 
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
-		final PdfPTable table = new PdfPTable(5); // Code 1
+		final PdfPTable table = new PdfPTable(6); 
+		table.addCell("Klasse XXX");
+		table.addCell("Montag");
+		table.addCell("Dienstag");
+		table.addCell("Mittwoch");
+		table.addCell("Donnerstag");
+		table.addCell("Freitag");
 
-		// Code 2
-		table.addCell("1");
-		table.addCell("2");
+		table.setHeaderRows(1);
+		int counter =4;
+		for (final TimetableLesson lesson : timeTable.getLessons()) {
+			if(counter == 4){
+				counter = 0;
+				table.addCell(lesson.getLesson().getTimeFrom().toString().substring(0, 5) + "\n - \n" + lesson.getLesson().getTimeTo().toString().substring(0, 5));
+			}else{
+				counter++;
+			}
+			table.addCell(lesson.getSubject().getShortName()+"\n"+
+			lesson.getTeacher().getShortName()+"\n"+
+			lesson.getRoom().getDescription());
+		}
 
-		// Code 3
-		table.addCell("3");
-		table.addCell("4");
-
-		// Code 4
-		table.addCell("5");
-		table.addCell("6");
-
-		// Code 5
 		document.add(table);
-		document.close();
 	}
 
 }

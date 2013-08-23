@@ -30,21 +30,11 @@ public class AccountHandlerTest extends TestCase {
 	public void setUp() {
 		this.handler = new AccountHandler();
 
-		final String name = "Dennis";
-		final String familyName = "Markmann";
-		final String eMailAddress = "test@test.de";
-		try {
-			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
-			this.userName = account.getUser();
-		} catch (final EmailSendingException e) {
-			AccountHandlerTest.fail();
-		} catch (final DuplicateUserException e) {
-		}
 	}
 
 	@Test
 	public void testAccountCreation() {
-
+		this.createTestAccount();
 		this.password = new LoginQuery().getPassword(this.userName);
 		AccountHandlerTest.assertNotNull(this.password);
 
@@ -52,10 +42,24 @@ public class AccountHandlerTest extends TestCase {
 
 	@Test
 	public void testPasswordChange() {
-
+		this.createTestAccount();
 		this.password = this.handler.changePassword(this.userName);
 		AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
+	}
 
+	public void createTestAccount() {
+
+		final String name = "Dennis";
+		final String familyName = "Markmann";
+		final String eMailAddress = "test@test.de";
+
+		try {
+			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
+			this.userName = account.getUser();
+		} catch (final EmailSendingException e) {
+			AccountHandlerTest.fail();
+		} catch (final DuplicateUserException e) {
+		}
 	}
 
 	@Test
