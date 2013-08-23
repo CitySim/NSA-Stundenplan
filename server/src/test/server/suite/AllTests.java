@@ -17,7 +17,7 @@ import server.persistence.PersistEntityTest;
 @SuiteClasses({ AccountHandlerTest.class, CookieHandlerTest.class,
 		ExceptionLoggerTest.class, NewsLetterHandlerTest.class,
 		PasswordValidatorTest.class, HibernateTimeTableTest.class,
-		FilePrinterTest.class, PersistEntityTest.class })
+		FilePrinterTest.class})
 public class AllTests {
 
 }
