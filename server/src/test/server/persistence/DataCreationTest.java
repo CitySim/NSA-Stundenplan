@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,13 +15,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.entities.Day;
+import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Lesson;
+import server.entities.Login;
+import server.entities.Replacement;
 import server.entities.Room;
 import server.entities.Subject;
 import server.entities.Teacher;
 import server.entities.Timetable;
 import server.entities.TimetableLesson;
+import server.operations.PasswordEncryptor;
 
 public class DataCreationTest {
 
@@ -36,7 +42,7 @@ public class DataCreationTest {
 	}
 
 	@Test
-	public void entityManagerTest() {
+	public void testDataCreation() {
 
 		this.em.getTransaction().begin();
 
@@ -69,13 +75,10 @@ public class DataCreationTest {
 		final Lesson lesson10 = this.createLesson("15:45:00", "16:30:00");
 
 		final Subject ae = this.createSubject("Anwendungsentwicklung", "AE");
-		final Subject suk = this.createSubject("Sprache und Kommunikation",
-				"SuK");
+		final Subject suk = this.createSubject("Sprache und Kommunikation", "SuK");
 		final Subject itSyst = this.createSubject("IT-Systeme", "IT-Syst");
-		final Subject wug = this.createSubject("Wirtschaft und Gesellschaft",
-				"WuG");
-		final Subject orgaGp = this.createSubject(
-				"Organisation und Geschäftsprozesse", "OrgaGp");
+		final Subject wug = this.createSubject("Wirtschaft und Gesellschaft", "WuG");
+		final Subject orgaGp = this.createSubject("Organisation und Geschäftsprozesse", "OrgaGp");
 		final Subject fe = this.createSubject("Fachenglisch", "FE");
 		final Subject pro = this.createSubject("Projekt", "Pro");
 
@@ -88,102 +91,62 @@ public class DataCreationTest {
 		final List<TimetableLesson> timetableLessons = new ArrayList<TimetableLesson>();
 
 		// Lessons for Monday
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson3, montag, ae,
-				timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson4, montag, ae,
-				timetableLessons);
-		this.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk,
-				timetableLessons);
-		this.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk,
-				timetableLessons);
-		this.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag,
-				itSyst, timetableLessons);
+		final TimetableLesson timetableLesson = this.createTimeTableSession(it1a, lürssen, raum53, lesson3, montag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lürssen, raum53, lesson4, montag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timetableLessons);
+		this.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timetableLessons);
+		this.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timetableLessons);
 
 		// Lessons for TuesDay
-		this.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag,
-				wug, timetableLessons);
-		this.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag,
-				wug, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson5, dienstag,
-				ae, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson6, dienstag,
-				ae, timetableLessons);
+		this.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag, wug, timetableLessons);
+		this.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag, wug, timetableLessons);
+		this.createTimeTableSession(it1a, lürssen, raum53, lesson5, dienstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lürssen, raum53, lesson6, dienstag, ae, timetableLessons);
 
 		// Lessons for Wednesday
-		this.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch,
-				orgaGp, timetableLessons);
-		this.createTimeTableSession(it1a, giera, raum82, lesson4, mittwoch,
-				orgaGp, timetableLessons);
-		this.createTimeTableSession(it1a, herrmann, raum53, lesson5, mittwoch,
-				itSyst, timetableLessons);
-		this.createTimeTableSession(it1a, herrmann, raum53, lesson6, mittwoch,
-				itSyst, timetableLessons);
-		this.createTimeTableSession(it1a, burg, raum114, lesson7, mittwoch, fe,
-				timetableLessons);
-		this.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe,
-				timetableLessons);
+		this.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch, orgaGp, timetableLessons);
+		this.createTimeTableSession(it1a, giera, raum82, lesson4, mittwoch, orgaGp, timetableLessons);
+		this.createTimeTableSession(it1a, herrmann, raum53, lesson5, mittwoch, itSyst, timetableLessons);
+		this.createTimeTableSession(it1a, herrmann, raum53, lesson6, mittwoch, itSyst, timetableLessons);
+		this.createTimeTableSession(it1a, burg, raum114, lesson7, mittwoch, fe, timetableLessons);
+		this.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe, timetableLessons);
 
 		// Lessons for Thursday
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson1, donnerstag,
-				ae, timetableLessons);
-		this.createTimeTableSession(it1a, lürssen, raum53, lesson2, donnerstag,
-				ae, timetableLessons);
-		this.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag,
-				orgaGp, timetableLessons);
-		this.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag,
-				orgaGp, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson5,
-				donnerstag, pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson6,
-				donnerstag, pro, timetableLessons);
-		this.createTimeTableSession(it1a, herrmann, raum53, lesson7,
-				donnerstag, pro, timetableLessons);
-		this.createTimeTableSession(it1a, herrmann, raum53, lesson8,
-				donnerstag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, lürssen, raum53, lesson1, donnerstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, lürssen, raum53, lesson2, donnerstag, ae, timetableLessons);
+		this.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag, orgaGp, timetableLessons);
+		this.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag, orgaGp, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, donnerstag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, donnerstag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, herrmann, raum53, lesson7, donnerstag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, herrmann, raum53, lesson8, donnerstag, pro, timetableLessons);
 
 		// Lessons for Friday
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson1, freitag,
-				pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson2, freitag,
-				pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson3, freitag,
-				pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson4, freitag,
-				pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, freitag,
-				pro, timetableLessons);
-		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, freitag,
-				pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson1, freitag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson2, freitag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson3, freitag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson4, freitag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, freitag, pro, timetableLessons);
+		this.createTimeTableSession(it1a, wehmeyer, raum53, lesson6, freitag, pro, timetableLessons);
 
 		final Timetable timetable = new Timetable();
 		timetable.setLessons(timetableLessons);
 		this.em.persist(timetable);
 
-		// final EmailAddress email = new EmailAddress();
-		// email.setEMailAddress("hans@wurst.de");
-		// this.em.persist(email);
-		//
-		// final Login login1 = new Login();
-		// login1.setEmail(email);
-		// login1.setPassword(new PasswordEncryptor().encryptPassword("test"));
-		// login1.setUser("Hans");
-		// this.em.persist(login1);
-		//
-		// final Replacement replacement1 = new Replacement();
-		// replacement1.setDate(Calendar.getInstance().getTime());
-		// replacement1.setRoom(room1);
-		// replacement1.setTeacher(herrmann);
-		// replacement1.setForm(it1a);
-		// this.em.persist(replacement1);
-		//
-		// timetableLesson1.setReplacement(replacement1);
-		// this.em.persist(timetableLesson1);
+		this.createLogin("Volker.Lürssen", "Volker.Lürssen@g18.de");
+		this.createLogin("Kirsten.Albers", "Kirsten.Albers@g18.de");
+		this.createLogin("Werner.Herrmann", "Werner.Herrmann@g18.de");
+		this.createLogin("Thomas.Bastians", "Thomas.Bastians@g18.de");
+		this.createLogin("Heike.Giera", "Heike.Giera@g18.de");
+		this.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@g18.de");
+		this.createLogin("Burg.Burg", "Burg.Burg@g18.de");
+
+		this.createReplacement(Calendar.getInstance().getTime(), raum53, lürssen, it1a, timetableLesson);
 
 		this.em.getTransaction().commit();
 
 		@SuppressWarnings("unchecked")
-		final List<Form> list = this.em.createNativeQuery(
-				"select * from Klasse", Form.class).getResultList();
+		final List<Form> list = this.em.createNativeQuery("select * from Klasse", Form.class).getResultList();
 		assertTrue(list.size() >= 2);
 		for (final Form current : list) {
 			final String firstName = current.getDescription();
@@ -191,8 +154,7 @@ public class DataCreationTest {
 		}
 	}
 
-	private Teacher createTeacher(final String firstName,
-			final String lastName, final String shortName) {
+	private Teacher createTeacher(final String firstName, final String lastName, final String shortName) {
 		final Teacher teacher = new Teacher();
 		teacher.setFirstname(firstName);
 		teacher.setName(lastName);
@@ -224,8 +186,7 @@ public class DataCreationTest {
 		return lesson;
 	}
 
-	private Subject createSubject(final String description,
-			final String shortName) {
+	private Subject createSubject(final String description, final String shortName) {
 		final Subject subject = new Subject();
 		subject.setDescription(description);
 		subject.setShortName(shortName);
@@ -240,10 +201,8 @@ public class DataCreationTest {
 		return day;
 	}
 
-	private TimetableLesson createTimeTableSession(final Form form,
-			final Teacher teacher, final Room room, final Lesson lesson,
-			final Day day, final Subject subject,
-			final List<TimetableLesson> timetableLessons) {
+	private TimetableLesson createTimeTableSession(final Form form, final Teacher teacher, final Room room, final Lesson lesson, final Day day,
+			final Subject subject, final List<TimetableLesson> timetableLessons) {
 
 		final TimetableLesson timetableLesson = new TimetableLesson();
 		timetableLesson.setForm(form);
@@ -253,7 +212,34 @@ public class DataCreationTest {
 		timetableLesson.setDay(day);
 		timetableLesson.setSubject(subject);
 		timetableLessons.add(timetableLesson);
+		this.em.persist(timetableLesson);
 		return timetableLesson;
+	}
+
+	private EmailAddress createEmailAddress(final String eMailAddress) {
+		final EmailAddress email = new EmailAddress();
+		email.setEMailAddress(eMailAddress);
+		this.em.persist(email);
+		return email;
+	}
+
+	private void createLogin(final String userName, final String eMailAddress) {
+		final Login login = new Login();
+		login.setUser(userName);
+		login.setEmail(this.createEmailAddress(eMailAddress));
+		login.setPassword(new PasswordEncryptor().encryptPassword("test"));
+		this.em.persist(login);
+	}
+
+	private void createReplacement(final Date date, final Room room, final Teacher teacher, final Form form, final TimetableLesson timetableLesson) {
+		final Replacement replacement = new Replacement();
+		replacement.setDate(date);
+		replacement.setRoom(room);
+		replacement.setTeacher(teacher);
+		replacement.setForm(form);
+		this.em.persist(replacement);
+		timetableLesson.setReplacement(replacement);
+		this.em.persist(timetableLesson);
 	}
 
 }
