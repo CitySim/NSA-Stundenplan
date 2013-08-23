@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 @Path("day")
 public class DayResource {
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getDaysJSON() {
@@ -25,9 +25,6 @@ public class DayResource {
 
 	@SuppressWarnings("unchecked")
 	public List<Day> getDays() {
-		return HibernateUtil
-				.getEntityManager()
-				.createNativeQuery("select * from Tag",
-						Day.class).getResultList();
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Tag", Day.class).getResultList();
 	}
 }
