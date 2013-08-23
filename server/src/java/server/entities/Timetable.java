@@ -2,15 +2,16 @@ package server.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Timetable extends DefaultEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<TimetableLesson> timetableLessons;
 
 	public List<TimetableLesson> getLessons() {
