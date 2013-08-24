@@ -18,6 +18,14 @@ import server.entities.Teacher;
 import server.entities.TimetableLesson;
 import server.operations.PasswordEncryptor;
 
+/**
+ * Contains methods for creating data.
+ * 
+ * @author dennis.markmann
+ * @since JDK.1.7.0_25
+ * @version 1.0
+ */
+
 public class DataCreationHelper {
 
 	private final EntityManager em;
