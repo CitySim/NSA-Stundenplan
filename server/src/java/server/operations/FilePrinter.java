@@ -12,12 +12,16 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import server.entities.Day;
+import server.entities.Lesson;
 import server.entities.Timetable;
 import server.entities.TimetableLesson;
 import server.exceptions.ScheduleCreationException;
+import server.resources.DayResource;
 import server.resources.LessonResource;
 
 import com.itextpdf.text.Document;
@@ -110,25 +114,35 @@ public class FilePrinter {
 		table.addCell("Freitag");
 
 		table.setHeaderRows(1);
-		int counter = 4;
-		final HashMap<Time, String> hashMap = new HashMap<>();
-		final List<Time> times = new LessonResource().getTimeList();
-
-		// hashMap.put(times.get(i), timeTable.getLessons().get(i))
-
+		Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer,Map<Integer, String>>();
+		String display = null;
+		// TODO --> Get times and Days not from Database but from a static Server Class
+		final List<Lesson> times = new LessonResource().getLessons();
+		final List<Day> days = new DayResource().getDays();
+		for (int x = 0; x < times.size(); x++) {
+			timeDayHashMap.put(times.get(x).getId(), new HashMap<Integer, String>());
+		}
 		for (final TimetableLesson lesson : timeTable.getLessons()) {
-
-			if (counter == 4) {
-				counter = 0;
-				table.addCell(lesson.getLesson().getTimeFrom().toString().substring(0, 5) + "\n - \n"
-						+ lesson.getLesson().getTimeTo().toString().substring(0, 5));
-			} else {
-				counter++;
-			}
-			table.addCell(lesson.getSubject().getShortName() + "\n" + lesson.getTeacher().getShortName() + "\n" + lesson.getRoom().getDescription());
+			display = lesson.getSubject().getShortName() + "\n" + lesson.getTeacher().getShortName() + "\n" + lesson.getRoom().getDescription();
+			timeDayHashMap.get(lesson.getLesson().getId()).put(lesson.getDay().getId(), display);
 		}
 
+			for (int i = 0; i < times.size(); i++) {
+				table.addCell(times.get(i).getTimeFrom().toString().substring(0, 5) + "\n - \n"
+						+ times.get(i).getTimeTo().toString().substring(0, 5));
+				for (int j = 1; j < days.size()+1; j++) {
+					if(timeDayHashMap.get(i+1) == null){
+						table.addCell("");
+					}else{
+						String value = timeDayHashMap.get(i+1).get(j);
+						if(value != null){
+							table.addCell(value);
+						}else{
+							table.addCell("");
+						}
+					}
+				}
+			}
 		document.add(table);
 	}
-
 }

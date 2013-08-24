@@ -29,13 +29,4 @@ public class LessonResource {
 	public List<Lesson> getLessons() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
 	}
-	
-	public List<Time> getTimeList() {
-		List<Time> times = new ArrayList<>();
-		List<Lesson> lessons = getLessons();
-		for (Lesson lesson : lessons) {
-			times.add(lesson.getTimeFrom());
-		}
-		return times;
-	}
 }
