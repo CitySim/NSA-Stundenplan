@@ -41,14 +41,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FilePrinter {
 	String path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
-	String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") +"timeTable.png";
+	String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
 	public final File printAsPDF(final Timetable timeTable) throws ScheduleCreationException {
 		final Document document = new Document();
-		String path = null;
 		try {
 
-			PdfWriter.getInstance(document, new FileOutputStream(path));
+			PdfWriter.getInstance(document, new FileOutputStream(this.path));
 			document.open();
 			this.createPdfTable(timeTable, document);
 			document.close();
@@ -56,7 +55,7 @@ public class FilePrinter {
 		} catch (final FileNotFoundException | DocumentException e) {
 			throw new ScheduleCreationException();
 		}
-		return new File(path);
+		return new File(this.path);
 	}
 
 	public final File printAsPng(final Timetable timeTable) throws ScheduleCreationException {
@@ -76,14 +75,14 @@ public class FilePrinter {
 			ig2.setPaint(Color.black);
 			ig2.drawString(message, (width - stringWidth) / 2, height / 2 + stringHeight / 4);
 
-			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
+			this.path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
-			ImageIO.write(image, "PNG", new File(path));
+			ImageIO.write(image, "PNG", new File(this.path));
 
 		} catch (final IOException e) {
 			throw new ScheduleCreationException();
 		}
-		return new File(path);
+		return new File(this.path);
 
 	}
 
@@ -116,7 +115,7 @@ public class FilePrinter {
 		table.addCell("Freitag");
 
 		table.setHeaderRows(1);
-		Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer, Map<Integer, String>>();
+		final Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer, Map<Integer, String>>();
 		String display = null;
 		// TODO --> Get times and Days not from Database but from a static
 		// Server Class
@@ -136,7 +135,7 @@ public class FilePrinter {
 				if (timeDayHashMap.get(i + 1) == null) {
 					table.addCell("");
 				} else {
-					String value = timeDayHashMap.get(i + 1).get(j);
+					final String value = timeDayHashMap.get(i + 1).get(j);
 					if (value != null) {
 						table.addCell(value);
 					} else {
@@ -149,23 +148,22 @@ public class FilePrinter {
 	}
 
 	public void createPng() {
-		int i = 0;
+		final int i = 0;
 		PDDocument doc = null;
 		try {
-			doc = PDDocument.load(path);
-		} catch (IOException e) {
+			doc = PDDocument.load(this.path);
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 		@SuppressWarnings("unchecked")
-		List<PDPage> pages = doc.getDocumentCatalog().getAllPages();
-		for (PDPage page : pages) {
+		final List<PDPage> pages = doc.getDocumentCatalog().getAllPages();
+		for (final PDPage page : pages) {
 			BufferedImage img = null;
 			try {
-				img = page.convertToImage(BufferedImage.TYPE_INT_RGB, 72);
+				img = page.convertToImage(BufferedImage.TYPE_INT_ARGB, 72);
 
-				ImageIO.write(img, "png", new File(pngFileName));
-				i++;
-			} catch (IOException e) {
+				ImageIO.write(img, "PNG", new File(this.pngFileName));
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 		}

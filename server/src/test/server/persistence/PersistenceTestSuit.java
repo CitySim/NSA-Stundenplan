@@ -15,7 +15,7 @@ import server.operations.FilePrinterTest;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({ HibernateTimeTableTest.class, FilePrinterTest.class, DataCreationTest.class })
+@SuiteClasses({ HibernateTimeTableTest.class, DataCreationTest.class, FilePrinterTest.class })
 public class PersistenceTestSuit {
 
 }
