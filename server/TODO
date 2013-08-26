@@ -1,19 +1,24 @@
-- Link generierung für die Anmeldung / Abmeldung
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
 - AvailableResource implementieren
 - ConfirmationResource implementieren (für Newsletter Anmeldung)
-
-- Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
+- NewsletterResource implementieren (Zur Krankmeldung)
 - Cookie überprüfen bei jedem Request
 
 - forgot password function hinzufügen. (Im Pflichtenheft)
 - Fix testCookieCreation (test only)
 
+Leonard:
+
+- Link generierung für die Anmeldung / Abmeldung
+
 Dennis:
+
 - Format für die ConfirmationMail korrigieren
+- Create / Update Umschaltung töten
 
 Oleg:
+
 Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
 Auch bind Parameters!
 http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
