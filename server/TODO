@@ -1,15 +1,17 @@
-- Fix CookieCreation (test)
-- AvailableResource implementieren
-- ConfirmationResource implementieren (für Newsletter anmeldung)
-- Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
+- Link generierung für die Anmeldung / Abmeldung
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
+- AvailableResource implementieren
+- ConfirmationResource implementieren (für Newsletter Anmeldung)
+
+- Wenn es Stundenplan Änderungen gibt, muss der SendNewsLetter Job benachrichtigt werden.
 - Cookie überprüfen bei jedem Request
 
 - forgot password function hinzufügen. (Im Pflichtenheft)
+- Fix testCookieCreation (test only)
 
 Dennis:
-EmailSending testen (Mercury einrichten etc.)
+- Format für die ConfirmationMail korrigieren
 
 Oleg:
 Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
