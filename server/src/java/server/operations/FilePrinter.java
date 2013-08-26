@@ -28,6 +28,7 @@ import server.resources.LessonResource;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -107,12 +108,13 @@ public class FilePrinter {
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
 		final PdfPTable table = new PdfPTable(6);
-		table.addCell("Klasse XXX");
-		table.addCell("Montag");
-		table.addCell("Dienstag");
-		table.addCell("Mittwoch");
-		table.addCell("Donnerstag");
-		table.addCell("Freitag");
+		
+		table.addCell("\nKlasse "+timeTable.getLessons().get(0).getForm().getDescription() +"\n ");
+		table.addCell("\nMontag\n ");
+		table.addCell("\nDienstag\n ");
+		table.addCell("\nMittwoch\n ");
+		table.addCell("\nDonnerstag\n ");
+		table.addCell("\nFreitag\n ");
 
 		table.setHeaderRows(1);
 		final Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer, Map<Integer, String>>();
@@ -154,13 +156,14 @@ public class FilePrinter {
 			doc = PDDocument.load(this.path);
 		} catch (final IOException e) {
 			e.printStackTrace();
+			System.out.println("ok");
 		}
 		@SuppressWarnings("unchecked")
 		final List<PDPage> pages = doc.getDocumentCatalog().getAllPages();
 		for (final PDPage page : pages) {
 			BufferedImage img = null;
 			try {
-				img = page.convertToImage(BufferedImage.TYPE_INT_ARGB, 72);
+				img = page.convertToImage(BufferedImage.TYPE_INT_RGB, 72);
 
 				ImageIO.write(img, "PNG", new File(this.pngFileName));
 			} catch (final IOException e) {
