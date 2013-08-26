@@ -107,4 +107,20 @@ class EmailTextCreator {
 
 		return sb.toString();
 	}
+
+	public String generateRemoveRegistrationText(String schoolClass, String email) {
+
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("Hallo,");
+		sb.append("um sich von dem Newsletter von der Klasse " + schoolClass + "  abzumelden klicken Sie folgenden Link:");
+		sb.append(System.lineSeparator());
+
+		sb.append(new NewsLetterHandler().generateRemoveLink(schoolClass, email));
+
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+
+		return sb.toString();
+	}
 }

@@ -95,4 +95,22 @@ class EmailCreator {
 
 		return emailList;
 	}
+
+	public ArrayList<EmailObject> createRemoveRegistrationMail(String schoolClass, String email) {
+		
+		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
+
+		final EmailObject emailObject = new EmailObject();
+		emailList.add(emailObject);
+
+		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
+
+		final String emailText = new EmailTextCreator().generateRemoveRegistrationText(schoolClass, email);
+
+		new EmailContentCreator().createMailContent(emailText, null, emailObject);
+
+		emailAddresList.add(email);
+
+		return emailList;
+	}
 }

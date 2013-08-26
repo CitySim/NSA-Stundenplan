@@ -21,9 +21,9 @@ public class EmailJobHelper {
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);
 	}
 
-	public final void sendConfirmationMail(final String eMailAddress, final String schoolClass) throws EmailSendingException {
+	public final void sendConfirmationMail(final String schoolClass, final String email) throws EmailSendingException {
 
-		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(eMailAddress, schoolClass);
+		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(email, schoolClass);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - RegistrierungsBestätigung"), emailList);
 	}
 
@@ -41,5 +41,11 @@ public class EmailJobHelper {
 
 	private EmailSettings setEmailSettings(final String titel) {
 		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
+	}
+
+	public boolean sendRemoveRegistrationMail(String schoolClass, String email) throws EmailSendingException {
+		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(schoolClass, email);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Newsletter abmelden"), emailList);
+		return false;
 	}
 }
