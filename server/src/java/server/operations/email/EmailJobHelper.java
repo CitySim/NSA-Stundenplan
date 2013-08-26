@@ -2,6 +2,8 @@ package server.operations.email;
 
 import java.util.ArrayList;
 
+import server.entities.Form;
+import server.entities.Newsletter;
 import server.entities.Timetable;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
@@ -21,9 +23,9 @@ public class EmailJobHelper {
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);
 	}
 
-	public final void sendConfirmationMail(final String schoolClass, final String email) throws EmailSendingException {
+	public final void sendConfirmationMail(final Form form, final String email) throws EmailSendingException {
 
-		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(email, schoolClass);
+		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(form, email);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - RegistrierungsBestätigung"), emailList);
 	}
 
@@ -43,8 +45,8 @@ public class EmailJobHelper {
 		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
 	}
 
-	public boolean sendRemoveRegistrationMail(String schoolClass, String email) throws EmailSendingException {
-		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(schoolClass, email);
+	public boolean sendRemoveRegistrationMail(Newsletter newsletter) throws EmailSendingException {
+		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(newsletter);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Newsletter abmelden"), emailList);
 		return false;
 	}

@@ -46,7 +46,7 @@ public class NewsLetterHandlerTest extends TestCase {
 		// TODO Edit url
 		this.url = "nsa blabla/add_" + this.eMailAddress + "_to:" + this.schoolClass;
 
-		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(this.schoolClass, this.eMailAddress));
+		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(form, this.eMailAddress));
 
 	}
 
@@ -69,7 +69,7 @@ public class NewsLetterHandlerTest extends TestCase {
 		NewsLetterHandlerTest.assertEquals(true, success);
 
 		try {
-			NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(this.eMailAddress, this.schoolClass));
+			NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(newsLetterList.get(0)));
 		} catch (EmailSendingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

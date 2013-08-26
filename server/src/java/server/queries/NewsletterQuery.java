@@ -37,18 +37,11 @@ public class NewsletterQuery extends QueryResult {
 	}
 
 	/**
-	 * Removes existing Email
+	 * Removes existing Newsletter registration
 	 * 
 	 */
-	public boolean removeEmail(final Form form, final String mail) {
-		EmailAddress email = getEmail(mail);
-
-		if (email != null && form != null) {
-			Newsletter newsletter = getNewsletter(email.getId(), form.getId());
+	public boolean removeNewsletter(final Newsletter newsletter) {
 			return removeFromDB(newsletter);
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -82,5 +75,4 @@ public class NewsletterQuery extends QueryResult {
 						+ " AND form_idKlasse =" + formID + "",
 				Newsletter.class));
 	}
-
 }

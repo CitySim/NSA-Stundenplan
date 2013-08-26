@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.entities.Form;
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
 
@@ -19,11 +20,14 @@ import server.operations.email.EmailJobHelper;
 public class EmailSendingTest extends TestCase {
 
 	private EmailJobHelper helper;
+	private Form form;
 
 	@Override
 	@Before
 	public void setUp() {
 		this.helper = new EmailJobHelper();
+		form = new Form();
+		form.setDescription("it1a");
 	}
 
 	@Test
@@ -31,7 +35,7 @@ public class EmailSendingTest extends TestCase {
 		try {
 			this.helper.sendCreationMail("test@localhost", "test", "test");
 			this.helper.sendPasswordChangeMail("test@localhost", "test", "test");
-			this.helper.sendConfirmationMail("test@localhost", "it1a");
+			this.helper.sendConfirmationMail(form, "test@localhost");
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
 		}

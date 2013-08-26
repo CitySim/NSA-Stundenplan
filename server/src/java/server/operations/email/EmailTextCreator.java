@@ -1,5 +1,7 @@
 package server.operations.email;
 
+import server.entities.Form;
+import server.entities.Newsletter;
 import server.operations.NewsLetterHandler;
 
 /**
@@ -42,22 +44,21 @@ class EmailTextCreator {
 		return sb.toString();
 	}
 
-	String generateConformationText(final String schoolClass, final String eMailAddress) {
+	String generateConformationText(final Form form, final String eMailAddress) {
 
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
 		sb.append("sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
-		sb.append("Die für sie eingetragene Klasse ist die " + schoolClass + " .");
+		sb.append("Die für sie eingetragene Klasse ist die " + form.getDescription() + " .");
 		sb.append(System.lineSeparator());
 
 		sb.append("Bitte bestätigen sie ihre Anmeldung indem Sie auf den folgenden Link klicken:");
-		sb.append(new NewsLetterHandler().generateRegistrationLink(schoolClass, eMailAddress));
+		sb.append(new NewsLetterHandler().generateRegistrationLink(form, eMailAddress));
 		sb.append(System.lineSeparator());
 
 		sb.append("Sollten Sie die Registrierung nicht durchgeführt haben oder keine Newsletter erhalten wollen,");
-		sb.append("klicken Sie auf den folgenden Link oder ignorieren diese Nachricht.");
-		sb.append(new NewsLetterHandler().generateRemoveLink(schoolClass, eMailAddress));
+		sb.append("ignorieren diese Nachricht.");
 		sb.append("Ihre Addresse wird dann in kürze wieder gelöscht.");
 
 		sb.append(System.lineSeparator());
@@ -108,15 +109,15 @@ class EmailTextCreator {
 		return sb.toString();
 	}
 
-	public String generateRemoveRegistrationText(String schoolClass, String email) {
+	public String generateRemoveRegistrationText(Newsletter newsletter) {
 
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
-		sb.append("um sich von dem Newsletter von der Klasse " + schoolClass + "  abzumelden klicken Sie folgenden Link:");
+		sb.append("um sich von dem Newsletter von der Klasse " + newsletter.getForm().getDescription() + "  abzumelden klicken Sie folgenden Link:");
 		sb.append(System.lineSeparator());
 
-		sb.append(new NewsLetterHandler().generateRemoveLink(schoolClass, email));
+		sb.append(new NewsLetterHandler().generateRemoveLink(newsletter));
 
 		sb.append(System.lineSeparator());
 		sb.append("Ihr National Studenplan Agency Team.");

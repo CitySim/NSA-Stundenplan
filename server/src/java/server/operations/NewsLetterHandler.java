@@ -1,6 +1,7 @@
 package server.operations;
 
 import server.entities.Form;
+import server.entities.Newsletter;
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
 import server.queries.NewsletterQuery;
@@ -13,51 +14,32 @@ import server.queries.NewsletterQuery;
  * @since JDK.1.7.0_25
  * @version 1.0
  */
-// FIXME links erstellen
+// FIXME url_prefix
 public class NewsLetterHandler {
-	
-	public final String generateRegistrationLink(final String schoolClass, final String eMailAddress) {
 
-		final String url = "nsa blabla/" + "add_" + eMailAddress + "_to:" + schoolClass;
+	private final static String URL_PREFIX = "http://localhost:8080/server/newsletter/";
 
-		// createLink containing our webSite URL + add + emailAddress + to
-		// schoolClass
-
-		return url;
+	public final String generateRegistrationLink(final Form form, final String email) {
+		return URL_PREFIX + "confirm?id=" + form.getId() + "&email=" + email;
 	}
 
-	public final String generateRemoveLink(final String schoolClass, final String eMailAddress) {
-
-		final String url = "nsablabla/" + "remove_" + eMailAddress + "_from:" + schoolClass;
-
-		// createLink containing our webSite URL + remove + emailAddress + to
-		// schoolClass
-
-		return url;
+	public final String generateRemoveLink(final Newsletter newsletter) {
+		return URL_PREFIX + "remove?id=" + newsletter.getId();
 	}
 
-	public final void addAddress(final String schoolClass, final String email
-			) throws EmailSendingException {
-
-		new EmailJobHelper().sendConfirmationMail(schoolClass, email);
-
+	public final void addAddress(final Form form, final String email) throws EmailSendingException {
+		new EmailJobHelper().sendConfirmationMail(form, email);
 	}
 
-	public boolean removeAddress(final String email,
-			final String schoolClass) throws EmailSendingException {
-
-		return new EmailJobHelper().sendRemoveRegistrationMail(schoolClass, email);
-
+	public boolean removeAddress(Newsletter newsletter) throws EmailSendingException {
+		return new EmailJobHelper().sendRemoveRegistrationMail(newsletter);
 	}
 
-	public boolean confirmRegistration(Form schoolClass, String email) {
-
-		return new NewsletterQuery().confirmEmail(schoolClass, email);
-
+	public boolean confirmRegistration(Form form, String email) {
+		return new NewsletterQuery().confirmEmail(form, email);
 	}
 
-	public boolean removeRegistration(Form schoolClass, String email) {
-		return new NewsletterQuery().removeEmail(schoolClass, email);
+	public boolean removeRegistration(Newsletter newsletter) {
+		return new NewsletterQuery().removeNewsletter(newsletter);
 	}
-
 }

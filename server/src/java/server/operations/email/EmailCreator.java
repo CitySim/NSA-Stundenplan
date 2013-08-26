@@ -3,6 +3,8 @@ package server.operations.email;
 import java.io.File;
 import java.util.ArrayList;
 
+import server.entities.Form;
+import server.entities.Newsletter;
 import server.entities.Timetable;
 import server.exceptions.ScheduleCreationException;
 import server.operations.FilePrinter;
@@ -17,7 +19,7 @@ import server.operations.FilePrinter;
 
 class EmailCreator {
 
-	final ArrayList<EmailObject> createConfirmationMail(final String eMailAddress, final String schoolClass) {
+	final ArrayList<EmailObject> createConfirmationMail(final Form form, final String email) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
@@ -26,11 +28,11 @@ class EmailCreator {
 
 		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
 
-		final String emailText = new EmailTextCreator().generateConformationText(schoolClass, eMailAddress);
+		final String emailText = new EmailTextCreator().generateConformationText(form, email);
 
 		new EmailContentCreator().createMailContent(emailText, null, emailObject);
 
-		emailAddresList.add(eMailAddress);
+		emailAddresList.add(email);
 
 		return emailList;
 
@@ -95,8 +97,9 @@ class EmailCreator {
 
 		return emailList;
 	}
-
-	public ArrayList<EmailObject> createRemoveRegistrationMail(String schoolClass, String email) {
+	
+	// TODO testen, überprüfen, ggf. refactorn
+	public ArrayList<EmailObject> createRemoveRegistrationMail(Newsletter newsletter) {
 		
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
@@ -105,11 +108,11 @@ class EmailCreator {
 
 		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
 
-		final String emailText = new EmailTextCreator().generateRemoveRegistrationText(schoolClass, email);
+		final String emailText = new EmailTextCreator().generateRemoveRegistrationText(newsletter);
 
 		new EmailContentCreator().createMailContent(emailText, null, emailObject);
 
-		emailAddresList.add(email);
+		emailAddresList.add(newsletter.getEmail().getEMailAddress());
 
 		return emailList;
 	}
