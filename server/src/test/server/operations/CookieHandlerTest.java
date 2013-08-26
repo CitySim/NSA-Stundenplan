@@ -32,6 +32,7 @@ public class CookieHandlerTest extends TestCase {
 	@Test
 	public void testCookieCreation() {
 		final NewCookie cookie = this.handler.createCookie();
+
 		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
 		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
 	}

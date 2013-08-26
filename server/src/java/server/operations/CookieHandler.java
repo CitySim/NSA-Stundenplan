@@ -19,7 +19,6 @@ public class CookieHandler {
 	public final NewCookie createCookie() {
 
 		final String cookieID = new PasswordEncryptor().generateEncryptedPassword();
-
 		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID);
 		final DateHelper dateHelper = new DateHelper();
 		dateHelper.addTime(0, 1, 0, 0, 0, 0);

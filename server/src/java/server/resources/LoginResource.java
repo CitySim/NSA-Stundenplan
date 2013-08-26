@@ -22,22 +22,20 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response doLogin(
-			@DefaultValue("") @FormParam("user") String userName,
-			@DefaultValue("") @FormParam("password") String password) {
+	public Response doLogin(@DefaultValue("") @FormParam("user") final String userName, @DefaultValue("") @FormParam("password") final String password) {
 		final Gson gson = new Gson();
 		String json;
 		NewCookie cookie = null;
-		
+
 		try {
 			new LoginValidator().validateLoginData(userName, password);
 			cookie = new CookieHandler().createCookie();
 			json = gson.toJson(cookie);
 
-		} catch (LoginFailedException e) {
+		} catch (final LoginFailedException e) {
 			json = gson.toJson(e.showErrorMessage());
 		}
-		
+
 		return Response.ok(json).cookie(cookie).build();
 	}
 }
