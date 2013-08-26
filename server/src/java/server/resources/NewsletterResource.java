@@ -24,9 +24,9 @@ public class NewsletterResource extends QueryResult {
 		if (form == null) {
 			//FIXME fehler zurückgeben
 		}
-		newsLetterHandler.confirmRegistration(form, email);
+		boolean result = newsLetterHandler.confirmRegistration(form, email);
 		final Gson gson = new Gson();
-		String json = null;
+		String json = gson.toJson(result);
 		return json;
 	}
 	
