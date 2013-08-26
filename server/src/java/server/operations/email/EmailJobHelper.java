@@ -40,6 +40,6 @@ public class EmailJobHelper {
 	}
 
 	private EmailSettings setEmailSettings(final String titel) {
-		return new EmailSettings("olegscheltow", "", "olegscheltow@localhost", titel, "localhost");
+		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
 	}
 }

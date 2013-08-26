@@ -29,7 +29,9 @@ public class EmailSendingTest extends TestCase {
 	@Test
 	public void testEmailSending() {
 		try {
-			this.helper.sendPasswordChangeMail("olegscheltow@localhost", "olegscheltow", "oleg");
+			this.helper.sendCreationMail("test@localhost", "test", "test");
+			this.helper.sendPasswordChangeMail("test@localhost", "test", "test");
+			this.helper.sendConfirmationMail("test@localhost", "it1a");
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
 		}

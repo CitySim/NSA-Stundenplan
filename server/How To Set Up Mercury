@@ -2,12 +2,29 @@ Email versenden mit Java: http://stackoverflow.com/questions/15938298/not-receiv
 
 Komplett konfiguration Mercury: http://www.derdualstudent.de/mercury-einrichten-xampp-mailserver.html
 
+1. Komplett konfiguration Mercury durchfÃ¼hren ( Siehe Link ), nur Punkt 9 NICHT machen.
 
-Für euch:
-User anlegen usw. sollte für die funktion des Email krams eigentlich reichen
-- Mercury starten
-- Configuration --> manage local users.. --> ADD
---> Hier euren Email user eintragen:
-Username : username
-Personal name: <username>@localhost
-Mail password: Leer lassen 
+2. User anlegen: Mercury Admin -> Configuration -> Manage local users
+Folgendes Format verwenden:
+username: test
+personal Name: test
+password: test
+
+3. Mercury neustarten, Thunderbird portable downloaden und installieren.
+
+4. In Thunderbird neues konto erstellen -> Existierendes Konto verwenden
+
+Daten eingeben:
+name: test
+email: test@localhost
+password: test
+
+--> Weiter
+--> POP3 Nachrichten auf dem PC speichern
+--> Fertig
+--> Ich verstehe das Risiko
+--> weiter
+
+--> test ausfÃ¼hren
+
+ 
