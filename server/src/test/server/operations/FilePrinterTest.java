@@ -1,5 +1,7 @@
 package server.operations;
 
+import java.io.File;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -41,15 +43,12 @@ public class FilePrinterTest extends TestCase {
 		}
 	}
 
-	// @Test
-	// public void testprintAsPNG() {
-	// try {
-	// FilePrinterTest.assertNotNull(this.printer
-	// .printAsPng(this.timeTable));
-	// } catch (final ScheduleCreationException e) {
-	// FilePrinterTest.fail();
-	// }
-	// }
+	@Test
+	public void testprintAsPNG() {
+		String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
+		File f = new File(pngFileName);
+		FilePrinterTest.assertTrue(f.exists());
+	}
 
 	@After
 	public void cleanUpTestData() {

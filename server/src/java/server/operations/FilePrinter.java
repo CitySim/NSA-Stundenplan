@@ -9,12 +9,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 
 import server.entities.Day;
 import server.entities.Lesson;
@@ -38,14 +40,14 @@ import com.itextpdf.text.pdf.PdfWriter;
  */
 
 public class FilePrinter {
+	String path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
+	String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
 	public final File printAsPDF(final Timetable timeTable) throws ScheduleCreationException {
 		final Document document = new Document();
-		String path = null;
 		try {
 
-			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
-			PdfWriter.getInstance(document, new FileOutputStream(path));
+			PdfWriter.getInstance(document, new FileOutputStream(this.path));
 			document.open();
 			this.createPdfTable(timeTable, document);
 			document.close();
@@ -53,11 +55,10 @@ public class FilePrinter {
 		} catch (final FileNotFoundException | DocumentException e) {
 			throw new ScheduleCreationException();
 		}
-		return new File(path);
+		return new File(this.path);
 	}
 
 	public final File printAsPng(final Timetable timeTable) throws ScheduleCreationException {
-		String path = "";
 		try {
 			final int width = 200, height = 200;
 
@@ -74,14 +75,14 @@ public class FilePrinter {
 			ig2.setPaint(Color.black);
 			ig2.drawString(message, (width - stringWidth) / 2, height / 2 + stringHeight / 4);
 
-			path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
+			this.path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
-			ImageIO.write(image, "PNG", new File(path));
+			ImageIO.write(image, "PNG", new File(this.path));
 
 		} catch (final IOException e) {
 			throw new ScheduleCreationException();
 		}
-		return new File(path);
+		return new File(this.path);
 
 	}
 
@@ -114,9 +115,10 @@ public class FilePrinter {
 		table.addCell("Freitag");
 
 		table.setHeaderRows(1);
-		Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer,Map<Integer, String>>();
+		final Map<Integer, Map<Integer, String>> timeDayHashMap = new HashMap<Integer, Map<Integer, String>>();
 		String display = null;
-		// TODO --> Get times and Days not from Database but from a static Server Class
+		// TODO --> Get times and Days not from Database but from a static
+		// Server Class
 		final List<Lesson> times = new LessonResource().getLessons();
 		final List<Day> days = new DayResource().getDays();
 		for (int x = 0; x < times.size(); x++) {
@@ -127,22 +129,43 @@ public class FilePrinter {
 			timeDayHashMap.get(lesson.getLesson().getId()).put(lesson.getDay().getId(), display);
 		}
 
-			for (int i = 0; i < times.size(); i++) {
-				table.addCell(times.get(i).getTimeFrom().toString().substring(0, 5) + "\n - \n"
-						+ times.get(i).getTimeTo().toString().substring(0, 5));
-				for (int j = 1; j < days.size()+1; j++) {
-					if(timeDayHashMap.get(i+1) == null){
+		for (int i = 0; i < times.size(); i++) {
+			table.addCell(times.get(i).getTimeFrom().toString().substring(0, 5) + "\n - \n" + times.get(i).getTimeTo().toString().substring(0, 5));
+			for (int j = 1; j < days.size() + 1; j++) {
+				if (timeDayHashMap.get(i + 1) == null) {
+					table.addCell("");
+				} else {
+					final String value = timeDayHashMap.get(i + 1).get(j);
+					if (value != null) {
+						table.addCell(value);
+					} else {
 						table.addCell("");
-					}else{
-						String value = timeDayHashMap.get(i+1).get(j);
-						if(value != null){
-							table.addCell(value);
-						}else{
-							table.addCell("");
-						}
 					}
 				}
 			}
+		}
 		document.add(table);
+	}
+
+	public void createPng() {
+		final int i = 0;
+		PDDocument doc = null;
+		try {
+			doc = PDDocument.load(this.path);
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+		@SuppressWarnings("unchecked")
+		final List<PDPage> pages = doc.getDocumentCatalog().getAllPages();
+		for (final PDPage page : pages) {
+			BufferedImage img = null;
+			try {
+				img = page.convertToImage(BufferedImage.TYPE_INT_ARGB, 72);
+
+				ImageIO.write(img, "PNG", new File(this.pngFileName));
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
