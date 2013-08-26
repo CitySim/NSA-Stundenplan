@@ -7,8 +7,11 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.entities.Form;
 import server.entities.Newsletter;
+import server.exceptions.EmailSendingException;
 import server.queries.NewsletterQuery;
+import server.resources.FormResource;
 
 /**
  * Test for the generation of the newsLetter and URLs.
@@ -25,12 +28,15 @@ public class NewsLetterHandlerTest extends TestCase {
 	private String schoolClass;
 	private String eMailAddress;
 	private String url;
+	private Form form;
 
 	@Override
 	@Before
 	public void setUp() {
 		this.handler = new NewsLetterHandler();
 		this.schoolClass = "it1a";
+		form = FormResource.getForms().get(0);
+		
 		this.eMailAddress = "test@test.de";
 	}
 
@@ -51,7 +57,7 @@ public class NewsLetterHandlerTest extends TestCase {
 
 		boolean success = false;
 
-		NewsLetterHandlerTest.assertTrue(this.handler.validateConfirmation(this.url));
+		NewsLetterHandlerTest.assertTrue(this.handler.confirmRegistration(form, eMailAddress));
 
 		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters();
 
@@ -62,6 +68,11 @@ public class NewsLetterHandlerTest extends TestCase {
 		}
 		NewsLetterHandlerTest.assertEquals(true, success);
 
-		NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(this.eMailAddress, this.schoolClass));
+		try {
+			NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(this.eMailAddress, this.schoolClass));
+		} catch (EmailSendingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
