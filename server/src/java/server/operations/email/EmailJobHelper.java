@@ -48,6 +48,6 @@ public class EmailJobHelper {
 	public boolean sendRemoveRegistrationMail(Newsletter newsletter) throws EmailSendingException {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(newsletter);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Newsletter abmelden"), emailList);
-		return false;
+		return true;
 	}
 }

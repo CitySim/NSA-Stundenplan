@@ -44,7 +44,7 @@ public class NewsLetterHandlerTest extends TestCase {
 	public void testUrlCreation() {
 
 		// TODO Edit url
-		this.url = "nsa blabla/add_" + this.eMailAddress + "_to:" + this.schoolClass;
+		this.url = "http://localhost:8080/server/newsletter/confirm?id=" + form.getId() + "&email=" + this.eMailAddress;
 
 		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(form, this.eMailAddress));
 
