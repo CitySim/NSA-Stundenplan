@@ -44,9 +44,8 @@ public class CookieQuery extends QueryResult {
 
 	public void removeInvalidCookies(final Date date) {
 		@SuppressWarnings("unchecked")
-		final List<Cookie> cookies = this.em.createNativeQuery(
-				"select * from Cookie WHERE invalidForm <='" + date + "'",
-				Cookie.class).getResultList();
+		final List<Cookie> cookies = this.em.createNativeQuery("select * from Cookie WHERE invalidForm <='" + date + "'", Cookie.class)
+				.getResultList();
 		if (cookies.size() != 0) {
 			this.em.getTransaction().begin();
 			for (final Cookie cookie : cookies) {
@@ -63,9 +62,7 @@ public class CookieQuery extends QueryResult {
 	 * @return
 	 */
 	public Cookie getCookie(final String cookieString) {
-		return (Cookie) this.getSingleResult(this.em.createNativeQuery(
-				"select * from Cookie WHERE cookie ='" + cookieString + "'",
-				Cookie.class));
+		return (Cookie) this.getSingleResult(this.em.createNativeQuery("select * from Cookie WHERE cookie ='" + cookieString + "'", Cookie.class));
 	}
 
 }

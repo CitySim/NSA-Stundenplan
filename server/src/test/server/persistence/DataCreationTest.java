@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,11 +37,6 @@ public class DataCreationTest {
 	public void init() {
 		this.em = HibernateUtil.getEntityManager();
 		this.helper = new DataCreationHelper(this.em);
-	}
-
-	@After
-	public void cleanup() {
-		this.em.close();
 	}
 
 	@SuppressWarnings("unused")
