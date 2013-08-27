@@ -28,7 +28,7 @@ public class PrintResource {
 			e.printStackTrace();
 		}
 
-		return Response.ok(pdf).header("Content-Disposition", "inline; timetable.pdf").build();
+		return Response.ok(pdf).header("Content-Disposition", "attachment; filename=timetable.pdf").build();
 	}
 
 	@GET
@@ -44,6 +44,6 @@ public class PrintResource {
 			e.printStackTrace();
 		}
 		
-		return Response.ok(png).header("Content-Disposition", "inline; timetable.png").build();
+		return Response.ok(png).header("Content-Disposition", "attachment; filename=timetable.png").build();
 	}
 }
