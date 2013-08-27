@@ -1,10 +1,12 @@
+- Vertretung eintragen API (Replacement)
+- Cookie überprüfen bei jedem Request
+- forgot password function hinzufügen. (Im Pflichtenheft)
+
+Leonard:
+
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
 - AvailableResource implementieren
-- Vertretung eintragen API (Replacement)
-- Cookie überprüfen bei jedem Request
-
-- forgot password function hinzufügen. (Im Pflichtenheft)
 
 Dennis:
 
