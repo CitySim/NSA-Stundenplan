@@ -17,7 +17,7 @@ import server.resources.FormResource;
  * Test for the generation of the newsLetter and URLs.
  * 
  * @author dennis.markmann
- * @since JDK.1.7.0_25
+ * @since 1.0 
  * @version 1.0
  */
 
@@ -25,7 +25,6 @@ public class NewsLetterHandlerTest extends TestCase {
 
 	private NewsLetterHandler handler;
 
-	private String schoolClass;
 	private String eMailAddress;
 	private String url;
 	private Form form;
@@ -34,7 +33,6 @@ public class NewsLetterHandlerTest extends TestCase {
 	@Before
 	public void setUp() {
 		this.handler = new NewsLetterHandler();
-		this.schoolClass = "it1a";
 		form = FormResource.getForms().get(0);
 		
 		this.eMailAddress = "test@test.de";
@@ -69,10 +67,10 @@ public class NewsLetterHandlerTest extends TestCase {
 		NewsLetterHandlerTest.assertEquals(true, success);
 
 		try {
-			NewsLetterHandlerTest.assertTrue(this.handler.removeAddress(newsLetterList.get(0)));
+			assertTrue(this.handler.removeAddress(newsLetterList.get(0)));
 		} catch (EmailSendingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail();
 		}
+		assertTrue(handler.removeRegistration(newsLetterList.get(0)));
 	}
 }
