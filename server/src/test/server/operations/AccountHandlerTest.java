@@ -48,7 +48,7 @@ public class AccountHandlerTest extends TestCase {
 		} catch (final EmailSendingException e) {
 			AccountHandlerTest.fail();
 		}
-		AccountHandlerTest.assertEquals(this.password, new LoginQuery().getPassword(this.userName));
+		AccountHandlerTest.assertEquals(new PasswordEncryptor().encryptPassword(this.password), new LoginQuery().getPassword(this.userName));
 	}
 
 	public void createTestAccount() {
