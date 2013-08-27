@@ -40,9 +40,11 @@ public class AccountHandler {
 
 	public final String changePassword(final String userName) throws EmailSendingException {
 
-		final String password = new PasswordEncryptor().generateEncryptedPassword();
+		final PasswordEncryptor encryptor = new PasswordEncryptor();
 
-		this.changePasswordInDatabase(userName, password);
+		final String password = encryptor.generatePassword();
+
+		this.changePasswordInDatabase(userName, encryptor.encryptPassword(password));
 
 		final String eMailAddress = new LoginQuery().getEmailForUser(userName);
 
