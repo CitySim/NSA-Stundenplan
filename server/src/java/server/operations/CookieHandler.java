@@ -46,7 +46,7 @@ public class CookieHandler {
 		new CookieQuery().removeInvalidCookies(new Date());
 	}
 
-	final boolean deleteCookie(final NewCookie cookie) {
+	public final boolean deleteCookie(final NewCookie cookie) {
 		return new CookieQuery().removeCookie(cookie.getValue());
 	}
 }
