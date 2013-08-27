@@ -2,6 +2,8 @@ package server.exceptions;
 
 import java.util.Date;
 
+import com.google.gson.JsonObject;
+
 /**
  * Used as super class for other exceptions to implement the showErrorMessage
  * method.
@@ -21,11 +23,22 @@ public class SuperException extends Exception {
 	private Date date = null;
 
 	public SuperException(final int errorNumber, final String errorTitel, final String errorMessage) {
-
+		super(errorMessage);
+		
 		this.errorNumber = errorNumber;
 		this.errorTitel = errorTitel;
 		this.errorMessage = errorMessage;
 		this.date = new Date();
+	}
+	
+	public final JsonObject getJsonObejct() {
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("no", errorNumber);
+		jsonObject.addProperty("title", errorTitel);
+		jsonObject.addProperty("message", errorMessage);
+		//jsonObject.addProperty("date", date.toString());
+		
+		return jsonObject;
 	}
 
 	public final String createLogingMessage() {

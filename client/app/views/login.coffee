@@ -21,12 +21,11 @@ class window.nsa.Views.Login extends Backbone.View
 
 			success: (data) =>
 				try
-					data = JSON.parse(data)
-
-					if not data.status
-						@$("app-alert").html(data.error).show()
+					if data.status is "ok"
+						nsa.Data.user.set("id", 1)
+						nsa.app.navigate("admin", { trigger: true })
 					else
-						nsa.app.navigate("admin")
+						@$(".app-alert").html(data.error).show()
 				catch e
 					nsa.app.error
 						no: 2543
