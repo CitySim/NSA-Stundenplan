@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import server.exceptions.ScheduleCreationException;
 import server.operations.FilePrinter;
@@ -16,8 +17,8 @@ public class PrintResource {
 
 	@GET
 	@Path("pdf")
-	@Produces(MediaType.TEXT_PLAIN)
-	public File printPDF(@QueryParam("id") int timetableId) {
+	@Produces("application/pdf")
+	public Response printPDF(@QueryParam("id") int timetableId) {
 		FilePrinter filePrinter = new FilePrinter();
 		File pdf = null;
 		try {
@@ -27,13 +28,13 @@ public class PrintResource {
 			e.printStackTrace();
 		}
 
-		return pdf;
+		return Response.ok(pdf).header("Content-Disposition", "inline; timetable.pdf").build();
 	}
 
 	@GET
 	@Path("png")
-	@Produces(MediaType.TEXT_PLAIN)
-	public File printPNG(@QueryParam("id") int timetableId) {
+	@Produces("image/png")
+	public Response printPNG(@QueryParam("id") int timetableId) {
 		FilePrinter filePrinter = new FilePrinter();
 		File png = null;
 		try {
@@ -42,6 +43,7 @@ public class PrintResource {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return png;
+		
+		return Response.ok(png).header("Content-Disposition", "inline; timetable.png").build();
 	}
 }
