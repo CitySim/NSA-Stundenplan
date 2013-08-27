@@ -28,7 +28,6 @@ import server.resources.LessonResource;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -150,7 +149,6 @@ public class FilePrinter {
 	}
 
 	public void createPng() {
-		final int i = 0;
 		PDDocument doc = null;
 		try {
 			doc = PDDocument.load(this.path);
