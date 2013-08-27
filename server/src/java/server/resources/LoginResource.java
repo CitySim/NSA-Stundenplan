@@ -3,14 +3,18 @@ package server.resources;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
+import server.exceptions.EmailSendingException;
 import server.exceptions.LoginFailedException;
+import server.operations.AccountHandler;
 import server.operations.CookieHandler;
 import server.operations.LoginValidator;
 
@@ -38,5 +42,18 @@ public class LoginResource {
 			json = gson.toJson(e.showErrorMessage());
 		}
 		return Response.ok(json).cookie(cookie).build();
+	}
+	
+	@Path("changepw")
+	@GET
+	public String changePassword(@QueryParam("user") String userName) {
+		AccountHandler accountHandler = new AccountHandler();
+		String newPassword = null;
+		try {
+			newPassword = accountHandler.changePassword(userName);
+		} catch (EmailSendingException e) {
+			return new Gson().toJson(e.getMessage());
+		}
+		return new Gson().toJson(newPassword);		
 	}
 }

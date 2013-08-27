@@ -14,7 +14,7 @@ import server.queries.LoginQuery;
  * @version 1.0
  */
 
-class AccountHandler {
+public class AccountHandler {
 
 	final Login createAccount(final String name, final String familyName, final String eMailAddress) throws DuplicateUserException,
 			EmailSendingException {
@@ -38,7 +38,7 @@ class AccountHandler {
 
 	}
 
-	final String changePassword(final String userName) throws EmailSendingException {
+	public final String changePassword(final String userName) throws EmailSendingException {
 
 		final String password = new PasswordEncryptor().generateEncryptedPassword();
 
