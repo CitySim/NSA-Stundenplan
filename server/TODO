@@ -14,8 +14,8 @@ Sven:
 Dennis:
 
 - Fix testCookieCreation (test only)
-- Format für die ConfirmationMail korrigieren
 - Create / Update Umschaltung töten
+- Generate emailText for replacements
 
 Oleg:
 
