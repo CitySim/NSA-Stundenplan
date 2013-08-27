@@ -38,7 +38,6 @@ public class HibernateUtil {
 	}
 
 	public static boolean checkDatabase() {
-		// TODO CHECK IF DB final EXISTS
 		final int port = 8080;
 		final String userName = "root";
 		final String password = "";
