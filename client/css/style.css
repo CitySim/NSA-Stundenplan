@@ -72,11 +72,11 @@ body {
 	border-top-right-radius: 4px;
 }
 
-.stundenplan .vertretung {
-	color: #FFF;
-	background-color: #D9534F;
+.stundenplan .warning {
+	/* background-color: #D9534F; */
 }
 
-.stundenplan .ausfall {
-	background-color: #FFA190;
+.stundenplan .danger {
+	/* color: #FFF;
+	background-color: #FFA190; */
 }
