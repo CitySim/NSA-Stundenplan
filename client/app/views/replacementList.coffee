@@ -25,7 +25,9 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 			return
 
 		@$el.html @template
-			collection: @collection.toJSON()
+			collection: _.groupBy @collection.toJSON(), (r) =>
+				r.format_date = moment(r.date, "ddd DD, YYYY hh:mm:ss A").format("DD.MM.YYYY")
+				return r.format_date
 
 		return
 

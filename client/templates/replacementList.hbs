@@ -1,97 +1,19 @@
 <div class="row">
 	<div class="col-12">
-		<legend>05.08.13</legend>
+		{{#each collection}}
 
-		<div class="list-group">
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-		</div>
+			<legend>{{@key}}</legend>
 
-		<legend>06.08.13</legend>
-
-		<div class="list-group">
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT2b, 8:30 - 9:15, Fachenglisch</h4>
-				<p class="list-group-item-text">
-					mit Hermann, Raum 42<br>
-					<b>Hinweis:</b> Wir wescheln in einen Raum mit Beamer
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-		</div>
-		
-		<legend>07.08.13</legend>
-
-		<div class="list-group">
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-					<b>Hinweis:</b> Die Klassenarbeit findet nicht statt
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-		</div>
-		
-		<legend>08.08.13</legend>
-
-		<div class="list-group">
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-			<a href="#replacement/42" class="list-group-item">
-				<h4 class="list-group-item-heading">IT3a, 7:45 - 8:30, IT-Systeme</h4>
-				<p class="list-group-item-text">
-					mit Lührsen, Raum 57<br>
-				</p>
-			</a>
-		</div>
+			<div class="list-group">
+				{{#each this}}
+					<a href="#replacement/42" class="list-group-item">
+						<h4 class="list-group-item-heading">{{form.description}}, 0:00 - 0:00, fach</h4>
+						<p class="list-group-item-text">
+							mit {{teacher.firstname}} {{teacher.name}}, {{room.description}}<br>
+						</p>
+					</a>
+				{{/each}}
+			</div>
+		{{/each}}
 	</div>
 </div>
