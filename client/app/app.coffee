@@ -16,6 +16,7 @@ class window.nsa.App extends Backbone.Router
 		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
 		"about"					: "about"
+		"admin"					: "admin"
 		"*error"				: "errorNotFound"
 
 	initialize: () =>
@@ -58,6 +59,14 @@ class window.nsa.App extends Backbone.Router
 
 	about: () =>
 		@showView(new nsa.Views.About())
+		return
+
+	admin: () =>
+		if not nsa.Data.user.isLoggedIn()
+			@navigate("login", { trigger: true })
+			return
+
+		@showView(new nsa.Views.Admin())
 		return
 
 	errorNotFound: () =>

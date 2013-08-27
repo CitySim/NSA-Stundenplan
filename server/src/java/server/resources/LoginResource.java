@@ -15,6 +15,7 @@ import server.operations.CookieHandler;
 import server.operations.LoginValidator;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Path("login")
 public class LoginResource {
@@ -32,10 +33,17 @@ public class LoginResource {
 		try {
 			new LoginValidator().validateLoginData(userName, password);
 			cookie = new CookieHandler().createCookie();
-			json = gson.toJson(cookie);
 
+			JsonObject loginResult = new JsonObject();
+			loginResult.addProperty("status", "ok");
+			
+			json = gson.toJson(loginResult);
 		} catch (final LoginFailedException e) {
-			json = gson.toJson(e.showErrorMessage());
+			JsonObject loginResult = new JsonObject();
+			loginResult.addProperty("status", "error");
+			loginResult.addProperty("error", e.getMessage());
+			
+			json = gson.toJson(loginResult);
 		}
 		return Response.ok(json).cookie(cookie).build();
 	}
