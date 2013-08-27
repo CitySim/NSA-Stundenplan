@@ -2,20 +2,13 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 	template: nsa.handlebars.replacementList
 
 	initialize: () =>
-		collection = new nsa.Collections.Replacements()
-		collection.fetch
-			success: () =>
-				@collection = collection
-				@render()
-				return
-			error: () =>
-				delete @collection
-				nsa.app.error
-					no: 2401
-					title: "Fehler"
-					message: "Fehler beim Laden der Vertretungen"
-				
-				return
+		delete nsa.Data.replacements
+		nsa.app.fetchList "replacements", (err) =>
+			return if err?
+
+			@collection = nsa.Data.replacements
+			@render()
+			return
 
 		return
 

@@ -1,40 +1,45 @@
 <div class="row">
 	<div class="col-12">
-		<h3>IT2b, 8:30 - 9:15</h3>
+		{{#with model}}
+			<h3>{{form.description}}, 0:00 - 0:00</h3>
 
-		<table class="table">
-			<tr>
-				<td>
-					Vertretungsleher
-				</td>
-				<td>
-					Hermann
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Raum
-				</td>
-				<td>
-					42
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Fach
-				</td>
-				<td>
-					Fachenglisch
-				</td>
-			</tr>
-			<tr class="warning">
-				<td>
-					Hinweis
-				</td>
-				<td>
-					Wir wescheln in einen Raum mit Beamer
-				</td>
-			</tr>
-		</table>
+			<table class="table">
+				<tr>
+					<td>
+						Vertretungsleher
+					</td>
+					<td>
+						{{teacher.firstname}} {{teacher.name}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Raum
+					</td>
+					<td>
+						{{room.description}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Fach
+					</td>
+					<td>
+						Fach?
+					</td>
+				</tr>
+				{{#if note}}
+					<tr class="warning">
+						<td>
+							Hinweis
+						</td>
+						<td>
+							{{note}}
+						</td>
+					</tr>
+				{{/if}}
+			</table>
+		{{/with}}
 	</div>
 </div>
+

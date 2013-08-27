@@ -49,8 +49,10 @@ class window.nsa.App extends Backbone.Router
 		@showView(new nsa.Views.ReplacementList())
 		return
 
-	replacementDetails: () =>
-		@showView(new nsa.Views.ReplacementDetail())
+	replacementDetails: (id) =>
+		@showView new nsa.Views.ReplacementDetail
+			replacementId: id
+
 		return
 
 	login: () =>
@@ -107,12 +109,13 @@ class window.nsa.App extends Backbone.Router
 
 	fetchList: (list, callback) =>
 		switch list
-			when "classes"	then collection = new nsa.Collections.Classes()
-			when "days"		then collection = new nsa.Collections.Days()
-			when "lessons"	then collection = new nsa.Collections.Lessons()
-			when "rooms"	then collection = new nsa.Collections.Rooms()
-			when "subjects"	then collection = new nsa.Collections.Subjects()
-			when "teachers"	then collection = new nsa.Collections.Teachers()
+			when "classes"		then collection = new nsa.Collections.Classes()
+			when "days"			then collection = new nsa.Collections.Days()
+			when "lessons"		then collection = new nsa.Collections.Lessons()
+			when "rooms"		then collection = new nsa.Collections.Rooms()
+			when "subjects"		then collection = new nsa.Collections.Subjects()
+			when "teachers"		then collection = new nsa.Collections.Teachers()
+			when "replacements"	then collection = new nsa.Collections.Replacements()
 
 		if not collection?
 			nsa.app.error
