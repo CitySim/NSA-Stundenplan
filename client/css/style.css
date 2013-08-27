@@ -30,19 +30,26 @@ body {
 
 .news:after {
 	content : "";
-    display: block;
-    position: absolute;
-    top: 10;
-    left: 15;
-    background-image: url('https://i.imgur.com/D8lkXuu.gif');
-    background-repeat: no-repeat;
-    width: 450;
-    height: 500;
-    opacity : 0.1;
+	display: block;
+	position: absolute;
+	top: 10;
+	left: 15;
+	right: 15;
+	height: 570px;
+	background-image: url("//i.imgur.com/D8lkXuu.gif");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	opacity : 0.1;
+}
+
+@media (min-width: 427px) {
+	.news:after {
+		background-size: 397px;
+	}
 }
 
 /* Stundenplan */
-
 
 .stundenplan {
 	border-top: none;
