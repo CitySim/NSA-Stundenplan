@@ -1,19 +1,14 @@
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
 - AvailableResource implementieren
-- ConfirmationResource implementieren (für Newsletter Anmeldung)
-- NewsletterResource implementieren (Zur Krankmeldung)
+- Vertretung eintragen API (Replacement)
 - Cookie überprüfen bei jedem Request
 
 - forgot password function hinzufügen. (Im Pflichtenheft)
-- Fix testCookieCreation (test only)
-
-Leonard:
-
-- Link generierung für die Anmeldung / Abmeldung
 
 Dennis:
 
+- Fix testCookieCreation (test only)
 - Format für die ConfirmationMail korrigieren
 - Create / Update Umschaltung töten
 
