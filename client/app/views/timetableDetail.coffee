@@ -18,6 +18,12 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			success: () =>
 				@model = model
 				return
+			error: () =>
+				nsa.app.error
+					no: 2809
+					title: "Stundenplan-Ladefehler"
+					message: "Es ist ein schwerer unerwarteter Stundenplan-Ladefehler aufgetreten"
+				return
 		return
 		
 	render: () =>
