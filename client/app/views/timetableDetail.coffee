@@ -41,8 +41,10 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			return
 
 		# prepare timetable
+		tempTimeTable = []
 		_.each tempLessons, (l) =>
-			tempTimeTable = []
+			l.days = []
+
 			_.each tempDays, (d) =>
 				tempLesson = {}
 				_.each @model.get("timetableLessons"), (t) =>
@@ -50,18 +52,13 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 						tempLesson = t
 					return
 
-				tempTimeTable[tempTimeTable.length - 1].push(tempLesson)
+				l.days.push(tempLesson)
 				return
-
-			l.days = tempTimeTable
 			return
-
-		console.log tempTimeTable
 
 		@$el.html @template
 			days: tempDays
 			lessons: tempLessons
 			timetable: @model.toJSON()
-			timetabledta: tempTimeTable
 
 		return
