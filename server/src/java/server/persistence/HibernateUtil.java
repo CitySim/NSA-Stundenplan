@@ -1,5 +1,11 @@
 package server.persistence;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,8 +18,8 @@ public class HibernateUtil {
 
 	static {
 		if (emf == null) {
-			// HibernateUtil.checkDatabase();
-			// final boolean exists = true;
+
+			// final boolean exists = HibernateUtil.checkDatabase();
 			// if (exists) {
 			emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
 			// } else {
@@ -31,20 +37,33 @@ public class HibernateUtil {
 		return entityManager;
 	}
 
-	// public static void checkDatabase() {
-	// // TODO CHECK IF DB final EXISTS
-	// final Connection con = null;
-	// Statement stmt = null;
-	// try {
-	// stmt = con.createStatement();
-	// } catch (final SQLException e) {
-	// e.printStackTrace();
-	// }
-	// try {
-	// final ResultSet rs = stmt.executeQuery("SELECT * FROM test");
-	// System.out.println(rs.last());
-	// } catch (final SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
+	public static boolean checkDatabase() {
+		// TODO CHECK IF DB final EXISTS
+		final int port = 8080;
+		final String userName = "root";
+		final String password = "";
+		Connection con = null;
+		Statement stmt = null;
+		try {
+			final String url = "jdbc:mysql://localhost:" + port + "/test";
+			con = DriverManager.getConnection(url, userName, password);
+		} catch (final Exception e) {
+		}
+		try {
+			stmt = con.createStatement();
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			final ResultSet rs = stmt.executeQuery("SELECT * FROM test");
+			System.out.println(rs.last());
+			if (rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (final SQLException e) {
+			return false;
+		}
+	}
 }
