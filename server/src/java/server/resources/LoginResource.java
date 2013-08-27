@@ -64,4 +64,10 @@ public class LoginResource {
 		}
 		return new Gson().toJson(newPassword);		
 	}
+	
+	@Path("logout")
+	@GET
+	public String logout(@QueryParam("cookie") NewCookie cookie) {
+		return new Gson().toJson(new CookieHandler().deleteCookie(cookie));
+	}
 }
