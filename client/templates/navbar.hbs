@@ -1,29 +1,30 @@
-<div class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
 	<div class="container">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-
-		<a class="navbar-brand" href="#">NSA</a>
-
-		<div class="nav-collapse collapse navbar-responsive-collapse" data-toggle="collapse"  data-target=".nav-collapse">
+		<div class="navbar-header">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".nsa-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">Bootstrap</a>
+		</div>
+		<nav class="collapse navbar-collapse nsa-navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Home</a></li>
 				<li><a href="#timetable">Stundenpläne</a></li>
-				<li><a href="#replacement">Vertretungen <span class="badge">42</span></a></li>
+				<li><a href="#replacement">Vertretungen</a></li>
 				<li><a href="#about">Über</a></li>
 			</ul>
-			<ul class="nav navbar-nav pull-right">
+			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown-header visible-sm">Admin-Bereich</li>
 				{{#if isLoggedIn}}
-					<li><a href="#">Neue Vertretung</a></li>
+					<li><a href="#admin">Admin</a></li>
 					<li><a href="#logout">Logout</a></li>
 				{{else}}
 					<li><a href="#login">Login</a></li>
 				{{/if}}
 			</ul>
-		</div>
+		</nav>
 	</div>
-</div>
+</header>
