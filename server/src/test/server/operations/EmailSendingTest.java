@@ -77,8 +77,8 @@ public class EmailSendingTest extends TestCase {
 
 	private Form createForm() {
 		this.em.getTransaction().begin();
+		final Form form = this.dataHelper.createForm("it1a", this.createTeacher());
 		this.em.getTransaction().commit();
-		Form form = this.dataHelper.createForm("it1a", this.createTeacher());
 		return form;
 	}
 
