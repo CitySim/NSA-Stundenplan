@@ -16,12 +16,8 @@ class window.nsa.Views.ChangePassword extends Backbone.View
 
 			success: (data) =>
 				try
-					#debugger
-					if data.status is "ok"
-						nsa.Data.user.set("id", $.cookie("NSA-Cookie"))
-						nsa.app.navigate("admin", { trigger: true })
-					else
-						@$(".app-alert").html(data).show()
+					# debugger
+					@$(".app-alert").html(data).show()
 				catch e
 					nsa.app.error
 						no: 2551

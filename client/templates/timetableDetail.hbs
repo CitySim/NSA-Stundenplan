@@ -2,14 +2,23 @@
 	<div class="col-md-12">
 		<h3 class="pull-left">ToDo</h3>
 	
-		<div class="btn-group pull-right">
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				Download <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/api/print/pdf?id={{timetable.id}}">PDF</a></li>
-				<li><a href="/api/print/png?id={{timetable.id}}">PNG</a></li>
-			</ul>
+		<div class="pull-right">
+			<div class="input-group" style="width: 300px;">
+				<input type="text" class="form-control app-email" placeholder="E-Mail">
+				<span class="input-group-btn">
+					<button class="btn btn-default app-subcribe" type="button">Abboieren</button>
+				</span>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Download <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/api/print/pdf?id={{timetable.id}}">PDF</a></li>
+					<li><a href="/api/print/png?id={{timetable.id}}">PNG</a></li>
+				</ul>
+			</div>
 		</div>
 
 		<table class="table table-bordered stundenplan">

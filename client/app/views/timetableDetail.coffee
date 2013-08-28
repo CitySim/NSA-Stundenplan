@@ -1,6 +1,9 @@
 class window.nsa.Views.TimetableDetail extends Backbone.View
 	template: nsa.handlebars.timetableDetail
 	className: "view-timetable-detail"
+
+	events:
+		"click .app-subcribe": "subcribe"
 	
 	loading: true
 
@@ -66,5 +69,33 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			days: tempDays
 			lessons: tempLessons
 			timetable: @model.toJSON()
+
+		return
+
+	subcribe: () =>
+		$.ajax
+			url: nsa.config.api + "/newsletter/confirm"
+			method: "GET"
+			date:
+				"id": @model.id
+				"email": @$(".app-username").val()
+			success: (data) =>
+				try
+					debugger
+				catch e
+					nsa.app.error
+						no: 2800
+						title: "Fehler beim abbonieren"
+						message: "Es tratt ein unbekannter Fehler auf.<br>" + e.message
+
+				return
+
+			error: () =>
+				nsa.app.error
+					no: 2801
+					title: "Fehler beim abbonieren"
+					message: "Es tratt ein unbekannter Fehler auf."
+
+				return
 
 		return
