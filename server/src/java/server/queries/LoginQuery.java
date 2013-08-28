@@ -90,9 +90,9 @@ public class LoginQuery extends QueryResult {
 	 * @param password
 	 */
 	public boolean changePassword(final String username, final String password) {
-		this.em.getTransaction().begin();
 		final Login loginUser = this.getLoginUser(username);
 		if (loginUser != null) {
+			this.em.getTransaction().begin();
 			loginUser.setPassword(password);
 			this.em.persist(loginUser);
 			this.em.getTransaction().commit();
