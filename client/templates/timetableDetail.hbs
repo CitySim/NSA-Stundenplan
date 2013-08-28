@@ -1,9 +1,21 @@
 <div class="row">
 	<div class="col-md-12">
+		<h3 class="pull-left">ToDo</h3>
+	
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				Download <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="/api/print/pdf?id={{timetable.id}}">PDF</a></li>
+				<li><a href="/api/print/png?id={{timetable.id}}">PNG</a></li>
+			</ul>
+		</div>
+
 		<table class="table table-bordered stundenplan">
 			<thead>
 				<tr>
-					<th style="width: 1%;">ToDo</th>
+					<th style="width: 1%;"></th>
 					{{#each days}}
 						<th style="width: 1%;">{{short}}</th>
 					{{/each}}
@@ -46,15 +58,5 @@
 				{{/each}}
 			</tbody>
 		</table>
-
-		<div class="btn-group dropup ">
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				Download <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/api/print/pdf?id={{timetable.id}}">PDF</a></li>
-				<li><a href="/api/print/png?id={{timetable.id}}">PNG</a></li>
-			</ul>
-		</div>
 	</div>
 </div>
