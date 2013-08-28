@@ -46,9 +46,13 @@ public class FilePrinterTest extends TestCase {
 	@Test
 	public void testprintAsPNG() {
 		String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
-		this.printer.createPng();
-		File f = new File(pngFileName);
-		FilePrinterTest.assertTrue(f.exists());
+		try {
+			this.printer.printAsPng(timeTable);
+			File f = new File(pngFileName);
+			FilePrinterTest.assertTrue(f.exists());
+		} catch (ScheduleCreationException e) {
+			FilePrinterTest.fail();
+		}
 	}
 
 	@After

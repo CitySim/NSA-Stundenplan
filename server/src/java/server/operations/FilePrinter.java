@@ -58,52 +58,6 @@ public class FilePrinter {
 		return new File(this.path);
 	}
 
-	public final File printAsPng(final Timetable timeTable) throws ScheduleCreationException {
-		try {
-			final int width = 200, height = 200;
-
-			final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-			final Graphics2D ig2 = image.createGraphics();
-
-			final Font font = new Font("TimesRoman", Font.BOLD, 20);
-			ig2.setFont(font);
-			final String message = this.createText(timeTable);
-			final FontMetrics fontMetrics = ig2.getFontMetrics();
-			final int stringWidth = fontMetrics.stringWidth(message);
-			final int stringHeight = fontMetrics.getAscent();
-			ig2.setPaint(Color.black);
-			ig2.drawString(message, (width - stringWidth) / 2, height / 2 + stringHeight / 4);
-
-			this.path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
-
-			ImageIO.write(image, "PNG", new File(this.path));
-
-		} catch (final IOException e) {
-			throw new ScheduleCreationException();
-		}
-		return new File(this.path);
-
-	}
-
-	private String createText(final Timetable timeTable) {
-
-		final StringBuilder sb = new StringBuilder();
-
-		for (final TimetableLesson lesson : timeTable.getLessons()) {
-			sb.append(lesson.getSubject().getShortName());
-			sb.append("\n");
-			sb.append(lesson.getTeacher().getShortName());
-			sb.append("\n");
-			sb.append(lesson.getRoom().getDescription());
-			sb.append("\n");
-			sb.append("\n");
-			sb.append("\n");
-
-		}
-		return sb.toString();
-	}
-
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
 		final PdfPTable table = new PdfPTable(6);
@@ -148,7 +102,8 @@ public class FilePrinter {
 		document.add(table);
 	}
 
-	public void createPng() {
+	public File printAsPng(Timetable timeTable) throws ScheduleCreationException {
+		printAsPDF(timeTable);
 		PDDocument doc = null;
 		try {
 			doc = PDDocument.load(this.path);
@@ -168,5 +123,6 @@ public class FilePrinter {
 				e.printStackTrace();
 			}
 		}
+		return new File(this.pngFileName);
 	}
 }
