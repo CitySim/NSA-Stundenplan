@@ -5,7 +5,7 @@ window.nsa = _.extend {}, window.nsa,
 	Data: {}
 	config:
 		api: "/api"
-	version: "0.1.1"
+	version: "0.2.0"
 
 class window.nsa.App extends Backbone.Router
 	routes:
@@ -56,6 +56,10 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	login: () =>
+		if nsa.Data.user.isLoggedIn()
+			@navigate("admin", { trigger: true })
+			return
+			
 		@showView(new nsa.Views.Login())
 		return
 
@@ -86,6 +90,12 @@ class window.nsa.App extends Backbone.Router
 
 	showView: (view) =>
 		@lastView?.remove()
+
+		if window.matchMedia? and not window.matchMedia("(min-width: 768px)").matches
+			# close nav
+			$(".nsa-navbar-collapse").collapse("hide")
+			console.log "close"
+
 
 		view.render()
 		view.$el.appendTo(".app-output")
@@ -145,9 +155,15 @@ class window.nsa.App extends Backbone.Router
 $ () ->
 	nsa.Data.user = new nsa.Models.User()
 	
+	cookieVal = $.cookie("NSA-Cookie")
+	if cookieVal?
+		nsa.Data.user.set("id", cookieVal)
+
 	navbarView = new nsa.Views.NavBar
 		el: $(".app-navbar")
 	navbarView.render()
+
+	#$(".nsa-navbar-collapse").collapse()
 
 	window.nsa.app = new window.nsa.App()
 	Backbone.history.start()

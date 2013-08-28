@@ -22,7 +22,7 @@ class window.nsa.Views.Login extends Backbone.View
 			success: (data) =>
 				try
 					if data.status is "ok"
-						nsa.Data.user.set("id", 1)
+						nsa.Data.user.set("id", $.cookie("NSA-Cookie"))
 						nsa.app.navigate("admin", { trigger: true })
 					else
 						@$(".app-alert").html(data.error).show()
