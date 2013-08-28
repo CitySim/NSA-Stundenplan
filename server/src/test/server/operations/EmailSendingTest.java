@@ -76,9 +76,8 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Form createForm() {
-		this.em.getTransaction().begin();
 		final Form form = this.dataHelper.createForm("it1a", this.createTeacher());
-		this.em.getTransaction().commit();
+		this.em.persist(form);
 		return form;
 	}
 
@@ -87,6 +86,7 @@ public class EmailSendingTest extends TestCase {
 		teacher.setFirstname("Hermann");
 		teacher.setName("Werner");
 		teacher.setShortName("Hr");
+		this.em.persist(teacher);
 		return teacher;
 	}
 
@@ -104,15 +104,19 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Newsletter createNewsletter() {
+		this.em.getTransaction().begin();
 		final Newsletter newsLetter = new Newsletter();
 		newsLetter.setForm(this.createForm());
 		newsLetter.setEmail(this.createEmailAddress());
+		this.em.persist(newsLetter);
+		this.em.getTransaction().commit();
 		return newsLetter;
 	}
 
 	private EmailAddress createEmailAddress() {
 		final EmailAddress emailAddress = new EmailAddress();
 		emailAddress.setEMailAddress("test@localhost");
+		this.em.persist(emailAddress);
 		return emailAddress;
 	}
 }
