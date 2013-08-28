@@ -17,7 +17,7 @@ import server.resources.FormResource;
  * Test for the generation of the newsLetter and URLs.
  * 
  * @author dennis.markmann
- * @since 1.0 
+ * @since 1.0
  * @version 1.0
  */
 
@@ -33,8 +33,8 @@ public class NewsLetterHandlerTest extends TestCase {
 	@Before
 	public void setUp() {
 		this.handler = new NewsLetterHandler();
-		form = FormResource.getForms().get(0);
-		
+		this.form = FormResource.getForms().get(0);
+
 		this.eMailAddress = "test@test.de";
 	}
 
@@ -42,9 +42,9 @@ public class NewsLetterHandlerTest extends TestCase {
 	public void testUrlCreation() {
 
 		// TODO Edit url
-		this.url = "http://localhost:8080/server/newsletter/confirm?id=" + form.getId() + "&email=" + this.eMailAddress;
+		this.url = "http://localhost:8080/server/newsletter/confirm?id=" + this.form.getId() + "&email=" + this.eMailAddress;
 
-		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(form, this.eMailAddress));
+		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(this.form, this.eMailAddress));
 
 	}
 
@@ -55,9 +55,9 @@ public class NewsLetterHandlerTest extends TestCase {
 
 		boolean success = false;
 
-		NewsLetterHandlerTest.assertTrue(this.handler.confirmRegistration(form, eMailAddress));
+		NewsLetterHandlerTest.assertTrue(this.handler.confirmRegistration(this.form, this.eMailAddress));
 
-		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters();
+		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters(this.form);
 
 		for (final Newsletter newsLetter : newsLetterList) {
 			if (newsLetter.getEmail().getEMailAddress().equals(this.eMailAddress)) {
@@ -68,9 +68,9 @@ public class NewsLetterHandlerTest extends TestCase {
 
 		try {
 			assertTrue(this.handler.removeAddress(newsLetterList.get(0)));
-		} catch (EmailSendingException e) {
+		} catch (final EmailSendingException e) {
 			fail();
 		}
-		assertTrue(handler.removeRegistration(newsLetterList.get(0)));
+		assertTrue(this.handler.removeRegistration(newsLetterList.get(0)));
 	}
 }
