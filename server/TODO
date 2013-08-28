@@ -23,11 +23,5 @@ Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/
 Auch bind Parameters!
 http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
 
-FilePrinter: 
-Pdf --> Wenn schon vorhanden nicht neu erstellen
-PNG --> Convert PDF to PNG:
-http://thinktibits.blogspot.de/2011/06/convert-png-to-pdf-itext-java-example.html
-
-
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
 		   sollte HTTP Status 400 kommen, nicht 404
