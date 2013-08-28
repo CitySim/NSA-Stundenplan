@@ -2,6 +2,8 @@ package server.operations;
 
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+
 import junit.framework.TestCase;
 
 import org.junit.Before;
@@ -17,6 +19,8 @@ import server.entities.Teacher;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
+import server.persistence.DataCreationHelper;
+import server.persistence.HibernateUtil;
 
 /**
  * Test for exception email sending.
@@ -30,6 +34,8 @@ public class EmailSendingTest extends TestCase {
 
 	private EmailJobHelper helper;
 	private Form form;
+	private EntityManager em;
+	private DataCreationHelper dataHelper;
 
 	@Override
 	@Before
@@ -37,6 +43,9 @@ public class EmailSendingTest extends TestCase {
 		this.helper = new EmailJobHelper();
 		this.form = new Form();
 		this.form.setDescription("it1a");
+
+		this.em = HibernateUtil.getEntityManager();
+		this.dataHelper = new DataCreationHelper(this.em);
 	}
 
 	@Test
@@ -67,10 +76,8 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Form createForm() {
-		final Form form = new Form();
-		form.setTeacher(this.createTeacher());
-		form.setDescription("it1a");
-		return form;
+		this.em.getTransaction().begin();
+		return this.dataHelper.createForm("it1a", this.createTeacher());
 	}
 
 	private Teacher createTeacher() {

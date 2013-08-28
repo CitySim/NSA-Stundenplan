@@ -71,7 +71,7 @@ class EmailTextCreator {
 		sb.append(System.lineSeparator());
 		sb.append("sie haben sich für den Newsletter der Nation Stundenplan Agency registriert.");
 		sb.append(System.lineSeparator());
-		sb.append("Die für sie eingetragene Klasse ist die " + form.getDescription() + " .");
+		sb.append("Die für sie eingetragene Klasse ist die " + form.getDescription() + ".");
 		sb.append(System.lineSeparator());
 
 		sb.append(System.lineSeparator());
@@ -105,12 +105,10 @@ class EmailTextCreator {
 
 		sb.append("Ihr Login ist: ");
 		sb.append(userName);
-		sb.append(".");
 		sb.append(System.lineSeparator());
 
 		sb.append("Ihr Passwort ist: ");
 		sb.append(password);
-		sb.append(".");
 		sb.append(System.lineSeparator());
 
 		sb.append(System.lineSeparator());
@@ -129,7 +127,6 @@ class EmailTextCreator {
 
 		sb.append("Ihr neues Passwort ist: ");
 		sb.append(password);
-		sb.append(".");
 		sb.append(System.lineSeparator());
 
 		sb.append(System.lineSeparator());
@@ -144,7 +141,7 @@ class EmailTextCreator {
 
 		sb.append("Hallo,");
 		sb.append(System.lineSeparator());
-		sb.append("um sich von dem Newsletter von der Klasse " + newsletter.getForm().getDescription() + "  abzumelden klicken Sie folgenden Link:");
+		sb.append("um sich von dem Newsletter von der Klasse " + newsletter.getForm().getDescription() + " abzumelden klicken Sie folgenden Link:");
 		sb.append(System.lineSeparator());
 
 		sb.append(System.lineSeparator());
