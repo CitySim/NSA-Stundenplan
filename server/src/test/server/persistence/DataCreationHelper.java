@@ -43,7 +43,7 @@ public class DataCreationHelper {
 		return teacher;
 	}
 
-	Form createForm(final String description, final Teacher teacher) {
+	public Form createForm(final String description, final Teacher teacher) {
 		final Form form = new Form();
 		form.setDescription(description);
 		form.setTeacher(teacher);

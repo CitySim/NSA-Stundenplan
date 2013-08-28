@@ -26,19 +26,19 @@ public class EmailJobHelper {
 	public final void sendConfirmationMail(final Form form, final String email) throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator().createConfirmationMail(form, email);
-		new EmailJob().sendMail(this.setEmailSettings("NSA - RegistrierungsBestätigung"), emailList);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Registrierungs Bestätigung"), emailList);
 	}
 
 	public final void sendCreationMail(final String eMailAddress, final String userName, final String password) throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator().createCreationMail(userName, password, eMailAddress);
-		new EmailJob().sendMail(this.setEmailSettings("NSA - ErstellBestätigung"), emailList);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Erstell Bestätigung"), emailList);
 	}
 
 	public final void sendPasswordChangeMail(final String eMailAddress, final String userName, final String password) throws EmailSendingException {
 
 		final ArrayList<EmailObject> emailList = new EmailCreator().createPasswordChangeMail(eMailAddress, userName, password);
-		new EmailJob().sendMail(this.setEmailSettings("NSA - PasswordÄnderungsBestätigung"), emailList);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Password Änderungs Bestätigung"), emailList);
 	}
 
 	public boolean sendRemoveRegistrationMail(final Newsletter newsletter) throws EmailSendingException {
