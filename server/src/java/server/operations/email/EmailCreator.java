@@ -1,13 +1,13 @@
 package server.operations.email;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import server.entities.Form;
 import server.entities.Newsletter;
-import server.entities.Timetable;
+import server.entities.Replacement;
 import server.exceptions.ScheduleCreationException;
-import server.operations.FilePrinter;
+import server.queries.NewsletterQuery;
 
 /**
  * Used to create the eMails to send.
@@ -38,26 +38,23 @@ class EmailCreator {
 
 	}
 
-	final ArrayList<EmailObject> createNewsLetterMails(final Timetable timeTable) throws ScheduleCreationException {
+	final ArrayList<EmailObject> createNewsLetterMails(final Replacement replacement) throws ScheduleCreationException {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
 		final EmailObject emailObject = new EmailObject();
 		emailList.add(emailObject);
 
-		// final ArrayList<String> emailAddresList =
-		// emailObject.getEmailAddressList();
+		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
 
-		final String emailText = new EmailTextCreator().generateScheduleChangeText();
-		final File file = new FilePrinter().printAsPDF(timeTable);
+		final String emailText = new EmailTextCreator().generateScheduleChangeText(replacement);
 
-		new EmailContentCreator().createMailContent(emailText, file, emailObject);
+		new EmailContentCreator().createMailContent(emailText, null, emailObject);
 
-		// for (final EmailAddresse eMailAddresse : newsLetter
-		// .geteMailAddressList()) {
-		// emailAddresList.add(eMailAddresse.geteMailAddress());
-		// }
-		// }
+		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters(replacement.getForm());
+		for (final Newsletter newsLetter : newsLetterList) {
+			emailAddresList.add(newsLetter.getEmail().getEMailAddress());
+		}
 
 		return emailList;
 	}
@@ -97,10 +94,10 @@ class EmailCreator {
 
 		return emailList;
 	}
-	
+
 	// TODO testen, überprüfen, ggf. refactorn
-	public ArrayList<EmailObject> createRemoveRegistrationMail(Newsletter newsletter) {
-		
+	public ArrayList<EmailObject> createRemoveRegistrationMail(final Newsletter newsletter) {
+
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
 		final EmailObject emailObject = new EmailObject();
