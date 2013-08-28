@@ -17,12 +17,12 @@ public class PrintResource {
 	@GET
 	@Path("pdf")
 	@Produces("application/pdf")
-	public Response printPDF(@QueryParam("id") int timetableId) {
-		FilePrinter filePrinter = new FilePrinter();
+	public Response printPDF(@QueryParam("id") final int timetableId) {
+		final FilePrinter filePrinter = new FilePrinter();
 		File pdf = null;
 		try {
 			pdf = filePrinter.printAsPDF(new TimetableResource().getTimetable(timetableId));
-		} catch (ScheduleCreationException e) {
+		} catch (final ScheduleCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -33,16 +33,16 @@ public class PrintResource {
 	@GET
 	@Path("png")
 	@Produces("image/png")
-	public Response printPNG(@QueryParam("id") int timetableId) {
-		FilePrinter filePrinter = new FilePrinter();
+	public Response printPNG(@QueryParam("id") final int timetableId) {
+		final FilePrinter filePrinter = new FilePrinter();
 		File png = null;
 		try {
 			png = filePrinter.printAsPng(new TimetableResource().getTimetable(timetableId));
-		} catch (ScheduleCreationException e) {
+		} catch (final ScheduleCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return Response.ok(png).header("Content-Disposition", "attachment; filename=timetable.png").build();
 	}
 }

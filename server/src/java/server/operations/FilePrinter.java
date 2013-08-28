@@ -1,9 +1,5 @@
 package server.operations;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -61,8 +57,8 @@ public class FilePrinter {
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
 		final PdfPTable table = new PdfPTable(6);
-		
-		table.addCell("\nKlasse "+timeTable.getLessons().get(0).getForm().getDescription() +"\n ");
+
+		table.addCell("\nKlasse " + timeTable.getLessons().get(0).getForm().getDescription() + "\n ");
 		table.addCell("\nMontag\n ");
 		table.addCell("\nDienstag\n ");
 		table.addCell("\nMittwoch\n ");
@@ -102,8 +98,8 @@ public class FilePrinter {
 		document.add(table);
 	}
 
-	public File printAsPng(Timetable timeTable) throws ScheduleCreationException {
-		printAsPDF(timeTable);
+	public File printAsPng(final Timetable timeTable) throws ScheduleCreationException {
+		this.printAsPDF(timeTable);
 		PDDocument doc = null;
 		try {
 			doc = PDDocument.load(this.path);

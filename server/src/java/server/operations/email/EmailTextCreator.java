@@ -2,6 +2,7 @@ package server.operations.email;
 
 import server.entities.Form;
 import server.entities.Newsletter;
+import server.entities.Replacement;
 import server.operations.NewsLetterHandler;
 
 /**
@@ -14,25 +15,36 @@ import server.operations.NewsLetterHandler;
 
 class EmailTextCreator {
 
-	String generateScheduleChangeText() {
+	String generateScheduleChangeText(final Replacement replacement) {
 
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
 		sb.append(System.lineSeparator());
-		sb.append("für den");
-		sb.append("system.getTag + den + system.getDATUM");
-		sb.append("hat sich eine Abweichung ergeben.");
+		sb.append("hiermit weisen wir Sie auf eine Abweichung ihres regulären Stundenplans hin.");
 		sb.append(System.lineSeparator());
 
 		sb.append(System.lineSeparator());
-		sb.append("Betroffene Stunde(n) [Font größer]");
-		sb.append("Stunde | Fach | Lehrer");
-		sb.append("alt:");
-		sb.append("geändert:");
+		sb.append("Betroffene Stunde:");
+		sb.append(replacement.getDate());
 		sb.append(System.lineSeparator());
 
-		sb.append("Änderungsart: system.get (?) Ausfall / Vertretung / Verschiebung");
+		sb.append("Neuer Raum:");
+		sb.append(replacement.getRoom());
+		sb.append(System.lineSeparator());
+
+		sb.append("Fach:");
+		sb.append(replacement.getSubject());
+		sb.append(System.lineSeparator());
+
+		sb.append("Vertretungslehrer:");
+		sb.append(replacement.getTeacher());
+		sb.append(System.lineSeparator());
+
+		sb.append("Notiz:");
+		sb.append(replacement.getNote());
+		sb.append(System.lineSeparator());
+
 		sb.append(System.lineSeparator());
 		sb.append("Hinweis: Hierbei handelt es sich um eine einmalige Änderung.");
 		sb.append(System.lineSeparator());

@@ -22,21 +22,16 @@ import server.entities.TimetableLesson;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 @Path("replacement")
 public class ReplacementResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getReplacementJSON(
-			@QueryParam("teacher") int teacherId,
-			@QueryParam("room") int roomId,
-			@QueryParam("class") int formId,
-			@QueryParam("start") Date start,
-			@QueryParam("end") Date end) {
+	public String getReplacementJSON(@QueryParam("teacher") final int teacherId, @QueryParam("room") final int roomId,
+			@QueryParam("class") final int formId, @QueryParam("start") final Date start, @QueryParam("end") final Date end) {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getReplacements(teacherId, formId, roomId, start, end));
+		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, start, end));
 		return json;
 	}
 
@@ -44,25 +39,23 @@ public class ReplacementResource {
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addReplacementJSON(@PathParam("replacement") String replacementJSON,
-			@QueryParam("lesson") int lessonId,
-			@QueryParam("form") int formId,
-			@QueryParam("day") int dayId) {
-		Gson gson = new Gson();
-		Replacement replacement = gson.fromJson(replacementJSON, Replacement.class);
-		return new Gson().toJson(addReplacement(replacement, lessonId, formId, dayId));
+	public String addReplacementJSON(@PathParam("replacement") final String replacementJSON, @QueryParam("lesson") final int lessonId,
+			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
+		final Gson gson = new Gson();
+		final Replacement replacement = gson.fromJson(replacementJSON, Replacement.class);
+		return new Gson().toJson(this.addReplacement(replacement, lessonId, formId, dayId));
 	}
 
-	private Replacement addReplacement(Replacement replacement, int lessonId, int formId, int dayId) {
-		EntityManager entityManager = HibernateUtil.getEntityManager();
-		Session session = entityManager.unwrap(Session.class);
-		
-		Criteria criteria = session.createCriteria(TimetableLesson.class);
+	private Replacement addReplacement(final Replacement replacement, final int lessonId, final int formId, final int dayId) {
+		final EntityManager entityManager = HibernateUtil.getEntityManager();
+		final Session session = entityManager.unwrap(Session.class);
+
+		final Criteria criteria = session.createCriteria(TimetableLesson.class);
 		criteria.add(Restrictions.eq("lesson.id", lessonId));
 		criteria.add(Restrictions.eq("form.id", formId));
-		criteria.add(Restrictions.eq("day.id", dayId));	
-		TimetableLesson timetableLesson = (TimetableLesson) criteria.uniqueResult();
-		
+		criteria.add(Restrictions.eq("day.id", dayId));
+		final TimetableLesson timetableLesson = (TimetableLesson) criteria.uniqueResult();
+
 		entityManager.getTransaction().begin();
 		entityManager.persist(replacement);
 		timetableLesson.setReplacement(replacement);
@@ -71,9 +64,9 @@ public class ReplacementResource {
 		return replacement;
 	}
 
-	private List<?> getReplacements(int teacherId, int formId, int roomId, Date start, Date end) {
-		Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Replacement.class);
+	private List<?> getReplacements(final int teacherId, final int formId, final int roomId, final Date start, final Date end) {
+		final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
+		final Criteria criteria = session.createCriteria(Replacement.class);
 		if (teacherId != 0) {
 			criteria.add(Restrictions.eq("teacher.id", teacherId));
 		}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import server.entities.Form;
 import server.entities.Newsletter;
-import server.entities.Timetable;
+import server.entities.Replacement;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 
@@ -18,8 +18,8 @@ import server.exceptions.ScheduleCreationException;
 
 public class EmailJobHelper {
 
-	public final void sendNewsLetterMail(final Timetable entityList) throws ScheduleCreationException, EmailSendingException {
-		final ArrayList<EmailObject> emailList = new EmailCreator().createNewsLetterMails(entityList);
+	public final void sendNewsLetterMail(final Replacement replacement) throws ScheduleCreationException, EmailSendingException {
+		final ArrayList<EmailObject> emailList = new EmailCreator().createNewsLetterMails(replacement);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);
 	}
 
@@ -41,13 +41,14 @@ public class EmailJobHelper {
 		new EmailJob().sendMail(this.setEmailSettings("NSA - PasswordÄnderungsBestätigung"), emailList);
 	}
 
-	private EmailSettings setEmailSettings(final String titel) {
-		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
-	}
-
-	public boolean sendRemoveRegistrationMail(Newsletter newsletter) throws EmailSendingException {
+	public boolean sendRemoveRegistrationMail(final Newsletter newsletter) throws EmailSendingException {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(newsletter);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Newsletter abmelden"), emailList);
 		return true;
 	}
+
+	private EmailSettings setEmailSettings(final String titel) {
+		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
+	}
+
 }

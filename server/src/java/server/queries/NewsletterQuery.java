@@ -58,14 +58,14 @@ public class NewsletterQuery extends QueryResult {
 	}
 
 	/**
-	 * Gets the full Newsletterlist
+	 * Gets the full Newsletterlist for a specified form
 	 * 
 	 * @return List<Newsletter>
 	 */
-	public List<Newsletter> getAllNewsletters() {
+	public List<Newsletter> getAllNewsletters(Form form) {
 		@SuppressWarnings("unchecked")
 		final List<Newsletter> newsletter = this.em.createNativeQuery(
-				"select * from Newsletter", Newsletter.class).getResultList();
+				"select * from Newsletter where id =" +form.getId() +"", Newsletter.class).getResultList();
 		return newsletter;
 	}
 
