@@ -15,6 +15,7 @@ class window.nsa.App extends Backbone.Router
 		"replacement"			: "replacement"
 		"replacement/:id"		: "replacementDetails"
 		"login"					: "login"
+		"login/changepw"		: "changepw"
 		"about"					: "about"
 		"admin"					: "admin"
 		"*error"				: "errorNotFound"
@@ -59,8 +60,12 @@ class window.nsa.App extends Backbone.Router
 		if nsa.Data.user.isLoggedIn()
 			@navigate("admin", { trigger: true })
 			return
-			
+
 		@showView(new nsa.Views.Login())
+		return
+
+	changepw: () =>
+		@showView(new nsa.Views.ChangePassword())
 		return
 
 	about: () =>
