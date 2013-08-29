@@ -24,8 +24,10 @@
 							mit {{teacher.firstname}} {{teacher.name}}, {{room.description}}<br>
 						</p>
 
-						<br>
-						<p class="text-warning"><b>Hinweis:</b> {{note}}</p>
+						{{#if note}}
+							<br>
+							<p class="text-warning"><b>Hinweis:</b> {{note}}</p>
+						{{/if}}
 					</a>
 				{{/each}}
 			</div>
