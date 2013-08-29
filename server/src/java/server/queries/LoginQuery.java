@@ -28,13 +28,14 @@ public class LoginQuery extends QueryResult {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the Email address for the specified User
+	 * 
 	 * @param username
 	 * @return String Email
 	 */
-	public String getEmailForUser(String username){
+	public String getEmailForUser(final String username) {
 		final Login login = this.getLoginUser(username);
 		if (login != null) {
 			return login.getEmail().getEMailAddress();
@@ -49,15 +50,17 @@ public class LoginQuery extends QueryResult {
 	 * @param password
 	 * @param eMailAddress
 	 */
-	public boolean createUser(final String username, final String password,
-			final String eMailAddress) {
+	public boolean createUser(final String username, final String password, final String eMailAddress) {
 		Login login = this.getLoginUser(username);
 		if (login == null) {
 			this.em.getTransaction().begin();
 
-			final EmailAddress email = new EmailAddress();
-			email.setEMailAddress(eMailAddress);
-			this.em.persist(email);
+			EmailAddress email = this.getEmail(eMailAddress);
+			if (email == null) {
+				email = new EmailAddress();
+				email.setEMailAddress(eMailAddress);
+				this.em.persist(email);
+			}
 
 			login = new Login();
 			login.setPassword(password);
@@ -102,10 +105,19 @@ public class LoginQuery extends QueryResult {
 		}
 	}
 
+	/**
+	 * Gets existing Email address
+	 * 
+	 * @param formString
+	 * @return EmailAddress
+	 */
+	public EmailAddress getEmail(final String mail) {
+		return (EmailAddress) this.getSingleResult(this.em.createNativeQuery("select * from emailaddress WHERE eMailAddress ='" + mail + "'",
+				EmailAddress.class));
+	}
+
 	private Login getLoginUser(final String username) {
-		return (Login) this.getSingleResult(this.em.createQuery(
-				"select l from Login l where user = '" + username + "'",
-				Login.class));
+		return (Login) this.getSingleResult(this.em.createQuery("select l from Login l where user = '" + username + "'", Login.class));
 	}
 
 }
