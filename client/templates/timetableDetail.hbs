@@ -42,7 +42,7 @@
 						</td>
 						{{#each days}}
 							{{#if replacement}}
-								<td class="warning">
+								<td class="danger">
 									{{#with replacement}}
 										{{#if subject}}
 											{{subject.subject}}<br>
@@ -55,7 +55,7 @@
 										{{/if}}
 
 										{{#if ../../../../isLoggedIn}}
-											<a href="#/replacement/{{id}}/edit">Edit</a>
+											<br><a href="#/replacement/{{id}}/edit">Ändern</a>
 										{{/if}}
 									{{/with}}
 								</td>
@@ -64,6 +64,16 @@
 									{{subject.shortName}}<br>
 									{{room.description}}<br>
 									{{teacher.shortName}}
+
+									{{#if ../../../isLoggedIn}}
+										{{#if subject}}
+											{{#if room}}
+												{{#if teacher}}
+													<br><a href="#/replacement/new/{{subject.id}}/{{room.id}}/{{teacher.id}}">Ändern</a>
+												{{/if}}
+											{{/if}}
+										{{/if}}
+									{{/if}}
 								</td>
 							{{/if}}
 						{{/each}}
