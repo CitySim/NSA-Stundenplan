@@ -1,4 +1,4 @@
-	window.nsa = _.extend {}, window.nsa,
+window.nsa = _.extend {}, window.nsa,
 	Views: {}
 	Models: {}
 	Collections: {}
