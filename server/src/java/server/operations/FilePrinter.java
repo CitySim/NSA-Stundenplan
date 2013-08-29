@@ -57,8 +57,17 @@ public class FilePrinter {
 	private void createPdfTable(final Timetable timeTable, final Document document) throws DocumentException {
 
 		final PdfPTable table = new PdfPTable(6);
-
-		table.addCell("\nKlasse " + timeTable.getLessons().get(0).getForm().getDescription() + "\n ");
+		String input = "";
+		
+		if(timeTable.getForm() != null){
+			input = "Klasse: "+ timeTable.getForm().getDescription();
+		}else if(timeTable.getRoom() != null){
+			input = "Raum: "+ timeTable.getRoom().getDescription();
+		}else if(timeTable.getTeacher() != null){ 
+			input = "Lehrer: " + timeTable.getTeacher().getFirstname()+ " "+timeTable.getTeacher().getName();
+		}
+		
+		table.addCell("\n"+ input +"\n ");
 		table.addCell("\nMontag\n ");
 		table.addCell("\nDienstag\n ");
 		table.addCell("\nMittwoch\n ");
