@@ -36,7 +36,6 @@ public class EmailSendingTest extends TestCase {
 	private Form form;
 	private EntityManager em;
 	private DataCreationHelper dataHelper;
-
 	@Override
 	@Before
 	public void setUp() {
@@ -52,7 +51,7 @@ public class EmailSendingTest extends TestCase {
 	public void testEmailSending() {
 		try {
 			try {
-				this.helper.sendNewsLetterMail(this.createReplacement());
+				this.helper.sendNewsLetterMail(this.getExistingReplacement());
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
@@ -65,14 +64,9 @@ public class EmailSendingTest extends TestCase {
 		}
 	}
 
-	private Replacement createReplacement() {
-		final Replacement replacement = new Replacement();
-		replacement.setDate(new Date());
-		replacement.setForm(this.createForm());
-		replacement.setNote("Dummer Lehrer");
-		replacement.setRoom(this.createRoom());
-		replacement.setSubject(this.createSubject());
-		return replacement;
+	
+	private Replacement getExistingReplacement() {
+		return em.find(Replacement.class, 1);
 	}
 
 	private Form createForm() {
