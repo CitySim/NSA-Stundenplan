@@ -6,7 +6,7 @@
 			<div class="input-group" style="width: 300px;">
 				<input type="text" class="form-control app-email" placeholder="E-Mail">
 				<span class="input-group-btn">
-					<button class="btn btn-default app-subcribe" type="button">Abboieren</button>
+					<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
 				</span>
 			</div>
 
@@ -52,6 +52,10 @@
 										{{/if}}
 										{{#if teacher}}
 											{{teacher.shortName}}
+										{{/if}}
+
+										{{#if ../../../../isLoggedIn}}
+											<a href="#/replacement/{{id}}/edit">Edit</a>
 										{{/if}}
 									{{/with}}
 								</td>
