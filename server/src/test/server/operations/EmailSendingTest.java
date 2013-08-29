@@ -58,7 +58,7 @@ public class EmailSendingTest extends TestCase {
 			this.helper.sendConfirmationMail(this.form, "test@localhost");
 			this.helper.sendCreationMail("test@localhost", "test", "test");
 			this.helper.sendPasswordChangeMail("test@localhost", "test", "test");
-			this.helper.sendRemoveRegistrationMail(this.createNewsletter());
+			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
 		}
@@ -69,48 +69,8 @@ public class EmailSendingTest extends TestCase {
 		return em.find(Replacement.class, 1);
 	}
 
-	private Form createForm() {
-		final Form form = this.dataHelper.createForm("it1a", this.createTeacher());
-		this.em.persist(form);
-		return form;
-	}
-
-	private Teacher createTeacher() {
-		final Teacher teacher = new Teacher();
-		teacher.setFirstname("Hermann");
-		teacher.setName("Werner");
-		teacher.setShortName("Hr");
-		this.em.persist(teacher);
-		return teacher;
-	}
-
-	private Room createRoom() {
-		final Room room = new Room();
-		room.setDescription("Raum301");
-		return room;
-	}
-
-	private Subject createSubject() {
-		final Subject subject = new Subject();
-		subject.setDescription("Fachenglisch");
-		subject.setShortName("FE");
-		return null;
-	}
-
-	private Newsletter createNewsletter() {
-		this.em.getTransaction().begin();
-		final Newsletter newsLetter = new Newsletter();
-		newsLetter.setForm(this.createForm());
-		newsLetter.setEmail(this.createEmailAddress());
-		this.em.persist(newsLetter);
-		this.em.getTransaction().commit();
-		return newsLetter;
-	}
-
-	private EmailAddress createEmailAddress() {
-		final EmailAddress emailAddress = new EmailAddress();
-		emailAddress.setEMailAddress("test@localhost");
-		this.em.persist(emailAddress);
-		return emailAddress;
+	private Newsletter getExistingNewsletter(){
+		
+		return em.find(Newsletter.class,1);
 	}
 }
