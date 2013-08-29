@@ -2,6 +2,13 @@ package server.operations;
 
 import java.util.Date;
 
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Variant.VariantListBuilder;
+import javax.ws.rs.ext.RuntimeDelegate;
+
 import junit.framework.TestCase;
 
 import org.junit.Before;
@@ -19,21 +26,53 @@ import server.queries.CookieQuery;
 
 public class CookieHandlerTest extends TestCase {
 
-	// private CookieHandler handler;
+	private CookieHandler handler;
 
 	@Override
 	@Before
 	public void setUp() {
-		// this.handler = new CookieHandler();
+		this.handler = new CookieHandler();
 	}
 
-	// @Test
-	// public void testCookieCreation() {
-	// final NewCookie cookie = this.handler.createCookie();
-	//
-	// CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
-	// CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
-	// }
+	@Test
+	public void testCookieCreation() {
+		RuntimeDelegate.setInstance(new RuntimeDelegate() {
+
+			@Override
+			public VariantListBuilder createVariantListBuilder() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public UriBuilder createUriBuilder() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public ResponseBuilder createResponseBuilder() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public <T> HeaderDelegate<T> createHeaderDelegate(Class<T> arg0) {
+				return null;
+			}
+
+			@Override
+			public <T> T createEndpoint(Application arg0, Class<T> arg1) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		});
+
+		final NewCookie cookie = this.handler.createCookie();
+
+		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
+		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
+	}
 
 	@Test
 	public void testInvalidCookie() {
