@@ -19,13 +19,12 @@ public class HibernateUtil {
 	static {
 		if (emf == null) {
 
-			// final boolean exists = HibernateUtil.checkDatabase();
-			// if (exists) {
-			emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
-			// } else {
-			// emf =
-			// Persistence.createEntityManagerFactory("nsa-stundenplan-new");
-			// }
+			final boolean exists = HibernateUtil.checkDatabase();
+			if (exists) {
+				emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
+			} else {
+				emf = Persistence.createEntityManagerFactory("nsa-stundenplan-new");
+			}
 		}
 
 		if (entityManager == null) {
@@ -38,7 +37,7 @@ public class HibernateUtil {
 	}
 
 	public static boolean checkDatabase() {
-		final int port = 8080;
+		final int port = 3306;
 		final String userName = "root";
 		final String password = "";
 		Connection con = null;
@@ -54,9 +53,8 @@ public class HibernateUtil {
 			e.printStackTrace();
 		}
 		try {
-			final ResultSet rs = stmt.executeQuery("SELECT * FROM test");
-			System.out.println(rs.last());
-			if (rs.next()) {
+			final ResultSet rs = stmt.executeQuery("SELECT * FROM emailaddress WHERE id ='1'");
+			if (rs != null) {
 				return true;
 			} else {
 				return false;
