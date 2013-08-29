@@ -1,5 +1,5 @@
-class window.nsa.Views.ReplacementDetail extends Backbone.View
-	template: nsa.handlebars.replacementDetail
+class window.nsa.Views.ReplacementEdit extends Backbone.View
+	template: nsa.handlebars.replacementEdit
 
 	initialize: () =>
 		nsa.app.fetchList "replacements", (err) =>
@@ -25,6 +25,5 @@ class window.nsa.Views.ReplacementDetail extends Backbone.View
 
 		@$el.html @template
 			model: @model.toJSON()
-			isLoggedIn: nsa.Data.user.isLoggedIn()
 
 		return

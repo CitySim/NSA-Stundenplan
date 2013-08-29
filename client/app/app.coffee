@@ -14,6 +14,7 @@ class window.nsa.App extends Backbone.Router
 		"timetable/:type/:id"	: "timetableDetail"
 		"replacement"			: "replacement"
 		"replacement/:id"		: "replacementDetails"
+		"replacement/:id/edit"	: "replacementEdit"
 		"login"					: "login"
 		"login/changepw"		: "changepw"
 		"about"					: "about"
@@ -52,6 +53,12 @@ class window.nsa.App extends Backbone.Router
 
 	replacementDetails: (id) =>
 		@showView new nsa.Views.ReplacementDetail
+			replacementId: id
+
+		return
+
+	replacementEdit: (id) =>
+		@showView new nsa.Views.ReplacementEdit
 			replacementId: id
 
 		return
