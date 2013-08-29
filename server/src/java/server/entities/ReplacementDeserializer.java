@@ -20,7 +20,7 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 		JsonObject json = jsonEl.getAsJsonObject();
 		Replacement replacement;
 		EntityManager em = HibernateUtil.getEntityManager();
-		if (json.get("id").getAsInt() != 0) {
+		if (json.get("id") != null && json.get("id").getAsInt() != 0) {
 			replacement = em.find(Replacement.class, json.get("id").getAsInt());
 		} else {
 			replacement = new Replacement();
