@@ -21,6 +21,9 @@ public class AvailableResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAvailable(@QueryParam("day") int dayId, @QueryParam("lesson") int lessonId) {
+		if (dayId == 0 || lessonId == 0) {
+			return new Gson().toJson("Ungültiger Tag oder Stunde ausgewählt!");
+		}
 		Available available = new Available();
 		available.setAvailableTeachers(getAvailableTeachers(dayId, lessonId));
 		available.setAvailableRooms(getAvailableRooms(dayId, lessonId));
@@ -29,7 +32,7 @@ public class AvailableResource {
 
 	@SuppressWarnings("unchecked")
 	private List<Teacher> getAvailableTeachers(int dayId, int lessonId) {
-		String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = 1 and idStunde = 1)";
+		String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId + " and idStunde = " + lessonId + ")";
 		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
 
 		List<Teacher> liste = query.getResultList();
@@ -38,7 +41,7 @@ public class AvailableResource {
 
 	@SuppressWarnings("unchecked")
 	private List<Room> getAvailableRooms(int dayId, int lessonId) {
-		String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = 1 and idStunde = 1)";
+		String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId + " and idStunde = " + lessonId + ")";
 		Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);
 
 		List<Room> liste = query.getResultList();
