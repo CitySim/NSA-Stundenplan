@@ -9,18 +9,18 @@ window.nsa = _.extend {}, window.nsa,
 
 class window.nsa.App extends Backbone.Router
 	routes:
-		""						: "home"
-		"timetable"				: "timetable"
-		"timetable/:type/:id"	: "timetableDetail"
-		"replacement"			: "replacement"
-		"replacement/new"		: "replacementNew"
-		"replacement/:id"		: "replacementDetails"
-		"replacement/:id/edit"	: "replacementEdit"
-		"login"					: "login"
-		"login/changepw"		: "changepw"
-		"about"					: "about"
-		"admin"					: "admin"
-		"*error"				: "errorNotFound"
+		""							: "home"
+		"timetable"					: "timetable"
+		"timetable/:type/:id"		: "timetableDetail"
+		"replacement"				: "replacement"
+		"replacement/new/:subject/:room/:teacher"	: "replacementNew"
+		"replacement/:id"			: "replacementDetails"
+		"replacement/:id/edit"		: "replacementEdit"
+		"login"						: "login"
+		"login/changepw"			: "changepw"
+		"about"						: "about"
+		"admin"						: "admin"
+		"*error"					: "errorNotFound"
 
 	initialize: () =>
 		return
@@ -68,13 +68,16 @@ class window.nsa.App extends Backbone.Router
 
 		return
 
-	replacementNew: () =>
+	replacementNew: (subject, room, teacher) =>
 		if not nsa.Data.user.isLoggedIn()
 			@navigate("login", { trigger: true })
 			return
 			
 		@showView new nsa.Views.ReplacementEdit
 			newReplacement: true
+			subject: subject
+			room: room
+			teacher: teacher
 
 		return
 

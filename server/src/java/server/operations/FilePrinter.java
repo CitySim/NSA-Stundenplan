@@ -62,7 +62,7 @@ public class FilePrinter {
 		if(timeTable.getForm() != null){
 			input = "Klasse: "+ timeTable.getForm().getDescription();
 		}else if(timeTable.getRoom() != null){
-			input = "Raum: "+ timeTable.getRoom().getDescription();
+			input = timeTable.getRoom().getDescription();
 		}else if(timeTable.getTeacher() != null){ 
 			input = "Lehrer: " + timeTable.getTeacher().getFirstname()+ " "+timeTable.getTeacher().getName();
 		}

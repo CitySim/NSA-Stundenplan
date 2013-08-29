@@ -7,10 +7,25 @@
 			<div class="list-group">
 				{{#each this}}
 					<a href="#replacement/{{id}}" class="list-group-item">
-						<h4 class="list-group-item-heading">{{form.description}}, 0:00 - 0:00, fach</h4>
+						<h4 class="list-group-item-heading">
+							{{form.description}},
+							{{#if lesson}}
+								<span class="text-muted">{{lesson.format_start}} - {{lesson.format_end}}</span>
+							{{else}}
+								<span class="text-muted">keine Stunde</span>
+							{{/if}},
+							{{#if subject}}
+								{{subject.description}}
+							{{else}}
+								<span class="text-muted">kein Fach</span>
+							{{/if}}
+						</h4>
 						<p class="list-group-item-text">
 							mit {{teacher.firstname}} {{teacher.name}}, {{room.description}}<br>
 						</p>
+
+						<br>
+						<p class="text-warning"><b>Hinweis:</b> {{note}}</p>
 					</a>
 				{{/each}}
 			</div>

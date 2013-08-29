@@ -6,7 +6,7 @@
 			<div class="input-group" style="width: 300px;">
 				<input type="text" class="form-control app-email" placeholder="E-Mail">
 				<span class="input-group-btn">
-					<button class="btn btn-default app-subcribe" type="button">Abboieren</button>
+					<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
 				</span>
 			</div>
 
@@ -42,7 +42,7 @@
 						</td>
 						{{#each days}}
 							{{#if replacement}}
-								<td class="warning">
+								<td class="danger">
 									{{#with replacement}}
 										{{#if subject}}
 											{{subject.subject}}<br>
@@ -53,6 +53,10 @@
 										{{#if teacher}}
 											{{teacher.shortName}}
 										{{/if}}
+
+										{{#if ../../../../isLoggedIn}}
+											<br><a href="#/replacement/{{id}}/edit">Ändern</a>
+										{{/if}}
 									{{/with}}
 								</td>
 							{{else}}
@@ -60,6 +64,16 @@
 									{{subject.shortName}}<br>
 									{{room.description}}<br>
 									{{teacher.shortName}}
+
+									{{#if ../../../isLoggedIn}}
+										{{#if subject}}
+											{{#if room}}
+												{{#if teacher}}
+													<br><a href="#/replacement/new/{{subject.id}}/{{room.id}}/{{teacher.id}}">Ändern</a>
+												{{/if}}
+											{{/if}}
+										{{/if}}
+									{{/if}}
 								</td>
 							{{/if}}
 						{{/each}}
