@@ -9,11 +9,6 @@ Sven:
 - Aufruf von changePassword (Passwort vergessen) durch den Client
 - Aufruf von deleteCookie (Ausloggen) durch den Client
 
-Dennis:
-
-- Fix testCookieCreation (test only / weiß nicht wie..)
-- Create / Update Umschaltung töten (testen)
-
 Oleg:
 
 Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
