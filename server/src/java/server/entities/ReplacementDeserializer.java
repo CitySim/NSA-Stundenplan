@@ -27,6 +27,7 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 		replacement.setRoom(em.find(Room.class, json.get("room").getAsInt()));
 		replacement.setSubject(em.find (Subject.class, json.get("subject").getAsInt()));
 		replacement.setTeacher(em.find(Teacher.class, json.get("teacher").getAsInt()));
+		replacement.setLesson(em.find(Lesson.class, json.get("lesson").getAsInt()));
 		
 		return replacement;
 	}

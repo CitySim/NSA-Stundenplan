@@ -23,7 +23,10 @@ public class Replacement extends DefaultEntity {
 
 	@ManyToOne(targetEntity = Form.class)
 	private Form form;
-
+	
+	@ManyToOne(targetEntity = Lesson.class)
+	private Lesson lesson;
+	
 	private String note;
 
 	public Date getDate() {
@@ -72,5 +75,13 @@ public class Replacement extends DefaultEntity {
 
 	public void setForm(Form form) {
 		this.form = form;
+	}
+
+	public Lesson getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
 	}
 }

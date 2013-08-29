@@ -28,8 +28,8 @@ public class SchoolResource {
 				+ "++++ Er kann sich ins Knie ficken: Frau will mit Schlangenmenschen nicht ins Bett ++++<br>"
 				+ "++++ Nicht die feine Art: Kundin schreit Metzgerin wegen falscher Leberwurst an ++++<br>"
 				+ "++++ Gehen langsam aus: Alte Gigolos ++++<br>"
-				+ "++++ Hier isst der Kunde König: Kannibalen-Restaurant serviert Häuptlingsfleisch ++++<br>"
-				+ "++++ Den Dicken markiert: Paintballprofi prahlt nach Sieg über korpulenten Gegner ++++<br>"
-				+ "++++ Trachten nach dem Tod: Bayerische Profikiller möchten in traditioneller Kleidung bestattet werden ++++";
+				+ "++++ Hier isst der Kunde KÃ¶nig: Kannibalen-Restaurant serviert HÃ¤uptlingsfleisch ++++<br>"
+				+ "++++ Den Dicken markiert: Paintballprofi prahlt nach Sieg Ã¼ber korpulenten Gegner ++++<br>"
+				+ "++++ Trachten nach dem Tod: Bayerische Profikiller mÃ¶chten in traditioneller Kleidung bestattet werden ++++";
 	}
 }
