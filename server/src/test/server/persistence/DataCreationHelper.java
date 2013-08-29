@@ -11,6 +11,7 @@ import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Lesson;
 import server.entities.Login;
+import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.entities.Room;
 import server.entities.Subject;
@@ -124,5 +125,12 @@ public class DataCreationHelper {
 		this.em.persist(replacement);
 		timetableLesson.setReplacement(replacement);
 		this.em.persist(timetableLesson);
+	}
+
+	void createNewsletter(final Form form, final String email) {
+		final Newsletter newsLetter = new Newsletter();
+		newsLetter.setForm(form);
+		newsLetter.setEmail(this.createEmailAddress(email));
+		this.em.persist(newsLetter);
 	}
 }

@@ -1,7 +1,5 @@
 package server.operations;
 
-import java.util.Date;
-
 import javax.persistence.EntityManager;
 
 import junit.framework.TestCase;
@@ -13,8 +11,6 @@ import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
 import server.entities.Replacement;
-import server.entities.Room;
-import server.entities.Subject;
 import server.entities.Teacher;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
@@ -36,6 +32,7 @@ public class EmailSendingTest extends TestCase {
 	private Form form;
 	private EntityManager em;
 	private DataCreationHelper dataHelper;
+
 	@Override
 	@Before
 	public void setUp() {
@@ -64,9 +61,8 @@ public class EmailSendingTest extends TestCase {
 		}
 	}
 
-	
 	private Replacement getExistingReplacement() {
-		return em.find(Replacement.class, 1);
+		return this.em.find(Replacement.class, 1);
 	}
 
 	private Form createForm() {
@@ -82,19 +78,6 @@ public class EmailSendingTest extends TestCase {
 		teacher.setShortName("Hr");
 		this.em.persist(teacher);
 		return teacher;
-	}
-
-	private Room createRoom() {
-		final Room room = new Room();
-		room.setDescription("Raum301");
-		return room;
-	}
-
-	private Subject createSubject() {
-		final Subject subject = new Subject();
-		subject.setDescription("Fachenglisch");
-		subject.setShortName("FE");
-		return null;
 	}
 
 	private Newsletter createNewsletter() {

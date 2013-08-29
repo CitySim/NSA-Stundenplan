@@ -187,11 +187,14 @@ public class DataCreationTest {
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, null, null, timetableLesson2);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, null, "Lehrer kaputt", timetableLesson3);
 
+		this.helper.createNewsletter(it1a, "test@locahost.de");
+		this.helper.createNewsletter(it1a, "Kirsten.Albers@g18.de");
+		this.helper.createNewsletter(it1b, "Heike.Giera@g18.de");
+
 		this.em.getTransaction().commit();
 
 		@SuppressWarnings("unchecked")
 		final List<Form> list = this.em.createNativeQuery("select * from Klasse", Form.class).getResultList();
 		assertTrue(list.size() >= 2);
 	}
-
 }
