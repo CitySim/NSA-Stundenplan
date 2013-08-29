@@ -1,6 +1,13 @@
 <div class="row">
 	<div class="col-md-12">
-		<legend>Vertretung bearbeiten</legend>
+		<legend>
+			{{#if newReplacement}}
+				neue Vertretung
+			{{else}}
+				Vertretung bearbeiten
+			{{/if}}
+		</legend>
+		
 
 		{{#with model}}
 

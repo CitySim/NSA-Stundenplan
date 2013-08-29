@@ -14,19 +14,22 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			@render()
 			return
 
-		nsa.app.fetchList "replacements", (err) =>
-			return if err?
+		if @options.newReplacement
+			@model = new nsa.Models.Replacement()
+		else
+			nsa.app.fetchList "replacements", (err) =>
+				return if err?
 
-			@model = nsa.Data.replacements.get(@options.replacementId)
-			if not @model?
-				nsa.app.error
-					no: 2704
-					title: "Fehler beim laden"
-					message: "Fehler beim laden der Vertretung"
-				return
+				@model = nsa.Data.replacements.get(@options.replacementId)
+				if not @model?
+						nsa.app.error
+						no: 2900
+						title: "Fehler beim laden (ID nicht gefunden)"
+						message: "Fehler beim laden der Vertretung"
+					return
 			
-			@render()
-			return
+				@render()
+				return
 
 		return
 
@@ -50,6 +53,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			rooms: nsa.Data.rooms.toJSON()
 			subjects: nsa.Data.subjects.toJSON()
 			classes: nsa.Data.classes.toJSON()
+			newReplacement: @options.newReplacement or false
 
 		return
 

@@ -13,6 +13,7 @@ class window.nsa.App extends Backbone.Router
 		"timetable"				: "timetable"
 		"timetable/:type/:id"	: "timetableDetail"
 		"replacement"			: "replacement"
+		"replacement/new"		: "replacementNew"
 		"replacement/:id"		: "replacementDetails"
 		"replacement/:id/edit"	: "replacementEdit"
 		"login"					: "login"
@@ -58,8 +59,22 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	replacementEdit: (id) =>
+		if not nsa.Data.user.isLoggedIn()
+			@navigate("login", { trigger: true })
+			return
+			
 		@showView new nsa.Views.ReplacementEdit
 			replacementId: id
+
+		return
+
+	replacementNew: () =>
+		if not nsa.Data.user.isLoggedIn()
+			@navigate("login", { trigger: true })
+			return
+			
+		@showView new nsa.Views.ReplacementEdit
+			newReplacement: true
 
 		return
 
