@@ -47,9 +47,9 @@ public class EmailSendingTest extends TestCase {
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
-			this.helper.sendConfirmationMail(this.form, "test@localhost");
-			this.helper.sendCreationMail("test@localhost", "test", "test");
-			this.helper.sendPasswordChangeMail("test@localhost", "test", "test");
+			this.helper.sendConfirmationMail(this.form, "test@localhost"); //Registrierungs Bestätigung
+			this.helper.sendCreationMail("test@localhost", "test", "test"); // Erstell Bestätigung
+			this.helper.sendPasswordChangeMail("test@localhost", "test", "test"); // Password Änderungs bestätigung
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
