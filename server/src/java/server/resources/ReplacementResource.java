@@ -17,10 +17,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import server.entities.Replacement;
+import server.entities.ReplacementDeserializer;
 import server.entities.TimetableLesson;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Path("replacement")
 public class ReplacementResource {
@@ -35,13 +37,15 @@ public class ReplacementResource {
 	}
 
 	@POST
-	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addReplacementJSON(String replacementJSON, @QueryParam("lesson") final int lessonId,
 			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
-		final Gson gson = new Gson();
-		final Replacement replacement = gson.fromJson(replacementJSON, Replacement.class);
+		
+		final GsonBuilder gson = new GsonBuilder();
+		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+		
 		return new Gson().toJson(this.addReplacement(replacement, lessonId, formId, dayId));
 	}
 

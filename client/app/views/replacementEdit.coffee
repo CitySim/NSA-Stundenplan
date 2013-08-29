@@ -70,15 +70,17 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			data[name] = val
 			return
 
+		@$("form input, form select, form textarea, form button").attr("disabled", true)
+
 		@model.set(data)
-		@model.save {}, 
+		@model.save {},
 			success: () =>
 				alert("ok")
+				nsa.app.navigate("admin", { trigger: true })
 				return
 			error: () =>
 				alert("fehler")
+				@$("form input, form select, form textarea, form button").attr("disabled", false)
 				return
-
-		@$("form input, form select, form textarea, form button").attr("disabled", true)
 
 		return
