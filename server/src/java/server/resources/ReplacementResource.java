@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -34,6 +35,20 @@ public class ReplacementResource {
 		final Gson gson = new Gson();
 		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, start, end));
 		return json;
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changeReplacementJSON(String replacementJSON) {
+		final GsonBuilder gson = new GsonBuilder();
+		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+		final EntityManager entityManager = HibernateUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		HibernateUtil.getEntityManager().persist(replacement);
+		entityManager.getTransaction().commit();
+		return new Gson().toJson(replacement);
 	}
 
 	@POST
