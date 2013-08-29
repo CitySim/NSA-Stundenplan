@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import server.operations.OperationTestSuit;
 import server.persistence.DataCreationTest;
-import server.persistence.HibernateTimeTableTest;
 
 /**
  * Used to start all tests for the application.
@@ -17,7 +16,6 @@ import server.persistence.HibernateTimeTableTest;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({ DataCreationTest.class, OperationTestSuit.class, HibernateTimeTableTest.class })
+@SuiteClasses({ DataCreationTest.class, OperationTestSuit.class })
 public class AllTests {
-
 }

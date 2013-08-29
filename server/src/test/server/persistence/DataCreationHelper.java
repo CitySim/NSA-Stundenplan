@@ -18,6 +18,7 @@ import server.entities.Subject;
 import server.entities.Teacher;
 import server.entities.TimetableLesson;
 import server.operations.PasswordEncryptor;
+import server.queries.NewsletterQuery;
 
 /**
  * Contains methods for creating data.
@@ -98,10 +99,13 @@ public class DataCreationHelper {
 	}
 
 	EmailAddress createEmailAddress(final String eMailAddress) {
-		final EmailAddress email = new EmailAddress();
-		email.setEMailAddress(eMailAddress);
-		this.em.persist(email);
-		return email;
+		EmailAddress emailAddress = new NewsletterQuery().getEmail(eMailAddress);
+		if (emailAddress == null) {
+			emailAddress = new EmailAddress();
+			emailAddress.setEMailAddress(eMailAddress);
+			this.em.persist(emailAddress);
+		}
+		return emailAddress;
 	}
 
 	void createLogin(final String userName, final String eMailAddress) {

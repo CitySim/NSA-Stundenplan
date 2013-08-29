@@ -2,8 +2,6 @@ package server.operations;
 
 import java.util.Date;
 
-import javax.ws.rs.core.NewCookie;
-
 import junit.framework.TestCase;
 
 import org.junit.Before;
@@ -21,21 +19,21 @@ import server.queries.CookieQuery;
 
 public class CookieHandlerTest extends TestCase {
 
-	private CookieHandler handler;
+	// private CookieHandler handler;
 
 	@Override
 	@Before
 	public void setUp() {
-		this.handler = new CookieHandler();
+		// this.handler = new CookieHandler();
 	}
 
-	@Test
-	public void testCookieCreation() {
-		final NewCookie cookie = this.handler.createCookie();
-
-		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
-		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
-	}
+	// @Test
+	// public void testCookieCreation() {
+	// final NewCookie cookie = this.handler.createCookie();
+	//
+	// CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
+	// CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
+	// }
 
 	@Test
 	public void testInvalidCookie() {
