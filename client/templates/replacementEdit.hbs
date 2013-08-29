@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-md-12">
+		<legend>Vertretung bearbeiten</legend>
+
+		{{#with model}}
+
+			<form role="form">
+				<div class="form-group">
+					<label for="formDate">Datum</label>
+					<input type="date" class="form-control" id="formDate" placeholder="DD.MM.JJJJ">
+				</div>
+				<div class="form-group">
+					<label for="formTeacher">Lehrer</label>
+					<select class="form-control" id="formTeacher">
+
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="formRoom">Raum</label>
+					<select class="form-control" id="formRoom">
+
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="formSubject">Fach</label>
+					<select class="form-control" id="formSubject">
+
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="formForm">Klasse</label>
+					<select class="form-control" id="formForm">
+
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="formNote">Notiz</label>
+					<textarea id="formNote" class="form-control" rows="3"></textarea>
+				</div>
+			
+				<button type="submit" class="btn btn-primary">Speichern</button>
+			</form>
+
+		{{/with}}
+	</div>
+</div>
