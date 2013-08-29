@@ -183,9 +183,9 @@ public class DataCreationTest {
 		this.helper.createLogin("Burg.Burg", "Burg.Burg@g18.de");
 		this.helper.createLogin("test", "test@g18.de");
 
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, timetableLesson);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, timetableLesson2);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, timetableLesson3);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, "Lehrer erkrankt", timetableLesson);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, null, null, timetableLesson2);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, null, "Lehrer kaputt", timetableLesson3);
 
 		this.em.getTransaction().commit();
 
