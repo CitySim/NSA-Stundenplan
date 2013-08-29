@@ -39,6 +39,10 @@
 					</tr>
 				{{/if}}
 			</table>
+
+			{{#if ../isLoggedIn}}
+				<a href="#replacement/{{id}}/edit" class="btn btn-default">Bearbeiten</a>
+			{{/if}}
 		{{/with}}
 	</div>
 </div>
