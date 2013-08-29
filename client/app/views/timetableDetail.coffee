@@ -69,6 +69,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			days: tempDays
 			lessons: tempLessons
 			timetable: @model.toJSON()
+			isLoggedIn: nsa.Data.user.isLoggedIn()
 
 		return
 
