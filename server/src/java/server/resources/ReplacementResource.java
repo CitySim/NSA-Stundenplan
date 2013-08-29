@@ -8,7 +8,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +38,7 @@ public class ReplacementResource {
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addReplacementJSON(@PathParam("replacement") final String replacementJSON, @QueryParam("lesson") final int lessonId,
+	public String addReplacementJSON(String replacementJSON, @QueryParam("lesson") final int lessonId,
 			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
 		final Gson gson = new Gson();
 		final Replacement replacement = gson.fromJson(replacementJSON, Replacement.class);
@@ -59,7 +58,7 @@ public class ReplacementResource {
 		entityManager.getTransaction().begin();
 		entityManager.persist(replacement);
 		timetableLesson.setReplacement(replacement);
-		entityManager.persist(timetableLesson);
+		entityManager.refresh(timetableLesson);
 		entityManager.getTransaction().commit();
 		return replacement;
 	}
