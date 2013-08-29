@@ -174,22 +174,22 @@ public class DataCreationTest {
 		timetable_it1b.setLessons(timeTableLessons_it1a);
 		this.em.persist(timetable_it1b);
 
-		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@g18.de");
-		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@g18.de");
-		this.helper.createLogin("Werner.Herrmann", "Werner.Herrmann@g18.de");
-		this.helper.createLogin("Thomas.Bastians", "Thomas.Bastians@g18.de");
-		this.helper.createLogin("Heike.Giera", "Heike.Giera@g18.de");
-		this.helper.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@g18.de");
-		this.helper.createLogin("Burg.Burg", "Burg.Burg@g18.de");
-		this.helper.createLogin("test", "test@g18.de");
+		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@localhost.de");
+		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@localhost.de");
+		this.helper.createLogin("Werner.Herrmann", "Werner.Herrmann@localhost.de");
+		this.helper.createLogin("Thomas.Bastians", "Thomas.Bastians@localhost.de");
+		this.helper.createLogin("Heike.Giera", "Heike.Giera@localhost.de");
+		this.helper.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@localhost.de");
+		this.helper.createLogin("Burg.Burg", "Burg.Burg@localhost.de");
+		this.helper.createLogin("test", "test@localhost.de");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, "Lehrer erkrankt", timetableLesson);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, null, null, timetableLesson2);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, null, "Lehrer kaputt", timetableLesson3);
 
-		this.helper.createNewsletter(it1a, "test@locahost.de");
-		this.helper.createNewsletter(it1a, "Kirsten.Albers@g18.de");
-		this.helper.createNewsletter(it1b, "Heike.Giera@g18.de");
+		this.helper.createNewsletter(it1a, "test@localhost.de");
+		this.helper.createNewsletter(it1a, "Kirsten.Albers@localhost.de");
+		this.helper.createNewsletter(it1b, "Heike.Giera@localhost.de");
 
 		this.em.getTransaction().commit();
 

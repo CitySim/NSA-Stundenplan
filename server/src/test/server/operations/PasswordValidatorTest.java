@@ -37,7 +37,7 @@ public class PasswordValidatorTest extends TestCase {
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
-		final String eMailAddress = "test@test.de";
+		final String eMailAddress = "test@localhost.de";
 
 		Login account = null;
 		try {

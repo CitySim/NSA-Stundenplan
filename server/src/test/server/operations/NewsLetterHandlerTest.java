@@ -35,7 +35,7 @@ public class NewsLetterHandlerTest extends TestCase {
 		this.handler = new NewsLetterHandler();
 		this.form = FormResource.getForms().get(0);
 
-		this.eMailAddress = "test2@test2.de";
+		this.eMailAddress = "test2@localhost.de";
 	}
 
 	@Test

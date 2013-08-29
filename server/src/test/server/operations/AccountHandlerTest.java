@@ -55,7 +55,7 @@ public class AccountHandlerTest extends TestCase {
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
-		final String eMailAddress = "test@test.de";
+		final String eMailAddress = "test@localhost.de";
 
 		try {
 			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
