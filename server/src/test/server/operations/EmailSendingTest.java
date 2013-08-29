@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
 import server.entities.Replacement;
@@ -14,6 +15,9 @@ import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
+import server.queries.LoginQuery;
+import server.queries.NewsletterQuery;
+import server.resources.FormResource;
 
 /**
  * Test for exception email sending.
@@ -28,15 +32,16 @@ public class EmailSendingTest extends TestCase {
 	private EmailJobHelper helper;
 	private Form form;
 	private EntityManager em;
+	private String email;
 
 	@Override
 	@Before
 	public void setUp() {
 		this.helper = new EmailJobHelper();
-		this.form = new Form();
-		this.form.setDescription("it1a");
+		this.form = FormResource.getForms().get(0);
 
 		this.em = HibernateUtil.getEntityManager();
+		email="test@localhost";
 	}
 
 	@Test
@@ -47,9 +52,9 @@ public class EmailSendingTest extends TestCase {
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
-			this.helper.sendConfirmationMail(this.form, "test@localhost"); //Registrierungs Bestätigung
-			this.helper.sendCreationMail("test@localhost", "test", "test"); // Erstell Bestätigung
-			this.helper.sendPasswordChangeMail("test@localhost", "test", "test"); // Password Änderungs bestätigung
+			this.helper.sendConfirmationMail(this.form, email); //Registrierungs Bestätigung
+			this.helper.sendCreationMail(email, "test", "test"); // Erstell Bestätigung
+			this.helper.sendPasswordChangeMail(email, "test", "test"); // Password Änderungs bestätigung
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
@@ -61,6 +66,7 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Newsletter getExistingNewsletter() {
-		return this.em.find(Newsletter.class, 8);
+		EmailAddress emailAdress = new NewsletterQuery().getEmail(email);
+		return new NewsletterQuery().getNewsletter(emailAdress.getId(), form.getId());
 	}
 }
