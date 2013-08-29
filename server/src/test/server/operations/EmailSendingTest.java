@@ -61,6 +61,6 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Newsletter getExistingNewsletter() {
-		return this.em.find(Newsletter.class, 1);
+		return this.em.find(Newsletter.class, 8);
 	}
 }
