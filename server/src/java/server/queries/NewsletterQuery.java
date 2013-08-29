@@ -41,7 +41,7 @@ public class NewsletterQuery extends QueryResult {
 	 * 
 	 */
 	public boolean removeNewsletter(final Newsletter newsletter) {
-			return removeFromDB(newsletter);
+		return this.removeFromDB(newsletter);
 	}
 
 	/**
@@ -50,11 +50,9 @@ public class NewsletterQuery extends QueryResult {
 	 * @param formString
 	 * @return EmailAddress
 	 */
-	private EmailAddress getEmail(final String mail) {
-		return (EmailAddress) getSingleResult(em
-				.createNativeQuery(
-						"select * from emailaddress WHERE eMailAddress ='"
-								+ mail + "'", EmailAddress.class));
+	public EmailAddress getEmail(final String mail) {
+		return (EmailAddress) this.getSingleResult(this.em.createNativeQuery("select * from emailaddress WHERE eMailAddress ='" + mail + "'",
+				EmailAddress.class));
 	}
 
 	/**
@@ -62,17 +60,15 @@ public class NewsletterQuery extends QueryResult {
 	 * 
 	 * @return List<Newsletter>
 	 */
-	public List<Newsletter> getAllNewsletters(Form form) {
+	public List<Newsletter> getAllNewsletters(final Form form) {
 		@SuppressWarnings("unchecked")
-		final List<Newsletter> newsletter = this.em.createNativeQuery(
-				"select * from Newsletter where id =" +form.getId() +"", Newsletter.class).getResultList();
+		final List<Newsletter> newsletter = this.em.createNativeQuery("select * from Newsletter where id =" + form.getId() + "", Newsletter.class)
+				.getResultList();
 		return newsletter;
 	}
 
-	public Newsletter getNewsletter(int mailID, int formID) {
-		return (Newsletter) getSingleResult(em.createNativeQuery(
-				"select * from Newsletter where email_id=" + mailID
-						+ " AND form_idKlasse =" + formID + "",
-				Newsletter.class));
+	public Newsletter getNewsletter(final int mailID, final int formID) {
+		return (Newsletter) this.getSingleResult(this.em.createNativeQuery("select * from Newsletter where email_id=" + mailID
+				+ " AND form_idKlasse =" + formID + "", Newsletter.class));
 	}
 }
