@@ -20,11 +20,6 @@ Wenn Zeit Criteria einfügen: http://docs.jboss.org/hibernate/entitymanager/3.5/
 Auch bind Parameters!
 http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
 
-Bei Lehrer -> Lehrer name oben links
-Bei Raum -> Raumname
-Bei Klasse -> Klasse
-Methoden hinzufügen?
-
 Email Stundenplan Änderung soll das Datum formatiert zurückgeben
 
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
