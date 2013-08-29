@@ -62,7 +62,7 @@ public class ReplacementResource {
 		entityManager.getTransaction().begin();
 		entityManager.persist(replacement);
 		timetableLesson.setReplacement(replacement);
-		entityManager.refresh(timetableLesson);
+		entityManager.persist(timetableLesson);
 		entityManager.getTransaction().commit();
 		return replacement;
 	}
