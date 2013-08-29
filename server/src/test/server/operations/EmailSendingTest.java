@@ -7,15 +7,12 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
 import server.entities.Replacement;
-import server.entities.Teacher;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
-import server.persistence.DataCreationHelper;
 import server.persistence.HibernateUtil;
 
 /**
@@ -31,7 +28,6 @@ public class EmailSendingTest extends TestCase {
 	private EmailJobHelper helper;
 	private Form form;
 	private EntityManager em;
-	private DataCreationHelper dataHelper;
 
 	@Override
 	@Before
@@ -41,7 +37,6 @@ public class EmailSendingTest extends TestCase {
 		this.form.setDescription("it1a");
 
 		this.em = HibernateUtil.getEntityManager();
-		this.dataHelper = new DataCreationHelper(this.em);
 	}
 
 	@Test
@@ -55,7 +50,7 @@ public class EmailSendingTest extends TestCase {
 			this.helper.sendConfirmationMail(this.form, "test@localhost");
 			this.helper.sendCreationMail("test@localhost", "test", "test");
 			this.helper.sendPasswordChangeMail("test@localhost", "test", "test");
-			this.helper.sendRemoveRegistrationMail(this.createNewsletter());
+			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
 		}
@@ -65,35 +60,7 @@ public class EmailSendingTest extends TestCase {
 		return this.em.find(Replacement.class, 1);
 	}
 
-	private Form createForm() {
-		final Form form = this.dataHelper.createForm("it1a", this.createTeacher());
-		this.em.persist(form);
-		return form;
-	}
-
-	private Teacher createTeacher() {
-		final Teacher teacher = new Teacher();
-		teacher.setFirstname("Hermann");
-		teacher.setName("Werner");
-		teacher.setShortName("Hr");
-		this.em.persist(teacher);
-		return teacher;
-	}
-
-	private Newsletter createNewsletter() {
-		this.em.getTransaction().begin();
-		final Newsletter newsLetter = new Newsletter();
-		newsLetter.setForm(this.createForm());
-		newsLetter.setEmail(this.createEmailAddress());
-		this.em.persist(newsLetter);
-		this.em.getTransaction().commit();
-		return newsLetter;
-	}
-
-	private EmailAddress createEmailAddress() {
-		final EmailAddress emailAddress = new EmailAddress();
-		emailAddress.setEMailAddress("test@localhost");
-		this.em.persist(emailAddress);
-		return emailAddress;
+	private Newsletter getExistingNewsletter() {
+		return this.em.find(Newsletter.class, 1);
 	}
 }
