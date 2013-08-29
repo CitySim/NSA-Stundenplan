@@ -21,9 +21,9 @@ public class HibernateUtil {
 
 			final boolean exists = HibernateUtil.checkDatabase();
 			if (exists) {
-				emf = Persistence.createEntityManagerFactory("nsa-stundenplan");
+				emf = Persistence.createEntityManagerFactory("nsa-stundenplan-update");
 			} else {
-				emf = Persistence.createEntityManagerFactory("nsa-stundenplan-new");
+				emf = Persistence.createEntityManagerFactory("nsa-stundenplan-create");
 			}
 		}
 
