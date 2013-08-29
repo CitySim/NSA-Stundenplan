@@ -23,8 +23,12 @@ class window.nsa.Views.ReplacementDetail extends Backbone.View
 			@$el.html nsa.handlebars.loading()
 			return
 
+		model = @model.toJSON()
+		model.format_start = moment(model.lesson.timeFrom, "hh:mm a").format("HH:mm")
+		model.format_end = moment(model.lesson.timeTo, "hh:mm a").format("HH:mm")
+
 		@$el.html @template
-			model: @model.toJSON()
+			model: model
 			isLoggedIn: nsa.Data.user.isLoggedIn()
 
 		return

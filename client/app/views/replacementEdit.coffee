@@ -72,6 +72,10 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 		@$("form input, form select, form textarea, form button").attr("disabled", true)
 
+		@model.fetchData = @options.fetchData
+
+		data.date = moment(data.date, "DD.MM.YYYY").format("MMM DD, YYYY hh:mm:ss A")
+
 		@model.set(data)
 		@model.save {},
 			success: () =>
