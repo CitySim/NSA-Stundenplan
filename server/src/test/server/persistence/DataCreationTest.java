@@ -184,7 +184,7 @@ public class DataCreationTest {
 		this.helper.createLogin("test", "test@localhost.de");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugnisskonferenz", timetableLesson2);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", timetableLesson2);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", timetableLesson3);
 
 		this.helper.createNewsletter(it1a, "test@localhost.de");
