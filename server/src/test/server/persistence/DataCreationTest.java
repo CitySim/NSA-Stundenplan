@@ -183,9 +183,9 @@ public class DataCreationTest {
 		this.helper.createLogin("Burg.Burg", "Burg.Burg@localhost.de");
 		this.helper.createLogin("test", "test@localhost.de");
 
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, "Lehrer erkrankt", timetableLesson);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, null, null, timetableLesson2);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, null, "Lehrer kaputt", timetableLesson3);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, null, lesson3, null, timetableLesson2);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, null, lesson4, "Lehrer kaputt", timetableLesson3);
 
 		this.helper.createNewsletter(it1a, "test@localhost.de");
 		this.helper.createNewsletter(it1a, "Kirsten.Albers@localhost.de");
