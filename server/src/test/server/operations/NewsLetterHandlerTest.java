@@ -35,13 +35,12 @@ public class NewsLetterHandlerTest extends TestCase {
 		this.handler = new NewsLetterHandler();
 		this.form = FormResource.getForms().get(0);
 
-		this.eMailAddress = "test@test.de";
+		this.eMailAddress = "test2@test2.de";
 	}
 
 	@Test
 	public void testUrlCreation() {
 
-		// TODO Edit url
 		this.url = "http://localhost:8080/server/newsletter/confirm?id=" + this.form.getId() + "&email=" + this.eMailAddress;
 
 		NewsLetterHandlerTest.assertEquals(this.url, this.handler.generateRegistrationLink(this.form, this.eMailAddress));
@@ -50,8 +49,6 @@ public class NewsLetterHandlerTest extends TestCase {
 
 	@Test
 	public void testAddressCreation() {
-
-		this.testUrlCreation();
 
 		boolean success = false;
 
