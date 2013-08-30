@@ -1,5 +1,6 @@
 class window.nsa.Views.ReplacementDetail extends Backbone.View
 	template: nsa.handlebars.replacementDetail
+	className: "view-replacement-detail"
 
 	initialize: () =>
 		nsa.app.fetchList "replacements", (err) =>

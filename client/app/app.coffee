@@ -77,10 +77,6 @@ class window.nsa.App extends Backbone.Router
 			
 		@showView new nsa.Views.ReplacementEdit
 			newReplacement: true
-			fetchData:
-				lesson: lesson
-				form: form
-				day: day
 
 		return
 

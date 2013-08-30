@@ -1,5 +1,6 @@
 class window.nsa.Views.Error extends Backbone.View
 	template: nsa.handlebars.error
+	className: "view-error"
 
 	errorImageList: [
 		{ t: "v", s: "//www.youtube.com/embed/iqT0iFZifgw?rel=0&autoplay=1&loop=1" } # FUKKIRETA 10 hours 

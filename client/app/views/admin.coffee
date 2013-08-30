@@ -1,5 +1,6 @@
 class window.nsa.Views.Admin extends Backbone.View
 	template: nsa.handlebars.admin
+	className: "view-admin"
 
 	events:
 		"click .app-save": "save"

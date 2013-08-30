@@ -1,10 +1,12 @@
 class window.nsa.Views.ReplacementEdit extends Backbone.View
 	template: nsa.handlebars.replacementEdit
+	className: "view-replacement-edit"
 
 	loading: true
 
 	events:
 		"click .app-save": "save"
+		"change [name=droplesson]": "toggleDropLesson"
 
 	initialize: () =>
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
@@ -47,8 +49,6 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			return
 
 		model = @model.toJSON()
-		if model.date?
-			model.format_date = moment(model.date, "MMM DD, YYYY hh:mm:ss A").format("YYYY-MM-DD")
 
 		@$el.html @template
 			model: model
@@ -59,6 +59,18 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			subjects: nsa.Data.subjects.toJSON()
 			classes: nsa.Data.classes.toJSON()
 			newReplacement: @options.newReplacement or false
+
+		return
+
+	toggleDropLesson: () =>
+		checkbox = $("[name=droplesson]")
+		selects = @$("select[name=teacher], select[name=room], select[name=subject]")
+
+		selects.attr("disabled", checkbox.is(":checked"))
+		if checkbox.is(":checked")
+			selects.append("""<option value="0">entfällt</option>""").val(0)
+		else
+			selects.find("option[value=0]").remove()
 
 		return
 

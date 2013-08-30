@@ -20,7 +20,7 @@ body {
 
 /* Fehlerseite */
 
-.errorvid {
+.view-error .errorvid {
 	max-width: 535px;
 	border: 12px solid #1B1B1B;
 	border-radius: 8px;
@@ -28,50 +28,45 @@ body {
 
 /* Main Page */
 
-.home-logo {
+.view-home .logo {
 	margin: 15px 0;
 	border: 1px solid #000;
 }
 
 /* Stundenplan */
 
-.stundenplan {
+.view-timetable-detail {
 	border-top: none;
 }
 
-.stundenplan th:nth-child(n+2), .stundenplan td:first-child {
-	background-color: rgb(235, 235, 235);
+.view-timetable-detail table th:nth-child(n+2), .view-timetable-detail td:first-child {
+	background-color: #ebebeb;
 }
 
-.stundenplan th:first-child {
-	border-top: 1px solid #FFF !important;
-	border-right: 1px solid #FFF !important;
-	border-left: 1px solid #FFF !important;
+.view-timetable-detail table th:first-child {
+	border-top: 1px solid #ffffff !important;
+	border-right: 1px solid #ffffff !important;
+	border-left: 1px solid #ffffff !important;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 24px;
 	font-weight: 500;
 	line-height: 1.1;
 }
 
-.stundenplan th:nth-child(2) {
-	border-left: 1px solid #FFF !important;
+.view-timetable-detail table th:nth-child(2) {
+	border-left: 1px solid #ffffff !important;
 	border-top-left-radius: 4px;
 }
 
-.stundenplan th:nth-child(6) {
-	border-right: 1px solid #FFF !important;
+.view-timetable-detail table th:nth-child(6) {
+	border-right: 1px solid #ffffff !important;
 	border-top-right-radius: 4px;
 }
 
-.stundenplan .warning {
-	/* background-color: #D9534F; */
+.view-timetable-detail input[type=checkbox] {
+	margin: 0;
 }
 
-.stundenplan .danger {
-	/* color: #FFF;
-	background-color: #FFA190; */
-}
-
-.stundenplan-title {
+.view-timetable-detail h3 {
 	margin-top: 8px;
 }

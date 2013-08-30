@@ -1,5 +1,6 @@
 class window.nsa.Views.About extends Backbone.View
 	template: nsa.handlebars.about
+	className: "view-about"
 
 	initialize: () =>
 

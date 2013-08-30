@@ -1,5 +1,6 @@
 class window.nsa.Views.Home extends Backbone.View
 	template: nsa.handlebars.home
+	className: "view-home"
 
 	initialize: () =>
 		if nsa.Data.school?

@@ -14,7 +14,7 @@
 			<form role="form" >
 				<div class="form-group">
 					<label for="formDate">Datum</label>
-					<input name="date" type="week" class="form-control" id="formDate" placeholder="DD.MM.JJJJ" value="{{format_date}}">
+					<input name="date" type="week" class="form-control" id="formDate" placeholder="2013-W32" value="{{week}}">
 				</div>
 				<div class="form-group">
 					<label for="formDay">Tag</label>
@@ -32,6 +32,21 @@
 						{{/each}}
 					</select>
 				</div>
+				<div class="form-group">
+					<label for="formForm">Klasse</label>
+					<select name="form" class="form-control" id="formForm">
+						{{#each ../classes}}
+							<option value="{{id}}" {{#ifcond ../form.id "==" id}}selected{{/ifcond}}>{{description}}</option>
+						{{/each}}
+					</select>
+				</div>
+				<hr>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="droplesson"> Diese Stunde entfällt
+					</label>
+				</div>
+				<hr>
 				<div class="form-group">
 					<label for="formTeacher">Lehrer</label>
 					<select name="teacher" class="form-control" id="formTeacher">
@@ -53,14 +68,6 @@
 					<select name="subject" class="form-control" id="formSubject">
 						{{#each ../subjects}}
 							<option value="{{id}}" {{#ifcond ../subject.id "==" id}}selected{{/ifcond}}>{{description}}</option>
-						{{/each}}
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="formForm">Klasse</label>
-					<select name="form" class="form-control" id="formForm">
-						{{#each ../classes}}
-							<option value="{{id}}" {{#ifcond ../form.id "==" id}}selected{{/ifcond}}>{{description}}</option>
 						{{/each}}
 					</select>
 				</div>

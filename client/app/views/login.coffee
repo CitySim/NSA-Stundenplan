@@ -1,5 +1,6 @@
 class window.nsa.Views.Login extends Backbone.View
 	template: nsa.handlebars.login
+	className: "view-login"
 
 	events:
 		"click .btn.app-login": "sendLogin"

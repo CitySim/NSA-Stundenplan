@@ -1,5 +1,6 @@
 class window.nsa.Views.ReplacementList extends Backbone.View
 	template: nsa.handlebars.replacementList
+	className: "view-replacement-list"
 
 	initialize: () =>
 		delete nsa.Data.replacements

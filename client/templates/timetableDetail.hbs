@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="pull-left stundenplan-title">
+		<h3 class="pull-left">
 			{{#if timetable.form}}
 				{{timetable.form.description}}
 			{{/if}}
@@ -39,7 +39,7 @@
 
 		<div class="clearfix"></div>
 
-		<table class="table table-bordered stundenplan">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th style="width: 1%;"></th>
@@ -59,12 +59,11 @@
 							</small>
 						</td>
 						{{#each days}}
-
 							{{#ifcond replacement "and" ../../showReplacement}}
 								<td class="danger">
 									{{#with replacement}}
 										{{#if subject}}
-											{{subject.subject}}<br>
+											{{subject.shortName}}<br>
 										{{/if}}
 										{{#if room}}
 											{{room.description}}<br>
@@ -73,22 +72,31 @@
 											{{teacher.shortName}}
 										{{/if}}
 
-										<br><a href="#/replacement/{{id}}" class="btn btn-default btn-xs">Details</a>
+										<br><a href="#replacement/{{id}}" class="btn btn-default btn-xs">Details</a>
 									{{/with}}
 								</td>
 							{{else}}
 								<td>
-									{{subject.shortName}}<br>
-									{{room.description}}<br>
-									{{teacher.shortName}}
+									{{#with lesson}}
+										{{subject.shortName}}<br>
+										{{room.description}}<br>
+										{{teacher.shortName}}<br>
+										{{form.description}}
+									{{/with}}
 
 									{{#if ../../../isLoggedIn}}
-										{{#if subject}}
-											{{#if room}}
-												{{#if teacher}}
-													<br><a href="#/replacement/new/{{../../../lesson.id}}/{{../../form.id}}/{{../../../day.id}}" class="btn btn-default btn-xs">Neue Vertretung</a>
-												{{/if}}
+										{{#if replacement}}
+											<br><a href="#replacement/{{replacement.id}}" class="btn btn-default btn-xs">Details</a>
+										{{else}}
+											<br>
+											{{#if ../../../../../timetable.form}}
+												<a href="#replacement/new/{{../../../../../id}}/{{../day.id}}/{{../../../../../../timetable.form}}" class="btn btn-default btn-xs">
+											{{else}}
+												<a href="#replacement/new/{{../../../../../id}}/{{../day.id}}/{{../lesson.form.id}}" class="btn btn-default btn-xs">
 											{{/if}}
+											
+												Neue Vertretung
+											</a>
 										{{/if}}
 									{{/if}}
 								</td>

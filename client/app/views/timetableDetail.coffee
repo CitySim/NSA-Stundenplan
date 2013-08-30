@@ -80,20 +80,24 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		_.each tempLessons, (l) =>
 			l.days = []
 			_.each tempDays, (d) =>
-				tempLesson = {}
-
 				# lesson suchen
+				tempLesson = {}
 				_.each @model.get("timetableLessons"), (t) =>
 					if d.id is t.day.id and l.id is t.lesson.id
 						tempLesson = t
 					return
 
+				# replacements suchen
+				tempReplacement = undefined
 				_.each @replacements.toJSON(), (r) =>
 					if d.id is r.day.id and l.id is r.lesson.id
-						tempLesson.replacement = r
+						tempReplacement = r
 					return
 
-				l.days.push(tempLesson)
+				l.days.push
+					day: d
+					lesson: tempLesson
+					replacement: tempReplacement
 				return
 			return
 

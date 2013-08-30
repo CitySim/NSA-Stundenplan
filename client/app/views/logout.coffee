@@ -1,5 +1,6 @@
 class window.nsa.Views.Logout extends Backbone.View
 	template: nsa.handlebars.logout
+	className: "view-logout"
 
 	initialize: () =>
 		@message = "sie werden augeloggt..."

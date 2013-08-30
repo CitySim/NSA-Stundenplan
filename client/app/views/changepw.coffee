@@ -1,5 +1,6 @@
 class window.nsa.Views.ChangePassword extends Backbone.View
 	template: nsa.handlebars.changepassword
+	className: "view-change-password"
 
 	events:
 		"click .btn.app-login": "sendPasswordChange"
