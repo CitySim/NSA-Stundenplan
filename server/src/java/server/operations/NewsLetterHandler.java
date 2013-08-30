@@ -18,7 +18,7 @@ import server.queries.NewsletterQuery;
 // FIXME url_prefix
 public class NewsLetterHandler {
 
-	private final static String URL_PREFIX = "http://localhost:8080/server/newsletter/";
+	private static final String URL_PREFIX = "http://localhost:8080/server/newsletter/";
 
 	public final String generateRegistrationLink(final Form form, final String email) {
 		return URL_PREFIX + "confirm?id=" + form.getId() + "&email=" + email;
@@ -32,7 +32,7 @@ public class NewsLetterHandler {
 		new EmailJobHelper().sendConfirmationMail(form, email);
 	}
 
-	public boolean removeAddress(final Newsletter newsletter) throws EmailSendingException, EmailAddressException {
+	boolean removeAddress(final Newsletter newsletter) throws EmailSendingException, EmailAddressException {
 		return new EmailJobHelper().sendRemoveRegistrationMail(newsletter);
 	}
 

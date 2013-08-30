@@ -11,19 +11,19 @@ public class Cookie extends DefaultEntity {
 	private String cookie;
 	private Date invalidForm;
 
-	public String getCookie() {
+	public final String getCookie() {
 		return this.cookie;
 	}
 
-	public void setCookie(final String cookie) {
+	public final void setCookie(final String cookie) {
 		this.cookie = cookie;
 	}
 
-	public Date getInvalidForm() {
-		return invalidForm;
+	public final Date getInvalidForm() {
+		return this.invalidForm;
 	}
 
-	public void setInvalidForm(Date invalidForm) {
+	public final void setInvalidForm(final Date invalidForm) {
 		this.invalidForm = invalidForm;
 	}
 }

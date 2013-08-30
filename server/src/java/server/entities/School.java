@@ -8,23 +8,22 @@ public class School extends DefaultEntity {
 
 	private static final long serialVersionUID = 1L;
 	private String image;
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String text;
 
-	public String getImage() {
-		return image;
+	public final String getImage() {
+		return this.image;
 	}
 
-	public void setImage(String image) {
+	public final void setImage(final String image) {
 		this.image = image;
 	}
 
-	
-	public String getText() {
-		return text;
+	public final String getText() {
+		return this.text;
 	}
 
-	public void setText(String text) {
+	public final void setText(final String text) {
 		this.text = text;
 	}
 }

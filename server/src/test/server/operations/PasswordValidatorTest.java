@@ -28,13 +28,13 @@ public class PasswordValidatorTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() {
+	public final void setUp() {
 		this.validator = new LoginValidator();
 		this.handler = new AccountHandler();
 	}
 
 	@Test
-	public void testPasswordValidation() {
+	public final void testPasswordValidation() {
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
@@ -62,7 +62,7 @@ public class PasswordValidatorTest extends TestCase {
 
 	@Test
 	@After
-	public void cleanUpTestData() {
+	public final void cleanUpTestData() {
 		this.handler.deleteAccount(this.userName);
 	}
 }

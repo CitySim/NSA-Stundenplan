@@ -28,14 +28,14 @@ public class FilePrinterTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() {
+	public final void setUp() {
 		this.printer = new FilePrinter();
 		this.cleaner = new CacheCleaner();
 		this.timeTable = new TimetableResource().getClassTimetable(1);
 	}
 
 	@Test
-	public void testprintAsPDF() {
+	public final void testprintAsPDF() {
 		try {
 			FilePrinterTest.assertNotNull(this.printer.printAsPDF(this.timeTable));
 		} catch (final ScheduleCreationException e) {
@@ -44,19 +44,19 @@ public class FilePrinterTest extends TestCase {
 	}
 
 	@Test
-	public void testprintAsPNG() {
-		String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
+	public final void testprintAsPNG() {
+		final String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 		try {
-			this.printer.printAsPng(timeTable);
-			File f = new File(pngFileName);
+			this.printer.printAsPng(this.timeTable);
+			final File f = new File(pngFileName);
 			FilePrinterTest.assertTrue(f.exists());
-		} catch (ScheduleCreationException e) {
+		} catch (final ScheduleCreationException e) {
 			FilePrinterTest.fail();
 		}
 	}
 
 	@After
-	public void cleanUpTestData() {
+	public final void cleanUpTestData() {
 		this.cleaner.cleanCache();
 	}
 }

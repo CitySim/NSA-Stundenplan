@@ -36,8 +36,8 @@ import com.itextpdf.text.pdf.PdfWriter;
  */
 
 public class FilePrinter {
-	String path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
-	String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
+	private final String path = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.pdf";
+	private final String pngFileName = System.getProperty("user.home") + System.getProperty("file.separator") + "timeTable.png";
 
 	public final File printAsPDF(final Timetable timeTable) throws ScheduleCreationException {
 		final Document document = new Document();

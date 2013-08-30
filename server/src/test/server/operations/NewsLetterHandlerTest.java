@@ -33,7 +33,7 @@ public class NewsLetterHandlerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() {
+	public final void setUp() {
 		this.handler = new NewsLetterHandler();
 		this.newsLetterQuery = new NewsletterQuery();
 
@@ -43,7 +43,7 @@ public class NewsLetterHandlerTest extends TestCase {
 	}
 
 	@Test
-	public void testUrlCreation() {
+	public final void testUrlCreation() {
 
 		this.url = "http://localhost:8080/server/newsletter/confirm?id=" + this.form.getId() + "&email=" + this.eMailAddress;
 
@@ -52,7 +52,7 @@ public class NewsLetterHandlerTest extends TestCase {
 	}
 
 	@Test
-	public void testAddressCreation() {
+	public final void testAddressCreation() {
 
 		boolean success = false;
 

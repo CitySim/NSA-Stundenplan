@@ -7,7 +7,7 @@ import server.entities.Form;
 import server.entities.Newsletter;
 
 /**
- * Creates/Deletes/Checks the Cookies and inputs them into the Database
+ * Creates/Deletes/Checks the Cookies and inputs them into the Database.
  * 
  * @author oleg.scheltow
  * 
@@ -37,15 +37,16 @@ public class NewsletterQuery extends QueryResult {
 	}
 
 	/**
-	 * Removes existing Newsletter registration
+	 * Removes existing Newsletter registration.
 	 * 
+	 * @return boolean successful
 	 */
 	public boolean removeNewsletter(final Newsletter newsletter) {
 		return this.removeFromDB(newsletter);
 	}
 
 	/**
-	 * Gets existing Email address
+	 * Gets existing Email address.
 	 * 
 	 * @param formString
 	 * @return EmailAddress
@@ -56,7 +57,7 @@ public class NewsletterQuery extends QueryResult {
 	}
 
 	/**
-	 * Gets the full Newsletterlist for a specified form
+	 * Gets the full Newsletterlist for a specified form.
 	 * 
 	 * @return List<Newsletter>
 	 */
