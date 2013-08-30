@@ -23,12 +23,9 @@ public class NewsletterResource extends QueryResult {
 		NewsLetterHandler newsLetterHandler = new NewsLetterHandler();
 		Form form = em.find(Form.class, formId);
 		if (form == null) {
-			// FIXME fehler zurückgeben
+			return new Gson().toJson("Fehler: Klasse nicht gefunden");
 		}
-		boolean result = newsLetterHandler.confirmRegistration(form, email);
-		final Gson gson = new Gson();
-		String json = gson.toJson(result);
-		return json;
+		return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
 	}
 
 	@GET
@@ -37,9 +34,6 @@ public class NewsletterResource extends QueryResult {
 	public String removeRegistration(@QueryParam("id") int newsletterId) {
 		NewsLetterHandler newsLetterHandler = new NewsLetterHandler();
 		Newsletter newsletter = em.find(Newsletter.class, newsletterId);
-		boolean result = newsLetterHandler.removeRegistration(newsletter);
-		final Gson gson = new Gson();
-		String json = gson.toJson(result);
-		return json;
+		return new Gson().toJson(newsLetterHandler.removeRegistration(newsletter));
 	}
 }
