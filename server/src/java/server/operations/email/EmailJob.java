@@ -55,13 +55,13 @@ class EmailJob {
 							msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailAddress, false));
 							Transport.send(msg);
 						} catch (final MessagingException e) {
-							// throw new EmailSendingException();
+							throw new EmailSendingException();
 						}
 					}
 				}
 			}
 		} catch (final Exception e) {
-			// throw new EmailSendingException();
+			throw new EmailSendingException();
 		}
 	}
 
