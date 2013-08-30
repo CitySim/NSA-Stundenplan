@@ -22,7 +22,7 @@ public class SchoolResource {
 	// TODO: Dummy muss in ie Datenbank
 	private class School {
 		@SuppressWarnings("unused")
-		String image = "http://i.imgur.com/xcEPAMC.gif";
+		String image = "http://mw2.google.com/mw-panoramio/photos/medium/24678566.jpg";
 		@SuppressWarnings("unused")
 		String text = "++++ Einfach mal abschalten: Pfleger geniesst Ruhe auf der Intensivstation ++++<br>"
 				+ "++++ Er kann sich ins Knie ficken: Frau will mit Schlangenmenschen nicht ins Bett ++++<br>"
