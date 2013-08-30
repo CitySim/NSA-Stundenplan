@@ -167,8 +167,6 @@ class window.nsa.App extends Backbone.Router
 		if window.matchMedia? and not window.matchMedia("(min-width: 768px)").matches
 			# close nav
 			$(".nsa-navbar-collapse").collapse("hide")
-			console.log "close"
-
 
 		view.render()
 		view.$el.appendTo(".app-output")

@@ -87,10 +87,10 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			method: "GET"
 			date:
 				"id": @model.id
-				"email": @$(".app-username").val()
+				"email": @$(".app-email").val()
 			success: (data) =>
 				try
-					debugger
+					@$(".app-email").val("").attr("placeholder", "Vielen Dank!")
 				catch e
 					nsa.app.error
 						no: 2800
