@@ -15,6 +15,7 @@ import server.entities.Day;
 import server.entities.Form;
 import server.entities.Lesson;
 import server.entities.Room;
+import server.entities.School;
 import server.entities.Subject;
 import server.entities.Teacher;
 import server.entities.Timetable;
@@ -44,7 +45,17 @@ public class DataCreationTest {
 	public void testDataCreation() {
 
 		this.em.getTransaction().begin();
-
+		
+		final School school = new School();
+		school.setImage("http://mw2.google.com/mw-panoramio/photos/medium/24678566.jpg");
+		school.setText("++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
+				+ "++++ Zeugnisse sind fertig ++++<br>"
+				+ "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
+				+ "++++ Folgende Lehrer sind krank: ... ++++<br>"
+				+ "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
+				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>");
+		em.persist(school);
+		
 		final Teacher lührssen = this.helper.createTeacher("Volker", "Lührssen", "Lü");
 		final Teacher albers = this.helper.createTeacher("Kirsten", "Albers", "Al");
 		final Teacher herrmann = this.helper.createTeacher("Werner", "Herrmann", "Hr");
