@@ -174,22 +174,22 @@ public class DataCreationTest {
 		timetable_it1b.setLessons(timeTableLessons_it1a);
 		this.em.persist(timetable_it1b);
 
-		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@localhost.de");
-		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@localhost.de");
-		this.helper.createLogin("Werner.Herrmann", "Werner.Herrmann@localhost.de");
-		this.helper.createLogin("Thomas.Bastians", "Thomas.Bastians@localhost.de");
-		this.helper.createLogin("Heike.Giera", "Heike.Giera@localhost.de");
-		this.helper.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@localhost.de");
-		this.helper.createLogin("Burg.Burg", "Burg.Burg@localhost.de");
-		this.helper.createLogin("test", "test@localhost.de");
+		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@localhost");
+		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@localhost");
+		this.helper.createLogin("Werner.Herrmann", "Werner.Herrmann@localhost");
+		this.helper.createLogin("Thomas.Bastians", "Thomas.Bastians@localhost");
+		this.helper.createLogin("Heike.Giera", "Heike.Giera@localhost");
+		this.helper.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@localhost");
+		this.helper.createLogin("Burg.Burg", "Burg.Burg@localhost");
+		this.helper.createLogin("test", "test@localhost");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", timetableLesson2);
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", timetableLesson3);
 
-		this.helper.createNewsletter(it1a, "test@localhost.de");
-		this.helper.createNewsletter(it1a, "Kirsten.Albers@localhost.de");
-		this.helper.createNewsletter(it1b, "Heike.Giera@localhost.de");
+		this.helper.createNewsletter(it1a, "test@localhost");
+		this.helper.createNewsletter(it1a, "Kirsten.Albers@localhost");
+		this.helper.createNewsletter(it1b, "Heike.Giera@localhost");
 
 		this.em.getTransaction().commit();
 
