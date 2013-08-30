@@ -3,7 +3,6 @@ package server.persistence;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -169,6 +168,7 @@ public class DataCreationTest {
 		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson6, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson7, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson8, donnerstag, pro, timeTableLessons_it1b);
+		
 		// Lessons for Friday
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson1, freitag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson2, freitag, pro, timeTableLessons_it1b);
@@ -190,9 +190,9 @@ public class DataCreationTest {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt");
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz");
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung");
+		this.helper.createReplacement("2013-W31", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt");
+		this.helper.createReplacement("2013-W31", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz");
+		this.helper.createReplacement("2013-W31", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung");
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");

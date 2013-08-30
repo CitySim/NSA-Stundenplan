@@ -1,7 +1,6 @@
 package server.persistence;
 
 import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -116,10 +115,11 @@ class DataCreationHelper {
 		this.em.persist(login);
 	}
 
-	void createReplacement(final String week, final Room room, final Teacher teacher, final Form form, final Subject subject, final Lesson lesson,
+	void createReplacement(final String week, final Day day, final Room room, final Teacher teacher, final Form form, final Subject subject, final Lesson lesson,
 			final String note) {
 		final Replacement replacement = new Replacement();
 		replacement.setWeek(week);
+		replacement.setDay(day);
 		replacement.setRoom(room);
 		replacement.setTeacher(teacher);
 		replacement.setForm(form);

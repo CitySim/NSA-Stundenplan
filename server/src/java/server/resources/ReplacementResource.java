@@ -107,9 +107,9 @@ public class ReplacementResource {
 		if (roomId != 0) {
 			criteria.add(Restrictions.eq("room.id", roomId));
 		}
-		if (start != null && end != null) {
-			criteria.add(Restrictions.between("date", start, end));
-		}
+		/*if (start != null && end != null) {
+			criteria.add(Restrictions.between("week", start, end));
+		}*/
 		return criteria.list();
 	}
 }

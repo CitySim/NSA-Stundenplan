@@ -88,7 +88,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 						tempLesson = t
 					return
 
-				@replacements.each (r) =>
+				_.each @replacements.toJSON(), (r) =>
 					if d.id is r.day.id and l.id is r.lesson.id
 						tempLesson.replacement = r
 					return
