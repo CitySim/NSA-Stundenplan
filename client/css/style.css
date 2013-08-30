@@ -28,28 +28,10 @@ body {
 
 /* Main Page */
 
-/*
-.news:after {
-	content : "";
-	display: block;
-	position: absolute;
-	top: 10;
-	left: 15;
-	right: 15;
-	height: 570px;
-	background-image: url("//i.imgur.com/D8lkXuu.gif");
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: 100%;
-	opacity : 0.1;
+.home-logo {
+	margin: 15px 0;
+	border: 1px solid #000;
 }
-
-@media (min-width: 427px) {
-	.news:after {
-		background-size: 397px;
-	}
-}
-*/
 
 /* Stundenplan */
 
