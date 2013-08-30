@@ -46,8 +46,15 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			l.format_end = moment(l.timeTo, "hh:mm a").format("HH:mm")
 			return
 
+		model = @model.toJSON()
+		if model.date?
+			model.format_date = moment(model.date, "MMM DD, YYYY hh:mm:ss A").format("YYYY-MM-DD")
+
+		console.log model
+
+
 		@$el.html @template
-			model: @model.toJSON()
+			model: model
 			lessons: tempLessons
 			teachers: nsa.Data.teachers.toJSON()
 			rooms: nsa.Data.rooms.toJSON()
@@ -74,7 +81,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 		@model.fetchData = @options.fetchData
 
-		data.date = moment(data.date, "DD.MM.YYYY").format("MMM DD, YYYY hh:mm:ss A")
+		data.date = moment(data.date, "YYYY-MM-DD").format("MMM DD, YYYY hh:mm:ss A")
 
 		@model.set(data)
 		@model.save {},
