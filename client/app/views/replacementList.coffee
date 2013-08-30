@@ -23,7 +23,11 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 					r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
 					r.format_end = moment(r.lesson.timeTo, "hh:mm a").format("HH:mm")
 
-				r.format_date = moment(r.date, "MMM DD, YYYY hh:mm:ss A").format("DD.MM.YYYY")
+				if r.date?
+					r.format_date = moment(r.date, "MMM DD, YYYY hh:mm:ss A").format("DD.MM.YYYY")
+				else
+					r.format_date = "unbekannt"
+					
 				return r.format_date
 
 		return

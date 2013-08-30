@@ -1,19 +1,23 @@
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="pull-left">ToDo</h3>
+		<h3 class="pull-left stundenplan-title">
+			{{#if timetable.form}}
+				{{timetable.form.description}}
+			{{/if}}
+			{{#if timetable.room}}
+				{{timetable.room.description}}
+			{{/if}}
+			{{#if timetable.teacher}}
+				{{timetable.teacher.firstname}} {{timetable.teacher.name}}
+			{{/if}}
+		</h3>
 	
 		<div class="pull-right">
-			<div class="input-group" style="width: 300px;">
-				<input type="text" class="form-control app-email" placeholder="E-Mail">
-				<span class="input-group-btn">
-					<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
-				</span>
-			</div>
+			<button type="button" class="btn btn-default app-toggle pull-left">
+				<input type="checkbox" {{#if showReplacement}}checked{{/if}}> Änderungen
+			</button>
 
-			<div class="btn-group">
-				<button type="button" class="btn btn-default app-toggle">
-					<input type="checkbox" {{#if showReplacement}}checked{{/if}}> Änderungen
-				</button>
+			<div class="btn-group pull-left" style="margin: 0 15px;">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Download <span class="caret"></span>
 				</button>
@@ -21,6 +25,13 @@
 					<li><a href="/api/print/pdf?id={{timetable.id}}">PDF</a></li>
 					<li><a href="/api/print/png?id={{timetable.id}}">PNG</a></li>
 				</ul>
+			</div>
+
+			<div class="input-group pull-left" style="width: 300px;">
+				<input type="text" class="form-control app-email" placeholder="E-Mail">
+				<span class="input-group-btn">
+					<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
+				</span>
 			</div>
 		</div>
 
