@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		{{#with model}}
 			<h3>
-				{{form.description}},
+				<a href="#timetable/class/{{form.id}}">{{form.description}}</a>,
 				{{#if lesson}}
 					{{format_start}} - {{format_end}}
 				{{else}}
@@ -16,7 +16,7 @@
 						Vertretungsleher
 					</td>
 					<td>
-						{{teacher.firstname}} {{teacher.name}}
+						<a href="#/timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
 					</td>
 				</tr>
 				<tr>
@@ -24,7 +24,7 @@
 						Raum
 					</td>
 					<td>
-						{{room.description}}
+						<a href="#/timetable/room/{{room.id}}">{{room.description}}</a>
 					</td>
 				</tr>
 				<tr>

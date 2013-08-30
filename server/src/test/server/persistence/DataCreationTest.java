@@ -99,12 +99,9 @@ public class DataCreationTest {
 		// Lessons for Monday
 		final List<TimetableLesson> timeTableLessons_it1a = new ArrayList<TimetableLesson>();
 
-		final TimetableLesson timetableLesson = this.helper
-				.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timeTableLessons_it1a);
-		final TimetableLesson timetableLesson2 = this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae,
-				timeTableLessons_it1a);
-		final TimetableLesson timetableLesson3 = this.helper
-				.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timeTableLessons_it1a);
 		// Lessons for TuesDay
@@ -193,9 +190,9 @@ public class DataCreationTest {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", timetableLesson2);
-		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", timetableLesson3);
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt");
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz");
+		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung");
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");

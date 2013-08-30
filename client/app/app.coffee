@@ -125,10 +125,6 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	logout: () =>
-		if not nsa.Data.user.isLoggedIn()
-			@navigate("home", { trigger: true })
-			return
-
 		@showView(new nsa.Views.Logout())
 		return
 

@@ -26,7 +26,7 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 		} else {
 			replacement = new Replacement();
 		}
-		replacement.setDate(new Date(json.get("date").getAsString()));
+		replacement.setWeek(new Date(json.get("date").getAsString()));
 		replacement.setForm(em.find(Form.class, json.get("form").getAsInt()));
 		replacement.setNote(json.get("note").getAsString());
 		replacement.setRoom(em.find(Room.class, json.get("room").getAsInt()));

@@ -14,7 +14,15 @@
 			<form role="form" >
 				<div class="form-group">
 					<label for="formDate">Datum</label>
-					<input name="date" type="date" class="form-control" id="formDate" placeholder="DD.MM.JJJJ" value="{{format_date}}">
+					<input name="date" type="week" class="form-control" id="formDate" placeholder="DD.MM.JJJJ" value="{{format_date}}">
+				</div>
+				<div class="form-group">
+					<label for="formDay">Tag</label>
+					<select name="day" class="form-control" id="formDay">
+						{{#each ../days}}
+							<option value="{{id}}" {{#ifcond ../day.id "==" id}}selected{{/ifcond}}>{{description}}</option>
+						{{/each}}
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="formlesson">Stunde</label>

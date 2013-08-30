@@ -56,14 +56,13 @@ public class ReplacementResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public final String addReplacementJSON(final String replacementJSON, @QueryParam("lesson") final int lessonId,
-			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
+	public final String addReplacementJSON(final String replacementJSON) {
 
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
 		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
 
-		return new Gson().toJson(this.addReplacement(replacement, lessonId, formId, dayId));
+		return new Gson().toJson(this.addReplacement(replacement));
 	}
 
 	@DELETE
@@ -77,7 +76,6 @@ public class ReplacementResource {
 		final Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
 		final TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
 		if (timetableLesson != null) {
-			timetableLesson.setReplacement(null);
 			entityManager.getTransaction().begin();
 			entityManager.persist(timetableLesson);
 			entityManager.getTransaction().commit();
@@ -88,20 +86,11 @@ public class ReplacementResource {
 		return true;
 	}
 
-	private Replacement addReplacement(final Replacement replacement, final int lessonId, final int formId, final int dayId) {
+	private Replacement addReplacement(final Replacement replacement) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		final Session session = entityManager.unwrap(Session.class);
-
-		final Criteria criteria = session.createCriteria(TimetableLesson.class);
-		criteria.add(Restrictions.eq("lesson.id", lessonId));
-		criteria.add(Restrictions.eq("form.id", formId));
-		criteria.add(Restrictions.eq("day.id", dayId));
-		final TimetableLesson timetableLesson = (TimetableLesson) criteria.uniqueResult();
 
 		entityManager.getTransaction().begin();
 		entityManager.persist(replacement);
-		timetableLesson.setReplacement(replacement);
-		entityManager.persist(timetableLesson);
 		entityManager.getTransaction().commit();
 		return replacement;
 	}

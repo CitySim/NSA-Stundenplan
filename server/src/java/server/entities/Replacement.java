@@ -10,7 +10,8 @@ public class Replacement extends DefaultEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	private Date date;
+	// format: "2013-W31"
+	private String week;
 
 	@ManyToOne(targetEntity = Teacher.class)
 	private Teacher teacher;
@@ -27,14 +28,17 @@ public class Replacement extends DefaultEntity {
 	@ManyToOne(targetEntity = Lesson.class)
 	private Lesson lesson;
 
+	@ManyToOne(targetEntity = Day.class)
+	private Day day;
+
 	private String note;
 
-	public Date getDate() {
-		return this.date;
+	public String getWeek() {
+		return this.week;
 	}
 
-	public void setDate(final Date date) {
-		this.date = date;
+	public void setWeek(final String week) {
+		this.week = week;
 	}
 
 	public Teacher getTeacher() {

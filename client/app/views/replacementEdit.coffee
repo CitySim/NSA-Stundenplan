@@ -7,7 +7,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 		"click .app-save": "save"
 
 	initialize: () =>
-		nsa.app.fetchLists ["classes", "lessons", "rooms", "subjects", "teachers"], (err) =>
+		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
 			return if err?
 
 			@loading = false
@@ -52,6 +52,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 		@$el.html @template
 			model: model
+			days: nsa.Data.days.toJSON()
 			lessons: tempLessons
 			teachers: nsa.Data.teachers.toJSON()
 			rooms: nsa.Data.rooms.toJSON()

@@ -26,7 +26,7 @@ class EmailTextCreator {
 
 		sb.append(System.lineSeparator());
 		sb.append("Betroffener Tag und Stunde:");
-		sb.append(replacement.getDate());
+		sb.append(replacement.getWeek());
 		sb.append(System.lineSeparator());
 
 		sb.append("Neuer Raum:");

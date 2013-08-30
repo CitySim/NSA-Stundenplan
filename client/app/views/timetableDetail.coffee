@@ -10,12 +10,31 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 	showReplacement: true
 
 	initialize: () =>
+		@start = moment().startOf("week").add(1, "day")
+		@end = moment().endOf("week").add(1, "day")
+
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
 			return if err?
 
 			@loading = false
 			@render()
 			return
+
+		replacements = new nsa.Collections.Replacements()
+		replacements.fetchData = 
+			start: @start.format("MMM DD, YYYY hh:mm:ss A")
+			end: @end.format("MMM DD, YYYY hh:mm:ss A")
+		replacements.fetchData[@options.fetchData.type] = @options.fetchData.id
+		replacements.fetch
+			success: () =>
+				@replacements = replacements
+				return
+			error: () =>
+				nsa.app.error
+					no: 2810
+					title: "Stundenplan-Ladefehler"
+					message: "Änderungen könnten nicht geladen werden."
+				return
 
 		model = new nsa.Models.TimeTable()
 		model.fetchData = @options.fetchData
@@ -37,7 +56,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		return
 		
 	render: () =>
-		if @loading or not @model?
+		if @loading or not @model? or not @replacements
 			@$el.html nsa.handlebars.loading()
 			return
 
@@ -60,12 +79,18 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		tempTimeTable = []
 		_.each tempLessons, (l) =>
 			l.days = []
-
 			_.each tempDays, (d) =>
 				tempLesson = {}
+
+				# lesson suchen
 				_.each @model.get("timetableLessons"), (t) =>
 					if d.id is t.day.id and l.id is t.lesson.id
 						tempLesson = t
+					return
+
+				@replacements.each (r) =>
+					if d.id is r.day.id and l.id is r.lesson.id
+						tempLesson.replacement = r
 					return
 
 				l.days.push(tempLesson)
