@@ -30,7 +30,7 @@ public class HibernateUtil {
 		return entityManager;
 	}
 
-	public static boolean checkDatabase() {
+	private static boolean checkDatabase() {
 		// final int port = 3306;
 		// final String userName = "root";
 		// final String password = "";
@@ -40,6 +40,8 @@ public class HibernateUtil {
 		// final String url = "jdbc:mysql://localhost:" + port + "/test";
 		// con = DriverManager.getConnection(url, userName, password);
 		// } catch (final Exception e) {
+		// throw new DataBaseConnectionException();
+		// return false;
 		// }
 		// try {
 		// stmt = con.createStatement();

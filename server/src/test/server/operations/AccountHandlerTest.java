@@ -28,13 +28,13 @@ public class AccountHandlerTest extends TestCase {
 
 	@Override
 	@Before
-	public void setUp() {
+	public final void setUp() {
 		this.handler = new AccountHandler();
 
 	}
 
 	@Test
-	public void testAccountCreation() {
+	public final void testAccountCreation() {
 		this.createTestAccount();
 		this.password = new LoginQuery().getPassword(this.userName);
 		AccountHandlerTest.assertNotNull(this.password);
@@ -42,7 +42,7 @@ public class AccountHandlerTest extends TestCase {
 	}
 
 	@Test
-	public void testPasswordChange() {
+	public final void testPasswordChange() {
 		this.createTestAccount();
 		try {
 			this.password = this.handler.changePassword(this.userName);
@@ -54,7 +54,7 @@ public class AccountHandlerTest extends TestCase {
 		AccountHandlerTest.assertTrue(new LoginValidator().validatePassword(this.password, new LoginQuery().getPassword(this.userName)));
 	}
 
-	public void createTestAccount() {
+	public final void createTestAccount() {
 
 		final String name = "Dennis";
 		final String familyName = "Markmann";
@@ -71,7 +71,7 @@ public class AccountHandlerTest extends TestCase {
 
 	@Test
 	@After
-	public void cleanUpTestData() {
+	public final void cleanUpTestData() {
 		this.handler.deleteAccount(this.userName);
 	}
 }

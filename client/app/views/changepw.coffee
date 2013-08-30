@@ -16,8 +16,7 @@ class window.nsa.Views.ChangePassword extends Backbone.View
 
 			success: (data) =>
 				try
-					# debugger
-					@$(".app-alert").html(data).show()
+					@$(".app-alert").html("Ihr neues Passwort wurde ihnen zugesendet").show()
 				catch e
 					nsa.app.error
 						no: 2551

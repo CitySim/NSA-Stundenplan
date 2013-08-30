@@ -14,19 +14,19 @@ public class Newsletter extends DefaultEntity {
 	@ManyToOne(targetEntity = EmailAddress.class)
 	private EmailAddress email;
 
-	public Form getForm() {
-		return form;
+	public final Form getForm() {
+		return this.form;
 	}
 
-	public void setForm(Form form) {
+	public final void setForm(final Form form) {
 		this.form = form;
 	}
 
-	public EmailAddress getEmail() {
-		return email;
+	public final EmailAddress getEmail() {
+		return this.email;
 	}
 
-	public void setEmail(EmailAddress email) {
+	public final void setEmail(final EmailAddress email) {
 		this.email = email;
 	}
 }

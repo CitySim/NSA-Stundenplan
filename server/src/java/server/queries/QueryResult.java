@@ -15,7 +15,7 @@ public class QueryResult {
 
 	}
 
-	public boolean removeFromDB(final Object object) {
+	boolean removeFromDB(final Object object) {
 		if (object == null) {
 			return false;
 		} else {
@@ -27,7 +27,7 @@ public class QueryResult {
 
 	}
 
-	public Object getSingleResult(final Query query) {
+	Object getSingleResult(final Query query) {
 		query.setMaxResults(1);
 		final List<?> list = query.getResultList();
 		if (list == null || list.size() == 0) {

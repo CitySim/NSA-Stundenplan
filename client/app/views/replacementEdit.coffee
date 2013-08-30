@@ -50,9 +50,6 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 		if model.date?
 			model.format_date = moment(model.date, "MMM DD, YYYY hh:mm:ss A").format("YYYY-MM-DD")
 
-		console.log model
-
-
 		@$el.html @template
 			model: model
 			lessons: tempLessons
@@ -86,11 +83,14 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 		@model.set(data)
 		@model.save {},
 			success: () =>
-				alert("ok")
-				nsa.app.navigate("admin", { trigger: true })
+				nsa.app.navigate("replacement", { trigger: true })
 				return
 			error: () =>
-				alert("fehler")
+				nsa.app.error
+					no: 4010
+					title: "Fehler"
+					message: "Der Server hat ein Problem"
+
 				@$("form input, form select, form textarea, form button").attr("disabled", false)
 				return
 

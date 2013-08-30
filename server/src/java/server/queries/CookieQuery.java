@@ -6,7 +6,7 @@ import java.util.List;
 import server.entities.Cookie;
 
 /**
- * Creates/Deletes/Checks the Cookies and inputs them into the Database
+ * Creates/Deletes/Checks the Cookies and inputs them into the Database.
  * 
  * @author oleg.scheltow
  * 
@@ -18,7 +18,7 @@ public class CookieQuery extends QueryResult {
 	}
 
 	/**
-	 * Creates a new Cookie
+	 * Creates a new Cookie.
 	 * 
 	 * @param cookieString
 	 */
@@ -32,10 +32,10 @@ public class CookieQuery extends QueryResult {
 	}
 
 	/**
-	 * Removes existing Cookie
+	 * Removes existing Cookie.
 	 * 
 	 * @param cookieString
-	 * @return
+	 * @return boolean successful
 	 */
 	public boolean removeCookie(final String cookieString) {
 		final Cookie cookie = this.getCookie(cookieString);
@@ -56,10 +56,10 @@ public class CookieQuery extends QueryResult {
 	}
 
 	/**
-	 * Get the specified Cookie
+	 * Get the specified Cookie.
 	 * 
 	 * @param cookie
-	 * @return
+	 * @return boolean successful
 	 */
 	public Cookie getCookie(final String cookieString) {
 		return (Cookie) this.getSingleResult(this.em.createNativeQuery("select * from Cookie WHERE cookie ='" + cookieString + "'", Cookie.class));

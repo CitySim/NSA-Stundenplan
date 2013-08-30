@@ -26,23 +26,23 @@ public class Form implements Serializable {
 	@ManyToOne(targetEntity = Teacher.class)
 	private Teacher teacher;
 
-	public int getId() {
+	public final int getId() {
 		return this.id;
 	}
 
-	public String getDescription() {
+	public final String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(final String description) {
+	public final void setDescription(final String description) {
 		this.description = description;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
+	public final Teacher getTeacher() {
+		return this.teacher;
 	}
 
-	public void setTeacher(Teacher teacher) {
+	public final void setTeacher(final Teacher teacher) {
 		this.teacher = teacher;
 	}
 }

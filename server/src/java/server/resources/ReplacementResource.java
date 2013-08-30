@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -42,7 +42,7 @@ public class ReplacementResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String changeReplacementJSON(String replacementJSON) {
+	public final String changeReplacementJSON(final String replacementJSON) {
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
 		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
@@ -56,8 +56,8 @@ public class ReplacementResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addReplacementJSON(String replacementJSON, @QueryParam("lesson") final int lessonId, @QueryParam("form") final int formId,
-			@QueryParam("day") final int dayId) {
+	public final String addReplacementJSON(final String replacementJSON, @QueryParam("lesson") final int lessonId,
+			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
 
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
@@ -67,15 +67,15 @@ public class ReplacementResource {
 	}
 
 	@DELETE
-	public boolean deleteReplacement(@QueryParam("id") final int replacementId) {
+	public final boolean deleteReplacement(@QueryParam("id") final int replacementId) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		Replacement replacement = entityManager.find(Replacement.class, replacementId);
+		final Replacement replacement = entityManager.find(Replacement.class, replacementId);
 		if (replacement == null) {
 			return false;
 		}
-		String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
-		Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
-		TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
+		final String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
+		final Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
+		final TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
 		if (timetableLesson != null) {
 			timetableLesson.setReplacement(null);
 			entityManager.getTransaction().begin();

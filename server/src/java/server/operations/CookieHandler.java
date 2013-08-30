@@ -38,11 +38,7 @@ public class CookieHandler {
 			cookieValue = cookie.getValue();
 		}
 
-		if (new CookieQuery().getCookie(cookieValue) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return new CookieQuery().getCookie(cookieValue) != null;
 	}
 
 	public final void deleteInvalidCookies() {

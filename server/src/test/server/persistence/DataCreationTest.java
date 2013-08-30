@@ -40,22 +40,19 @@ public class DataCreationTest {
 		this.helper = new DataCreationHelper(this.em);
 	}
 
-	@SuppressWarnings("unused")
 	@Test
-	public void testDataCreation() {
+	public final void testDataCreation() {
 
 		this.em.getTransaction().begin();
-		
+
 		final School school = new School();
 		school.setImage("http://mw2.google.com/mw-panoramio/photos/medium/24678566.jpg");
 		school.setText("++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
-				+ "++++ Zeugnisse sind fertig ++++<br>"
-				+ "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
-				+ "++++ Folgende Lehrer sind krank: ... ++++<br>"
-				+ "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
+				+ "++++ Zeugnisse sind fertig ++++<br>" + "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
+				+ "++++ Folgende Lehrer sind krank: ... ++++<br>" + "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
 				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>");
-		em.persist(school);
-		
+		this.em.persist(school);
+
 		final Teacher lührssen = this.helper.createTeacher("Volker", "Lührssen", "Lü");
 		final Teacher albers = this.helper.createTeacher("Kirsten", "Albers", "Al");
 		final Teacher herrmann = this.helper.createTeacher("Werner", "Herrmann", "Hr");
@@ -164,6 +161,8 @@ public class DataCreationTest {
 		this.helper.createTimeTableSession(it1b, burg, raum82, lesson7, mittwoch, fe, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum53, lesson8, mittwoch, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum53, lesson9, mittwoch, orgaGp, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, giera, raum53, lesson10, mittwoch, orgaGp, timeTableLessons_it1b);
+
 		// Lessons for Thursday
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson1, donnerstag, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson2, donnerstag, orgaGp, timeTableLessons_it1b);

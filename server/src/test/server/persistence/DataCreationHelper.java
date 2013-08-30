@@ -28,11 +28,11 @@ import server.queries.NewsletterQuery;
  * @version 1.0
  */
 
-public class DataCreationHelper {
+class DataCreationHelper {
 
 	private final EntityManager em;
 
-	public DataCreationHelper(final EntityManager em) {
+	DataCreationHelper(final EntityManager em) {
 		this.em = em;
 	}
 
@@ -45,7 +45,7 @@ public class DataCreationHelper {
 		return teacher;
 	}
 
-	public Form createForm(final String description, final Teacher teacher) {
+	Form createForm(final String description, final Teacher teacher) {
 		final Form form = new Form();
 		form.setDescription(description);
 		form.setTeacher(teacher);
@@ -98,7 +98,7 @@ public class DataCreationHelper {
 		return timetableLesson;
 	}
 
-	EmailAddress createEmailAddress(final String eMailAddress) {
+	private EmailAddress createEmailAddress(final String eMailAddress) {
 		EmailAddress emailAddress = new NewsletterQuery().getEmail(eMailAddress);
 		if (emailAddress == null) {
 			emailAddress = new EmailAddress();

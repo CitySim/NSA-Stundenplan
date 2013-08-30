@@ -4,7 +4,7 @@ import server.entities.EmailAddress;
 import server.entities.Login;
 
 /**
- * Creates/Deletes/Checks the Login and inputs them into the Database
+ * Creates/Deletes/Checks the Login and inputs them into the Database.
  * 
  * @author oleg.scheltow
  * 
@@ -16,7 +16,7 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Get the Password for the specified User
+	 * Get the Password for the specified User.
 	 * 
 	 * @param username
 	 * @return String password
@@ -30,7 +30,7 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Gets the Email address for the specified User
+	 * Gets the Email address for the specified User.
 	 * 
 	 * @param username
 	 * @return String Email
@@ -44,11 +44,12 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Create a new User with the specified Details
+	 * Create a new User with the specified Details.
 	 * 
 	 * @param username
 	 * @param password
 	 * @param eMailAddress
+	 * @return boolean successful
 	 */
 	public boolean createUser(final String username, final String password, final String eMailAddress) {
 		Login login = this.getLoginUser(username);
@@ -75,10 +76,10 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Removes the User Login
+	 * Removes the User Login.
 	 * 
 	 * @param username
-	 * @return
+	 * @return boolean successful
 	 */
 	public boolean removeLogin(final String username) {
 		final Login login = this.getLoginUser(username);
@@ -87,10 +88,11 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Changes the User password
+	 * Changes the User password.
 	 * 
 	 * @param username
 	 * @param password
+	 * @return boolean successful
 	 */
 	public boolean changePassword(final String username, final String password) {
 		final Login loginUser = this.getLoginUser(username);
@@ -106,12 +108,12 @@ public class LoginQuery extends QueryResult {
 	}
 
 	/**
-	 * Gets existing Email address
+	 * Gets existing Email address.
 	 * 
 	 * @param formString
 	 * @return EmailAddress
 	 */
-	public EmailAddress getEmail(final String mail) {
+	private EmailAddress getEmail(final String mail) {
 		return (EmailAddress) this.getSingleResult(this.em.createNativeQuery("select * from emailaddress WHERE eMailAddress ='" + mail + "'",
 				EmailAddress.class));
 	}

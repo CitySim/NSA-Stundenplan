@@ -21,10 +21,10 @@ public class TimetableLesson implements Serializable {
 	private Form form;
 
 	public Form getForm() {
-		return form;
+		return this.form;
 	}
 
-	public void setForm(Form form) {
+	public final void setForm(final Form form) {
 		this.form = form;
 	}
 
@@ -34,11 +34,11 @@ public class TimetableLesson implements Serializable {
 	private Day day;
 
 	public Day getDay() {
-		return day;
+		return this.day;
 	}
 
-	public void setDay(Day newDay) {
-		day = newDay;
+	public void setDay(final Day newDay) {
+		this.day = newDay;
 	}
 
 	@EmbeddedId
@@ -47,11 +47,11 @@ public class TimetableLesson implements Serializable {
 	private Lesson lesson;
 
 	public Lesson getLesson() {
-		return lesson;
+		return this.lesson;
 	}
 
-	public void setLesson(Lesson newLesson) {
-		lesson = newLesson;
+	public void setLesson(final Lesson newLesson) {
+		this.lesson = newLesson;
 	}
 
 	@ManyToOne
@@ -59,11 +59,11 @@ public class TimetableLesson implements Serializable {
 	private Teacher teacher;
 
 	public Teacher getTeacher() {
-		return teacher;
+		return this.teacher;
 	}
 
-	public void setTeacher(Teacher newTeacher) {
-		teacher = newTeacher;
+	public void setTeacher(final Teacher newTeacher) {
+		this.teacher = newTeacher;
 	}
 
 	@ManyToOne
@@ -71,11 +71,11 @@ public class TimetableLesson implements Serializable {
 	private Subject subject;
 
 	public Subject getSubject() {
-		return subject;
+		return this.subject;
 	}
 
-	public void setSubject(Subject newSubject) {
-		subject = newSubject;
+	public void setSubject(final Subject newSubject) {
+		this.subject = newSubject;
 	}
 
 	@ManyToOne
@@ -83,21 +83,21 @@ public class TimetableLesson implements Serializable {
 	private Room room;
 
 	public Room getRoom() {
-		return room;
+		return this.room;
 	}
 
-	public void setRoom(Room newRoom) {
-		room = newRoom;
+	public void setRoom(final Room newRoom) {
+		this.room = newRoom;
 	}
 
 	@OneToOne(targetEntity = Replacement.class)
 	private Replacement replacement;
 
 	public Replacement getReplacement() {
-		return replacement;
+		return this.replacement;
 	}
 
-	public void setReplacement(Replacement replacement) {
+	public void setReplacement(final Replacement replacement) {
 		this.replacement = replacement;
 	}
 }

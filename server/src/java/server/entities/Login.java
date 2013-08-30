@@ -10,30 +10,30 @@ public class Login extends DefaultEntity {
 	private String user;
 	private String password;
 
-	public String getUser() {
+	public final String getUser() {
 		return this.user;
 	}
 
-	public void setUser(final String user) {
+	public final void setUser(final String user) {
 		this.user = user;
 	}
 
-	public String getPassword() {
+	public final String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(final String password) {
+	public final void setPassword(final String password) {
 		this.password = password;
 	}
 
 	@ManyToOne(targetEntity = EmailAddress.class)
 	private EmailAddress email;
 
-	public EmailAddress getEmail() {
-		return email;
+	public final EmailAddress getEmail() {
+		return this.email;
 	}
 
-	public void setEmail(EmailAddress email) {
+	public final void setEmail(final EmailAddress email) {
 		this.email = email;
 	}
 
