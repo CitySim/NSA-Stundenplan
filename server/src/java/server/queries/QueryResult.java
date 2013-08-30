@@ -7,6 +7,14 @@ import javax.persistence.Query;
 
 import server.persistence.HibernateUtil;
 
+/**
+ * Super class for other queries to initiate the entityManager loading and to
+ * carry methods for subclasses.
+ * 
+ * @author oleg.scheltow
+ * 
+ */
+
 public class QueryResult {
 	protected final EntityManager em;
 
