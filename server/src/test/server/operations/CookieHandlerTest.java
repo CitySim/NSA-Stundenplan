@@ -4,8 +4,8 @@ import java.util.Date;
 
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Variant.VariantListBuilder;
 import javax.ws.rs.ext.RuntimeDelegate;
 
@@ -57,12 +57,12 @@ public class CookieHandlerTest extends TestCase {
 			}
 
 			@Override
-			public <T> HeaderDelegate<T> createHeaderDelegate(Class<T> arg0) {
+			public <T> HeaderDelegate<T> createHeaderDelegate(final Class<T> arg0) {
 				return null;
 			}
 
 			@Override
-			public <T> T createEndpoint(Application arg0, Class<T> arg1) {
+			public <T> T createEndpoint(final Application arg0, final Class<T> arg1) {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -71,7 +71,7 @@ public class CookieHandlerTest extends TestCase {
 		final NewCookie cookie = this.handler.createCookie();
 
 		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie));
-		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie));
+		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie.getValue()));
 	}
 
 	@Test

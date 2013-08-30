@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import server.entities.Form;
 import server.entities.Newsletter;
+import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 import server.queries.NewsletterQuery;
 import server.resources.FormResource;
@@ -69,6 +70,8 @@ public class NewsLetterHandlerTest extends TestCase {
 		try {
 			assertTrue(this.handler.removeAddress(newsLetter));
 		} catch (final EmailSendingException e) {
+			fail();
+		} catch (final EmailAddressException e) {
 			fail();
 		}
 		assertTrue(this.handler.removeRegistration(newsLetter));
