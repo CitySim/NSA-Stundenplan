@@ -85,7 +85,33 @@ class window.nsa.App extends Backbone.Router
 		return
 
 	replacementDelete: (id) =>
-		history.back()
+		@navigate("replacement", { trigger: true })
+
+		$.ajax
+			url: nsa.config.api + "/replacement?id=#{id}"
+			method: "DELETE"
+			headers:
+				"Content-Type": "application/x-www-form-urlencoded"
+
+			success: (data) =>
+				if data.toString() is "false"
+					nsa.app.error
+						no: 3206
+						title: "Fehler beim Löschen"
+						message: "Ein Eintrag konnte nicht gelöscht werden, der Sever meldet einen Fehler."
+					return
+
+				@navigate("replacement", { trigger: true })
+				return
+
+			error: () =>
+				nsa.app.error
+					no: 3201
+					title: "Fehler beim Löschen"
+					message: "Es tratt ein schwerer Fehler auf"
+
+				return
+
 		return
 
 	login: () =>
