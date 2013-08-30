@@ -51,7 +51,7 @@ public class DataCreationTest {
 		final Teacher bastians = this.helper.createTeacher("Thomas", "Bastians", "Ba");
 		final Teacher giera = this.helper.createTeacher("Heike", "Giera", "Ga");
 		final Teacher wehmeyer = this.helper.createTeacher("Markus", "Wehmeyer", "Wm");
-		final Teacher burg = this.helper.createTeacher("Burg", "Burg", "Bu");
+		final Teacher burg = this.helper.createTeacher("Andreas", "Burg", "Bu");
 
 		final Form it1a = this.helper.createForm("it1a", herrmann);
 		final Form it1b = this.helper.createForm("it1b", burg);
@@ -180,7 +180,7 @@ public class DataCreationTest {
 		this.helper.createLogin("Thomas.Bastians", "ThomasBastians@localhost");
 		this.helper.createLogin("Heike.Giera", "HeikeGiera@localhost");
 		this.helper.createLogin("Markus.Wehmeyer", "MarkusWehmeyer@localhost");
-		this.helper.createLogin("Burg.Burg", "BurgBurg@localhost");
+		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
