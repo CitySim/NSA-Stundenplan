@@ -1,7 +1,9 @@
 ﻿package server.resources;
 
 import javax.persistence.EntityManager;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +15,7 @@ import com.google.gson.Gson;
 
 @Path("school")
 public class SchoolResource {
-	School school = new School();
+	School newSchool = new School();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -23,25 +25,26 @@ public class SchoolResource {
 		return json;
 	}
 
-	
-	public void changeSchoolJSON(){
+	public void changeSchoolJSON() {
 	}
-	
+
 	private School getSchool() {
 		return HibernateUtil.getEntityManager().find(School.class, 1);
 	}
 
-	private void setSchool(String image, String text) {
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void setSchool(String schoolJSON) {
+
+		Gson gson = new Gson();
+		School school = gson.fromJson(schoolJSON, School.class);
+
 		EntityManager em = HibernateUtil.getEntityManager();
-		school = em.find(School.class, 1);
+		newSchool = em.find(School.class, 1);
 		em.getTransaction().begin();
-		if (image != null) {
-			school.setImage(image);
-		}
-		if (text != null) {
-			school.setText(text);
-		}
-		em.persist(school);
+		newSchool.setImage(school.getImage());
+		newSchool.setText(school.getText());
+		em.persist(newSchool);
 		em.getTransaction().commit();
 
 	}
