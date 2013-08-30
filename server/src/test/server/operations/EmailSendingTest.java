@@ -15,7 +15,6 @@ import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
-import server.queries.LoginQuery;
 import server.queries.NewsletterQuery;
 import server.resources.FormResource;
 
@@ -41,7 +40,7 @@ public class EmailSendingTest extends TestCase {
 		this.form = FormResource.getForms().get(0);
 
 		this.em = HibernateUtil.getEntityManager();
-		email="test@localhost";
+		this.email = "test@localhost";
 	}
 
 	@Test
@@ -52,9 +51,12 @@ public class EmailSendingTest extends TestCase {
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
-			this.helper.sendConfirmationMail(this.form, email); //Registrierungs Bestätigung
-			this.helper.sendCreationMail(email, "test", "test"); // Erstell Bestätigung
-			this.helper.sendPasswordChangeMail(email, "test", "test"); // Password Änderungs bestätigung
+			// Registrierungs Bestätigung
+			this.helper.sendConfirmationMail(this.form, this.email);
+			// Erstell Bestätigung
+			this.helper.sendCreationMail(this.email, "test", "test");
+			// Password Änderungs Bestätigung
+			this.helper.sendPasswordChangeMail(this.email, "test", "test");
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
 			EmailSendingTest.fail();
@@ -66,7 +68,7 @@ public class EmailSendingTest extends TestCase {
 	}
 
 	private Newsletter getExistingNewsletter() {
-		EmailAddress emailAdress = new NewsletterQuery().getEmail(email);
-		return new NewsletterQuery().getNewsletter(emailAdress.getId(), form.getId());
+		final EmailAddress emailAdress = new NewsletterQuery().getEmail(this.email);
+		return new NewsletterQuery().getNewsletter(emailAdress.getId(), this.form.getId());
 	}
 }
