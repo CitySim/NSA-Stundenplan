@@ -3,12 +3,6 @@ package server.entities;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-/**
- * TODO --> Values should not be null
- * 
- * @author oleg.scheltow
- * 
- */
 @Entity
 public class Newsletter extends DefaultEntity {
 
