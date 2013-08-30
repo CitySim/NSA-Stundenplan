@@ -29,8 +29,6 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 		try {
 			replacement.setDate(DateFormat.getDateInstance().parse((json.get("date").getAsString())));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		replacement.setForm(em.find(Form.class, json.get("form").getAsInt()));
 		replacement.setNote(json.get("note").getAsString());

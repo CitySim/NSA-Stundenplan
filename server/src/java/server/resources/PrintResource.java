@@ -23,8 +23,7 @@ public class PrintResource {
 		try {
 			pdf = filePrinter.printAsPDF(new TimetableResource().getTimetable(timetableId));
 		} catch (final ScheduleCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.serverError().header("error", e).build();
 		}
 
 		return Response.ok(pdf).header("Content-Disposition", "attachment; filename=timetable.pdf").build();
@@ -39,8 +38,7 @@ public class PrintResource {
 		try {
 			png = filePrinter.printAsPng(new TimetableResource().getTimetable(timetableId));
 		} catch (final ScheduleCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.serverError().header("error", e).build();
 		}
 
 		return Response.ok(png).header("Content-Disposition", "attachment; filename=timetable.png").build();
