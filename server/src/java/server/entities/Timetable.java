@@ -14,55 +14,55 @@ public class Timetable extends DefaultEntity {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<TimetableLesson> timetableLessons;
-	
+
 	@OneToOne(targetEntity = Form.class)
 	private Form form;
-	
+
 	@OneToOne(targetEntity = Teacher.class)
 	private Teacher teacher;
-	
+
 	@OneToOne(targetEntity = Room.class)
 	private Room room;
 
 	public List<TimetableLesson> getLessons() {
-		return timetableLessons;
+		return this.timetableLessons;
 	}
 
-	public void setLessons(List<TimetableLesson> lessons) {
+	public void setLessons(final List<TimetableLesson> lessons) {
 		this.timetableLessons = lessons;
 	}
 
 	// TODO Liste initialisieren
-	public void addLesson(TimetableLesson timetableLesson) {
-		timetableLessons.add(timetableLesson);
+	public void addLesson(final TimetableLesson timetableLesson) {
+		this.timetableLessons.add(timetableLesson);
 	}
 
 	// TODO TESTEN
-	public void removeTimetableLesson(TimetableLesson timetableLesson) {
-		timetableLessons.remove(timetableLesson);
+	public void removeTimetableLesson(final TimetableLesson timetableLesson) {
+		this.timetableLessons.remove(timetableLesson);
 	}
 
 	public Form getForm() {
-		return form;
+		return this.form;
 	}
 
-	public void setForm(Form form) {
+	public void setForm(final Form form) {
 		this.form = form;
 	}
 
 	public Teacher getTeacher() {
-		return teacher;
+		return this.teacher;
 	}
 
-	public void setTeacher(Teacher teacher) {
+	public void setTeacher(final Teacher teacher) {
 		this.teacher = teacher;
 	}
 
 	public Room getRoom() {
-		return room;
+		return this.room;
 	}
 
-	public void setRoom(Room room) {
+	public void setRoom(final Room room) {
 		this.room = room;
 	}
 }

@@ -29,14 +29,9 @@ class EmailJob {
 
 		final Properties properties = new Properties();
 		properties.put("mail.smtp.host", emailSettings.getSmtpHost());
-		// properties.setProperty("mail.smtp.port", "587");
-		// properties.put("mail.smtp.auth", "true");
 
 		properties.setProperty("mail.smtp.password", emailSettings.getPassword());
 
-		// final MailAuthenticator auth = new MailAuthenticator(
-		// emailSettings.getUsername(), emailSettings.getPassword());
-		// final Session session = Session.getDefaultInstance(properties, auth);
 		final Session session = Session.getDefaultInstance(properties);
 		try {
 			final Message msg = new MimeMessage(session);
