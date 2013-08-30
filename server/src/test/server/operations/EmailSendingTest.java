@@ -59,10 +59,8 @@ public class EmailSendingTest extends TestCase {
 			// Password Änderungs Bestätigung
 			this.helper.sendPasswordChangeMail(this.email, "test", "test");
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
-		} catch (final EmailSendingException e) {
+		} catch (final EmailSendingException | EmailAddressException e) {
 			fail();
-		} catch (final EmailAddressException e) {
-			// fail();
 		}
 	}
 
