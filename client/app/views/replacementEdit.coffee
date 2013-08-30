@@ -91,8 +91,6 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 		@model.fetchData = @options.fetchData
 
-		data.date = moment(data.date, "YYYY-MM-DD").format("MMM DD, YYYY hh:mm:ss A")
-
 		@model.set(data)
 		@model.save {},
 			success: () =>
