@@ -24,6 +24,7 @@ import server.resources.FormResource;
 public class NewsLetterHandlerTest extends TestCase {
 
 	private NewsLetterHandler handler;
+	private NewsletterQuery newsLetterQuery;
 
 	private String eMailAddress;
 	private String url;
@@ -33,9 +34,11 @@ public class NewsLetterHandlerTest extends TestCase {
 	@Before
 	public void setUp() {
 		this.handler = new NewsLetterHandler();
-		this.form = FormResource.getForms().get(0);
+		this.newsLetterQuery = new NewsletterQuery();
 
 		this.eMailAddress = "test2@localhost";
+		this.form = FormResource.getForms().get(0);
+
 	}
 
 	@Test
@@ -62,12 +65,12 @@ public class NewsLetterHandlerTest extends TestCase {
 			}
 		}
 		NewsLetterHandlerTest.assertEquals(true, success);
-
+		final Newsletter newsLetter = this.newsLetterQuery.getNewsletter(this.newsLetterQuery.getEmail(this.eMailAddress).getId(), this.form.getId());
 		try {
-			assertTrue(this.handler.removeAddress(newsLetterList.get(1)));
+			assertTrue(this.handler.removeAddress(newsLetter));
 		} catch (final EmailSendingException e) {
 			fail();
 		}
-		assertTrue(this.handler.removeRegistration(newsLetterList.get(1)));
+		assertTrue(this.handler.removeRegistration(newsLetter));
 	}
 }

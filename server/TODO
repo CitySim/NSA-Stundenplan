@@ -9,6 +9,3 @@ http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
 Email Stundenplan Änderung soll das Datum formatiert zurückgeben
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
 		   sollte HTTP Status 400 kommen, nicht 404
-
-
-NewsLetterHandlerTest : Nicht nach ID löschen sondern nach Namen suchen.
