@@ -62,8 +62,8 @@ public class NewsletterQuery extends QueryResult {
 	 */
 	public List<Newsletter> getAllNewsletters(final Form form) {
 		@SuppressWarnings("unchecked")
-		final List<Newsletter> newsletter = this.em.createNativeQuery("select * from Newsletter where form_idKlasse =" + form.getId() + "", Newsletter.class)
-				.getResultList();
+		final List<Newsletter> newsletter = this.em.createNativeQuery("select * from Newsletter where form_idKlasse =" + form.getId() + "",
+				Newsletter.class).getResultList();
 		return newsletter;
 	}
 
