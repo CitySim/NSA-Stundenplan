@@ -16,6 +16,7 @@ class window.nsa.App extends Backbone.Router
 		"replacement/new/:lesson/:form/:day": "replacementNew"
 		"replacement/:id"			: "replacementDetails"
 		"replacement/:id/edit"		: "replacementEdit"
+		"replacement/:id/delete"	: "replacementDelete"
 		"login"						: "login"
 		"logout"					: "logout"
 		"login/changepw"			: "changepw"
@@ -81,6 +82,10 @@ class window.nsa.App extends Backbone.Router
 				form: form
 				day: day
 
+		return
+
+	replacementDelete: (id) =>
+		history.back()
 		return
 
 	login: () =>

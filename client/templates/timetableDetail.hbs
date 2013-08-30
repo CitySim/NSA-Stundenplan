@@ -56,9 +56,7 @@
 											{{teacher.shortName}}
 										{{/if}}
 
-										{{#if ../../../../isLoggedIn}}
-											<br><a href="#/replacement/{{id}}/edit">Ändern</a>
-										{{/if}}
+										<br><a href="#/replacement/{{id}}" class="btn btn-default btn-xs">Details</a>
 									{{/with}}
 								</td>
 							{{else}}
@@ -71,7 +69,7 @@
 										{{#if subject}}
 											{{#if room}}
 												{{#if teacher}}
-													<br><a href="#/replacement/new/{{../../../lesson.id}}/{{../../form.id}}/{{../../../day.id}}">Ändern</a>
+													<br><a href="#/replacement/new/{{../../../lesson.id}}/{{../../form.id}}/{{../../../day.id}}" class="btn btn-default btn-xs">Neue Vertretung</a>
 												{{/if}}
 											{{/if}}
 										{{/if}}
