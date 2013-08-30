@@ -18,7 +18,6 @@ import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 
-// TODO Refactoring + Überprüfen auf leere ResultListen
 @Path("timetable")
 public class TimetableResource {
 	private EntityManager entitiyManager;

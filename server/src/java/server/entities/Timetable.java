@@ -32,12 +32,10 @@ public class Timetable extends DefaultEntity {
 		this.timetableLessons = lessons;
 	}
 
-	// TODO Liste initialisieren
 	public void addLesson(final TimetableLesson timetableLesson) {
 		this.timetableLessons.add(timetableLesson);
 	}
 
-	// TODO TESTEN
 	public void removeTimetableLesson(final TimetableLesson timetableLesson) {
 		this.timetableLessons.remove(timetableLesson);
 	}

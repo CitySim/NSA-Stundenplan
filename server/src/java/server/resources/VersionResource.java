@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 
 @Path("version")
 public class VersionResource {
-	// TODO Version an anderer Stelle ablegen
+	
 	private ServerVersion version = new ServerVersion();
 
 	@GET
@@ -22,6 +22,6 @@ public class VersionResource {
 
 	private class ServerVersion {
 		@SuppressWarnings("unused")
-		String version = "1.0.0";
+		String version = "1.0.1 international alpha deluxe z5 pre-release";
 	}
 }
