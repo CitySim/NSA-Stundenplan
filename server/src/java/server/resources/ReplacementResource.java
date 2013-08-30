@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -63,6 +64,20 @@ public class ReplacementResource {
 		
 		return new Gson().toJson(this.addReplacement(replacement, lessonId, formId, dayId));
 	}
+	
+	@DELETE
+	public boolean deleteReplacement(@QueryParam("id") final int replacementId) {
+		final EntityManager entityManager = HibernateUtil.getEntityManager();
+		Replacement replacement = entityManager.find(Replacement.class, replacementId);
+		if (replacement == null) {
+			return false;
+		}
+		entityManager.getTransaction().begin();
+		entityManager.remove(replacement);
+		entityManager.getTransaction().commit();
+		return true;
+	}
+	
 
 	private Replacement addReplacement(final Replacement replacement, final int lessonId, final int formId, final int dayId) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
