@@ -14,13 +14,13 @@
 			<form role="form" >
 				<div class="form-group">
 					<label for="formDate">Datum</label>
-					<input name="date" type="date" class="form-control" id="formDate" placeholder="DD.MM.JJJJ">
+					<input name="date" type="date" class="form-control" id="formDate" placeholder="DD.MM.JJJJ" value="{{format_date}}">
 				</div>
 				<div class="form-group">
 					<label for="formlesson">Stunde</label>
 					<select name="lesson" class="form-control" id="formlesson">
 						{{#each ../lessons}}
-							<option value="{{id}}">{{no}}: {{format_start}} - {{format_end}}</option>
+							<option value="{{id}}" {{#ifcond ../lesson.id "==" id}}selected{{/ifcond}}>{{no}}: {{format_start}} - {{format_end}}</option>
 						{{/each}}
 					</select>
 				</div>
@@ -28,7 +28,7 @@
 					<label for="formTeacher">Lehrer</label>
 					<select name="teacher" class="form-control" id="formTeacher">
 						{{#each ../teachers}}
-							<option value="{{id}}">{{firstname}} {{name}}</option>
+							<option value="{{id}}" {{#ifcond ../teacher.id "==" id}}selected{{/ifcond}}>{{firstname}} {{name}}</option>
 						{{/each}}
 					</select>
 				</div>
@@ -36,7 +36,7 @@
 					<label for="formRoom">Raum</label>
 					<select name="room" class="form-control" id="formRoom">
 						{{#each ../rooms}}
-							<option value="{{id}}">{{description}}</option>
+							<option value="{{id}}" {{#ifcond ../room.id "==" id}}selected{{/ifcond}}>{{description}}</option>
 						{{/each}}
 					</select>
 				</div>
@@ -44,7 +44,7 @@
 					<label for="formSubject">Fach</label>
 					<select name="subject" class="form-control" id="formSubject">
 						{{#each ../subjects}}
-							<option value="{{id}}">{{description}}</option>
+							<option value="{{id}}" {{#ifcond ../subject.id "==" id}}selected{{/ifcond}}>{{description}}</option>
 						{{/each}}
 					</select>
 				</div>
@@ -52,13 +52,13 @@
 					<label for="formForm">Klasse</label>
 					<select name="form" class="form-control" id="formForm">
 						{{#each ../classes}}
-							<option value="{{id}}">{{description}}</option>
+							<option value="{{id}}" {{#ifcond ../form.id "==" id}}selected{{/ifcond}}>{{description}}</option>
 						{{/each}}
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="formNote">Notiz</label>
-					<textarea name="note" id="formNote" class="form-control" rows="3"></textarea>
+					<textarea name="note" id="formNote" class="form-control" rows="3">{{note}}</textarea>
 				</div>
 			
 				<button type="button" class="btn btn-primary app-save">Speichern</button>
