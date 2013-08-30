@@ -45,7 +45,8 @@ class window.nsa.Views.Admin extends Backbone.View
 				"Content-Type": "application/json"
 
 			success: (data) =>
-				alert("ok")
+				delete nsa.Data.school
+				nsa.app.navigate("", { trigger: true })
 				return
 
 			error: () =>
