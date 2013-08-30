@@ -1,8 +1,7 @@
 package server.entities;
 
 import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 
@@ -16,6 +15,7 @@ import com.google.gson.JsonParseException;
 
 public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Replacement deserialize(final JsonElement jsonEl, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
 		final JsonObject json = jsonEl.getAsJsonObject();
@@ -25,11 +25,8 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 			replacement = em.find(Replacement.class, json.get("id").getAsInt());
 		} else {
 			replacement = new Replacement();
-		}
-		try {
-			replacement.setDate(DateFormat.getDateInstance().parse((json.get("date").getAsString())));
-		} catch (ParseException e) {
-		}
+		}	
+		replacement.setDate(new Date(json.get("date").getAsString()));
 		replacement.setForm(em.find(Form.class, json.get("form").getAsInt()));
 		replacement.setNote(json.get("note").getAsString());
 		replacement.setRoom(em.find(Room.class, json.get("room").getAsInt()));
