@@ -49,7 +49,7 @@ public class CookieHandler {
 		new CookieQuery().removeInvalidCookies(new Date());
 	}
 
-	public final boolean deleteCookie(final NewCookie cookie) {
-		return new CookieQuery().removeCookie(cookie.getValue());
+	public final boolean deleteCookie(final String cookie) {
+		return new CookieQuery().removeCookie(cookie);
 	}
 }

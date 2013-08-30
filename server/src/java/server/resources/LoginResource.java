@@ -67,7 +67,7 @@ public class LoginResource {
 	
 	@Path("logout")
 	@GET
-	public String logout(@QueryParam("cookie") NewCookie cookie) {
+	public String logout(@QueryParam("cookie") String cookie) {
 		return new Gson().toJson(new CookieHandler().deleteCookie(cookie));
 	}
 }
