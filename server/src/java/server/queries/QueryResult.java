@@ -10,12 +10,12 @@ import server.persistence.HibernateUtil;
 public class QueryResult {
 	protected final EntityManager em;
 
-	public QueryResult(){
+	public QueryResult() {
 		this.em = HibernateUtil.getEntityManager();
 
 	}
-	
-	public boolean removeFromDB(Object object){
+
+	public boolean removeFromDB(final Object object) {
 		if (object == null) {
 			return false;
 		} else {
@@ -24,15 +24,15 @@ public class QueryResult {
 			this.em.getTransaction().commit();
 			return true;
 		}
-		
+
 	}
-	
-	public Object getSingleResult(Query query){
-	    query.setMaxResults(1);
-	    List<?> list = query.getResultList();
-	    if (list == null || list.size() == 0) {
-	        return null;
-	    }
-	    return list.get(0);
+
+	public Object getSingleResult(final Query query) {
+		query.setMaxResults(1);
+		final List<?> list = query.getResultList();
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
 	}
 }

@@ -64,10 +64,10 @@ public class NewsLetterHandlerTest extends TestCase {
 		NewsLetterHandlerTest.assertEquals(true, success);
 
 		try {
-			assertTrue(this.handler.removeAddress(newsLetterList.get(0)));
+			assertTrue(this.handler.removeAddress(newsLetterList.get(1)));
 		} catch (final EmailSendingException e) {
 			fail();
 		}
-		assertTrue(this.handler.removeRegistration(newsLetterList.get(0)));
+		assertTrue(this.handler.removeRegistration(newsLetterList.get(1)));
 	}
 }

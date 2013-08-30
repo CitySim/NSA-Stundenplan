@@ -58,16 +58,16 @@ public class FilePrinter {
 
 		final PdfPTable table = new PdfPTable(6);
 		String input = "";
-		
-		if(timeTable.getForm() != null){
-			input = "Klasse: "+ timeTable.getForm().getDescription();
-		}else if(timeTable.getRoom() != null){
+
+		if (timeTable.getForm() != null) {
+			input = "Klasse: " + timeTable.getForm().getDescription();
+		} else if (timeTable.getRoom() != null) {
 			input = timeTable.getRoom().getDescription();
-		}else if(timeTable.getTeacher() != null){ 
-			input = "Lehrer: " + timeTable.getTeacher().getFirstname()+ " "+timeTable.getTeacher().getName();
+		} else if (timeTable.getTeacher() != null) {
+			input = "Lehrer: " + timeTable.getTeacher().getFirstname() + " " + timeTable.getTeacher().getName();
 		}
-		
-		table.addCell("\n"+ input +"\n ");
+
+		table.addCell("\n" + input + "\n ");
 		table.addCell("\nMontag\n ");
 		table.addCell("\nDienstag\n ");
 		table.addCell("\nMittwoch\n ");

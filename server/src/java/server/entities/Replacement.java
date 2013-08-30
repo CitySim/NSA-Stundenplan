@@ -23,14 +23,14 @@ public class Replacement extends DefaultEntity {
 
 	@ManyToOne(targetEntity = Form.class)
 	private Form form;
-	
+
 	@ManyToOne(targetEntity = Lesson.class)
 	private Lesson lesson;
-	
+
 	private String note;
 
 	public Date getDate() {
-		return date;
+		return this.date;
 	}
 
 	public void setDate(final Date date) {
@@ -38,50 +38,50 @@ public class Replacement extends DefaultEntity {
 	}
 
 	public Teacher getTeacher() {
-		return teacher;
+		return this.teacher;
 	}
 
-	public void setTeacher(Teacher teacher) {
+	public void setTeacher(final Teacher teacher) {
 		this.teacher = teacher;
 	}
 
 	public Room getRoom() {
-		return room;
+		return this.room;
 	}
 
-	public void setRoom(Room room) {
+	public void setRoom(final Room room) {
 		this.room = room;
 	}
 
 	public Subject getSubject() {
-		return subject;
+		return this.subject;
 	}
 
-	public void setSubject(Subject subject) {
+	public void setSubject(final Subject subject) {
 		this.subject = subject;
 	}
 
 	public String getNote() {
-		return note;
+		return this.note;
 	}
 
-	public void setNote(String note) {
+	public void setNote(final String note) {
 		this.note = note;
 	}
 
 	public Form getForm() {
-		return form;
+		return this.form;
 	}
 
-	public void setForm(Form form) {
+	public void setForm(final Form form) {
 		this.form = form;
 	}
 
 	public Lesson getLesson() {
-		return lesson;
+		return this.lesson;
 	}
 
-	public void setLesson(Lesson lesson) {
+	public void setLesson(final Lesson lesson) {
 		this.lesson = lesson;
 	}
 }

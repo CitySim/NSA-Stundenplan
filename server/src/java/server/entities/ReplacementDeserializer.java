@@ -16,22 +16,28 @@ import com.google.gson.JsonParseException;
 
 public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public Replacement deserialize(JsonElement jsonEl, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		JsonObject json = jsonEl.getAsJsonObject();
+	public Replacement deserialize(final JsonElement jsonEl, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+		final JsonObject json = jsonEl.getAsJsonObject();
 		Replacement replacement;
-		EntityManager em = HibernateUtil.getEntityManager();
+		final EntityManager em = HibernateUtil.getEntityManager();
 		if (json.get("id") != null && json.get("id").getAsInt() != 0) {
 			replacement = em.find(Replacement.class, json.get("id").getAsInt());
 		} else {
 			replacement = new Replacement();
 		}
+<<<<<<< HEAD
 		try {
 			replacement.setDate(DateFormat.getDateInstance().parse((json.get("date").getAsString())));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+=======
+
+		replacement.setDate(new Date(json.get("date").getAsString()));
+>>>>>>> branch 'master' of https://github.com/CitySim/NSA-Stundenplan.git
 		replacement.setForm(em.find(Form.class, json.get("form").getAsInt()));
 		replacement.setNote(json.get("note").getAsString());
 		replacement.setRoom(em.find(Room.class, json.get("room").getAsInt()));
