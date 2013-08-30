@@ -14,3 +14,4 @@ class window.nsa.Views.Logout extends Backbone.View
 		@$el.html @template
 			message: @message
 		return
+		
