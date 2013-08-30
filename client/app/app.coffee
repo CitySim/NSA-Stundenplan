@@ -94,12 +94,19 @@ class window.nsa.App extends Backbone.Router
 				"Content-Type": "application/x-www-form-urlencoded"
 
 			success: (data) =>
+				if data.toString() is "false"
+					nsa.app.error
+						no: 3206
+						title: "Fehler beim Löschen"
+						message: "Ein Eintrag konnte nicht gelöscht werden, der Sever meldet einen Fehler."
+					return
+
 				@navigate("replacement", { trigger: true })
 				return
 
 			error: () =>
 				nsa.app.error
-					no: 2542
+					no: 3201
 					title: "Fehler beim Löschen"
 					message: "Es tratt ein schwerer Fehler auf"
 
