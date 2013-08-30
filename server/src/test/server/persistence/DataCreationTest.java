@@ -174,13 +174,13 @@ public class DataCreationTest {
 		timetable_it1b.setLessons(timeTableLessons_it1a);
 		this.em.persist(timetable_it1b);
 
-		this.helper.createLogin("Volker.Lürssen", "Volker.Lürssen@localhost");
-		this.helper.createLogin("Kirsten.Albers", "Kirsten.Albers@localhost");
-		this.helper.createLogin("Werner.Herrmann", "Werner.Herrmann@localhost");
-		this.helper.createLogin("Thomas.Bastians", "Thomas.Bastians@localhost");
-		this.helper.createLogin("Heike.Giera", "Heike.Giera@localhost");
-		this.helper.createLogin("Markus.Wehmeyer", "Markus.Wehmeyer@localhost");
-		this.helper.createLogin("Burg.Burg", "Burg.Burg@localhost");
+		this.helper.createLogin("Volker.Lürssen", "VolkerLürssen@localhost");
+		this.helper.createLogin("Kirsten.Albers", "KirstenAlbers@localhost");
+		this.helper.createLogin("Werner.Herrmann", "WernerHerrmann@localhost");
+		this.helper.createLogin("Thomas.Bastians", "ThomasBastians@localhost");
+		this.helper.createLogin("Heike.Giera", "HeikeGiera@localhost");
+		this.helper.createLogin("Markus.Wehmeyer", "MarkusWehmeyer@localhost");
+		this.helper.createLogin("Burg.Burg", "BurgBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", timetableLesson);
@@ -188,8 +188,8 @@ public class DataCreationTest {
 		this.helper.createReplacement(Calendar.getInstance().getTime(), raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", timetableLesson3);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
-		this.helper.createNewsletter(it1a, "Kirsten.Albers@localhost");
-		this.helper.createNewsletter(it1b, "Heike.Giera@localhost");
+		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");
+		this.helper.createNewsletter(it1b, "HeikeGiera@localhost");
 
 		this.em.getTransaction().commit();
 
