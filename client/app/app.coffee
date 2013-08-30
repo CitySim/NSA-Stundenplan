@@ -17,6 +17,7 @@ class window.nsa.App extends Backbone.Router
 		"replacement/:id"			: "replacementDetails"
 		"replacement/:id/edit"		: "replacementEdit"
 		"login"						: "login"
+		"logout"					: "logout"
 		"login/changepw"			: "changepw"
 		"about"						: "about"
 		"admin"						: "admin"
@@ -88,6 +89,14 @@ class window.nsa.App extends Backbone.Router
 			return
 
 		@showView(new nsa.Views.Login())
+		return
+
+	logout: () =>
+		if not nsa.Data.user.isLoggedIn()
+			@navigate("home", { trigger: true })
+			return
+
+		@showView(new nsa.Views.Logout())
 		return
 
 	changepw: () =>
@@ -203,10 +212,13 @@ $ () ->
 	Handlebars.registerHelper "ifcond", (v1, operator, v2, options) ->
 		switch operator
 			when "=="	then (if v1 is v2	then options.fn(this) else options.inverse(this))
+			when "!="	then (if v1 isnt v2	then options.fn(this) else options.inverse(this))
 			when "<"	then (if v1 < v2	then options.fn(this) else options.inverse(this))
 			when "<="	then (if v1 <= v2	then options.fn(this) else options.inverse(this))
 			when ">"	then (if v1 > v2	then options.fn(this) else options.inverse(this))
 			when ">="	then (if v1 >= v2	then options.fn(this) else options.inverse(this))
+			when "and"	then (if v1 and v2	then options.fn(this) else options.inverse(this))
+			when "or"	then (if v1 or v2	then options.fn(this) else options.inverse(this))
 			else option.inverse()
 		
 	return

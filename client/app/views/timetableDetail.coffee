@@ -4,8 +4,10 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 
 	events:
 		"click .app-subcribe": "subcribe"
+		"change .app-toggle": "toggleReplacement"
 	
 	loading: true
+	showReplacement: true
 
 	initialize: () =>
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
@@ -27,6 +29,11 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 					title: "Stundenplan-Ladefehler"
 					message: "Es ist ein schwerer unerwarteter Stundenplan-Ladefehler aufgetreten"
 				return
+		return
+
+	toggleReplacement: () =>
+		@showReplacement = not @showReplacement
+		@render()
 		return
 		
 	render: () =>
@@ -69,6 +76,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			days: tempDays
 			lessons: tempLessons
 			timetable: @model.toJSON()
+			showReplacement: @showReplacement
 			isLoggedIn: nsa.Data.user.isLoggedIn()
 
 		return

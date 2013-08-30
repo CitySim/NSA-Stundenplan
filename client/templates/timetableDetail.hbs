@@ -11,6 +11,7 @@
 			</div>
 
 			<div class="btn-group">
+				<button type="button" class="btn btn-default"><input type="checkbox" class="app-toggle" {{#if showReplacement}}checked{{/if}}> Änderungen</button>
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Download <span class="caret"></span>
 				</button>
@@ -41,7 +42,8 @@
 							</small>
 						</td>
 						{{#each days}}
-							{{#if replacement}}
+
+							{{#ifcond replacement "and" ../../showReplacement}}
 								<td class="danger">
 									{{#with replacement}}
 										{{#if subject}}
@@ -75,7 +77,7 @@
 										{{/if}}
 									{{/if}}
 								</td>
-							{{/if}}
+							{{/ifcond}}
 						{{/each}}
 					</tr>
 				{{/each}}
