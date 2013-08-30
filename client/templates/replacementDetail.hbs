@@ -52,7 +52,10 @@
 			</table>
 
 			{{#if ../isLoggedIn}}
-				<a href="#replacement/{{id}}/edit" class="btn btn-default">Bearbeiten</a>
+				<div class="btn-group">
+					<a href="#replacement/{{id}}/edit" class="btn btn-default">Bearbeiten</a>
+					<a href="#replacement/{{id}}/delete" class="btn btn-default">Löschen</a>
+				</div>
 			{{/if}}
 		{{/with}}
 	</div>
