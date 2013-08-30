@@ -85,8 +85,8 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 		$.ajax
 			url: nsa.config.api + "/newsletter/confirm"
 			method: "GET"
-			date:
-				"id": @model.id
+			data:
+				"id": @model.get("form").id
 				"email": @$(".app-email").val()
 			success: (data) =>
 				try

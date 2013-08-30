@@ -56,7 +56,15 @@ public class NewsLetterHandlerTest extends TestCase {
 
 		boolean success = false;
 
-		NewsLetterHandlerTest.assertTrue(this.handler.confirmRegistration(this.form, this.eMailAddress));
+		try {
+			NewsLetterHandlerTest.assertTrue(this.handler.confirmRegistration(this.form, this.eMailAddress));
+		} catch (EmailSendingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (EmailAddressException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		final List<Newsletter> newsLetterList = new NewsletterQuery().getAllNewsletters(this.form);
 

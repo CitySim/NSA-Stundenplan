@@ -36,7 +36,7 @@ public class NewsLetterHandler {
 		return new EmailJobHelper().sendRemoveRegistrationMail(newsletter);
 	}
 
-	public boolean confirmRegistration(final Form form, final String email) {
+	public boolean confirmRegistration(final Form form, final String email) throws EmailSendingException, EmailAddressException {
 		return new NewsletterQuery().confirmEmail(form, email);
 	}
 

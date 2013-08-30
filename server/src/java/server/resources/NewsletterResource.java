@@ -8,7 +8,10 @@ import javax.ws.rs.core.MediaType;
 
 import server.entities.Form;
 import server.entities.Newsletter;
+import server.exceptions.EmailAddressException;
+import server.exceptions.EmailSendingException;
 import server.operations.NewsLetterHandler;
+import server.operations.email.EmailJobHelper;
 import server.queries.QueryResult;
 
 import com.google.gson.Gson;
@@ -25,7 +28,17 @@ public class NewsletterResource extends QueryResult {
 		if (form == null) {
 			return new Gson().toJson("Fehler: Klasse nicht gefunden");
 		}
-		return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
+		try {
+			EmailJobHelper helper = new EmailJobHelper();
+			helper.sendConfirmationMail(form, email);
+
+			return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
+		} catch (EmailSendingException e) {
+			e.printStackTrace();
+		} catch (EmailAddressException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@GET

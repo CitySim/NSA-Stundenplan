@@ -5,15 +5,17 @@ class window.nsa.Views.Logout extends Backbone.View
 		@message = "sie werden augeloggt..."
 
 		$.ajax
-			url: nsa.config.api + "/login/logout?cookie=#{$.cookie("NSA-Cookie")}"
+			url: nsa.config.api + "/login/logout?cookie=#{encodeURIComponent($.cookie("NSA-Cookie"))}"
 			method: "GET"
 			success: (data) =>
+				###
 				if data.toString() is "false"
 					nsa.app.error
 						no: 3206
 						title: "Fehler beim ausloggen"
 						message: "Ein Eintrag konnte nicht gelöscht werden, der Sever meldet einen Fehler."
 					return
+				###
 
 				setTimeout () =>
 					if $.removeCookie("NSA-Cookie")

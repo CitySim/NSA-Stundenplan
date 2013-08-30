@@ -27,12 +27,14 @@
 				</ul>
 			</div>
 
-			<div class="input-group pull-left" style="width: 300px;">
-				<input type="text" class="form-control app-email" placeholder="E-Mail">
-				<span class="input-group-btn">
-					<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
-				</span>
-			</div>
+			{{#if timetable.form}}
+				<div class="input-group pull-left" style="width: 300px;">
+					<input type="text" class="form-control app-email" placeholder="E-Mail">
+					<span class="input-group-btn">
+						<button class="btn btn-default app-subcribe" type="button">Abonnieren</button>
+					</span>
+				</div>
+			{{/if}}
 		</div>
 
 		<div class="clearfix"></div>
