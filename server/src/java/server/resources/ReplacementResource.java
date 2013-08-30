@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,7 +38,7 @@ public class ReplacementResource {
 		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, start, end));
 		return json;
 	}
-	
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,16 +56,16 @@ public class ReplacementResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addReplacementJSON(String replacementJSON, @QueryParam("lesson") final int lessonId,
-			@QueryParam("form") final int formId, @QueryParam("day") final int dayId) {
-		
+	public String addReplacementJSON(String replacementJSON, @QueryParam("lesson") final int lessonId, @QueryParam("form") final int formId,
+			@QueryParam("day") final int dayId) {
+
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
 		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-		
+
 		return new Gson().toJson(this.addReplacement(replacement, lessonId, formId, dayId));
 	}
-	
+
 	@DELETE
 	public boolean deleteReplacement(@QueryParam("id") final int replacementId) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
@@ -72,12 +73,20 @@ public class ReplacementResource {
 		if (replacement == null) {
 			return false;
 		}
+		String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
+		Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
+		TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
+		if (timetableLesson != null) {
+			timetableLesson.setReplacement(null);
+			entityManager.getTransaction().begin();
+			entityManager.persist(timetableLesson);
+			entityManager.getTransaction().commit();
+		}
 		entityManager.getTransaction().begin();
 		entityManager.remove(replacement);
 		entityManager.getTransaction().commit();
 		return true;
 	}
-	
 
 	private Replacement addReplacement(final Replacement replacement, final int lessonId, final int formId, final int dayId) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
