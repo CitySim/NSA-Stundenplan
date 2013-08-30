@@ -24,12 +24,11 @@ public class SchoolResource {
 		@SuppressWarnings("unused")
 		String image = "http://mw2.google.com/mw-panoramio/photos/medium/24678566.jpg";
 		@SuppressWarnings("unused")
-		String text = "++++ Einfach mal abschalten: Pfleger geniesst Ruhe auf der Intensivstation ++++<br>"
-				+ "++++ Er kann sich ins Knie ficken: Frau will mit Schlangenmenschen nicht ins Bett ++++<br>"
-				+ "++++ Nicht die feine Art: Kundin schreit Metzgerin wegen falscher Leberwurst an ++++<br>"
-				+ "++++ Gehen langsam aus: Alte Gigolos ++++<br>"
-				+ "++++ Hier isst der Kunde König: Kannibalen-Restaurant serviert Häuptlingsfleisch ++++<br>"
-				+ "++++ Den Dicken markiert: Paintballprofi prahlt nach Sieg über korpulenten Gegner ++++<br>"
-				+ "++++ Trachten nach dem Tod: Bayerische Profikiller möchten in traditioneller Kleidung bestattet werden ++++";
+		String text = "++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
+				+ "++++ Zeugnisse sind fertig ++++<br>"
+				+ "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
+				+ "++++ Folgende Lehrer sind krank: ... ++++<br>"
+				+ "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
+				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>";
 	}
 }
