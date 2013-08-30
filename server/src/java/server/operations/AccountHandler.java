@@ -2,6 +2,7 @@ package server.operations;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
 import server.queries.LoginQuery;
@@ -17,7 +18,7 @@ import server.queries.LoginQuery;
 public class AccountHandler {
 
 	final Login createAccount(final String name, final String familyName, final String eMailAddress) throws DuplicateUserException,
-			EmailSendingException {
+			EmailSendingException, EmailAddressException {
 
 		final String userName = this.generateUserName(this.correctFormat(name), this.correctFormat(familyName));
 
@@ -38,7 +39,7 @@ public class AccountHandler {
 
 	}
 
-	public final String changePassword(final String userName) throws EmailSendingException {
+	public final String changePassword(final String userName) throws EmailSendingException, EmailAddressException {
 
 		final PasswordEncryptor encryptor = new PasswordEncryptor();
 

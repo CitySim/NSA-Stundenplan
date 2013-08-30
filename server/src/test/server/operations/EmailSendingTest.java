@@ -11,6 +11,7 @@ import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Newsletter;
 import server.entities.Replacement;
+import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
@@ -59,7 +60,9 @@ public class EmailSendingTest extends TestCase {
 			this.helper.sendPasswordChangeMail(this.email, "test", "test");
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 		} catch (final EmailSendingException e) {
-			EmailSendingTest.fail();
+			fail();
+		} catch (final EmailAddressException e) {
+			// fail();
 		}
 	}
 

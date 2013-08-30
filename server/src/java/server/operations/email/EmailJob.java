@@ -13,6 +13,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 
 /**
@@ -25,7 +26,8 @@ import server.exceptions.EmailSendingException;
 
 class EmailJob {
 
-	final void sendMail(final EmailSettings emailSettings, final ArrayList<EmailObject> emailList) throws EmailSendingException {
+	final void sendMail(final EmailSettings emailSettings, final ArrayList<EmailObject> emailList) throws EmailSendingException,
+			EmailAddressException {
 
 		final Properties properties = new Properties();
 		properties.put("mail.smtp.host", emailSettings.getSmtpHost());
@@ -56,7 +58,7 @@ class EmailJob {
 				}
 			}
 		} catch (final Exception e) {
-			throw new EmailSendingException();
+			throw new EmailAddressException();
 		}
 	}
 

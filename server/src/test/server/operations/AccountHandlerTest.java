@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import server.entities.Login;
 import server.exceptions.DuplicateUserException;
+import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 import server.queries.LoginQuery;
 
@@ -46,7 +47,9 @@ public class AccountHandlerTest extends TestCase {
 		try {
 			this.password = this.handler.changePassword(this.userName);
 		} catch (final EmailSendingException e) {
-			AccountHandlerTest.fail();
+			fail();
+		} catch (final EmailAddressException e) {
+			fail();
 		}
 		AccountHandlerTest.assertTrue(new LoginValidator().validatePassword(this.password, new LoginQuery().getPassword(this.userName)));
 	}
@@ -61,7 +64,9 @@ public class AccountHandlerTest extends TestCase {
 			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
 			this.userName = account.getUser();
 		} catch (final EmailSendingException e) {
-			AccountHandlerTest.fail();
+			fail();
+		} catch (final EmailAddressException e) {
+			// fail();
 		} catch (final DuplicateUserException e) {
 		}
 	}
