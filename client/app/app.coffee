@@ -5,7 +5,7 @@ window.nsa = _.extend {}, window.nsa,
 	Data: {}
 	config:
 		api: "/api"
-	version: "0.5.0"
+	version: "1.0.0"
 
 class window.nsa.App extends Backbone.Router
 	routes:
@@ -101,7 +101,9 @@ class window.nsa.App extends Backbone.Router
 						message: "Ein Eintrag konnte nicht gelöscht werden, der Sever meldet einen Fehler."
 					return
 
-				@navigate("replacement", { trigger: true })
+				setTimeout () =>
+					@navigate("replacement", { trigger: true })
+				, 300
 				return
 
 			error: () =>

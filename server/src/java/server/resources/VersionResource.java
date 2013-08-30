@@ -22,6 +22,6 @@ public class VersionResource {
 
 	private class ServerVersion {
 		@SuppressWarnings("unused")
-		String version = "0.0.1";
+		String version = "1.0.0";
 	}
 }

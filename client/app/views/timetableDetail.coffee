@@ -4,7 +4,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 
 	events:
 		"click .app-subcribe": "subcribe"
-		"change .app-toggle": "toggleReplacement"
+		"click .app-toggle": "toggleReplacement"
 	
 	loading: true
 	showReplacement: true

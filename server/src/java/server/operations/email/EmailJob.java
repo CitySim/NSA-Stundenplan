@@ -56,7 +56,7 @@ class EmailJob {
 				}
 			}
 		} catch (final Exception e) {
-			// throw new EmailSendingException();
+			throw new EmailSendingException();
 		}
 	}
 
