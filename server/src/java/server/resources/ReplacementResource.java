@@ -113,9 +113,10 @@ public class ReplacementResource {
 		if (roomId != 0) {
 			criteria.add(Restrictions.eq("room.id", roomId));
 		}
-		/*if (start != null && end != null) {
-			criteria.add(Restrictions.between("week", start, end));
-		}*/
+		// TODO das wieder irgendwie fixen, wahrscheinlich so das man einfach eine bestimmte reingibt
+		//if (start != null && end != null) {
+		//	criteria.add(Restrictions.between("week", start, end));
+		//}
 		return criteria.list();
 	}
 }
