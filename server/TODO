@@ -18,11 +18,14 @@ Fehler während der Präsi:
 	(Generell auf sowas prüfen)
 3. Anzeige der Informationen zu Vertretungsstunden unvollständig und teilweise schwachsinnig (sollte sich nach ausgewähltem Tab richten)
 4. Email Versand teilweise buggy
-5. Refresh manchmal erforderlich?^^
+5. Refresh manchmal erforderlich / Seite crashed.
 6. Bild kann auf mobilen Geräten nicht angezeigt werden (Direkte Speicherung auf dem Server)
 7. Lehrer sollten auch Vertretungsmails kriegen (Kranke und neu zugewiesene)
+8. Passwort zurücksetzen erst nach Bestätigungsmail
 
 Nice to Have:
 
-7. Anzeige von Vertretungen auf die aktuelle Woche begrenzen (Umschalten einbauen)
-8. User anlegen etc. auch über die Seite ermöglichen
+1. Anzeige von Vertretungen auf die aktuelle Woche begrenzen (Umschalten einbauen)
+2. User, Stundenpläne anlegen etc. auch über die Seite ermöglichen
+3. Icon für die App auf Android etc.
+4. FireFox Support
