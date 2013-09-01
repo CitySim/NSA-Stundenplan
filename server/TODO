@@ -9,3 +9,20 @@ http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
 Email Stundenplan Änderung soll das Datum formatiert zurückgeben
 Nice2Have: Falls ein Datum an der Webservice im falschen Format gesendet wird,
 		   sollte HTTP Status 400 kommen, nicht 404
+
+		   
+Fehler während der Präsi:
+
+1. Eintrag von Vertretungen bleibt bei ursprünglicher Klasse / Lehrer / Raum eingetragen
+2. Abfangen von verschiedenen ungültigen Eingaben (ungültigen Daten etc.) beim Erstellen von Vertretungen etc.
+	(Generell auf sowas prüfen)
+3. Anzeige der Informationen zu Vertretungsstunden unvollständig und teilweise schwachsinnig (sollte sich nach ausgewähltem Tab richten)
+4. Email Versand teilweise buggy
+5. Refresh manchmal erforderlich?^^
+6. Bild kann auf mobilen Geräten nicht angezeigt werden (Direkte Speicherung auf dem Server)
+7. Lehrer sollten auch Vertretungsmails kriegen (Kranke und neu zugewiesene)
+
+Nice to Have:
+
+7. Anzeige von Vertretungen auf die aktuelle Woche begrenzen (Umschalten einbauen)
+8. User anlegen etc. auch über die Seite ermöglichen
