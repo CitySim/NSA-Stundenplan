@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -42,7 +43,9 @@ public class ReplacementResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public final String changeReplacementJSON(final String replacementJSON) {
+	public final String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") String nsaCookie, final String replacementJSON) {
+		// TODO: check nsaCookie
+		
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
 		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
@@ -56,7 +59,8 @@ public class ReplacementResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public final String addReplacementJSON(final String replacementJSON) {
+	public final String addReplacementJSON(@CookieParam(value = "NSA-Cookie") String nsaCookie, final String replacementJSON) {
+		// TODO: check nsaCookie
 
 		final GsonBuilder gson = new GsonBuilder();
 		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
@@ -66,7 +70,9 @@ public class ReplacementResource {
 	}
 
 	@DELETE
-	public final boolean deleteReplacement(@QueryParam("id") final int replacementId) {
+	public final boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") String nsaCookie, @QueryParam("id") final int replacementId) {
+		// TODO: check nsaCookie
+		
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
 		final Replacement replacement = entityManager.find(Replacement.class, replacementId);
 		if (replacement == null) {
