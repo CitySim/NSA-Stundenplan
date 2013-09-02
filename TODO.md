@@ -4,24 +4,6 @@
   * Parameter ist drin, muss validiert werden
 * "Passwort vergessen" Funktion hinzufügen. (Im Pflichtenheft)
 
-## Nice to Have
-
-* Wenn Zeit Criteria einfügen
-  * http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
-* Auch bind Parameters!
-  * http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
-* E-Mail Stundenplan Änderung soll das Datum formatiert zurückgeben
-* Falls ein Datum an der Webservice im falschen Format gesendet wird,
-  sollte HTTP Status 400 kommen, nicht 404
-* Anzeige von Vertretungen auf die aktuelle Woche begrenzen (Umschalten einbauen)
-* User, Stundenpläne anlegen etc. auch über die Seite ermöglichen
-  * in Version 2.0.0 vielleicht mal...
-* Icon für die App auf Android etc.
-  * favicon.ico, apple touch icons, ...
-* FireFox Support
-  * ist nur der Login oder?
-  * http://stackoverflow.com/questions/17602432/jersey-and-formparam-not-working-when-charset-is-specified-in-the-content-type
-	   
 ## Fehler während der Präsi:
 
 1. Eintrag von Vertretungen bleibt bei ursprünglicher Klasse / Lehrer / 
@@ -43,3 +25,23 @@
 7. Lehrer sollten auch Vertretungsmails kriegen (Kranke und neu zugewiesene)
    * reicht es wen deren Stundenpläne auch ab
 8. Passwort zurücksetzen erst nach Bestätigungsmail
+
+
+## Nice to Have
+
+* Wenn Zeit Criteria einfügen
+  * http://docs.jboss.org/hibernate/entitymanager/3.5/reference/en/html/objectstate.html
+* Auch bind Parameters!
+  * http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html
+* E-Mail Stundenplan Änderung soll das Datum formatiert zurückgeben
+* Falls ein Datum an der Webservice im falschen Format gesendet wird,
+  sollte HTTP Status 400 kommen, nicht 404
+* Anzeige von Vertretungen auf die aktuelle Woche begrenzen (Umschalten einbauen)
+* User, Stundenpläne anlegen etc. auch über die Seite ermöglichen
+  * in Version 2.0.0 vielleicht mal...
+* Icon für die App auf Android etc.
+  * favicon.ico, apple touch icons, ...
+* FireFox Support
+  * ist nur der Login oder?
+  * http://stackoverflow.com/questions/17602432/jersey-and-formparam-not-working-when-charset-is-specified-in-the-content-type
+	   
