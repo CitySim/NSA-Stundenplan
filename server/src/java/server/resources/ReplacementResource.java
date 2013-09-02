@@ -34,9 +34,9 @@ public class ReplacementResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getReplacementJSON(@QueryParam("teacher") final int teacherId, @QueryParam("room") final int roomId,
-			@QueryParam("class") final int formId, @QueryParam("start") final Date start, @QueryParam("end") final Date end) {
+			@QueryParam("class") final int formId, @QueryParam("start") final String week) {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, start, end));
+		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, week));
 		return json;
 	}
 
@@ -101,7 +101,7 @@ public class ReplacementResource {
 		return replacement;
 	}
 
-	private List<?> getReplacements(final int teacherId, final int formId, final int roomId, final Date start, final Date end) {
+	private List<?> getReplacements(final int teacherId, final int formId, final int roomId, final String week) {
 		final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
 		final Criteria criteria = session.createCriteria(Replacement.class);
 		if (teacherId != 0) {
@@ -113,10 +113,9 @@ public class ReplacementResource {
 		if (roomId != 0) {
 			criteria.add(Restrictions.eq("room.id", roomId));
 		}
-		// TODO das wieder irgendwie fixen, wahrscheinlich so das man einfach eine bestimmte reingibt
-		//if (start != null && end != null) {
-		//	criteria.add(Restrictions.between("week", start, end));
-		//}
+		if (week != null) {
+			criteria.add(Restrictions.eq("week", week));
+		}
 		return criteria.list();
 	}
 }
