@@ -25,6 +25,10 @@ public class LessonResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized List<Lesson> getLessons() {
-		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
+		try {
+			return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
+		} catch (final NullPointerException e) {
+			return this.getLessons();
+		}
 	}
 }

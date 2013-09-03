@@ -20,7 +20,7 @@ public class AvailableResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public final synchronized String getAvailable(@QueryParam("day") final int dayId, @QueryParam("lesson") final int lessonId) {
+	public final String getAvailable(@QueryParam("day") final int dayId, @QueryParam("lesson") final int lessonId) {
 		if (dayId == 0 || lessonId == 0) {
 			return new Gson().toJson("Ungültiger Tag oder Stunde ausgewählt!");
 		}
@@ -32,22 +32,30 @@ public class AvailableResource {
 
 	@SuppressWarnings("unchecked")
 	private synchronized List<Teacher> getAvailableTeachers(final int dayId, final int lessonId) {
-		final String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId
-				+ " and idStunde = " + lessonId + ")";
-		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
+		try {
+			final String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId
+					+ " and idStunde = " + lessonId + ")";
+			final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
 
-		final List<Teacher> liste = query.getResultList();
-		return liste;
+			final List<Teacher> liste = query.getResultList();
+			return liste;
+		} catch (final NullPointerException e) {
+			return this.getAvailableTeachers(dayId, lessonId);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private synchronized List<Room> getAvailableRooms(final int dayId, final int lessonId) {
-		final String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId
-				+ " and idStunde = " + lessonId + ")";
-		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);
+		try {
+			final String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId
+					+ " and idStunde = " + lessonId + ")";
+			final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);
 
-		final List<Room> liste = query.getResultList();
-		return liste;
+			final List<Room> liste = query.getResultList();
+			return liste;
+		} catch (final NullPointerException e) {
+			return this.getAvailableRooms(dayId, lessonId);
+		}
 	}
 
 	private class Available {

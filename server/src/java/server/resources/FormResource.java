@@ -18,14 +18,18 @@ public class FormResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		final List<Form> list = getForms();
+		final List<Form> list = FormResource.getForms();
 		final Gson gson = new Gson();
 		final String json = gson.toJson(list);
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static synchronized List<Form> getForms() {
-		return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
+	public synchronized static List<Form> getForms() {
+		try {
+			return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
+		} catch (final NullPointerException e) {
+			return FormResource.getForms();
+		}
 	}
 }

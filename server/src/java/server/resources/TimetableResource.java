@@ -51,84 +51,104 @@ public class TimetableResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized Timetable getClassTimetable(final int formId) {
-		final String timetableSql = "select * from timetable where form_idKlasse = '" + formId + "'";
-		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
+		try {
+			final String timetableSql = "select * from timetable where form_idKlasse = '" + formId + "'";
+			final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
-		if (timetableQuery.getResultList().size() > 0) {
-			return (Timetable) timetableQuery.getResultList().get(0);
+			if (timetableQuery.getResultList().size() > 0) {
+				return (Timetable) timetableQuery.getResultList().get(0);
+			}
+
+			final String lessonSql = "select * from klasse_tag_stunde where idKlasse = '" + formId + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String formSql = "select * from klasse where idKlasse = '" + formId + "'";
+			final Query formQuery = HibernateUtil.getEntityManager().createNativeQuery(formSql, Form.class);
+			timetable.setForm((Form) formQuery.getResultList().get(0));
+
+			this.saveTimetable(timetable);
+			return timetable;
+		} catch (final NullPointerException e) {
+			return this.getClassTimetable(formId);
 		}
-
-		final String lessonSql = "select * from klasse_tag_stunde where idKlasse = '" + formId + "'";
-		final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
-		final Timetable timetable = new Timetable();
-		timetable.setLessons(lessonQuery.getResultList());
-
-		final String formSql = "select * from klasse where idKlasse = '" + formId + "'";
-		final Query formQuery = HibernateUtil.getEntityManager().createNativeQuery(formSql, Form.class);
-		timetable.setForm((Form) formQuery.getResultList().get(0));
-
-		this.saveTimetable(timetable);
-		return timetable;
 	}
 
 	@SuppressWarnings("unchecked")
 	private synchronized Timetable getRoomTimetable(final int roomId) {
-		final String timetableSql = "select * from timetable where room_idRaum = '" + roomId + "'";
-		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
+		try {
+			final String timetableSql = "select * from timetable where room_idRaum = '" + roomId + "'";
+			final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
-		if (timetableQuery.getResultList().size() > 0) {
-			return (Timetable) timetableQuery.getResultList().get(0);
+			if (timetableQuery.getResultList().size() > 0) {
+				return (Timetable) timetableQuery.getResultList().get(0);
+			}
+
+			final String lessonSql = "select * from klasse_tag_stunde where idRaum = '" + roomId + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String roomSql = "select * from raum where idRaum = '" + roomId + "'";
+			final Query roomQuery = HibernateUtil.getEntityManager().createNativeQuery(roomSql, Room.class);
+			timetable.setRoom((Room) roomQuery.getResultList().get(0));
+
+			this.saveTimetable(timetable);
+			return timetable;
+		} catch (final NullPointerException e) {
+			return this.getRoomTimetable(roomId);
 		}
-
-		final String lessonSql = "select * from klasse_tag_stunde where idRaum = '" + roomId + "'";
-		final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
-		final Timetable timetable = new Timetable();
-		timetable.setLessons(lessonQuery.getResultList());
-
-		final String roomSql = "select * from raum where idRaum = '" + roomId + "'";
-		final Query roomQuery = HibernateUtil.getEntityManager().createNativeQuery(roomSql, Room.class);
-		timetable.setRoom((Room) roomQuery.getResultList().get(0));
-
-		this.saveTimetable(timetable);
-		return timetable;
 	}
 
 	@SuppressWarnings("unchecked")
 	private synchronized Timetable getTeacherTimetable(final int teacherId) {
-		final String timetableSql = "select * from timetable where teacher_idLehrer = '" + teacherId + "'";
-		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
+		try {
+			final String timetableSql = "select * from timetable where teacher_idLehrer = '" + teacherId + "'";
+			final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
-		if (timetableQuery.getResultList().size() > 0) {
-			return (Timetable) timetableQuery.getResultList().get(0);
+			if (timetableQuery.getResultList().size() > 0) {
+				return (Timetable) timetableQuery.getResultList().get(0);
+			}
+
+			final String lessonSql = "select * from klasse_tag_stunde where idLehrer = '" + teacherId + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String teacherSql = "select * from lehrer where idLehrer = '" + teacherId + "'";
+			final Query teacherQuery = HibernateUtil.getEntityManager().createNativeQuery(teacherSql, Teacher.class);
+			timetable.setTeacher((Teacher) teacherQuery.getResultList().get(0));
+
+			this.saveTimetable(timetable);
+			return timetable;
+		} catch (final NullPointerException e) {
+			return this.getTeacherTimetable(teacherId);
 		}
-
-		final String lessonSql = "select * from klasse_tag_stunde where idLehrer = '" + teacherId + "'";
-		final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
-		final Timetable timetable = new Timetable();
-		timetable.setLessons(lessonQuery.getResultList());
-
-		final String teacherSql = "select * from lehrer where idLehrer = '" + teacherId + "'";
-		final Query teacherQuery = HibernateUtil.getEntityManager().createNativeQuery(teacherSql, Teacher.class);
-		timetable.setTeacher((Teacher) teacherQuery.getResultList().get(0));
-
-		this.saveTimetable(timetable);
-		return timetable;
 	}
 
 	synchronized Timetable getTimetable(final int timetableId) {
-		final String sql = "select * from timetable where id = '" + timetableId + "'";
-		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Timetable.class);
-		final Timetable timetable = (Timetable) query.getResultList().get(0);
-		return timetable;
+		try {
+			final String sql = "select * from timetable where id = '" + timetableId + "'";
+			final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Timetable.class);
+			final Timetable timetable = (Timetable) query.getResultList().get(0);
+			return timetable;
+		} catch (final NullPointerException e) {
+			return this.getTimetable(timetableId);
+		}
 	}
 
 	private synchronized void saveTimetable(final Timetable timetable) {
 		if (timetable != null && timetable.getLessons().size() > 0) {
-			this.entitiyManager = HibernateUtil.getEntityManager();
-			final EntityTransaction transaction = this.entitiyManager.getTransaction();
-			transaction.begin();
-			this.entitiyManager.persist(timetable);
-			transaction.commit();
+			try {
+				this.entitiyManager = HibernateUtil.getEntityManager();
+				final EntityTransaction transaction = this.entitiyManager.getTransaction();
+				transaction.begin();
+				this.entitiyManager.persist(timetable);
+				transaction.commit();
+			} catch (final NullPointerException e) {
+				this.saveTimetable(timetable);
+			}
 		}
 	}
 }

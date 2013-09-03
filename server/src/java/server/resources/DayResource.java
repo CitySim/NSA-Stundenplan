@@ -25,6 +25,10 @@ public class DayResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized List<Day> getDays() {
-		return HibernateUtil.getEntityManager().createNativeQuery("select * from Tag", Day.class).getResultList();
+		try {
+			return HibernateUtil.getEntityManager().createNativeQuery("select * from Tag", Day.class).getResultList();
+		} catch (final NullPointerException e) {
+			return this.getDays();
+		}
 	}
 }

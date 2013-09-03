@@ -44,15 +44,18 @@ public class ReplacementResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public final synchronized String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
 		// TODO: check nsaCookie
-
-		final GsonBuilder gson = new GsonBuilder();
-		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		entityManager.getTransaction().begin();
-		HibernateUtil.getEntityManager().persist(replacement);
-		entityManager.getTransaction().commit();
-		return new Gson().toJson(replacement);
+		try {
+			final GsonBuilder gson = new GsonBuilder();
+			gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+			final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+			final EntityManager entityManager = HibernateUtil.getEntityManager();
+			entityManager.getTransaction().begin();
+			HibernateUtil.getEntityManager().persist(replacement);
+			entityManager.getTransaction().commit();
+			return new Gson().toJson(replacement);
+		} catch (final NullPointerException e) {
+			return this.changeReplacementJSON(nsaCookie, replacementJSON);
+		}
 	}
 
 	@POST
@@ -60,62 +63,75 @@ public class ReplacementResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public final synchronized String addReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
 		// TODO: check nsaCookie
+		try {
+			final GsonBuilder gson = new GsonBuilder();
+			gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+			final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
 
-		final GsonBuilder gson = new GsonBuilder();
-		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-
-		return new Gson().toJson(this.addReplacement(replacement));
+			return new Gson().toJson(this.addReplacement(replacement));
+		} catch (final NullPointerException e) {
+			return this.addReplacementJSON(nsaCookie, replacementJSON);
+		}
 	}
 
 	@DELETE
 	public final synchronized boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie,
 			@QueryParam("id") final int replacementId) {
 		// TODO: check nsaCookie
-
-		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		final Replacement replacement = entityManager.find(Replacement.class, replacementId);
-		if (replacement == null) {
-			return false;
-		}
-		final String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
-		final Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
-		final TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
-		if (timetableLesson != null) {
+		try {
+			final EntityManager entityManager = HibernateUtil.getEntityManager();
+			final Replacement replacement = entityManager.find(Replacement.class, replacementId);
+			if (replacement == null) {
+				return false;
+			}
+			final String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
+			final Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
+			final TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
+			if (timetableLesson != null) {
+				entityManager.getTransaction().begin();
+				entityManager.persist(timetableLesson);
+				entityManager.getTransaction().commit();
+			}
 			entityManager.getTransaction().begin();
-			entityManager.persist(timetableLesson);
+			entityManager.remove(replacement);
 			entityManager.getTransaction().commit();
+			return true;
+		} catch (final NullPointerException e) {
+			return this.deleteReplacement(nsaCookie, replacementId);
 		}
-		entityManager.getTransaction().begin();
-		entityManager.remove(replacement);
-		entityManager.getTransaction().commit();
-		return true;
 	}
 
 	private synchronized Replacement addReplacement(final Replacement replacement) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
-
-		entityManager.getTransaction().begin();
-		entityManager.persist(replacement);
-		entityManager.getTransaction().commit();
-		return replacement;
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.persist(replacement);
+			entityManager.getTransaction().commit();
+			return replacement;
+		} catch (final NullPointerException e) {
+			return this.addReplacement(replacement);
+		}
 	}
 
 	private synchronized List<?> getReplacements(final int teacherId, final int formId, final int roomId, final String week) {
-		final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
-		final Criteria criteria = session.createCriteria(Replacement.class);
-		if (teacherId != 0) {
-			criteria.add(Restrictions.eq("teacher.id", teacherId));
+		try {
+			final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
+			final Criteria criteria = session.createCriteria(Replacement.class);
+			if (teacherId != 0) {
+				criteria.add(Restrictions.eq("teacher.id", teacherId));
+			}
+			if (formId != 0) {
+				criteria.add(Restrictions.eq("form.id", formId));
+			}
+			if (roomId != 0) {
+				criteria.add(Restrictions.eq("room.id", roomId));
+			}
+			if (week != null) {
+				criteria.add(Restrictions.eq("week", week));
+			}
+			return criteria.list();
+		} catch (final NullPointerException e) {
+			return this.getReplacements(teacherId, formId, roomId, week);
 		}
-		if (formId != 0) {
-			criteria.add(Restrictions.eq("form.id", formId));
-		}
-		if (roomId != 0) {
-			criteria.add(Restrictions.eq("room.id", roomId));
-		}
-		if (week != null) {
-			criteria.add(Restrictions.eq("week", week));
-		}
-		return criteria.list();
 	}
 }
