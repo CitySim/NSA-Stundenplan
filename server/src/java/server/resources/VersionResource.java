@@ -15,9 +15,7 @@ public class VersionResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getVersionJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.version);
-		return json;
+		return new Gson().toJson(this.version);
 	}
 
 	private class ServerVersion {

@@ -34,11 +34,10 @@ public class NewsletterResource extends QueryResult {
 
 			return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
 		} catch (final EmailSendingException e) {
-			e.printStackTrace();
+			return new Gson().toJson(e.getMessage());
 		} catch (final EmailAddressException e) {
-			e.printStackTrace();
+			return new Gson().toJson(e.getMessage());
 		}
-		return null;
 	}
 
 	@GET

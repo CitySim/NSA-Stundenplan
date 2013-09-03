@@ -18,9 +18,7 @@ public class LessonResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getLessonsJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getLessons());
-		return json;
+		return new Gson().toJson(this.getLessons());
 	}
 
 	@SuppressWarnings("unchecked")

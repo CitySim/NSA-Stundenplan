@@ -20,12 +20,7 @@ public class SchoolResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSchoolJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getSchool());
-		return json;
-	}
-
-	public void changeSchoolJSON() {
+		return new Gson().toJson(this.getSchool());
 	}
 
 	private synchronized School getSchool() {

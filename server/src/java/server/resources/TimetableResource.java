@@ -26,27 +26,21 @@ public class TimetableResource {
 	@Path("class")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getClassTimetableJSON(@QueryParam("id") final int classId) {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getClassTimetable(classId));
-		return json;
+		return new Gson().toJson(this.getClassTimetable(classId));
 	}
 
 	@GET
 	@Path("room")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoomTimetableJSON(@QueryParam("id") final int roomId) {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getRoomTimetable(roomId));
-		return json;
+		return new Gson().toJson(this.getRoomTimetable(roomId));
 	}
 
 	@GET
 	@Path("teacher")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getTeacherTimetableJSON(@QueryParam("id") final int teacherId) {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getTeacherTimetable(teacherId));
-		return json;
+		return new Gson().toJson(this.getTeacherTimetable(teacherId));
 	}
 
 	@SuppressWarnings("unchecked")

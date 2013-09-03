@@ -18,9 +18,7 @@ public class DayResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getDaysJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getDays());
-		return json;
+		return new Gson().toJson(this.getDays());
 	}
 
 	@SuppressWarnings("unchecked")

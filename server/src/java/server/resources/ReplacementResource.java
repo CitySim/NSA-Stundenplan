@@ -34,9 +34,7 @@ public class ReplacementResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getReplacementJSON(@QueryParam("teacher") final int teacherId, @QueryParam("room") final int roomId,
 			@QueryParam("class") final int formId, @QueryParam("start") final String week) {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getReplacements(teacherId, formId, roomId, week));
-		return json;
+		return new Gson().toJson(this.getReplacements(teacherId, formId, roomId, week));
 	}
 
 	@PUT

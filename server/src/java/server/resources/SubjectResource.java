@@ -18,9 +18,7 @@ public class SubjectResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSubjectsJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getSubjects());
-		return json;
+		return new Gson().toJson(this.getSubjects());
 	}
 
 	@SuppressWarnings("unchecked")

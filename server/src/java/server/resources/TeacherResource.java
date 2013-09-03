@@ -18,9 +18,7 @@ public class TeacherResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getTeachers());
-		return json;
+		return new Gson().toJson(this.getTeachers());
 	}
 
 	@SuppressWarnings("unchecked")

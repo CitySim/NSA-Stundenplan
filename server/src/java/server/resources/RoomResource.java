@@ -18,9 +18,7 @@ public class RoomResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoomsJSON() {
-		final Gson gson = new Gson();
-		final String json = gson.toJson(this.getRooms());
-		return json;
+		return new Gson().toJson(this.getRooms());
 	}
 
 	@SuppressWarnings("unchecked")

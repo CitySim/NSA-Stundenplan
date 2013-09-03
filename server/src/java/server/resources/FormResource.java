@@ -18,10 +18,7 @@ public class FormResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
-		final List<Form> list = FormResource.getForms();
-		final Gson gson = new Gson();
-		final String json = gson.toJson(list);
-		return json;
+		return new Gson().toJson(FormResource.getForms());
 	}
 
 	@SuppressWarnings("unchecked")
