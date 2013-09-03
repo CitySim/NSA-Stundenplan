@@ -62,7 +62,7 @@ public class AccountHandlerTest extends TestCase {
 
 		try {
 			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
-			this.userName = account.getUser();
+			this.userName = account.getUsername();
 		} catch (final EmailSendingException | EmailAddressException e) {
 			fail();
 		} catch (final DuplicateUserException e) {

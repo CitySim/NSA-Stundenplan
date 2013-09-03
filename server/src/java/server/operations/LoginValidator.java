@@ -29,10 +29,9 @@ public class LoginValidator {
 		}
 
 		return passwordOkay;
-
 	}
 
-	boolean validatePassword(final String password, final String dbPassword) {
+	protected boolean validatePassword(final String password, final String dbPassword) {
 		Boolean matches = false;
 
 		if (BCrypt.checkpw(password, dbPassword)) {
@@ -40,5 +39,4 @@ public class LoginValidator {
 		}
 		return matches;
 	}
-
 }

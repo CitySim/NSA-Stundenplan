@@ -1,8 +1,10 @@
 package server.operations.email;
 
 import server.entities.Form;
+import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
+import server.operations.AccountHandler;
 import server.operations.NewsLetterHandler;
 
 /**
@@ -126,7 +128,7 @@ class EmailTextCreator {
 		return sb.toString();
 	}
 
-	public String generatePasswordChangeText(final String userName, final String password) {
+	public String generatePasswordChangedText(final String userName, final String password) {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append("Hallo,");
@@ -141,6 +143,24 @@ class EmailTextCreator {
 		sb.append(System.lineSeparator());
 		sb.append("Ihr National Studenplan Agency Team.");
 
+		return sb.toString();
+	}
+	
+	public String generateResetPasswordText(final Login login) {
+		
+		final StringBuilder sb = new StringBuilder();
+		
+		sb.append("Hallo,");
+		sb.append(System.lineSeparator());
+		sb.append("um Ihr Passwort zurückzusetzen klicken Sie hier:");
+		sb.append(System.lineSeparator());		
+
+		sb.append(new AccountHandler().generateResetPasswordLink(login.getId()));
+		sb.append(System.lineSeparator());
+		
+		sb.append(System.lineSeparator());
+		sb.append("Ihr National Studenplan Agency Team.");
+		
 		return sb.toString();
 	}
 

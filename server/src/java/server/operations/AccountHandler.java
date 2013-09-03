@@ -16,6 +16,8 @@ import server.queries.LoginQuery;
  */
 
 public class AccountHandler {
+	
+	public static final String URL_PREFIX = "http://localhost:8080/server/newsletter/";
 
 	final Login createAccount(final String name, final String familyName, final String eMailAddress) throws DuplicateUserException,
 			EmailSendingException, EmailAddressException {
@@ -38,23 +40,39 @@ public class AccountHandler {
 		return login;
 
 	}
+	
+	public final void resetPassword(final String userName) throws EmailSendingException, EmailAddressException {
+		
+		Login login = new LoginQuery().getLogin(userName);	
+		new EmailJobHelper().sendResetPasswordMail(login);		
+	}
+	
+	public Object generateResetPasswordLink(int loginId) {
+		return URL_PREFIX + "remove?id=" + loginId;
+	}
 
 	public final String changePassword(final String userName) throws EmailSendingException, EmailAddressException {
+		
+		Login login = new LoginQuery().getLogin(userName);
 
 		final PasswordEncryptor encryptor = new PasswordEncryptor();
 
 		final String password = encryptor.generatePassword();
 
-		this.changePasswordInDatabase(userName, encryptor.encryptPassword(password));
+		this.changePasswordInDatabase(login, encryptor.encryptPassword(password));
 
-		final String eMailAddress = new LoginQuery().getEmailForUser(userName);
-
-		new EmailJobHelper().sendPasswordChangeMail(eMailAddress, userName, password);
+		new EmailJobHelper().sendPasswordChangedMail(login, password);
 
 		return password;
 	}
 
-	final boolean deleteAccount(final String userName) {
+	private void changePasswordInDatabase(final Login login, final String hashedPw) {
+		
+		new LoginQuery().changePassword(login, hashedPw);
+		
+	}
+	
+	protected final boolean deleteAccount(final String userName) {
 
 		return new LoginQuery().removeLogin(userName);
 	}
@@ -66,12 +84,6 @@ public class AccountHandler {
 		if (!success) {
 			throw new DuplicateUserException();
 		}
-
-	}
-
-	private void changePasswordInDatabase(final String userName, final String hashedPw) {
-
-		new LoginQuery().changePassword(userName, hashedPw);
 
 	}
 

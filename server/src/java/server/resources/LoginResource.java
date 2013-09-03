@@ -50,6 +50,20 @@ public class LoginResource {
 		}
 		return Response.ok(json).cookie(cookie).build();
 	}
+	
+	@Path("resetpw")
+	@GET
+	public String resetPassword(@QueryParam("user") final String userName) {
+		final AccountHandler accountHandler = new AccountHandler();
+		try {
+			accountHandler.resetPassword(userName);
+		} catch (final EmailSendingException e) {
+			return new Gson().toJson(e.getMessage());
+		} catch (final EmailAddressException e) {
+			return new Gson().toJson(e.getMessage());
+		}
+		return new Gson().toJson(true);
+	}
 
 	@Path("changepw")
 	@GET

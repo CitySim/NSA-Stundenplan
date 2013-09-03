@@ -22,7 +22,7 @@ public class LoginQuery extends QueryResult {
 	 * @return String password
 	 */
 	public String getPassword(final String username) {
-		final Login login = this.getLoginUser(username);
+		final Login login = this.getLogin(username);
 		if (login != null) {
 			return login.getPassword();
 		}
@@ -36,7 +36,7 @@ public class LoginQuery extends QueryResult {
 	 * @return String Email
 	 */
 	public String getEmailForUser(final String username) {
-		final Login login = this.getLoginUser(username);
+		final Login login = this.getLogin(username);
 		if (login != null) {
 			return login.getEmail().getEMailAddress();
 		}
@@ -52,7 +52,7 @@ public class LoginQuery extends QueryResult {
 	 * @return boolean successful
 	 */
 	public boolean createUser(final String username, final String password, final String eMailAddress) {
-		Login login = this.getLoginUser(username);
+		Login login = this.getLogin(username);
 		if (login == null) {
 			this.em.getTransaction().begin();
 
@@ -82,24 +82,23 @@ public class LoginQuery extends QueryResult {
 	 * @return boolean successful
 	 */
 	public boolean removeLogin(final String username) {
-		final Login login = this.getLoginUser(username);
+		final Login login = this.getLogin(username);
 		return this.removeFromDB(login);
 
 	}
 
 	/**
-	 * Changes the User password.
+	 * Changes the login password.
 	 * 
-	 * @param username
+	 * @param login
 	 * @param password
-	 * @return boolean successful
+	 * @return boolean success
 	 */
-	public boolean changePassword(final String username, final String password) {
-		final Login loginUser = this.getLoginUser(username);
-		if (loginUser != null) {
+	public boolean changePassword(final Login login, final String password) {
+		if (login != null) {
 			this.em.getTransaction().begin();
-			loginUser.setPassword(password);
-			this.em.persist(loginUser);
+			login.setPassword(password);
+			this.em.persist(login);
 			this.em.getTransaction().commit();
 			return true;
 		} else {
@@ -118,8 +117,7 @@ public class LoginQuery extends QueryResult {
 				EmailAddress.class));
 	}
 
-	private Login getLoginUser(final String username) {
+	public Login getLogin(final String username) {
 		return (Login) this.getSingleResult(this.em.createQuery("select l from Login l where user = '" + username + "'", Login.class));
 	}
-
 }

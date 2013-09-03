@@ -15,17 +15,14 @@ import server.queries.NewsletterQuery;
  * @since JDK.1.7.0_25
  * @version 1.0
  */
-// FIXME url_prefix
 public class NewsLetterHandler {
 
-	private static final String URL_PREFIX = "http://localhost:8080/server/newsletter/";
-
 	public final String generateRegistrationLink(final Form form, final String email) {
-		return URL_PREFIX + "confirm?id=" + form.getId() + "&email=" + email;
+		return AccountHandler.URL_PREFIX + "confirm?id=" + form.getId() + "&email=" + email;
 	}
 
 	public final String generateRemoveLink(final Newsletter newsletter) {
-		return URL_PREFIX + "remove?id=" + newsletter.getId();
+		return AccountHandler.URL_PREFIX + "remove?id=" + newsletter.getId();
 	}
 
 	public final void addAddress(final Form form, final String email) throws EmailSendingException, EmailAddressException {

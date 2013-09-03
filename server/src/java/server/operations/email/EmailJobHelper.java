@@ -3,6 +3,7 @@ package server.operations.email;
 import java.util.ArrayList;
 
 import server.entities.Form;
+import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
@@ -37,14 +38,20 @@ public class EmailJobHelper {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createCreationMail(userName, password, eMailAddress);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Erstell Bestätigung"), emailList);
 	}
-
-	public final void sendPasswordChangeMail(final String eMailAddress, final String userName, final String password) throws EmailSendingException,
-			EmailAddressException {
-
-		final ArrayList<EmailObject> emailList = new EmailCreator().createPasswordChangeMail(eMailAddress, userName, password);
-		new EmailJob().sendMail(this.setEmailSettings("NSA - Password Änderungs Bestätigung"), emailList);
+	
+	public final void sendResetPasswordMail(final Login login) throws EmailSendingException, EmailAddressException {
+		
+		final ArrayList<EmailObject> emailList = new EmailCreator().createResetPasswordMail(login);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Password zurücksetzen"), emailList);
 	}
 
+	public final void sendPasswordChangedMail(final Login login, final String password) throws EmailSendingException,
+			EmailAddressException {
+
+		final ArrayList<EmailObject> emailList = new EmailCreator().createPasswordChangedMail(login, password);
+		new EmailJob().sendMail(this.setEmailSettings("NSA - Password Änderungs Bestätigung"), emailList);
+	}
+	
 	public boolean sendRemoveRegistrationMail(final Newsletter newsletter) throws EmailSendingException, EmailAddressException {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createRemoveRegistrationMail(newsletter);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Newsletter abmelden"), emailList);
@@ -54,5 +61,4 @@ public class EmailJobHelper {
 	private EmailSettings setEmailSettings(final String titel) {
 		return new EmailSettings("postmaster", "", "postmaster@localhost", titel, "localhost");
 	}
-
 }

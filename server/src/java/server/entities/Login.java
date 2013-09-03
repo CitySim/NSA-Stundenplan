@@ -9,8 +9,10 @@ public class Login extends DefaultEntity {
 	private static final long serialVersionUID = 1L;
 	private String user;
 	private String password;
+	@ManyToOne(targetEntity = EmailAddress.class)
+	private EmailAddress email;
 
-	public final String getUser() {
+	public final String getUsername() {
 		return this.user;
 	}
 
@@ -26,9 +28,6 @@ public class Login extends DefaultEntity {
 		this.password = password;
 	}
 
-	@ManyToOne(targetEntity = EmailAddress.class)
-	private EmailAddress email;
-
 	public final EmailAddress getEmail() {
 		return this.email;
 	}
@@ -36,5 +35,4 @@ public class Login extends DefaultEntity {
 	public final void setEmail(final EmailAddress email) {
 		this.email = email;
 	}
-
 }

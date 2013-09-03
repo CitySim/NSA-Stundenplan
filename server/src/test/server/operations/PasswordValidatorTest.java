@@ -50,7 +50,7 @@ public class PasswordValidatorTest extends TestCase {
 		} catch (final DuplicateUserException e) {
 		}
 		final String password = account.getPassword();
-		this.userName = account.getUser();
+		this.userName = account.getUsername();
 
 		try {
 			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));

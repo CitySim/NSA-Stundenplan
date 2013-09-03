@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import server.entities.EmailAddress;
 import server.entities.Form;
+import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
@@ -33,13 +34,15 @@ public class EmailSendingTest extends TestCase {
 	private Form form;
 	private EntityManager em;
 	private String email;
+	private Login login;
 
 	@Override
 	@Before
 	public void setUp() {
 		this.helper = new EmailJobHelper();
 		this.form = FormResource.getForms().get(0);
-
+		this.login = new Login();
+		login.setUser("test");
 		this.em = HibernateUtil.getEntityManager();
 		this.email = "test@localhost";
 	}
@@ -52,13 +55,17 @@ public class EmailSendingTest extends TestCase {
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
-			// Registrierungs Bestätigung
+			
 			this.helper.sendConfirmationMail(this.form, this.email);
-			// Erstell Bestätigung
+			
 			this.helper.sendCreationMail(this.email, "test", "test");
-			// Password Änderungs Bestätigung
-			this.helper.sendPasswordChangeMail(this.email, "test", "test");
+			
+			this.helper.sendResetPasswordMail(login);
+			
+			this.helper.sendPasswordChangedMail(login, "test");
+			
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
+			
 		} catch (final EmailSendingException | EmailAddressException e) {
 			fail();
 		}

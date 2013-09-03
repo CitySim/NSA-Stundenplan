@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import server.entities.Form;
+import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.ScheduleCreationException;
@@ -76,8 +77,26 @@ class EmailCreator {
 
 		return emailList;
 	}
+	
+	public final ArrayList<EmailObject> createResetPasswordMail(final Login login) {
+		
+		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
+		
+		final EmailObject emailObject = new EmailObject();
+		emailList.add(emailObject);
+		
+		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
+		
+		final String emailText = new EmailTextCreator().generateResetPasswordText(login);
+		
+		new EmailContentCreator().createMailContent(emailText, null, emailObject);
+		
+		emailAddresList.add(login.getEmail().getEMailAddress());
+		
+		return emailList;
+	}
 
-	final ArrayList<EmailObject> createPasswordChangeMail(final String eMailAddress, final String userName, final String password) {
+	public final ArrayList<EmailObject> createPasswordChangedMail(final Login login, final String password) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
@@ -86,17 +105,17 @@ class EmailCreator {
 
 		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
 
-		final String emailText = new EmailTextCreator().generatePasswordChangeText(userName, password);
+		final String emailText = new EmailTextCreator().generatePasswordChangedText(login.getUsername(), password);
 
 		new EmailContentCreator().createMailContent(emailText, null, emailObject);
 
-		emailAddresList.add(eMailAddress);
+		emailAddresList.add(login.getEmail().getEMailAddress());
 
 		return emailList;
-	}
+	}	
 
 	// TODO testen, überprüfen, ggf. refactorn
-	public ArrayList<EmailObject> createRemoveRegistrationMail(final Newsletter newsletter) {
+	public final ArrayList<EmailObject> createRemoveRegistrationMail(final Newsletter newsletter) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
