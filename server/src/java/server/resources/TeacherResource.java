@@ -19,12 +19,12 @@ public class TeacherResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFormsJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getTeachers());
+		final String json = gson.toJson(this.getTeachers());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Teacher> getTeachers() {
+	public synchronized List<Teacher> getTeachers() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from lehrer", Teacher.class).getResultList();
 	}
 

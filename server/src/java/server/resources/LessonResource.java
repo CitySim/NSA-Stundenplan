@@ -19,12 +19,12 @@ public class LessonResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getLessonsJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getLessons());
+		final String json = gson.toJson(this.getLessons());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Lesson> getLessons() {
+	public synchronized List<Lesson> getLessons() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
 	}
 }

@@ -17,7 +17,7 @@ public class PrintResource {
 	@GET
 	@Path("pdf")
 	@Produces("application/pdf")
-	public Response printPDF(@QueryParam("id") final int timetableId) {
+	public synchronized Response printPDF(@QueryParam("id") final int timetableId) {
 		final FilePrinter filePrinter = new FilePrinter();
 		File pdf = null;
 		try {
@@ -32,7 +32,7 @@ public class PrintResource {
 	@GET
 	@Path("png")
 	@Produces("image/png")
-	public Response printPNG(@QueryParam("id") final int timetableId) {
+	public synchronized Response printPNG(@QueryParam("id") final int timetableId) {
 		final FilePrinter filePrinter = new FilePrinter();
 		File png = null;
 		try {

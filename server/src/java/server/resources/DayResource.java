@@ -19,12 +19,12 @@ public class DayResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getDaysJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getDays());
+		final String json = gson.toJson(this.getDays());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Day> getDays() {
+	public synchronized List<Day> getDays() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Tag", Day.class).getResultList();
 	}
 }

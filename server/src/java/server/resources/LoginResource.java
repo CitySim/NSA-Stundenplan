@@ -28,7 +28,8 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response doLogin(@DefaultValue("") @FormParam("user") final String userName, @DefaultValue("") @FormParam("password") final String password) {
+	public synchronized Response doLogin(@DefaultValue("") @FormParam("user") final String userName,
+			@DefaultValue("") @FormParam("password") final String password) {
 		final Gson gson = new Gson();
 		String json;
 		NewCookie cookie = null;
@@ -53,7 +54,7 @@ public class LoginResource {
 
 	@Path("changepw")
 	@GET
-	public String changePassword(@QueryParam("user") final String userName) {
+	public synchronized String changePassword(@QueryParam("user") final String userName) {
 		final AccountHandler accountHandler = new AccountHandler();
 		String newPassword = null;
 		try {
@@ -68,7 +69,7 @@ public class LoginResource {
 
 	@Path("logout")
 	@GET
-	public String logout(@QueryParam("cookie") final String cookie) {
+	public synchronized String logout(@QueryParam("cookie") final String cookie) {
 		return new Gson().toJson(new CookieHandler().deleteCookie(cookie));
 	}
 }

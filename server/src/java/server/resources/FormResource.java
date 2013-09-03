@@ -25,7 +25,7 @@ public class FormResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Form> getForms() {
+	public static synchronized List<Form> getForms() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
 	}
 }

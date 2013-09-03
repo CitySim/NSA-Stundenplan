@@ -20,31 +20,31 @@ public class SchoolResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSchoolJSON() {
-		Gson gson = new Gson();
-		String json = gson.toJson(getSchool());
+		final Gson gson = new Gson();
+		final String json = gson.toJson(this.getSchool());
 		return json;
 	}
 
 	public void changeSchoolJSON() {
 	}
 
-	private School getSchool() {
+	private synchronized School getSchool() {
 		return HibernateUtil.getEntityManager().find(School.class, 1);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void setSchool(String schoolJSON) {
+	public synchronized void setSchool(final String schoolJSON) {
 
-		Gson gson = new Gson();
-		School school = gson.fromJson(schoolJSON, School.class);
+		final Gson gson = new Gson();
+		final School school = gson.fromJson(schoolJSON, School.class);
 
-		EntityManager em = HibernateUtil.getEntityManager();
-		newSchool = em.find(School.class, 1);
+		final EntityManager em = HibernateUtil.getEntityManager();
+		this.newSchool = em.find(School.class, 1);
 		em.getTransaction().begin();
-		newSchool.setImage(school.getImage());
-		newSchool.setText(school.getText());
-		em.persist(newSchool);
+		this.newSchool.setImage(school.getImage());
+		this.newSchool.setText(school.getText());
+		em.persist(this.newSchool);
 		em.getTransaction().commit();
 
 	}

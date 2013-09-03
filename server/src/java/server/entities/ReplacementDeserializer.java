@@ -10,12 +10,11 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 
 public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 
 	@Override
-	public Replacement deserialize(final JsonElement jsonEl, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+	public Replacement deserialize(final JsonElement jsonEl, final Type typeOfT, final JsonDeserializationContext context) {
 		final JsonObject json = jsonEl.getAsJsonObject();
 		Replacement replacement;
 		final EntityManager em = HibernateUtil.getEntityManager();

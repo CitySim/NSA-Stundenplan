@@ -19,12 +19,12 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoomsJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getRooms());
+		final String json = gson.toJson(this.getRooms());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Room> getRooms() {
+	public synchronized List<Room> getRooms() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Raum", Room.class).getResultList();
 	}
 }

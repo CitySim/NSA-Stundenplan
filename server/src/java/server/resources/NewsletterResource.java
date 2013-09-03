@@ -22,20 +22,20 @@ public class NewsletterResource extends QueryResult {
 	@GET
 	@Path("confirm")
 	@Produces(MediaType.APPLICATION_JSON)
-	public final String confirmRegistration(@QueryParam("id") final int formId, @QueryParam("email") final String email) {
+	public final synchronized String confirmRegistration(@QueryParam("id") final int formId, @QueryParam("email") final String email) {
 		final NewsLetterHandler newsLetterHandler = new NewsLetterHandler();
 		final Form form = this.em.find(Form.class, formId);
 		if (form == null) {
 			return new Gson().toJson("Fehler: Klasse nicht gefunden");
 		}
 		try {
-			EmailJobHelper helper = new EmailJobHelper();
+			final EmailJobHelper helper = new EmailJobHelper();
 			helper.sendConfirmationMail(form, email);
 
 			return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
-		} catch (EmailSendingException e) {
+		} catch (final EmailSendingException e) {
 			e.printStackTrace();
-		} catch (EmailAddressException e) {
+		} catch (final EmailAddressException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -44,7 +44,7 @@ public class NewsletterResource extends QueryResult {
 	@GET
 	@Path("remove")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String removeRegistration(@QueryParam("id") final int newsletterId) {
+	public synchronized String removeRegistration(@QueryParam("id") final int newsletterId) {
 		final NewsLetterHandler newsLetterHandler = new NewsLetterHandler();
 		final Newsletter newsletter = this.em.find(Newsletter.class, newsletterId);
 		return new Gson().toJson(newsLetterHandler.removeRegistration(newsletter));

@@ -19,12 +19,12 @@ public class SubjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSubjectsJSON() {
 		final Gson gson = new Gson();
-		final String json = gson.toJson(getSubjects());
+		final String json = gson.toJson(this.getSubjects());
 		return json;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Subject> getSubjects() {
+	public synchronized List<Subject> getSubjects() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Unterrichtsfach", Subject.class).getResultList();
 	}
 }
