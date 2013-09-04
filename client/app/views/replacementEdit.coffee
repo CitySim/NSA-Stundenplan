@@ -17,7 +17,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			return
 
 		if @options.newReplacement
-			@model = new nsa.Models.Replacement
+			@model = new nsa.Models.Replacement _.extend @options.modelData,
 				week: moment().format("YYYY-[W]ww")
 		else
 			nsa.app.fetchList "replacements", (err) =>
