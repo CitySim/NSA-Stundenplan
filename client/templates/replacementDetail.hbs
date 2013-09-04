@@ -8,6 +8,9 @@
 				{{else}}
 					<span class="text-muted">keine Stunde</span>
 				{{/if}}
+				{{#if dropped}}
+					<span class="text-danger">entfällt</span>
+				{{/if}}
 			</h3>
 
 			<table class="table">
@@ -16,7 +19,11 @@
 						Vertretungsleher
 					</td>
 					<td>
-						<a href="#timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
+						{{#if dropped}}
+							<span class="text-danger">entfällt</span>
+						{{else}}
+							<a href="#timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
+						{{/if}}
 					</td>
 				</tr>
 				<tr>
@@ -24,7 +31,11 @@
 						Raum
 					</td>
 					<td>
-						<a href="#timetable/room/{{room.id}}">{{room.description}}</a>
+						{{#if dropped}}
+							<span class="text-danger">entfällt</span>
+						{{else}}
+							<a href="#timetable/room/{{room.id}}">{{room.description}}</a>
+						{{/if}}
 					</td>
 				</tr>
 				<tr>
@@ -32,10 +43,14 @@
 						Fach
 					</td>
 					<td>
-						{{#if subject}}
-							{{subject.description}}
+						{{#if dropped}}
+							<span class="text-danger">entfällt</span>
 						{{else}}
-							<span class="text-muted">kein Fach</span>
+							{{#if subject}}
+								{{subject.description}}
+							{{else}}
+								<span class="text-muted">kein Fach</span>
+							{{/if}}
 						{{/if}}
 					</td>
 				</tr>
