@@ -134,6 +134,7 @@ public class DataCreationTest {
 
 		final Timetable timetable_it1a = new Timetable();
 		timetable_it1a.setLessons(timeTableLessons_it1a);
+		timetable_it1a.setForm(it1a);
 		this.em.persist(timetable_it1a);
 
 		// it1b
@@ -178,7 +179,8 @@ public class DataCreationTest {
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson6, freitag, pro, timeTableLessons_it1b);
 
 		final Timetable timetable_it1b = new Timetable();
-		timetable_it1b.setLessons(timeTableLessons_it1a);
+		timetable_it1b.setLessons(timeTableLessons_it1b);
+		timetable_it1b.setForm(it1b);
 		this.em.persist(timetable_it1b);
 
 		this.helper.createLogin("Volker.Lürssen", "VolkerLürssen@localhost");
