@@ -1,7 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
-		{{#each collection}}
+		<h3>Woche {{week}}</h3>
 
+		{{#each collection}}
 			<legend>{{@key}}</legend>
 
 			<div class="list-group">
@@ -17,12 +18,23 @@
 							{{#if subject}}
 								{{subject.description}}
 							{{else}}
-								<span class="text-muted">kein Fach</span>
+								{{#if dropped}}
+									<span class="text-danger">entfällt</span>									
+								{{else}}
+									<span class="text-muted">kein Fach</span>
+								{{/if}}
 							{{/if}}
 						</h4>
-						<p class="list-group-item-text">
-							mit {{teacher.firstname}} {{teacher.name}}, {{room.description}}<br>
-						</p>
+
+						{{#if dropped}}
+							<p class="list-group-item-text text-danger">
+								Stunde entfällt
+							</p>
+						{{else}}
+							<p class="list-group-item-text">
+								mit {{teacher.firstname}} {{teacher.name}}, {{room.description}}<br>
+							</p>
+						{{/if}}							
 
 						{{#if note}}
 							<br>

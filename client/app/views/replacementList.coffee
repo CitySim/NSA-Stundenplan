@@ -3,13 +3,23 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 	className: "view-replacement-list"
 
 	initialize: () =>
-		delete nsa.Data.replacements
-		nsa.app.fetchList "replacements", (err) =>
-			return if err?
+		@week = moment().format("YYYY-[W]ww")
 
-			@collection = nsa.Data.replacements
-			@render()
-			return
+		replacements = new nsa.Collections.Replacements()
+		replacements.fetchData =
+			week: @week
+
+		replacements.fetch
+			success: () =>
+				@collection = replacements
+				@render()
+				return
+			error: () =>
+				nsa.app.error
+					no: 2810
+					title: "Vertretungen-Ladefehler"
+					message: "Änderungen konnten nicht geladen werden."
+				return
 
 		return
 
@@ -19,17 +29,16 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 			return
 
 		@$el.html @template
+			week: moment(@week, "YYYY-[W]ww").format("ww, YYYY")
 			collection: _.groupBy @collection.toJSON(), (r) =>
 				if r.lesson?
 					r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
 					r.format_end = moment(r.lesson.timeTo, "hh:mm a").format("HH:mm")
 
-				if r.date?
-					r.format_date = moment(r.date, "MMM DD, YYYY hh:mm:ss A").format("DD.MM.YYYY")
-				else
-					r.format_date = "unbekannt"
+				if not r.teacher? and not r.room? and not r.subject?
+					r.dropped = true
 					
-				return r.format_date
+				return r.day.description
 
 		return
 

@@ -10,9 +10,6 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 	showReplacement: true
 
 	initialize: () =>
-		@start = moment().startOf("week").add(1, "day")
-		@end = moment().endOf("week").add(1, "day")
-
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
 			return if err?
 
@@ -32,7 +29,7 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 				nsa.app.error
 					no: 2810
 					title: "Stundenplan-Ladefehler"
-					message: "Änderungen könnten nicht geladen werden."
+					message: "Änderungen konnten nicht geladen werden."
 				return
 
 		model = new nsa.Models.TimeTable()
