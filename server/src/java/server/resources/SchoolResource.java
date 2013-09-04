@@ -34,19 +34,15 @@ public class SchoolResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public synchronized void setSchool(final String schoolJSON) {
-		try {
-			final Gson gson = new Gson();
-			final School school = gson.fromJson(schoolJSON, School.class);
+		final Gson gson = new Gson();
+		final School school = gson.fromJson(schoolJSON, School.class);
 
-			final EntityManager em = HibernateUtil.getEntityManager();
-			this.newSchool = em.find(School.class, 1);
-			em.getTransaction().begin();
-			this.newSchool.setImage(school.getImage());
-			this.newSchool.setText(school.getText());
-			em.persist(this.newSchool);
-			em.getTransaction().commit();
-		} catch (final NullPointerException e) {
-			this.setSchool(schoolJSON);
-		}
+		final EntityManager em = HibernateUtil.getEntityManager();
+		this.newSchool = em.find(School.class, 1);
+		em.getTransaction().begin();
+		this.newSchool.setImage(school.getImage());
+		this.newSchool.setText(school.getText());
+		em.persist(this.newSchool);
+		em.getTransaction().commit();
 	}
 }

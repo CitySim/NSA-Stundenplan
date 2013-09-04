@@ -23,10 +23,6 @@ public class SubjectResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized List<Subject> getSubjects() {
-		try {
-			return HibernateUtil.getEntityManager().createNativeQuery("select * from Unterrichtsfach", Subject.class).getResultList();
-		} catch (final NullPointerException e) {
-			return this.getSubjects();
-		}
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Unterrichtsfach", Subject.class).getResultList();
 	}
 }

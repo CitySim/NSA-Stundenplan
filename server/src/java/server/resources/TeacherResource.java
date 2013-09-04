@@ -23,11 +23,6 @@ public class TeacherResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized List<Teacher> getTeachers() {
-		try {
-			return HibernateUtil.getEntityManager().createNativeQuery("select * from lehrer", Teacher.class).getResultList();
-		} catch (final NullPointerException e) {
-			return this.getTeachers();
-		}
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from lehrer", Teacher.class).getResultList();
 	}
-
 }

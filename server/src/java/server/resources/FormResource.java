@@ -23,10 +23,6 @@ public class FormResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized static List<Form> getForms() {
-		try {
-			return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
-		} catch (final NullPointerException e) {
-			return FormResource.getForms();
-		}
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
 	}
 }

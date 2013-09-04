@@ -23,10 +23,6 @@ public class RoomResource {
 
 	@SuppressWarnings("unchecked")
 	public synchronized List<Room> getRooms() {
-		try {
-			return HibernateUtil.getEntityManager().createNativeQuery("select * from Raum", Room.class).getResultList();
-		} catch (final NullPointerException e) {
-			return this.getRooms();
-		}
+		return HibernateUtil.getEntityManager().createNativeQuery("select * from Raum", Room.class).getResultList();
 	}
 }

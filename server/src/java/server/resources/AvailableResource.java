@@ -32,30 +32,22 @@ public class AvailableResource {
 
 	@SuppressWarnings("unchecked")
 	private synchronized List<Teacher> getAvailableTeachers(final int dayId, final int lessonId) {
-		try {
-			final String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId
-					+ " and idStunde = " + lessonId + ")";
-			final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
+		final String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId
+				+ " and idStunde = " + lessonId + ")";
+		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
 
-			final List<Teacher> liste = query.getResultList();
-			return liste;
-		} catch (final NullPointerException e) {
-			return this.getAvailableTeachers(dayId, lessonId);
-		}
+		final List<Teacher> liste = query.getResultList();
+		return liste;
 	}
 
 	@SuppressWarnings("unchecked")
 	private synchronized List<Room> getAvailableRooms(final int dayId, final int lessonId) {
-		try {
-			final String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId
-					+ " and idStunde = " + lessonId + ")";
-			final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);
+		final String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId
+				+ " and idStunde = " + lessonId + ")";
+		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);
 
-			final List<Room> liste = query.getResultList();
-			return liste;
-		} catch (final NullPointerException e) {
-			return this.getAvailableRooms(dayId, lessonId);
-		}
+		final List<Room> liste = query.getResultList();
+		return liste;
 	}
 
 	private class Available {
