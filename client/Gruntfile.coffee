@@ -48,7 +48,7 @@ module.exports = (grunt) ->
 		copy:
 			static:
 				expand: true
-				src: [ "index.html", "libs/*.js", "font/*.*" ]
+				src: [ "index.html", "home.jpg", "libs/*.js", "font/*.*" ]
 				dest: "build/"
 				
 	grunt.loadNpmTasks("grunt-contrib-uglify")

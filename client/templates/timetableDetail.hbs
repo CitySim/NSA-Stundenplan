@@ -83,9 +83,19 @@
 								<td>
 									{{#with lesson}}
 										{{subject.shortName}}<br>
-										{{room.description}}<br>
-										{{teacher.shortName}}<br>
-										{{form.description}}
+
+										{{#if ../../../../timetable.form}}
+											<a href="#timetable/room/{{room.id}}">{{room.description}}</a><br>
+											<a href="#timetable/teacher/{{teacher.id}}">{{teacher.shortName}}</a>
+										{{/if}}
+										{{#if ../../../../timetable.teacher}}
+											<a href="#timetable/room/{{room.id}}">{{room.description}}</a><br>
+											<a href="#timetable/class/{{form.id}}">{{form.description}}</a>
+										{{/if}}
+										{{#if ../../../../timetable.room}}
+											<a href="#timetable/teacher/{{teacher.id}}">{{teacher.shortName}}</a><br>
+											<a href="#timetable/class/{{form.id}}">{{form.description}}</a>
+										{{/if}}
 									{{/with}}
 
 									{{#if ../../../isLoggedIn}}
