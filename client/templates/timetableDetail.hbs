@@ -67,13 +67,28 @@
 										{{/ifcond}}
 
 										{{#if subject}}
-											{{subject.shortName}}<br>
+											{{subject.shortName}}
 										{{/if}}
-										{{#if room}}
-											{{room.description}}<br>
+
+										{{#if ../../../../timetable.room}}
+										{{else}}
+											{{#if room}}
+												<br><a href="#timetable/room/{{room.id}}">{{room.description}}</a>
+											{{/if}}
 										{{/if}}
-										{{#if teacher}}
-											{{teacher.shortName}}
+
+										{{#if ../../../../timetable.teacher}}
+										{{else}}
+											{{#if teacher}}
+												<br><a href="#timetable/teacher/{{teacher.id}}">{{teacher.shortName}}</a>
+											{{/if}}
+										{{/if}}
+
+										{{#if ../../../../timetable.form}}
+										{{else}}
+											{{#if form}}
+												<br><a href="#timetable/class/{{form.id}}">{{form.description}}</a>
+											{{/if}}
 										{{/if}}
 
 										<br><a href="#replacement/{{id}}" class="btn btn-default btn-xs">Details</a>
