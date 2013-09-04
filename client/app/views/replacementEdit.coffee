@@ -17,7 +17,8 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			return
 
 		if @options.newReplacement
-			@model = new nsa.Models.Replacement()
+			@model = new nsa.Models.Replacement
+				week: moment().format("YYYY-[W]ww")
 		else
 			nsa.app.fetchList "replacements", (err) =>
 				return if err?
@@ -59,6 +60,9 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			subjects: nsa.Data.subjects.toJSON()
 			classes: nsa.Data.classes.toJSON()
 			newReplacement: @options.newReplacement or false
+
+		if not model.teacher? and not model.room? and not model.subject?
+			$("[name=droplesson]").click()
 
 		return
 

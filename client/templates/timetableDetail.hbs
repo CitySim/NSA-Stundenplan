@@ -60,8 +60,12 @@
 						</td>
 						{{#each days}}
 							{{#ifcond replacement "and" ../../showReplacement}}
-								<td class="danger">
-									{{#with replacement}}
+								{{#with replacement}}
+									<td class="{{cellClass}}">
+										{{#ifcond cellClass "==" "danger"}}
+											<span class="label label-danger">entfällt</span><br>
+										{{/ifcond}}
+
 										{{#if subject}}
 											{{subject.shortName}}<br>
 										{{/if}}
@@ -73,8 +77,8 @@
 										{{/if}}
 
 										<br><a href="#replacement/{{id}}" class="btn btn-default btn-xs">Details</a>
-									{{/with}}
-								</td>
+									</td>
+								{{/with}}
 							{{else}}
 								<td>
 									{{#with lesson}}

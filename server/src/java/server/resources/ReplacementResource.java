@@ -76,14 +76,7 @@ public class ReplacementResource {
 		if (replacement == null) {
 			return false;
 		}
-		final String sql = "select * from klasse_tag_stunde where replacement_id = " + replacementId;
-		final Query query = entityManager.createNativeQuery(sql, TimetableLesson.class);
-		final TimetableLesson timetableLesson = (TimetableLesson) query.getResultList().get(0);
-		if (timetableLesson != null) {
-			entityManager.getTransaction().begin();
-			entityManager.persist(timetableLesson);
-			entityManager.getTransaction().commit();
-		}
+		
 		entityManager.getTransaction().begin();
 		entityManager.remove(replacement);
 		entityManager.getTransaction().commit();

@@ -21,9 +21,8 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 			return
 
 		replacements = new nsa.Collections.Replacements()
-		replacements.fetchData = 
-			start: @start.format("MMM DD, YYYY hh:mm:ss A")
-			end: @end.format("MMM DD, YYYY hh:mm:ss A")
+		replacements.fetchData =
+			week: moment().format("YYYY-[W]ww")
 		replacements.fetchData[@options.fetchData.type] = @options.fetchData.id
 		replacements.fetch
 			success: () =>
@@ -84,14 +83,19 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 				tempLesson = {}
 				_.each @model.get("timetableLessons"), (t) =>
 					if d.id is t.day.id and l.id is t.lesson.id
-						tempLesson = t
+						tempLesson = _.clone(t)
 					return
 
 				# replacements suchen
 				tempReplacement = undefined
 				_.each @replacements.toJSON(), (r) =>
 					if d.id is r.day.id and l.id is r.lesson.id
-						tempReplacement = r
+						tempReplacement = _.clone(r)
+
+						if not tempReplacement.teacher? and not tempReplacement.room? and not tempReplacement.subject?
+							tempReplacement.cellClass = "danger"
+						else
+							tempReplacement.cellClass = "warning"
 					return
 
 				l.days.push
