@@ -5,7 +5,7 @@ window.nsa = _.extend {}, window.nsa,
 	Data: {}
 	config:
 		api: "/api"
-	version: "1.0.0"
+	version: "1.2.0"
 
 class window.nsa.App extends Backbone.Router
 	routes:
