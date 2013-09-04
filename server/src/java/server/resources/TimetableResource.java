@@ -44,7 +44,7 @@ public class TimetableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Timetable getClassTimetable(final int formId) {
+	public Timetable getClassTimetable(final int formId) {
 		final String timetableSql = "select * from timetable where form_idKlasse = '" + formId + "'";
 		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
@@ -66,7 +66,7 @@ public class TimetableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	private synchronized Timetable getRoomTimetable(final int roomId) {
+	private Timetable getRoomTimetable(final int roomId) {
 		final String timetableSql = "select * from timetable where room_idRaum = '" + roomId + "'";
 		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
@@ -88,7 +88,7 @@ public class TimetableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	private synchronized Timetable getTeacherTimetable(final int teacherId) {
+	private Timetable getTeacherTimetable(final int teacherId) {
 		final String timetableSql = "select * from timetable where teacher_idLehrer = '" + teacherId + "'";
 		final Query timetableQuery = HibernateUtil.getEntityManager().createNativeQuery(timetableSql, Timetable.class);
 
@@ -109,14 +109,14 @@ public class TimetableResource {
 		return timetable;
 	}
 
-	synchronized Timetable getTimetable(final int timetableId) {
+	protected Timetable getTimetable(final int timetableId) {
 		final String sql = "select * from timetable where id = '" + timetableId + "'";
 		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Timetable.class);
 		final Timetable timetable = (Timetable) query.getResultList().get(0);
 		return timetable;
 	}
 
-	private synchronized void saveTimetable(final Timetable timetable) {
+	private void saveTimetable(final Timetable timetable) {
 		if (timetable != null && timetable.getLessons().size() > 0) {
 			this.entitiyManager = HibernateUtil.getEntityManager();
 			final EntityTransaction transaction = this.entitiyManager.getTransaction();
