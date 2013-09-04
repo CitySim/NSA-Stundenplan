@@ -12,7 +12,7 @@ class window.nsa.App extends Backbone.Router
 		""							: "home"
 		"timetable"					: "timetable"
 		"timetable/:type/:id"		: "timetableDetail"
-		"replacement"				: "replacement"
+		"replacement(/:year-W:week)": "replacement"
 		"replacement/new/:lesson/:day/:form": "replacementNew"
 		"replacement/:id"			: "replacementDetails"
 		"replacement/:id/edit"		: "replacementEdit"
@@ -50,8 +50,9 @@ class window.nsa.App extends Backbone.Router
 
 		return
 
-	replacement: () =>
-		@showView(new nsa.Views.ReplacementList())
+	replacement: (year, week) =>
+		@showView new nsa.Views.ReplacementList
+			week: "#{year}-W#{week}" if year? and week?
 		return
 
 	replacementDetails: (id) =>

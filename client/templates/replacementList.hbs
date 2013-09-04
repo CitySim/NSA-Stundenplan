@@ -2,6 +2,12 @@
 	<div class="col-md-12">
 		<h3>Woche {{week}}</h3>
 
+		<ul class="pager">
+			<li class="previous"><a href="#replacement/{{navigation.prev}}">&larr; Letzte Woche</a></li>
+			<li><a href="#replacement">Aktuelle Woche</a></li>
+			<li class="next"><a href="#replacement/{{navigation.next}}">Näschte Woche &rarr;</a></li>
+		</ul>
+
 		{{#each collection}}
 			<legend>{{@key}}</legend>
 
@@ -43,6 +49,8 @@
 					</a>
 				{{/each}}
 			</div>
+		{{else}}
+			<legend>keine Änderungen</legend>
 		{{/each}}
 	</div>
 </div>

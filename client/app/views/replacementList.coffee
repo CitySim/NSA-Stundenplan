@@ -3,7 +3,10 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 	className: "view-replacement-list"
 
 	initialize: () =>
-		@week = moment().format("YYYY-[W]ww")
+		if @options.week?
+			@week = @options.week
+		else
+			@week = moment().format("YYYY-[W]ww")
 
 		replacements = new nsa.Collections.Replacements()
 		replacements.fetchData =
@@ -28,8 +31,13 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 			@$el.html nsa.handlebars.loading()
 			return
 
+		momentWeek = moment(@week, "YYYY").add("weeks", parseInt(@week.split("W")[1]) - 1)
+
 		@$el.html @template
-			week: moment(@week, "YYYY-[W]ww").format("ww, YYYY")
+			week: momentWeek.format("ww, YYYY")
+			navigation:
+				prev: momentWeek.add("weeks", -1).format("YYYY-[W]ww")
+				next: momentWeek.add("weeks", 2).format("YYYY-[W]ww")
 			collection: _.groupBy @collection.toJSON(), (r) =>
 				if r.lesson?
 					r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
