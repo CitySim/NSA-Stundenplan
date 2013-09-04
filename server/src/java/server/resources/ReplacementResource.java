@@ -3,7 +3,6 @@ package server.resources;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.DELETE;
@@ -21,7 +20,6 @@ import org.hibernate.criterion.Restrictions;
 
 import server.entities.Replacement;
 import server.entities.ReplacementDeserializer;
-import server.entities.TimetableLesson;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
