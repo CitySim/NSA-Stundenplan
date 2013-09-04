@@ -24,11 +24,7 @@ public class SchoolResource {
 	}
 
 	private synchronized School getSchool() {
-		try {
-			return HibernateUtil.getEntityManager().find(School.class, 1);
-		} catch (final NullPointerException e) {
-			return this.getSchool();
-		}
+		return HibernateUtil.getEntityManager().find(School.class, 1);
 	}
 
 	@POST
