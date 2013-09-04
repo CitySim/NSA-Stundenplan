@@ -31,7 +31,7 @@ public class AvailableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	private synchronized List<Teacher> getAvailableTeachers(final int dayId, final int lessonId) {
+	private List<Teacher> getAvailableTeachers(final int dayId, final int lessonId) {
 		final String sql = "select * from lehrer where idLehrer not in " + "(select idLehrer " + "from klasse_tag_stunde where idTag = " + dayId
 				+ " and idStunde = " + lessonId + ")";
 		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Teacher.class);
@@ -41,7 +41,7 @@ public class AvailableResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	private synchronized List<Room> getAvailableRooms(final int dayId, final int lessonId) {
+	private List<Room> getAvailableRooms(final int dayId, final int lessonId) {
 		final String sql = "select * from raum where idRaum not in " + "(select idRaum " + "from klasse_tag_stunde where idTag = " + dayId
 				+ " and idStunde = " + lessonId + ")";
 		final Query query = HibernateUtil.getEntityManager().createNativeQuery(sql, Room.class);

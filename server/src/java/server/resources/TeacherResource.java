@@ -22,7 +22,7 @@ public class TeacherResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized List<Teacher> getTeachers() {
+	public List<Teacher> getTeachers() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from lehrer", Teacher.class).getResultList();
 	}
 }

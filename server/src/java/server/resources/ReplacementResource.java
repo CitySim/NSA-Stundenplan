@@ -40,7 +40,7 @@ public class ReplacementResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public final synchronized String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
+	public final String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
 		// TODO: check nsaCookie
 
 		final GsonBuilder gson = new GsonBuilder();
@@ -56,7 +56,7 @@ public class ReplacementResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public final synchronized String addReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
+	public final String addReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
 		// TODO: check nsaCookie
 
 		final GsonBuilder gson = new GsonBuilder();
@@ -67,7 +67,7 @@ public class ReplacementResource {
 	}
 
 	@DELETE
-	public final synchronized boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie,
+	public final boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie,
 			@QueryParam("id") final int replacementId) {
 		// TODO: check nsaCookie
 
@@ -90,7 +90,7 @@ public class ReplacementResource {
 		return true;
 	}
 
-	private synchronized Replacement addReplacement(final Replacement replacement) {
+	private Replacement addReplacement(final Replacement replacement) {
 		final EntityManager entityManager = HibernateUtil.getEntityManager();
 
 		entityManager.getTransaction().begin();
@@ -99,7 +99,7 @@ public class ReplacementResource {
 		return replacement;
 	}
 
-	private synchronized List<?> getReplacements(final int teacherId, final int formId, final int roomId, final String week) {
+	private List<?> getReplacements(final int teacherId, final int formId, final int roomId, final String week) {
 		final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
 		final Criteria criteria = session.createCriteria(Replacement.class);
 		

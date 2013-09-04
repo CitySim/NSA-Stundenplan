@@ -23,13 +23,13 @@ public class SchoolResource {
 		return new Gson().toJson(this.getSchool());
 	}
 
-	private synchronized School getSchool() {
+	private School getSchool() {
 		return HibernateUtil.getEntityManager().find(School.class, 1);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public synchronized void setSchool(final String schoolJSON) {
+	public void setSchool(final String schoolJSON) {
 		final Gson gson = new Gson();
 		final School school = gson.fromJson(schoolJSON, School.class);
 

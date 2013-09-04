@@ -22,7 +22,7 @@ public class FormResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized static List<Form> getForms() {
+	public static List<Form> getForms() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Klasse", Form.class).getResultList();
 	}
 }

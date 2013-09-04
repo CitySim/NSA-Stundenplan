@@ -82,7 +82,7 @@ public class LoginResource {
 
 	@Path("logout")
 	@GET
-	public synchronized String logout(@QueryParam("cookie") final String cookie) {
+	public String logout(@QueryParam("cookie") final String cookie) {
 		return new Gson().toJson(new CookieHandler().deleteCookie(cookie));
 	}
 }

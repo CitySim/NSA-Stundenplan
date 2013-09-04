@@ -22,7 +22,7 @@ public class LessonResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized List<Lesson> getLessons() {
+	public List<Lesson> getLessons() {
 		return HibernateUtil.getEntityManager().createNativeQuery("select * from Stunde", Lesson.class).getResultList();
 	}
 }
