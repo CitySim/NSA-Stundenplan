@@ -98,7 +98,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 		@model.set(data)
 		@model.save {},
 			success: () =>
-				nsa.app.navigate("replacement", { trigger: true })
+				nsa.app.navigate("replacement/#{@model.id}", { trigger: true })
 				return
 			error: () =>
 				nsa.app.error
