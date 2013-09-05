@@ -20,11 +20,13 @@ import org.hibernate.criterion.Restrictions;
 
 import server.entities.Replacement;
 import server.entities.ReplacementDeserializer;
+import server.exceptions.CookieInvalidException;
 import server.operations.CookieHandler;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 @Path("replacement")
 public class ReplacementResource {
@@ -40,16 +42,19 @@ public class ReplacementResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public final String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
-		// TODO: return null okay?
-		if (new CookieHandler().validateCookie(nsaCookie)) {
-			final GsonBuilder gson = new GsonBuilder();
-			gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-			final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-			final EntityManager entityManager = HibernateUtil.getEntityManager();
-			entityManager.getTransaction().begin();
-			HibernateUtil.getEntityManager().persist(replacement);
-			entityManager.getTransaction().commit();
-			return new Gson().toJson(replacement);
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final GsonBuilder gson = new GsonBuilder();
+				gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+				final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+				final EntityManager entityManager = HibernateUtil.getEntityManager();
+				entityManager.getTransaction().begin();
+				HibernateUtil.getEntityManager().persist(replacement);
+				entityManager.getTransaction().commit();
+				return new Gson().toJson(replacement);
+			}
+		} catch (JsonSyntaxException | CookieInvalidException e) {
+			return new Gson().toJson(e.getMessage());
 		}
 		return null;
 	}
@@ -58,30 +63,37 @@ public class ReplacementResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public final String addReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
-		// TODO: return null okay?
-		if (new CookieHandler().validateCookie(nsaCookie)) {
-			final GsonBuilder gson = new GsonBuilder();
-			gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-			final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final GsonBuilder gson = new GsonBuilder();
+				gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+				final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
 
-			return new Gson().toJson(this.addReplacement(replacement));
+				return new Gson().toJson(this.addReplacement(replacement));
+			}
+		} catch (JsonSyntaxException | CookieInvalidException e) {
+			return new Gson().toJson(e.getMessage());
 		}
 		return null;
 	}
 
 	@DELETE
 	public final boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie, @QueryParam("id") final int replacementId) {
-		if (new CookieHandler().validateCookie(nsaCookie)) {
-			final EntityManager entityManager = HibernateUtil.getEntityManager();
-			final Replacement replacement = entityManager.find(Replacement.class, replacementId);
-			if (replacement == null) {
-				return false;
-			}
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final EntityManager entityManager = HibernateUtil.getEntityManager();
+				final Replacement replacement = entityManager.find(Replacement.class, replacementId);
+				if (replacement == null) {
+					return false;
+				}
 
-			entityManager.getTransaction().begin();
-			entityManager.remove(replacement);
-			entityManager.getTransaction().commit();
-			return true;
+				entityManager.getTransaction().begin();
+				entityManager.remove(replacement);
+				entityManager.getTransaction().commit();
+				return true;
+			}
+		} catch (final CookieInvalidException e) {
+			return false;
 		}
 		return false;
 	}

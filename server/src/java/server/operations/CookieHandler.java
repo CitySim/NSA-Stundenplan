@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.ws.rs.core.NewCookie;
 
+import server.entities.Cookie;
+import server.exceptions.CookieInvalidException;
 import server.queries.CookieQuery;
 
 /**
@@ -30,9 +32,12 @@ public class CookieHandler {
 		return cookie;
 	}
 
-	public final boolean validateCookie(final String cookieValue) {
-
-		return new CookieQuery().getCookie(cookieValue) != null;
+	public final boolean validateCookie(final String cookieValue) throws CookieInvalidException {
+		final Cookie cookie = new CookieQuery().getCookie(cookieValue);
+		if (cookie == null) {
+			throw new CookieInvalidException();
+		}
+		return true;
 	}
 
 	public final void deleteInvalidCookies() {
