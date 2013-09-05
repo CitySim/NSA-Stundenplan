@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.exceptions.CookieInvalidException;
 import server.queries.CookieQuery;
 
 /**
@@ -70,7 +71,11 @@ public class CookieHandlerTest extends TestCase {
 
 		final NewCookie cookie = this.handler.createCookie();
 
-		CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie.getValue()));
+		try {
+			CookieHandlerTest.assertTrue(this.handler.validateCookie(cookie.getValue()));
+		} catch (final CookieInvalidException e) {
+			fail();
+		}
 		CookieHandlerTest.assertTrue(this.handler.deleteCookie(cookie.getValue()));
 	}
 
