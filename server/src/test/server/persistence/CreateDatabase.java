@@ -1,11 +1,11 @@
 package server.persistence;
 
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,14 +21,14 @@ import server.entities.Timetable;
 import server.entities.TimetableLesson;
 
 /**
- * Test for the initial dataCreation.
+ * database table creation and initial dataCreation.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
  * @version 1.0
  */
 
-public class DataCreationTest {
+public class CreateDatabase {
 
 	private EntityManager em;
 	private DataCreationHelper helper;
@@ -211,9 +211,52 @@ public class DataCreationTest {
 		this.helper.createNewsletter(it1b, "HeikeGiera@localhost");
 
 		this.em.getTransaction().commit();
+		
+		createTimetables();
 
-		@SuppressWarnings("unchecked")
-		final List<Form> list = this.em.createNativeQuery("select * from Klasse", Form.class).getResultList();
-		assertTrue(list.size() >= 2);
 	}
+
+	private void createTimetables() {
+		em.getTransaction().begin();
+		createTeacherTimetables();
+		createRoomTimetables();
+		em.getTransaction().commit();
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createRoomTimetables() {
+		List<Room> rooms = em.createQuery("from Room", Room.class).getResultList();
+
+		for (Room room : rooms) {
+			final String lessonSql = "select * from klasse_tag_stunde where idRaum = '" + room.getId() + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String roomSql = "select * from raum where idRaum = '" + room.getId() + "'";
+			final Query roomQuery = HibernateUtil.getEntityManager().createNativeQuery(roomSql, Room.class);
+			timetable.setRoom((Room) roomQuery.getResultList().get(0));
+
+			em.persist(timetable);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createTeacherTimetables() {
+		List<Teacher> teachers = em.createQuery("from Teacher", Teacher.class).getResultList();
+		
+		for (Teacher teacher : teachers) {
+			final String lessonSql = "select * from klasse_tag_stunde where idLehrer = '" + teacher.getId() + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String teacherSql = "select * from lehrer where idLehrer = '" + teacher.getId() + "'";
+			final Query teacherQuery = HibernateUtil.getEntityManager().createNativeQuery(teacherSql, Teacher.class);
+			timetable.setTeacher((Teacher) teacherQuery.getResultList().get(0));
+
+			em.persist(timetable);
+		}
+	}	
 }
