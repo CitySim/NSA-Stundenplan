@@ -116,7 +116,7 @@ class DataCreationHelper {
 	}
 
 	void createReplacement(final String week, final Day day, final Room room, final Teacher teacher, final Form form, final Subject subject, final Lesson lesson,
-			final String note) {
+			final String note, final int cancel) {
 		final Replacement replacement = new Replacement();
 		replacement.setWeek(week);
 		replacement.setDay(day);
@@ -126,6 +126,7 @@ class DataCreationHelper {
 		replacement.setSubject(subject);
 		replacement.setLesson(lesson);
 		replacement.setNote(note);
+		replacement.setCancel(cancel);
 
 		this.em.persist(replacement);
 	}

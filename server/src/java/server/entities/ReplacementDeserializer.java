@@ -25,6 +25,7 @@ public class ReplacementDeserializer implements JsonDeserializer<Replacement> {
 		}
 		replacement.setWeek((json.get("week").getAsString()));
 		replacement.setNote(json.get("note").getAsString());
+		replacement.setCancel(json.get("cancel").getAsInt());
 		replacement.setDay(em.find(Day.class, json.get("day").getAsInt()));
 		replacement.setForm(em.find(Form.class, json.get("form").getAsInt()));
 		replacement.setRoom(em.find(Room.class, json.get("room").getAsInt()));

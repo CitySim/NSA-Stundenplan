@@ -31,6 +31,8 @@ public class Replacement extends DefaultEntity {
 
 	private String note;
 
+	private int cancel;
+	
 	public String getWeek() {
 		return this.week;
 	}
@@ -94,4 +96,14 @@ public class Replacement extends DefaultEntity {
 	public void setNote(final String note) {
 		this.note = note;
 	}
+
+	public int getCancel() {
+		return cancel;
+	}
+
+	public void setCancel(int cancel) {
+		this.cancel = cancel;
+	}
+	
+	
 }

@@ -200,9 +200,9 @@ public class DataCreationTest {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement("2013-W31", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt");
-		this.helper.createReplacement("2013-W31", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz");
-		this.helper.createReplacement("2013-W31", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung");
+		this.helper.createReplacement("2013-W31", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
+		this.helper.createReplacement("2013-W31", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
+		this.helper.createReplacement("2013-W31", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");
