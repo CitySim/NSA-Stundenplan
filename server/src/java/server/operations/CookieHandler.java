@@ -30,13 +30,7 @@ public class CookieHandler {
 		return cookie;
 	}
 
-	final boolean validateCookie(final NewCookie cookie) {
-
-		String cookieValue = "";
-
-		if ("NSA-Cookie".equals(cookie.getName())) {
-			cookieValue = cookie.getValue();
-		}
+	public final boolean validateCookie(final String cookieValue) {
 
 		return new CookieQuery().getCookie(cookieValue) != null;
 	}

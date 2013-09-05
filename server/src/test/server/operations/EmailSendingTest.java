@@ -20,7 +20,6 @@ import server.persistence.HibernateUtil;
 import server.queries.LoginQuery;
 import server.queries.NewsletterQuery;
 import server.resources.FormResource;
-import server.resources.LoginResource;
 
 /**
  * Test for exception email sending.
@@ -61,9 +60,9 @@ public class EmailSendingTest extends TestCase {
 
 			this.helper.sendCreationMail(this.email, "test", "test");
 
-			this.helper.sendResetPasswordMail(login);
+			this.helper.sendResetPasswordMail(this.login);
 
-			this.helper.sendPasswordChangedMail(login, "test");
+			this.helper.sendPasswordChangedMail(this.login, "test");
 
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
 
