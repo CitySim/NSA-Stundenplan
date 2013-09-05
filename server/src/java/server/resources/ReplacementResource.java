@@ -20,10 +20,16 @@ import org.hibernate.criterion.Restrictions;
 
 import server.entities.Replacement;
 import server.entities.ReplacementDeserializer;
+import server.exceptions.CookieInvalidException;
+import server.exceptions.EmailAddressException;
+import server.exceptions.EmailSendingException;
+import server.operations.CookieHandler;
+import server.operations.NewsLetterHandler;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 @Path("replacement")
 public class ReplacementResource {
@@ -39,46 +45,67 @@ public class ReplacementResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public final String changeReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
-		// TODO: check nsaCookie
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final GsonBuilder gson = new GsonBuilder();
+				gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+				final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+				final EntityManager entityManager = HibernateUtil.getEntityManager();
+				entityManager.getTransaction().begin();
+				HibernateUtil.getEntityManager().persist(replacement);
+				entityManager.getTransaction().commit();
+				new NewsLetterHandler().generateReplacementMail(replacement);
 
-		final GsonBuilder gson = new GsonBuilder();
-		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		entityManager.getTransaction().begin();
-		HibernateUtil.getEntityManager().persist(replacement);
-		entityManager.getTransaction().commit();
-		return new Gson().toJson(replacement);
+				return new Gson().toJson(replacement);
+			}
+		} catch (JsonSyntaxException | CookieInvalidException | EmailSendingException | EmailAddressException e) {
+			return new Gson().toJson(e.getMessage());
+		}
+		return null;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public final String addReplacementJSON(@CookieParam(value = "NSA-Cookie") final String nsaCookie, final String replacementJSON) {
-		// TODO: check nsaCookie
-
-		final GsonBuilder gson = new GsonBuilder();
-		gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
-		final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-
-		return new Gson().toJson(this.addReplacement(replacement));
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final GsonBuilder gson = new GsonBuilder();
+				gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
+				final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
+				new NewsLetterHandler().generateReplacementMail(replacement);
+				return new Gson().toJson(this.addReplacement(replacement));
+			}
+		} catch (JsonSyntaxException | CookieInvalidException | EmailSendingException | EmailAddressException e) {
+			return new Gson().toJson(e.getMessage());
+		}
+		return null;
 	}
 
 	@DELETE
-	public final boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie,
-			@QueryParam("id") final int replacementId) {
-		// TODO: check nsaCookie
+	public final boolean deleteReplacement(@CookieParam(value = "NSA-Cookie") final String nsaCookie, @QueryParam("id") final int replacementId) {
+		try {
+			if (new CookieHandler().validateCookie(nsaCookie)) {
+				final EntityManager entityManager = HibernateUtil.getEntityManager();
+				final Replacement replacement = entityManager.find(Replacement.class, replacementId);
+				if (replacement == null) {
+					return false;
+				}
 
-		final EntityManager entityManager = HibernateUtil.getEntityManager();
-		final Replacement replacement = entityManager.find(Replacement.class, replacementId);
-		if (replacement == null) {
+				entityManager.getTransaction().begin();
+				entityManager.remove(replacement);
+				entityManager.getTransaction().commit();
+				new NewsLetterHandler().generateReplacementMail(replacement);
+
+				return true;
+			}
+		} catch (final CookieInvalidException | EmailSendingException | EmailAddressException e) { // TODO
+																																// Exception
+																																// Handling
+																																// SVEN!??
 			return false;
 		}
-		
-		entityManager.getTransaction().begin();
-		entityManager.remove(replacement);
-		entityManager.getTransaction().commit();
-		return true;
+		return false;
 	}
 
 	private Replacement addReplacement(final Replacement replacement) {
@@ -93,7 +120,7 @@ public class ReplacementResource {
 	private List<?> getReplacements(final int teacherId, final int formId, final int roomId, final String week) {
 		final Session session = HibernateUtil.getEntityManager().unwrap(Session.class);
 		final Criteria criteria = session.createCriteria(Replacement.class);
-		
+
 		if (teacherId != 0) {
 			criteria.add(Restrictions.eq("teacher.id", teacherId));
 		}
@@ -106,7 +133,7 @@ public class ReplacementResource {
 		if (week != null) {
 			criteria.add(Restrictions.eq("week", week));
 		}
-		
+
 		return criteria.list();
 	}
 }

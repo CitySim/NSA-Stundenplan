@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.ws.rs.core.NewCookie;
 
+import server.entities.Cookie;
+import server.exceptions.CookieInvalidException;
 import server.queries.CookieQuery;
 
 /**
@@ -22,23 +24,19 @@ public class CookieHandler {
 		dateHelper.addTime(0, 1, 0, 0, 0, 0);
 
 		final String cookieID = new PasswordEncryptor().generateEncryptedPassword();
-		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID, "/", null, 1, null, (int) dateHelper.parseStringToDate(
-				dateHelper.getFullDate()).getTime() / 1000, false);
+		final NewCookie cookie = new NewCookie("NSA-Cookie", cookieID, "/", null, 1, null, (int)30 * 24 * 60 * 60, false);
 
 		new CookieQuery().createCookie(cookieID, dateHelper.parseStringToDate(dateHelper.getFullDate()));
 
 		return cookie;
 	}
 
-	final boolean validateCookie(final NewCookie cookie) {
-
-		String cookieValue = "";
-
-		if ("NSA-Cookie".equals(cookie.getName())) {
-			cookieValue = cookie.getValue();
+	public final boolean validateCookie(final String cookieValue) throws CookieInvalidException {
+		final Cookie cookie = new CookieQuery().getCookie(cookieValue);
+		if (cookie == null) {
+			throw new CookieInvalidException();
 		}
-
-		return new CookieQuery().getCookie(cookieValue) != null;
+		return true;
 	}
 
 	public final void deleteInvalidCookies() {

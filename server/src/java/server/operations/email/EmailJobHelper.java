@@ -8,7 +8,6 @@ import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
-import server.exceptions.ScheduleCreationException;
 
 /**
  * Used to initialize the emailSending.
@@ -20,7 +19,7 @@ import server.exceptions.ScheduleCreationException;
 
 public class EmailJobHelper {
 
-	public final void sendNewsLetterMail(final Replacement replacement) throws ScheduleCreationException, EmailSendingException,
+	public final void sendNewsLetterMail(final Replacement replacement) throws EmailSendingException,
 			EmailAddressException {
 		final ArrayList<EmailObject> emailList = new EmailCreator().createNewsLetterMails(replacement);
 		new EmailJob().sendMail(this.setEmailSettings("NSA - Stundenplan Abweichung"), emailList);

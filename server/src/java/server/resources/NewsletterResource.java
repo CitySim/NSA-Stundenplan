@@ -33,9 +33,7 @@ public class NewsletterResource extends QueryResult {
 			helper.sendConfirmationMail(form, email);
 
 			return new Gson().toJson(newsLetterHandler.confirmRegistration(form, email));
-		} catch (final EmailSendingException e) {
-			return new Gson().toJson(e.getMessage());
-		} catch (final EmailAddressException e) {
+		} catch (final EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
 	}

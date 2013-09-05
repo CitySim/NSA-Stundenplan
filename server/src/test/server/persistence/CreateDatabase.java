@@ -1,11 +1,11 @@
 package server.persistence;
 
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,14 +21,14 @@ import server.entities.Timetable;
 import server.entities.TimetableLesson;
 
 /**
- * Test for the initial dataCreation.
+ * database table creation and initial dataCreation.
  * 
  * @author dennis.markmann
  * @since JDK.1.7.0_25
  * @version 1.0
  */
 
-public class DataCreationTest {
+public class CreateDatabase {
 
 	private EntityManager em;
 	private DataCreationHelper helper;
@@ -54,7 +54,16 @@ public class DataCreationTest {
 
 		final School school = new School();
 		school.setImage("/home.jpg");
-		school.setText("++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
+		school.setText("Staatliche Gewerbeschule G18 <br>"
+				+ "Informations- und Elektrotechnik, <br>"
+				+ "Chemie- und Automatisierungstechnik <br>"
+				+ "Dratelnstraße 26 21109 Hamburg <br>"
+				+ "<br>"
+				+ "Telefon: +49 40 428 79 - 02 <br>"
+				+ "Telefax: +49 40 428 79 - 450 <br>"
+				+ "E-Mail: g18(at)hibb.hamburg.de <br>"
+				+ "<br>"
+				+ "++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
 				+ "++++ Zeugnisse sind fertig ++++<br>" + "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
 				+ "++++ Folgende Lehrer sind krank: ... ++++<br>" + "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
 				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>");
@@ -200,18 +209,63 @@ public class DataCreationTest {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement("2013-W31", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt");
-		this.helper.createReplacement("2013-W31", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz");
-		this.helper.createReplacement("2013-W31", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung");
+		this.helper.createReplacement("2013-W36", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
+		this.helper.createReplacement("2013-W36", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
+		this.helper.createReplacement("2013-W36", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, lührssen, it1b, ae, lesson3, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, lührssen, it1b, ae, lesson4, "Fällt aus", 1);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");
 		this.helper.createNewsletter(it1b, "HeikeGiera@localhost");
 
 		this.em.getTransaction().commit();
+		
+		createTimetables();
 
-		@SuppressWarnings("unchecked")
-		final List<Form> list = this.em.createNativeQuery("select * from Klasse", Form.class).getResultList();
-		assertTrue(list.size() >= 2);
 	}
+
+	private void createTimetables() {
+		em.getTransaction().begin();
+		createTeacherTimetables();
+		createRoomTimetables();
+		em.getTransaction().commit();
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createRoomTimetables() {
+		List<Room> rooms = em.createQuery("from Room", Room.class).getResultList();
+
+		for (Room room : rooms) {
+			final String lessonSql = "select * from klasse_tag_stunde where idRaum = '" + room.getId() + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String roomSql = "select * from raum where idRaum = '" + room.getId() + "'";
+			final Query roomQuery = HibernateUtil.getEntityManager().createNativeQuery(roomSql, Room.class);
+			timetable.setRoom((Room) roomQuery.getResultList().get(0));
+
+			em.persist(timetable);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createTeacherTimetables() {
+		List<Teacher> teachers = em.createQuery("from Teacher", Teacher.class).getResultList();
+		
+		for (Teacher teacher : teachers) {
+			final String lessonSql = "select * from klasse_tag_stunde where idLehrer = '" + teacher.getId() + "'";
+			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
+			final Timetable timetable = new Timetable();
+			timetable.setLessons(lessonQuery.getResultList());
+
+			final String teacherSql = "select * from lehrer where idLehrer = '" + teacher.getId() + "'";
+			final Query teacherQuery = HibernateUtil.getEntityManager().createNativeQuery(teacherSql, Teacher.class);
+			timetable.setTeacher((Teacher) teacherQuery.getResultList().get(0));
+
+			em.persist(timetable);
+		}
+	}	
 }

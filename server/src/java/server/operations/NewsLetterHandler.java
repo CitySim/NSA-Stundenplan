@@ -2,6 +2,7 @@ package server.operations;
 
 import server.entities.Form;
 import server.entities.Newsletter;
+import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
 import server.operations.email.EmailJobHelper;
@@ -39,5 +40,9 @@ public class NewsLetterHandler {
 
 	public boolean removeRegistration(final Newsletter newsletter) {
 		return new NewsletterQuery().removeNewsletter(newsletter);
+	}
+
+	public final void generateReplacementMail(Replacement replacement) throws EmailSendingException, EmailAddressException {
+		new EmailJobHelper().sendNewsLetterMail(replacement);
 	}
 }
