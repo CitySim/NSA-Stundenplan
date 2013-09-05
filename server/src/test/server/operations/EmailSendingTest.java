@@ -17,8 +17,10 @@ import server.exceptions.EmailSendingException;
 import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
+import server.queries.LoginQuery;
 import server.queries.NewsletterQuery;
 import server.resources.FormResource;
+import server.resources.LoginResource;
 
 /**
  * Test for exception email sending.
@@ -41,8 +43,7 @@ public class EmailSendingTest extends TestCase {
 	public void setUp() {
 		this.helper = new EmailJobHelper();
 		this.form = FormResource.getForms().get(0);
-		this.login = new Login();
-		login.setUser("test");
+		this.login = new LoginQuery().getLogin("test");
 		this.em = HibernateUtil.getEntityManager();
 		this.email = "test@localhost";
 	}
@@ -55,17 +56,17 @@ public class EmailSendingTest extends TestCase {
 			} catch (final ScheduleCreationException e) {
 				fail();
 			}
-			
+
 			this.helper.sendConfirmationMail(this.form, this.email);
-			
+
 			this.helper.sendCreationMail(this.email, "test", "test");
-			
+
 			this.helper.sendResetPasswordMail(login);
-			
+
 			this.helper.sendPasswordChangedMail(login, "test");
-			
+
 			this.helper.sendRemoveRegistrationMail(this.getExistingNewsletter());
-			
+
 		} catch (final EmailSendingException | EmailAddressException e) {
 			fail();
 		}
