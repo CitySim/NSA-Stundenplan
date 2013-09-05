@@ -54,7 +54,16 @@ public class CreateDatabase {
 
 		final School school = new School();
 		school.setImage("/home.jpg");
-		school.setText("++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
+		school.setText("Staatliche Gewerbeschule G18 <br>"
+				+ "Informations- und Elektrotechnik, <br>"
+				+ "Chemie- und Automatisierungstechnik <br>"
+				+ "Dratelnstraße 26 21109 Hamburg <br>"
+				+ "<br>"
+				+ "Telefon: +49 40 428 79 - 02 <br>"
+				+ "Telefax: +49 40 428 79 - 450 <br>"
+				+ "E-Mail: g18(at)hibb.hamburg.de <br>"
+				+ "<br>"
+				+ "++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
 				+ "++++ Zeugnisse sind fertig ++++<br>" + "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
 				+ "++++ Folgende Lehrer sind krank: ... ++++<br>" + "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
 				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>");
