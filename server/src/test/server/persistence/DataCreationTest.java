@@ -44,6 +44,14 @@ public class DataCreationTest {
 
 		this.em.getTransaction().begin();
 
+		// To stop creating duplicate data
+		@SuppressWarnings("unchecked")
+		final List<Teacher> teacher = this.em.createNativeQuery("SELECT * FROM lehrer WHERE Vorname = 'Volker' and Name = 'Lührssen'", Teacher.class)
+				.getResultList();
+		if (teacher.size() != 0) {
+			return;
+		}
+
 		final School school = new School();
 		school.setImage("/home.jpg");
 		school.setText("++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
@@ -169,7 +177,7 @@ public class DataCreationTest {
 		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson6, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson7, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson8, donnerstag, pro, timeTableLessons_it1b);
-		
+
 		// Lessons for Friday
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson1, freitag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson2, freitag, pro, timeTableLessons_it1b);
