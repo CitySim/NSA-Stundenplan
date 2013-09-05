@@ -23,10 +23,8 @@ import server.entities.ReplacementDeserializer;
 import server.exceptions.CookieInvalidException;
 import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
-import server.exceptions.ScheduleCreationException;
 import server.operations.CookieHandler;
 import server.operations.NewsLetterHandler;
-import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
@@ -60,7 +58,7 @@ public class ReplacementResource {
 
 				return new Gson().toJson(replacement);
 			}
-		} catch (JsonSyntaxException | CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) {
+		} catch (JsonSyntaxException | CookieInvalidException | EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
 		return null;
@@ -78,7 +76,7 @@ public class ReplacementResource {
 				new NewsLetterHandler().generateReplacementMail(replacement);
 				return new Gson().toJson(this.addReplacement(replacement));
 			}
-		} catch (JsonSyntaxException | CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) {
+		} catch (JsonSyntaxException | CookieInvalidException | EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
 		return null;
@@ -101,7 +99,7 @@ public class ReplacementResource {
 
 				return true;
 			}
-		} catch (final CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) { // TODO
+		} catch (final CookieInvalidException | EmailSendingException | EmailAddressException e) { // TODO
 																																// Exception
 																																// Handling
 																																// SVEN!??

@@ -5,7 +5,6 @@ import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
-import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
 import server.queries.NewsletterQuery;
 
@@ -43,7 +42,7 @@ public class NewsLetterHandler {
 		return new NewsletterQuery().removeNewsletter(newsletter);
 	}
 
-	public final void generateReplacementMail(Replacement replacement) throws ScheduleCreationException, EmailSendingException, EmailAddressException {
+	public final void generateReplacementMail(Replacement replacement) throws EmailSendingException, EmailAddressException {
 		new EmailJobHelper().sendNewsLetterMail(replacement);
 	}
 }

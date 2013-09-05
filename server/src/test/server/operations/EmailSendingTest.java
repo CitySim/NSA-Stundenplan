@@ -14,7 +14,6 @@ import server.entities.Newsletter;
 import server.entities.Replacement;
 import server.exceptions.EmailAddressException;
 import server.exceptions.EmailSendingException;
-import server.exceptions.ScheduleCreationException;
 import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
 import server.queries.LoginQuery;
@@ -49,12 +48,8 @@ public class EmailSendingTest extends TestCase {
 
 	@Test
 	public void testEmailSending() {
-		try {
-			try {
-				this.helper.sendNewsLetterMail(this.getExistingReplacement());
-			} catch (final ScheduleCreationException e) {
-				fail();
-			}
+		try {			
+			this.helper.sendNewsLetterMail(this.getExistingReplacement());
 
 			this.helper.sendConfirmationMail(this.form, this.email);
 

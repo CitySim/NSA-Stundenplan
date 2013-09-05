@@ -7,7 +7,6 @@ import server.entities.Form;
 import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
-import server.exceptions.ScheduleCreationException;
 import server.queries.NewsletterQuery;
 
 /**
@@ -39,7 +38,7 @@ class EmailCreator {
 
 	}
 
-	final ArrayList<EmailObject> createNewsLetterMails(final Replacement replacement) throws ScheduleCreationException {
+	final ArrayList<EmailObject> createNewsLetterMails(final Replacement replacement) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
 
