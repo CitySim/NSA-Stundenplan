@@ -31,23 +31,30 @@ class EmailTextCreator {
 		sb.append(replacement.getWeek());
 		sb.append(System.lineSeparator());
 
-		sb.append("Neuer Raum:");
-		sb.append(replacement.getRoom().getDescription()); // Raum name
-		sb.append(System.lineSeparator());
+		if (replacement.getCancel() == 1) {
+			sb.append("Änderung: Die Stunde Fällt aus!");
 
-		sb.append("Fach:");
-		String fach = "-";
-		if (replacement.getSubject() != null) {
-			fach = replacement.getSubject().getDescription();
+		} else {
+
+			sb.append("Neuer Raum:");
+			sb.append(replacement.getRoom().getDescription()); // Raum name
+			sb.append(System.lineSeparator());
+
+			sb.append("Fach:");
+			String fach = "-";
+			if (replacement.getSubject() != null) {
+				fach = replacement.getSubject().getDescription();
+			}
+
+			sb.append(fach);
+			sb.append(System.lineSeparator());
+
+			sb.append("Vertretungslehrer:");
+			sb.append(replacement.getTeacher().getFirstname() + " " + replacement.getTeacher().getName());
+
 		}
 
-		sb.append(fach);
 		sb.append(System.lineSeparator());
-
-		sb.append("Vertretungslehrer:");
-		sb.append(replacement.getTeacher().getFirstname() + " " + replacement.getTeacher().getName());
-		sb.append(System.lineSeparator());
-
 		sb.append("Notiz:");
 		String note = replacement.getNote();
 		if (note == null) {
@@ -145,22 +152,22 @@ class EmailTextCreator {
 
 		return sb.toString();
 	}
-	
+
 	public String generateResetPasswordText(final Login login) {
-		
+
 		final StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("Hallo,");
 		sb.append(System.lineSeparator());
 		sb.append("um Ihr Passwort zurückzusetzen klicken Sie hier:");
-		sb.append(System.lineSeparator());		
+		sb.append(System.lineSeparator());
 
 		sb.append(new AccountHandler().generateResetPasswordLink(login.getId()));
 		sb.append(System.lineSeparator());
-		
+
 		sb.append(System.lineSeparator());
 		sb.append("Ihr National Studenplan Agency Team.");
-		
+
 		return sb.toString();
 	}
 

@@ -21,7 +21,12 @@ import org.hibernate.criterion.Restrictions;
 import server.entities.Replacement;
 import server.entities.ReplacementDeserializer;
 import server.exceptions.CookieInvalidException;
+import server.exceptions.EmailAddressException;
+import server.exceptions.EmailSendingException;
+import server.exceptions.ScheduleCreationException;
 import server.operations.CookieHandler;
+import server.operations.NewsLetterHandler;
+import server.operations.email.EmailJobHelper;
 import server.persistence.HibernateUtil;
 
 import com.google.gson.Gson;
@@ -51,9 +56,11 @@ public class ReplacementResource {
 				entityManager.getTransaction().begin();
 				HibernateUtil.getEntityManager().persist(replacement);
 				entityManager.getTransaction().commit();
+				new NewsLetterHandler().generateReplacementMail(replacement);
+
 				return new Gson().toJson(replacement);
 			}
-		} catch (JsonSyntaxException | CookieInvalidException e) {
+		} catch (JsonSyntaxException | CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
 		return null;
@@ -68,10 +75,10 @@ public class ReplacementResource {
 				final GsonBuilder gson = new GsonBuilder();
 				gson.registerTypeAdapter(Replacement.class, new ReplacementDeserializer());
 				final Replacement replacement = gson.create().fromJson(replacementJSON, Replacement.class);
-
+				new NewsLetterHandler().generateReplacementMail(replacement);
 				return new Gson().toJson(this.addReplacement(replacement));
 			}
-		} catch (JsonSyntaxException | CookieInvalidException e) {
+		} catch (JsonSyntaxException | CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
 		return null;
@@ -90,9 +97,14 @@ public class ReplacementResource {
 				entityManager.getTransaction().begin();
 				entityManager.remove(replacement);
 				entityManager.getTransaction().commit();
+				new NewsLetterHandler().generateReplacementMail(replacement);
+
 				return true;
 			}
-		} catch (final CookieInvalidException e) {
+		} catch (final CookieInvalidException | ScheduleCreationException | EmailSendingException | EmailAddressException e) { // TODO
+																																// Exception
+																																// Handling
+																																// SVEN!??
 			return false;
 		}
 		return false;
