@@ -19,11 +19,11 @@ import server.queries.NewsletterQuery;
 public class NewsLetterHandler {
 
 	public final String generateRegistrationLink(final Form form, final String email) {
-		return AccountHandler.URL_PREFIX + "confirm?id=" + form.getId() + "&email=" + email;
+		return AccountHandler.URL_PREFIX + "newsletter/confirm?id=" + form.getId() + "&email=" + email;
 	}
 
 	public final String generateRemoveLink(final Newsletter newsletter) {
-		return AccountHandler.URL_PREFIX + "remove?id=" + newsletter.getId();
+		return AccountHandler.URL_PREFIX + "newsletter/remove?id=" + newsletter.getId();
 	}
 
 	public final void addAddress(final Form form, final String email) throws EmailSendingException, EmailAddressException {

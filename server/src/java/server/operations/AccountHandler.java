@@ -17,7 +17,7 @@ import server.queries.LoginQuery;
 
 public class AccountHandler {
 	
-	public static final String URL_PREFIX = "http://localhost:8080/server/newsletter/";
+	public static final String URL_PREFIX = "http://localhost:8080/server/";
 
 	final Login createAccount(final String name, final String familyName, final String eMailAddress) throws DuplicateUserException,
 			EmailSendingException, EmailAddressException {
@@ -48,7 +48,7 @@ public class AccountHandler {
 	}
 	
 	public Object generateResetPasswordLink(int loginId) {
-		return URL_PREFIX + "remove?id=" + loginId;
+		return URL_PREFIX + "login/resetpw?user=" + loginId;
 	}
 
 	public final String changePassword(final String userName) throws EmailSendingException, EmailAddressException {
