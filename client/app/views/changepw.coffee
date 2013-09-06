@@ -12,7 +12,7 @@ class window.nsa.Views.ChangePassword extends Backbone.View
 
 	sendPasswordChange: () =>
 		$.ajax
-			url: nsa.config.api + "/login/changepw?user=#{@$(".app-username").val()}"
+			url: nsa.config.api + "/login/resetpw?user=#{@$(".app-username").val()}"
 			method: "GET"
 
 			success: (data) =>
