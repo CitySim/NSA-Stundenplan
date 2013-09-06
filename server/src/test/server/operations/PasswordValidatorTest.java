@@ -40,17 +40,17 @@ public class PasswordValidatorTest extends TestCase {
 		final String familyName = "Markmann";
 		final String eMailAddress = "test2@localhost";
 
-		Login account = null;
+		Login login = null;
 		try {
-			account = this.handler.createAccount(name, familyName, eMailAddress);
+			login = this.handler.createAccount(name, familyName, eMailAddress);
 		} catch (final EmailSendingException e) {
 			PasswordValidatorTest.fail();
 		} catch (final EmailAddressException e) {
 			PasswordValidatorTest.fail();
 		} catch (final DuplicateUserException e) {
 		}
-		final String password = account.getPassword();
-		this.userName = account.getUsername();
+		final String password = login.getPassword();
+		this.userName = login.getUsername();
 
 		try {
 			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));

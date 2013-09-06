@@ -28,22 +28,17 @@ public class AccountHandler {
 
 		final String hashedPw = new PasswordEncryptor().encryptPassword(password);
 
-		this.storeUserInDatabase(userName, hashedPw, eMailAddress);
+		Login login = storeUserInDatabase(userName, hashedPw, eMailAddress);
 
 		new EmailJobHelper().sendCreationMail(eMailAddress, userName, password);
-
-		// used for tests
-		final Login login = new Login();
-		login.setUser(userName);
-		login.setPassword(password);
-
+		
 		return login;
 
 	}
 	
-	public final void resetPassword(final String userName) throws EmailSendingException, EmailAddressException {
+	public final void resetPassword(final int userId) throws EmailSendingException, EmailAddressException {
 		
-		Login login = new LoginQuery().getLogin(userName);	
+		Login login = new LoginQuery().getLoginById(userId);	
 		new EmailJobHelper().sendResetPasswordMail(login);		
 	}
 	
@@ -51,9 +46,9 @@ public class AccountHandler {
 		return URL_PREFIX + "login/resetpw?user=" + loginId;
 	}
 
-	public final String changePassword(final String userName) throws EmailSendingException, EmailAddressException {
+	public final String changePassword(final int userId) throws EmailSendingException, EmailAddressException {
 		
-		Login login = new LoginQuery().getLogin(userName);
+		Login login = new LoginQuery().getLoginById(userId);
 
 		final PasswordEncryptor encryptor = new PasswordEncryptor();
 
@@ -77,14 +72,14 @@ public class AccountHandler {
 		return new LoginQuery().removeLogin(userName);
 	}
 
-	private void storeUserInDatabase(final String userName, final String hashedPw, final String eMailAddress) throws DuplicateUserException {
+	private Login storeUserInDatabase(final String userName, final String hashedPw, final String eMailAddress) throws DuplicateUserException {
 
-		final boolean success = new LoginQuery().createUser(userName, hashedPw, eMailAddress);
+		final Login login = new LoginQuery().createUser(userName, hashedPw, eMailAddress);
 
-		if (!success) {
+		if (login == null) {
 			throw new DuplicateUserException();
 		}
-
+		return login;
 	}
 
 	private String generateUserName(final String name, final String familyName) {
