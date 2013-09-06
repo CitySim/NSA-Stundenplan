@@ -3,10 +3,12 @@ package server.operations.email;
 import java.util.ArrayList;
 import java.util.List;
 
+import server.entities.EmailAddress;
 import server.entities.Form;
 import server.entities.Login;
 import server.entities.Newsletter;
 import server.entities.Replacement;
+import server.entities.Teacher;
 import server.queries.NewsletterQuery;
 
 /**
@@ -55,6 +57,8 @@ class EmailCreator {
 		for (final Newsletter newsLetter : newsLetterList) {
 			emailAddresList.add(newsLetter.getEmail().getEMailAddress());
 		}
+		this.addTeacherAddress(replacement.getTeacher(), emailAddresList);
+		this.addTeacherAddress(replacement.getOldteacher(), emailAddresList);
 
 		return emailList;
 	}
@@ -76,22 +80,22 @@ class EmailCreator {
 
 		return emailList;
 	}
-	
+
 	public final ArrayList<EmailObject> createResetPasswordMail(final Login login) {
-		
+
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
-		
+
 		final EmailObject emailObject = new EmailObject();
 		emailList.add(emailObject);
-		
+
 		final ArrayList<String> emailAddresList = emailObject.getEmailAddressList();
-		
+
 		final String emailText = new EmailTextCreator().generateResetPasswordText(login);
-		
+
 		new EmailContentCreator().createMailContent(emailText, null, emailObject);
-		
+
 		emailAddresList.add(login.getEmail().getEMailAddress());
-		
+
 		return emailList;
 	}
 
@@ -111,9 +115,8 @@ class EmailCreator {
 		emailAddresList.add(login.getEmail().getEMailAddress());
 
 		return emailList;
-	}	
+	}
 
-	// TODO testen, überprüfen, ggf. refactorn
 	public final ArrayList<EmailObject> createRemoveRegistrationMail(final Newsletter newsletter) {
 
 		final ArrayList<EmailObject> emailList = new ArrayList<EmailObject>();
@@ -130,5 +133,17 @@ class EmailCreator {
 		emailAddresList.add(newsletter.getEmail().getEMailAddress());
 
 		return emailList;
+	}
+
+	private void addTeacherAddress(final Teacher teacher, final ArrayList<String> emailAddresList) {
+		if (teacher != null) {
+			final EmailAddress email = new NewsletterQuery().getEmail(teacher.getFirstname() + teacher.getName() + "@localhost");
+			if (email != null) {
+				final String emailAddress = email.getEMailAddress();
+				if (!emailAddresList.contains(emailAddress)) {
+					emailAddresList.add(emailAddress);
+				}
+			}
+		}
 	}
 }
