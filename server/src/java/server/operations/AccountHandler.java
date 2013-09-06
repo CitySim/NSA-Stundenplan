@@ -36,10 +36,14 @@ public class AccountHandler {
 
 	}
 	
-	public final void resetPassword(final String userName) throws EmailSendingException, EmailAddressException {
+	public final boolean resetPassword(final String userName) throws EmailSendingException, EmailAddressException {
 		
 		Login login = new LoginQuery().getLogin(userName);	
-		new EmailJobHelper().sendResetPasswordMail(login);		
+		if (login == null) {
+			return false;
+		}
+		new EmailJobHelper().sendResetPasswordMail(login);	
+		return true;
 	}
 	
 	public Object generateResetPasswordLink(int loginId) {
