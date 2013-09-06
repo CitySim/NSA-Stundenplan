@@ -43,7 +43,7 @@ public class AccountHandler {
 	}
 	
 	public Object generateResetPasswordLink(int loginId) {
-		return URL_PREFIX + "login/resetpw?user=" + loginId;
+		return URL_PREFIX + "login/changepw?user=" + loginId;
 	}
 
 	public final String changePassword(final int userId) throws EmailSendingException, EmailAddressException {
