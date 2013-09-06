@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import server.operations.OperationTestSuit;
+import server.persistence.CreateDatabase;
 
 /**
  * Used to start all tests for the application.
@@ -15,6 +16,6 @@ import server.operations.OperationTestSuit;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({OperationTestSuit.class })
+@SuiteClasses({ CreateDatabase.class, OperationTestSuit.class })
 public class AllTests {
 }

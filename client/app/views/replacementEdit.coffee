@@ -6,7 +6,6 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 	events:
 		"click .app-save": "save"
-		"change [name=droplesson]": "toggleDropLesson"
 
 	initialize: () =>
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
@@ -61,21 +60,6 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			classes: nsa.Data.classes.toJSON()
 			newReplacement: @options.newReplacement or false
 
-		if not model.teacher? and not model.room? and not model.subject?
-			$("[name=droplesson]").click()
-
-		return
-
-	toggleDropLesson: () =>
-		checkbox = $("[name=droplesson]")
-		selects = @$("select[name=teacher], select[name=room], select[name=subject]")
-
-		selects.attr("disabled", checkbox.is(":checked"))
-		if checkbox.is(":checked")
-			selects.append("""<option value="0">entfällt</option>""").val(0)
-		else
-			selects.find("option[value=0]").remove()
-
 		return
 
 	save: () =>
@@ -87,6 +71,9 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			val = e.val()
 
 			return if not name? or not val?
+
+			if e.is("[type=checkbox]")
+				val = e.is(":checked")
 
 			data[name] = val
 			return

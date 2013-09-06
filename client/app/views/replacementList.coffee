@@ -42,9 +42,6 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 				if r.lesson?
 					r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
 					r.format_end = moment(r.lesson.timeTo, "hh:mm a").format("HH:mm")
-
-				if not r.teacher? and not r.room? and not r.subject?
-					r.dropped = true
 					
 				return r.day.description
 

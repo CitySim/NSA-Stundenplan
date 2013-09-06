@@ -28,9 +28,6 @@ class window.nsa.Views.ReplacementDetail extends Backbone.View
 		model.format_start = moment(model.lesson.timeFrom, "hh:mm a").format("HH:mm")
 		model.format_end = moment(model.lesson.timeTo, "hh:mm a").format("HH:mm")
 
-		if not model.teacher? and not model.room? and not model.subject?
-			model.dropped = true
-
 		@$el.html @template
 			model: model
 			isLoggedIn: nsa.Data.user.isLoggedIn()
