@@ -55,14 +55,15 @@ public class LoginResource {
 	@GET
 	public String resetPassword(@QueryParam("user") final String userName) {
 		final AccountHandler accountHandler = new AccountHandler();
+		boolean result = false;
 		try {
-			accountHandler.resetPassword(userName);
+			result = accountHandler.resetPassword(userName);
 		} catch (final EmailSendingException e) {
 			return new Gson().toJson(e.getMessage());
 		} catch (final EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
-		return new Gson().toJson(true);
+		return new Gson().toJson(result);
 	}
 
 	@Path("changepw")
@@ -73,7 +74,7 @@ public class LoginResource {
 		} catch (final EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
-		return new Gson().toJson("Ihr Passwort wurde erfolgreich geändert und wird Ihnen per Mail zugesendet.");
+		return "Ihr Passwort wurde erfolgreich geändert und wird Ihnen per Mail zugesendet";
 	}
 
 	@Path("logout")
