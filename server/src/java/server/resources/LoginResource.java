@@ -73,7 +73,7 @@ public class LoginResource {
 		} catch (final EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}
-		return new Gson().toJson(true);
+		return new Gson().toJson("Ihr Passwort wurde erfolgreich geändert und wird Ihnen per Mail zugesendet.");
 	}
 
 	@Path("logout")
