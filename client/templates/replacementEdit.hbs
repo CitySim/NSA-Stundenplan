@@ -47,6 +47,8 @@
 							<input type="checkbox" name="cancel" {{#if cancel}}checked{{/if}}> Diese Stunde entfällt
 						</label>
 					</div>
+				{{else}}
+					<input type="hidden" name="cancel" value="0">
 				{{/if}}
 				<hr>
 				{{#if oldteacher.id}}
@@ -58,6 +60,8 @@
 							{{/each}}
 						</select>
 					</div>
+				{{else}}
+					<input type="hidden" name="oldteacher" value="0">
 				{{/if}}
 				<div class="form-group">
 					<label for="formTeacher">Lehrer</label>

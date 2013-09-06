@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import server.entities.Replacement;
 import server.entities.ReplacementDeserializer;
 import server.exceptions.CookieInvalidException;
@@ -122,7 +121,11 @@ public class ReplacementResource {
 		final Criteria criteria = session.createCriteria(Replacement.class);
 
 		if (teacherId != 0) {
-			criteria.add(Restrictions.eq("teacher.id", teacherId));
+			criteria.add(
+				Restrictions.disjunction()
+					.add(Restrictions.eq("teacher.id", teacherId))
+					.add(Restrictions.eq("oldteacher.id", teacherId))
+			);
 		}
 		if (formId != 0) {
 			criteria.add(Restrictions.eq("form.id", formId));
