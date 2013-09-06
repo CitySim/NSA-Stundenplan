@@ -28,16 +28,19 @@ class EmailTextCreator {
 
 		sb.append(System.lineSeparator());
 		sb.append("Betroffener Tag:");
-		sb.append("Woche: "+replacement.getWeek());
-		sb.append("Tag:"+replacement.getDay().getDescription());
-		sb.append("Stunde: "+ replacement.getLesson().getTimeFrom() + " - " + replacement.getLesson().getTimeTo());
+		sb.append(System.lineSeparator());
+		sb.append("Woche: " + replacement.getWeek());
+		sb.append(System.lineSeparator());
+		sb.append("Tag: " + replacement.getDay().getDescription());
+		sb.append(System.lineSeparator());
+		sb.append("Stunde: " + replacement.getLesson().getTimeFrom() + " - " + replacement.getLesson().getTimeTo());
 		sb.append(System.lineSeparator());
 
-		sb.append("Neuer Raum:");
+		sb.append("Neuer Raum: ");
 		sb.append(replacement.getRoom().getDescription()); // Raum name
 		sb.append(System.lineSeparator());
 
-		sb.append("Fach:");
+		sb.append("Fach: ");
 		String fach = "-";
 		if (replacement.getSubject() != null) {
 			fach = replacement.getSubject().getDescription();
@@ -49,12 +52,12 @@ class EmailTextCreator {
 			sb.append("Änderung: Die Stunde Fällt aus!");
 
 		} else {
-			sb.append("Vertretungslehrer:");
+			sb.append("Vertretungslehrer: ");
 			sb.append(replacement.getTeacher().getFirstname() + " " + replacement.getTeacher().getName());
 		}
 
 		sb.append(System.lineSeparator());
-		sb.append("Notiz:");
+		sb.append("Notiz: ");
 		String note = replacement.getNote();
 		if (note == null) {
 			note = "-";
