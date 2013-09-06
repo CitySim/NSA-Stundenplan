@@ -53,10 +53,10 @@ public class LoginResource {
 
 	@Path("resetpw")
 	@GET
-	public String resetPassword(@QueryParam("user") final int userId) {
+	public String resetPassword(@QueryParam("user") final String userName) {
 		final AccountHandler accountHandler = new AccountHandler();
 		try {
-			accountHandler.resetPassword(userId);
+			accountHandler.resetPassword(userName);
 		} catch (final EmailSendingException e) {
 			return new Gson().toJson(e.getMessage());
 		} catch (final EmailAddressException e) {
