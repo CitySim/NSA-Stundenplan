@@ -20,10 +20,9 @@
 					</td>
 					<td>
 						{{#if cancel}}
-							<span class="text-danger">entfällt</span>
-						{{else}}
-							<a href="#timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
+							<span class="text-danger">entfällt</span> /&nbsp;
 						{{/if}}
+						<a href="#timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
 					</td>
 				</tr>
 				<tr>
@@ -32,10 +31,9 @@
 					</td>
 					<td>
 						{{#if cancel}}
-							<span class="text-danger">entfällt</span>
-						{{else}}
-							<a href="#timetable/room/{{room.id}}">{{room.description}}</a>
+							<span class="text-danger">entfällt</span> /&nbsp;
 						{{/if}}
+						<a href="#timetable/room/{{room.id}}">{{room.description}}</a>
 					</td>
 				</tr>
 				<tr>
@@ -44,13 +42,13 @@
 					</td>
 					<td>
 						{{#if cancel}}
-							<span class="text-danger">entfällt</span>
+							<span class="text-danger">entfällt</span> /&nbsp;
+						{{/if}}
+
+						{{#if subject}}
+							{{subject.description}}
 						{{else}}
-							{{#if subject}}
-								{{subject.description}}
-							{{else}}
-								<span class="text-muted">kein Fach</span>
-							{{/if}}
+							<span class="text-muted">kein Fach</span>
 						{{/if}}
 					</td>
 				</tr>
