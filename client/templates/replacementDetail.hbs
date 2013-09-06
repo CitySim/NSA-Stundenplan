@@ -8,7 +8,7 @@
 				{{else}}
 					<span class="text-muted">keine Stunde</span>
 				{{/if}}
-				{{#if dropped}}
+				{{#if cancel}}
 					<span class="text-danger">entfällt</span>
 				{{/if}}
 			</h3>
@@ -19,7 +19,7 @@
 						Vertretungsleher
 					</td>
 					<td>
-						{{#if dropped}}
+						{{#if cancel}}
 							<span class="text-danger">entfällt</span>
 						{{else}}
 							<a href="#timetable/teacher/{{teacher.id}}">{{teacher.firstname}} {{teacher.name}}</a>
@@ -31,7 +31,7 @@
 						Raum
 					</td>
 					<td>
-						{{#if dropped}}
+						{{#if cancel}}
 							<span class="text-danger">entfällt</span>
 						{{else}}
 							<a href="#timetable/room/{{room.id}}">{{room.description}}</a>
@@ -43,7 +43,7 @@
 						Fach
 					</td>
 					<td>
-						{{#if dropped}}
+						{{#if cancel}}
 							<span class="text-danger">entfällt</span>
 						{{else}}
 							{{#if subject}}
