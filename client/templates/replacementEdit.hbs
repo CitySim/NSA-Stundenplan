@@ -40,13 +40,25 @@
 						{{/each}}
 					</select>
 				</div>
+				{{#if ../cancelable}}
+					<hr>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="cancel" {{#if cancel}}checked{{/if}}> Diese Stunde entfällt
+						</label>
+					</div>
+				{{/if}}
 				<hr>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="cancel" {{#if cancel}}checked{{/if}}> Diese Stunde entfällt
-					</label>
-				</div>
-				<hr>
+				{{#if oldteacher.id}}
+					<div class="form-group">
+						<label for="formOldTeacher">Ürsprunglicher Lehrer</label>
+						<select name="oldteacher" class="form-control" id="formOldTeacher" disabled>
+							{{#each ../../teachers}}
+								<option value="{{id}}" {{#ifcond ../../oldteacher.id "==" id}}selected{{/ifcond}}>{{firstname}} {{name}}</option>
+							{{/each}}
+						</select>
+					</div>
+				{{/if}}
 				<div class="form-group">
 					<label for="formTeacher">Lehrer</label>
 					<select name="teacher" class="form-control" id="formTeacher">

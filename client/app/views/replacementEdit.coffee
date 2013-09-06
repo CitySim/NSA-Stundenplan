@@ -6,6 +6,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 
 	events:
 		"click .app-save": "save"
+		"click [name=cancel]": "toggleCancel"
 
 	initialize: () =>
 		nsa.app.fetchLists ["classes", "days", "lessons", "rooms", "subjects", "teachers"], (err) =>
@@ -59,6 +60,21 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			subjects: nsa.Data.subjects.toJSON()
 			classes: nsa.Data.classes.toJSON()
 			newReplacement: @options.newReplacement or false
+			cancelable: @options.modelData? and not isNaN(@options.modelData.teacher.id) and not isNaN(@options.modelData.room.id) and not isNaN(@options.modelData.subject.id)
+
+		return
+
+	toggleCancel: () =>
+		e = @$("[name=cancel]")
+
+		if e.is(":checked")
+			@$("[name=teacher]").prop("disabled", true).val(@options.modelData.teacher.id)
+			@$("[name=room]").prop("disabled", true).val(@options.modelData.room.id)
+			@$("[name=subject]").prop("disabled", true).val(@options.modelData.subject.id)
+		else
+			@$("[name=teacher]").prop("disabled", false)
+			@$("[name=room]").prop("disabled", false)
+			@$("[name=subject]").prop("disabled", false)
 
 		return
 

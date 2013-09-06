@@ -91,6 +91,8 @@ class window.nsa.App extends Backbone.Router
 					id: parseInt(room)
 				subject:
 					id: parseInt(subject)
+				oldteacher:
+					id: parseInt(teacher)
 
 		return
 
