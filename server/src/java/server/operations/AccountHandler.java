@@ -36,9 +36,9 @@ public class AccountHandler {
 
 	}
 	
-	public final void resetPassword(final int userId) throws EmailSendingException, EmailAddressException {
+	public final void resetPassword(final String userName) throws EmailSendingException, EmailAddressException {
 		
-		Login login = new LoginQuery().getLoginById(userId);	
+		Login login = new LoginQuery().getLogin(userName);	
 		new EmailJobHelper().sendResetPasswordMail(login);		
 	}
 	
