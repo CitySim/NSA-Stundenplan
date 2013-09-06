@@ -53,10 +53,10 @@ public class LoginResource {
 
 	@Path("resetpw")
 	@GET
-	public String resetPassword(@QueryParam("user") final String userName) {
+	public String resetPassword(@QueryParam("user") final int userId) {
 		final AccountHandler accountHandler = new AccountHandler();
 		try {
-			accountHandler.resetPassword(userName);
+			accountHandler.resetPassword(userId);
 		} catch (final EmailSendingException e) {
 			return new Gson().toJson(e.getMessage());
 		} catch (final EmailAddressException e) {
@@ -67,9 +67,9 @@ public class LoginResource {
 
 	@Path("changepw")
 	@GET
-	public String changePassword(@QueryParam("user") final String userName) {
+	public String changePassword(@QueryParam("user") final int userId) {
 		try {
-			new AccountHandler().changePassword(userName);
+			new AccountHandler().changePassword(userId);
 		} catch (final EmailSendingException | EmailAddressException e) {
 			return new Gson().toJson(e.getMessage());
 		}

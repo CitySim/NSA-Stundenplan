@@ -23,8 +23,8 @@ import server.queries.LoginQuery;
 public class AccountHandlerTest extends TestCase {
 
 	private AccountHandler handler;
-	private String userName;
 	private String password;
+	private Login login;
 
 	@Override
 	@Before
@@ -36,7 +36,7 @@ public class AccountHandlerTest extends TestCase {
 	@Test
 	public final void testAccountCreation() {
 		this.createTestAccount();
-		this.password = new LoginQuery().getPassword(this.userName);
+		this.password = new LoginQuery().getPassword(this.login.getUsername());
 		AccountHandlerTest.assertNotNull(this.password);
 
 	}
@@ -45,13 +45,13 @@ public class AccountHandlerTest extends TestCase {
 	public final void testPasswordChange() {
 		this.createTestAccount();
 		try {
-			this.password = this.handler.changePassword(this.userName);
+			this.password = this.handler.changePassword(this.login.getId());
 		} catch (final EmailSendingException e) {
 			fail();
 		} catch (final EmailAddressException e) {
 			fail();
 		}
-		AccountHandlerTest.assertTrue(new LoginValidator().validatePassword(this.password, new LoginQuery().getPassword(this.userName)));
+		AccountHandlerTest.assertTrue(new LoginValidator().validatePassword(this.password, new LoginQuery().getPassword(this.login.getUsername())));
 	}
 
 	public final void createTestAccount() {
@@ -61,8 +61,7 @@ public class AccountHandlerTest extends TestCase {
 		final String eMailAddress = "test@localhost";
 
 		try {
-			final Login account = this.handler.createAccount(name, familyName, eMailAddress);
-			this.userName = account.getUsername();
+			login = this.handler.createAccount(name, familyName, eMailAddress);
 		} catch (final EmailSendingException | EmailAddressException e) {
 			fail();
 		} catch (final DuplicateUserException e) {
@@ -72,6 +71,6 @@ public class AccountHandlerTest extends TestCase {
 	@Test
 	@After
 	public final void cleanUpTestData() {
-		this.handler.deleteAccount(this.userName);
+		this.handler.deleteAccount(this.login.getUsername());
 	}
 }

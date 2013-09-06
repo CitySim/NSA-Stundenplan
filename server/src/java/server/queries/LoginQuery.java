@@ -51,7 +51,7 @@ public class LoginQuery extends QueryResult {
 	 * @param eMailAddress
 	 * @return boolean successful
 	 */
-	public boolean createUser(final String username, final String password, final String eMailAddress) {
+	public Login createUser(final String username, final String password, final String eMailAddress) {
 		Login login = this.getLogin(username);
 		if (login == null) {
 			this.em.getTransaction().begin();
@@ -69,10 +69,8 @@ public class LoginQuery extends QueryResult {
 			login.setEmail(email);
 			this.em.persist(login);
 			this.em.getTransaction().commit();
-			return true;
-		} else {
-			return false;
-		}
+		} 
+		return login;
 	}
 
 	/**
@@ -119,5 +117,8 @@ public class LoginQuery extends QueryResult {
 
 	public Login getLogin(final String username) {
 		return (Login) this.getSingleResult(this.em.createQuery("select l from Login l where user = '" + username + "'", Login.class));
+	}
+	public Login getLoginById(final int userId) {
+		return (Login) this.getSingleResult(this.em.createQuery("from Login l where id = '" + userId + "'", Login.class));
 	}
 }

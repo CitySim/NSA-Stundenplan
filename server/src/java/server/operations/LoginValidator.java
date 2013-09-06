@@ -31,7 +31,7 @@ public class LoginValidator {
 		return passwordOkay;
 	}
 
-	protected boolean validatePassword(final String password, final String dbPassword) {
+	public boolean validatePassword(final String password, final String dbPassword) {
 		Boolean matches = false;
 
 		if (BCrypt.checkpw(password, dbPassword)) {
