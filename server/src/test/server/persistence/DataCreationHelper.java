@@ -115,13 +115,14 @@ class DataCreationHelper {
 		this.em.persist(login);
 	}
 
-	void createReplacement(final String week, final Day day, final Room room, final Teacher teacher, final Form form, final Subject subject, final Lesson lesson,
+	void createReplacement(final String week, final Day day, final Room room, final Teacher teacher,final Teacher oldteacher, final Form form, final Subject subject, final Lesson lesson,
 			final String note, final int cancel) {
 		final Replacement replacement = new Replacement();
 		replacement.setWeek(week);
 		replacement.setDay(day);
 		replacement.setRoom(room);
 		replacement.setTeacher(teacher);
+		replacement.setOldteacher(oldteacher);
 		replacement.setForm(form);
 		replacement.setSubject(subject);
 		replacement.setLesson(lesson);

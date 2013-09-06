@@ -203,11 +203,11 @@ public class CreateDatabase {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement("2013-W36", montag, raum53, luehrssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
-		this.helper.createReplacement("2013-W36", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
-		this.helper.createReplacement("2013-W36", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, it1b, ae, lesson3, "Fällt aus", 1);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, it1b, ae, lesson4, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", montag, raum53, luehrssen,luehrssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
+		this.helper.createReplacement("2013-W36", montag, raum53, wehmeyer, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
+		this.helper.createReplacement("2013-W36", montag, raum82, wehmeyer, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, null,luehrssen, it1b, ae, lesson3, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, null,luehrssen, it1b, ae, lesson4, "Fällt aus", 1);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "test3@localhost");

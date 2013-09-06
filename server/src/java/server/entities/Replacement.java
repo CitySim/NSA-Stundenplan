@@ -23,6 +23,9 @@ public class Replacement extends DefaultEntity {
 	@ManyToOne(targetEntity = Teacher.class)
 	private Teacher teacher;
 
+	@ManyToOne(targetEntity = Teacher.class)
+	private Teacher oldteacher;
+
 	@ManyToOne(targetEntity = Room.class)
 	private Room room;
 
@@ -73,6 +76,14 @@ public class Replacement extends DefaultEntity {
 		this.teacher = teacher;
 	}
 
+	public Teacher getOldteacher() {
+		return oldteacher;
+	}
+
+	public void setOldteacher(final Teacher oldteacher) {
+		this.oldteacher = oldteacher;
+	}
+
 	public Room getRoom() {
 		return this.room;
 	}
@@ -104,6 +115,5 @@ public class Replacement extends DefaultEntity {
 	public void setCancel(int cancel) {
 		this.cancel = cancel;
 	}
-	
 	
 }
