@@ -2,15 +2,8 @@ package server.operations;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import server.entities.Login;
-import server.exceptions.DuplicateUserException;
-import server.exceptions.EmailAddressException;
-import server.exceptions.EmailSendingException;
-import server.exceptions.LoginFailedException;
 
 /**
  * Test for password validation.
@@ -23,46 +16,25 @@ import server.exceptions.LoginFailedException;
 public class PasswordValidatorTest extends TestCase {
 
 	private LoginValidator validator;
-	private AccountHandler handler;
-	private String userName;
+	private PasswordEncryptor encryptor;
 
 	@Override
 	@Before
 	public final void setUp() {
 		this.validator = new LoginValidator();
-		this.handler = new AccountHandler();
+		this.encryptor = new PasswordEncryptor();
 	}
 
 	@Test
 	public final void testPasswordValidation() {
 
-		final String name = "Dennis";
-		final String familyName = "Markmann";
-		final String eMailAddress = "test2@localhost";
+		final String password;
+		final String hashedPw;
 
-		Login login = null;
-		try {
-			login = this.handler.createAccount(name, familyName, eMailAddress);
-		} catch (final EmailSendingException e) {
-			PasswordValidatorTest.fail();
-		} catch (final EmailAddressException e) {
-			PasswordValidatorTest.fail();
-		} catch (final DuplicateUserException e) {
-		}
-		final String password = login.getPassword();
-		this.userName = login.getUsername();
+		password = this.encryptor.generatePassword();
+		hashedPw = this.encryptor.encryptPassword(password);
 
-		try {
-			PasswordValidatorTest.assertTrue(this.validator.validateLoginData(this.userName, password));
-		} catch (final LoginFailedException e) {
-			PasswordValidatorTest.fail();
-		}
+		PasswordValidatorTest.assertTrue(this.validator.validatePassword(password, hashedPw));
 
-	}
-
-	@Test
-	@After
-	public final void cleanUpTestData() {
-		this.handler.deleteAccount(this.userName);
 	}
 }
