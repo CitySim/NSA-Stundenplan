@@ -170,7 +170,6 @@ public class CreateDatabase {
 		this.helper.createTimeTableSession(it1b, giera, raum53, lesson8, mittwoch, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum53, lesson9, mittwoch, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum53, lesson10, mittwoch, orgaGp, timeTableLessons_it1b);
-
 		// Lessons for Thursday
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson1, donnerstag, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson2, donnerstag, orgaGp, timeTableLessons_it1b);
@@ -180,7 +179,6 @@ public class CreateDatabase {
 		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson6, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson7, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson8, donnerstag, pro, timeTableLessons_it1b);
-
 		// Lessons for Friday
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson1, freitag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, burg, raum114, lesson2, freitag, pro, timeTableLessons_it1b);
@@ -203,11 +201,11 @@ public class CreateDatabase {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement("2013-W36", montag, raum53, luehrssen,luehrssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
+		this.helper.createReplacement("2013-W36", montag, raum53, luehrssen, luehrssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
 		this.helper.createReplacement("2013-W36", montag, raum53, herrmann, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
 		this.helper.createReplacement("2013-W36", montag, raum82, herrmann, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen,luehrssen, it1b, ae, lesson3, "Fällt aus", 1);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen,luehrssen, it1b, ae, lesson4, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, luehrssen, it1b, ae, lesson3, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, luehrssen, it1b, ae, lesson4, "Fällt aus", 1);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
 		this.helper.createNewsletter(it1a, "test3@localhost");
