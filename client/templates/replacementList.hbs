@@ -24,7 +24,7 @@
 							{{#if subject}}
 								{{subject.description}}
 							{{else}}
-								{{#if dropped}}
+								{{#if cancel}}
 									<span class="text-danger">entfällt</span>									
 								{{else}}
 									<span class="text-muted">kein Fach</span>
@@ -32,7 +32,7 @@
 							{{/if}}
 						</h4>
 
-						{{#if dropped}}
+						{{#if cancel}}
 							<p class="list-group-item-text text-danger">
 								Stunde entfällt
 							</p>

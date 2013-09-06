@@ -88,11 +88,6 @@ class window.nsa.Views.TimetableDetail extends Backbone.View
 				_.each @replacements.toJSON(), (r) =>
 					if d.id is r.day.id and l.id is r.lesson.id
 						tempReplacement = _.clone(r)
-
-						if not tempReplacement.teacher? and not tempReplacement.room? and not tempReplacement.subject?
-							tempReplacement.cellClass = "danger"
-						else
-							tempReplacement.cellClass = "warning"
 					return
 
 				l.days.push

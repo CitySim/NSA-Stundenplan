@@ -61,10 +61,10 @@
 						{{#each days}}
 							{{#ifcond replacement "and" ../../showReplacement}}
 								{{#with replacement}}
-									<td class="{{cellClass}}">
-										{{#ifcond cellClass "==" "danger"}}
+									<td class="{{#if cancel}}danger{{else}}warning{{/if}}">
+										{{#if cancel}}
 											<span class="label label-danger">entfällt</span><br>
-										{{/ifcond}}
+										{{/if}}
 
 										{{#if subject}}
 											{{subject.shortName}}
