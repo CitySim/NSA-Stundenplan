@@ -1,6 +1,5 @@
 package server.persistence;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,30 +45,25 @@ public class CreateDatabase {
 
 		// To stop creating duplicate data
 		@SuppressWarnings("unchecked")
-		final List<Teacher> teacher = this.em.createNativeQuery("SELECT * FROM lehrer WHERE Vorname = 'Volker' and Name = 'Lührssen'", Teacher.class)
-				.getResultList();
+		final List<Teacher> teacher = this.em
+				.createNativeQuery("SELECT * FROM lehrer WHERE Vorname = 'Volker' and Name = 'Luehrssen'", Teacher.class).getResultList();
 		if (teacher.size() != 0) {
+			this.em.getTransaction().commit();
 			return;
 		}
 
 		final School school = new School();
 		school.setImage("/home.jpg");
-		school.setText("Staatliche Gewerbeschule G18 <br>"
-				+ "Informations- und Elektrotechnik, <br>"
-				+ "Chemie- und Automatisierungstechnik <br>"
-				+ "Dratelnstraße 26 21109 Hamburg <br>"
-				+ "<br>"
-				+ "Telefon: +49 40 428 79 - 02 <br>"
-				+ "Telefax: +49 40 428 79 - 450 <br>"
-				+ "E-Mail: g18(at)hibb.hamburg.de <br>"
-				+ "<br>"
+		school.setText("Staatliche Gewerbeschule G18 <br>" + "Informations- und Elektrotechnik, <br>" + "Chemie- und Automatisierungstechnik <br>"
+				+ "Dratelnstraße 26 21109 Hamburg <br>" + "<br>" + "Telefon: +49 40 428 79 - 02 <br>" + "Telefax: +49 40 428 79 - 450 <br>"
+				+ "E-Mail: g18(at)hibb.hamburg.de <br>" + "<br>"
 				+ "++++ Neuer Rekord: Die IT1a hat den besten Notenschnitt, den jemals eine Klasse erreicht hat ++++<br>"
 				+ "++++ Zeugnisse sind fertig ++++<br>" + "++++ Studie: Killerspiele fördern Aufmerksamkeit und Reaktionsvermögen ++++<br>"
 				+ "++++ Folgende Lehrer sind krank: ... ++++<br>" + "++++ Stundenausfall für die Klassen IT3C, CH3M, IN5T ++++<br>"
 				+ "++++ Studie: Lernortverlegung nach Zuhause führt zu effektiverem Lernverhalten ++++<br>");
 		this.em.persist(school);
 
-		final Teacher lührssen = this.helper.createTeacher("Volker", "Lührssen", "Lü");
+		final Teacher luehrssen = this.helper.createTeacher("Volker", "Luehrssen", "Lue");
 		final Teacher albers = this.helper.createTeacher("Kirsten", "Albers", "Al");
 		final Teacher herrmann = this.helper.createTeacher("Werner", "Herrmann", "Hr");
 		final Teacher bastians = this.helper.createTeacher("Thomas", "Bastians", "Ba");
@@ -115,16 +109,16 @@ public class CreateDatabase {
 		// Lessons for Monday
 		final List<TimetableLesson> timeTableLessons_it1a = new ArrayList<TimetableLesson>();
 
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson3, montag, ae, timeTableLessons_it1a);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson4, montag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson3, montag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson4, montag, ae, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, albers, raum32, lesson5, montag, suk, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, albers, raum32, lesson6, montag, suk, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, herrmann, raum32, lesson7, montag, itSyst, timeTableLessons_it1a);
 		// Lessons for TuesDay
 		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson3, dienstag, wug, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, bastians, raum81, lesson4, dienstag, wug, timeTableLessons_it1a);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson5, dienstag, ae, timeTableLessons_it1a);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson6, dienstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson5, dienstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson6, dienstag, ae, timeTableLessons_it1a);
 		// Lessons for Wednesday
 		this.helper.createTimeTableSession(it1a, giera, raum82, lesson3, mittwoch, orgaGp, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, giera, raum82, lesson4, mittwoch, orgaGp, timeTableLessons_it1a);
@@ -133,8 +127,8 @@ public class CreateDatabase {
 		this.helper.createTimeTableSession(it1a, burg, raum114, lesson7, mittwoch, fe, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, burg, raum114, lesson8, mittwoch, fe, timeTableLessons_it1a);
 		// Lessons for Thursday
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson1, donnerstag, ae, timeTableLessons_it1a);
-		this.helper.createTimeTableSession(it1a, lührssen, raum53, lesson2, donnerstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson1, donnerstag, ae, timeTableLessons_it1a);
+		this.helper.createTimeTableSession(it1a, luehrssen, raum53, lesson2, donnerstag, ae, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, giera, raum81, lesson3, donnerstag, orgaGp, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, giera, raum81, lesson4, donnerstag, orgaGp, timeTableLessons_it1a);
 		this.helper.createTimeTableSession(it1a, wehmeyer, raum53, lesson5, donnerstag, pro, timeTableLessons_it1a);
@@ -162,10 +156,10 @@ public class CreateDatabase {
 		this.helper.createTimeTableSession(it1b, albers, raum32, lesson2, montag, suk, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, bastians, raum53, lesson5, montag, wug, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, bastians, raum53, lesson6, montag, wug, timeTableLessons_it1b);
-		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson7, montag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, luehrssen, raum53, lesson7, montag, ae, timeTableLessons_it1b);
 		// Lessons for TuesDay
-		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson1, dienstag, ae, timeTableLessons_it1b);
-		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson2, dienstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, luehrssen, raum53, lesson1, dienstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, luehrssen, raum53, lesson2, dienstag, ae, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, bastians, raum81, lesson3, dienstag, wug, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, bastians, raum81, lesson4, dienstag, wug, timeTableLessons_it1b);
 		// Lessons for Wednesday
@@ -180,8 +174,8 @@ public class CreateDatabase {
 		// Lessons for Thursday
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson1, donnerstag, orgaGp, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, giera, raum81, lesson2, donnerstag, orgaGp, timeTableLessons_it1b);
-		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson3, donnerstag, ae, timeTableLessons_it1b);
-		this.helper.createTimeTableSession(it1b, lührssen, raum53, lesson4, donnerstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, luehrssen, raum53, lesson3, donnerstag, ae, timeTableLessons_it1b);
+		this.helper.createTimeTableSession(it1b, luehrssen, raum53, lesson4, donnerstag, ae, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson5, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, herrmann, raum114, lesson6, donnerstag, pro, timeTableLessons_it1b);
 		this.helper.createTimeTableSession(it1b, wehmeyer, raum114, lesson7, donnerstag, pro, timeTableLessons_it1b);
@@ -200,7 +194,7 @@ public class CreateDatabase {
 		timetable_it1b.setForm(it1b);
 		this.em.persist(timetable_it1b);
 
-		this.helper.createLogin("Volker.Lürssen", "VolkerLürssen@localhost");
+		this.helper.createLogin("Volker.Luehrssen", "VolkerLuehrssen@localhost");
 		this.helper.createLogin("Kirsten.Albers", "KirstenAlbers@localhost");
 		this.helper.createLogin("Werner.Herrmann", "WernerHerrmann@localhost");
 		this.helper.createLogin("Thomas.Bastians", "ThomasBastians@localhost");
@@ -209,35 +203,34 @@ public class CreateDatabase {
 		this.helper.createLogin("Andreas.Burg", "AndreasBurg@localhost");
 		this.helper.createLogin("test", "test@localhost");
 
-		this.helper.createReplacement("2013-W36", montag, raum53, lührssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
+		this.helper.createReplacement("2013-W36", montag, raum53, luehrssen, it1a, pro, lesson2, "Lehrer erkrankt", 0);
 		this.helper.createReplacement("2013-W36", montag, raum53, wehmeyer, it1a, ae, lesson3, "Zeugniskonferenz", 0);
 		this.helper.createReplacement("2013-W36", montag, raum82, wehmeyer, it1b, ae, lesson4, "Veranstaltung", 0);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, lührssen, it1b, ae, lesson3, "Fällt aus", 1);
-		this.helper.createReplacement("2013-W36", donnerstag, raum53, lührssen, it1b, ae, lesson4, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, it1b, ae, lesson3, "Fällt aus", 1);
+		this.helper.createReplacement("2013-W36", donnerstag, raum53, luehrssen, it1b, ae, lesson4, "Fällt aus", 1);
 
 		this.helper.createNewsletter(it1a, "test@localhost");
-		this.helper.createNewsletter(it1a, "KirstenAlbers@localhost");
-		this.helper.createNewsletter(it1b, "HeikeGiera@localhost");
+		this.helper.createNewsletter(it1a, "test3@localhost");
 
 		this.em.getTransaction().commit();
-		
-		createTimetables();
+
+		this.createTimetables();
 
 	}
 
 	private void createTimetables() {
-		em.getTransaction().begin();
-		createTeacherTimetables();
-		createRoomTimetables();
-		em.getTransaction().commit();
-		
+		this.em.getTransaction().begin();
+		this.createTeacherTimetables();
+		this.createRoomTimetables();
+		this.em.getTransaction().commit();
+
 	}
 
 	@SuppressWarnings("unchecked")
 	private void createRoomTimetables() {
-		List<Room> rooms = em.createQuery("from Room", Room.class).getResultList();
+		final List<Room> rooms = this.em.createQuery("from Room", Room.class).getResultList();
 
-		for (Room room : rooms) {
+		for (final Room room : rooms) {
 			final String lessonSql = "select * from klasse_tag_stunde where idRaum = '" + room.getId() + "'";
 			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
 			final Timetable timetable = new Timetable();
@@ -247,15 +240,15 @@ public class CreateDatabase {
 			final Query roomQuery = HibernateUtil.getEntityManager().createNativeQuery(roomSql, Room.class);
 			timetable.setRoom((Room) roomQuery.getResultList().get(0));
 
-			em.persist(timetable);
+			this.em.persist(timetable);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private void createTeacherTimetables() {
-		List<Teacher> teachers = em.createQuery("from Teacher", Teacher.class).getResultList();
-		
-		for (Teacher teacher : teachers) {
+		final List<Teacher> teachers = this.em.createQuery("from Teacher", Teacher.class).getResultList();
+
+		for (final Teacher teacher : teachers) {
 			final String lessonSql = "select * from klasse_tag_stunde where idLehrer = '" + teacher.getId() + "'";
 			final Query lessonQuery = HibernateUtil.getEntityManager().createNativeQuery(lessonSql, TimetableLesson.class);
 			final Timetable timetable = new Timetable();
@@ -265,7 +258,7 @@ public class CreateDatabase {
 			final Query teacherQuery = HibernateUtil.getEntityManager().createNativeQuery(teacherSql, Teacher.class);
 			timetable.setTeacher((Teacher) teacherQuery.getResultList().get(0));
 
-			em.persist(timetable);
+			this.em.persist(timetable);
 		}
-	}	
+	}
 }
