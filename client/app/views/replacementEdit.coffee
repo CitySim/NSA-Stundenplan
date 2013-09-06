@@ -73,7 +73,7 @@ class window.nsa.Views.ReplacementEdit extends Backbone.View
 			return if not name? or not val?
 
 			if e.is("[type=checkbox]")
-				val = e.is(":checked")
+				val = if e.is(":checked") then 1 else 0
 
 			data[name] = val
 			return

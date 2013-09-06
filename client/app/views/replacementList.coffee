@@ -33,17 +33,23 @@ class window.nsa.Views.ReplacementList extends Backbone.View
 
 		momentWeek = moment(@week, "YYYY").add("weeks", parseInt(@week.split("W")[1]) - 1)
 
+		collection = _.sortBy @collection.toJSON(), (r) =>
+			return r.day.id
+
+		collection = _.groupBy collection, (r) =>
+			if r.lesson?
+				r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
+				r.format_end = moment(r.lesson.timeTo, "hh:mm a").format("HH:mm")
+			
+			return r.day.description
+			
 		@$el.html @template
 			week: momentWeek.format("ww, YYYY")
 			navigation:
 				prev: momentWeek.add("weeks", -1).format("YYYY-[W]ww")
 				next: momentWeek.add("weeks", 2).format("YYYY-[W]ww")
-			collection: _.groupBy @collection.toJSON(), (r) =>
-				if r.lesson?
-					r.format_start = moment(r.lesson.timeFrom, "hh:mm a").format("HH:mm")
-					r.format_end = moment(r.lesson.timeTo, "hh:mm a").format("HH:mm")
+			collection: collection
 					
-				return r.day.description
 
 		return
 
